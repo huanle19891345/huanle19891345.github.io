@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Even - A super concise theme for Hugo</title>
+    <link>https://huanle19891345.github.io/</link>
+    <description>Recent content on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 07 Jan 2021 18:14:29 +0800</lastBuildDate><atom:link href="https://huanle19891345.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First_post2</title>
+      <link>https://huanle19891345.github.io/post/bitmap/</link>
+      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      
+      <guid>https://huanle19891345.github.io/post/bitmap/</guid>
+      <description>[TOC] Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化 Android Bitmap变迁与原理解析（4.x-8.x） Bitmap: 从出生到死亡 Bitma</description>
+    </item>
+    
+    <item>
+      <title>First_post2</title>
+      <link>https://huanle19891345.github.io/post/first_post/</link>
+      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      
+      <guid>https://huanle19891345.github.io/post/first_post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>First_post2</title>
+      <link>https://huanle19891345.github.io/post/supporttoandroidx/</link>
+      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      
+      <guid>https://huanle19891345.github.io/post/supporttoandroidx/</guid>
+      <description>title1 Title2 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn https://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876 是时候迁移至 AndroidX 了！ 新架构单独封装一个独立的module(使用androidx)，和xhcore相互独立，确保项目组可以选择使用 sup</description>
+    </item>
+    
+  </channel>
+</rss>
