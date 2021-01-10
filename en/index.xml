@@ -23,10 +23,38 @@ Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，�
     
     <item>
       <title>BitmapX</title>
+      <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmap/</link>
+      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmap/</guid>
+      <description>[TOC]
+Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
+Android Bitmap变迁与原理解析（4.x-8.x）
+Bitmap: 从出生到死亡
+Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
+ ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
+    </item>
+    
+    <item>
+      <title>BitmapX</title>
       <link>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmap/</link>
       <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmap/</guid>
+      <description>[TOC]
+Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
+Android Bitmap变迁与原理解析（4.x-8.x）
+Bitmap: 从出生到死亡
+Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
+ ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
+    </item>
+    
+    <item>
+      <title>BitmapXX</title>
+      <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapxx/bitmap/</link>
+      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapxx/bitmap/</guid>
       <description>[TOC]
 Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
 Android Bitmap变迁与原理解析（4.x-8.x）
