@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on Documentation for Hugo Learn Theme</title>
+    <link>https://huanle19891345.github.io/en/android/</link>
+    <description>Recent content in Android on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 07 Jan 2021 18:14:29 +0800</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>硬件加速绘制</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</link>
+      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</guid>
+      <description>graph TB IRenderPipeline--&amp;gt;OpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaOpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaVulkanPipeline graph TB Thread--&amp;gt;ThreadBase ThreadBase--&amp;gt;ReanderThread frameworks/base/core/java/android/view/IWindow.aidl
+IWindow /** * API back to a client window that the Window Manager uses to inform it of * interesting things happening. * * {@hide} */ oneway interface IWindow {} frameworks/base/core/java/android/view/IWindowSession.aidl
+IWindowSession /** * System private per-application interface to the window manager. * * {@hide} */ interface IWindowSession {} ViewRootImpl // These can be accessed by any thread, must be protected with a lock.</description>
+    </item>
+    
+  </channel>
+</rss>
