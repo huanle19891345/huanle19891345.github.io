@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Documentation for Hugo Learn Theme</title>
+    <title>home on Documentation for Hugo Learn Theme</title>
     <link>https://huanle19891345.github.io/en/</link>
-    <description>Recent content on Documentation for Hugo Learn Theme</description>
+    <description>Recent content in home on Documentation for Hugo Learn Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 07 Jan 2021 18:14:29 +0800</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bitmap1</title>
       <link>https://huanle19891345.github.io/en/android/bitmap/bitmap/</link>

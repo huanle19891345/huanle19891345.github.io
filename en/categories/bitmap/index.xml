@@ -8,16 +8,6 @@
     <language>en-US</language>
     <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/categories/bitmap/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Bitmap</title>
-      <link>https://huanle19891345.github.io/en/android/bitmap/</link>
-      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/bitmap/</guid>
-      <description>Bitmap
-child</description>
-    </item>
-    
-    <item>
       <title>BitmapX</title>
       <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/</link>
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
@@ -53,6 +43,16 @@ child</description>
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmapxx/</guid>
+      <description>Bitmap
+child</description>
+    </item>
+    
+    <item>
+      <title>Bitmap</title>
+      <link>https://huanle19891345.github.io/en/android/bitmap/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/bitmap/</guid>
       <description>Bitmap
 child</description>
     </item>

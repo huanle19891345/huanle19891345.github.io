@@ -14,13 +14,6 @@
 	"content": ""
 },
 {
-	"uri": "https://huanle19891345.github.io/en/android/bitmap/",
-	"title": "Bitmap",
-	"tags": [],
-	"description": "",
-	"content": "Bitmap\nchild\n"
-},
-{
 	"uri": "https://huanle19891345.github.io/en/android/androidx/bitmapx/",
 	"title": "BitmapX",
 	"tags": [],
@@ -44,6 +37,20 @@
 {
 	"uri": "https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmapxx/",
 	"title": "BitmapXX",
+	"tags": [],
+	"description": "",
+	"content": "Bitmap\nchild\n"
+},
+{
+	"uri": "https://huanle19891345.github.io/en/",
+	"title": "home",
+	"tags": [],
+	"description": "",
+	"content": "Bitmap\n"
+},
+{
+	"uri": "https://huanle19891345.github.io/en/android/bitmap/",
+	"title": "Bitmap",
 	"tags": [],
 	"description": "",
 	"content": "Bitmap\nchild\n"
@@ -86,13 +93,6 @@
 {
 	"uri": "https://huanle19891345.github.io/en/categories/",
 	"title": "Categories",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "https://huanle19891345.github.io/en/",
-	"title": "Documentation for Hugo Learn Theme",
 	"tags": [],
 	"description": "",
 	"content": ""
@@ -198,6 +198,13 @@
 {
 	"uri": "https://huanle19891345.github.io/en/categories/bitmap/",
 	"title": "Bitmap",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://huanle19891345.github.io/en/categories/home/",
+	"title": "home",
 	"tags": [],
 	"description": "",
 	"content": ""
