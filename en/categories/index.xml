@@ -1,65 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Documentation for Hugo Learn Theme</title>
+    <title>Categories on 郑欢的学习总结</title>
     <link>https://huanle19891345.github.io/en/categories/</link>
-    <description>Recent content in Categories on Documentation for Hugo Learn Theme</description>
+    <description>Recent content in Categories on 郑欢的学习总结</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <lastBuildDate>Thu, 07 Jan 2021 18:14:29 +0800</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>内存优化优化</title>
-      <link>https://huanle19891345.github.io/en/categories/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/categories/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E4%BC%98%E5%8C%96/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>布局优化</title>
-      <link>https://huanle19891345.github.io/en/categories/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/categories/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>性能优化</title>
-      <link>https://huanle19891345.github.io/en/categories/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/categories/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>AndroidX</title>
-      <link>https://huanle19891345.github.io/en/categories/androidx/</link>
-      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/categories/androidx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bitmap</title>
-      <link>https://huanle19891345.github.io/en/categories/bitmap/</link>
-      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/categories/bitmap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>home</title>
-      <link>https://huanle19891345.github.io/en/categories/home/</link>
-      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/categories/home/</guid>
-      <description></description>
-    </item>
-    
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

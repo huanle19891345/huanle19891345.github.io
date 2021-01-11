@@ -1,220 +1,56 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>home on Documentation for Hugo Learn Theme</title>
+    <title>技术探索总结 on 郑欢的学习总结</title>
     <link>https://huanle19891345.github.io/en/</link>
-    <description>Recent content in home on Documentation for Hugo Learn Theme</description>
+    <description>Recent content in 技术探索总结 on 郑欢的学习总结</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Bitmap1</title>
-      <link>https://huanle19891345.github.io/en/android/bitmap/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      <title>Flutter消息机制</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/bitmap/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</guid>
+      <description>消息机制 深入理解Flutter消息机制
+ThreadHost初始化
+[-&amp;gt; flutter/shell/common/thread_host.cc] ThreadHost::ThreadHost(std::string name_prefix, uint64_t mask) { if (mask &amp;amp; ThreadHost::Type::Platform) { platform_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.platform&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::UI) { //创建线程 [见小节2.2] ui_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.ui&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::GPU) { gpu_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.gpu&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::IO) { io_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.io&amp;quot;); } } TaskRunner初始化
+[-&amp;gt; flutter/fml/task_runner.cc] TaskRunner::TaskRunner(fml::RefPtr&amp;lt;MessageLoopImpl&amp;gt; loop) : loop_(std::move(loop)) {} Flutter引擎启动过程，会创建UI/GPU/IO这3个线程，并且会为每个线程依次创建MessageLoop对象，启动后处于epoll_wait等待状态。对于Flutter的消息机制跟Android原生的消息机制有很多相似之处，都有消息(或者任务)、消息队列以及Looper，有一点不同的是Android有一个Handler类，用于发送消息以及执行回调方法，相对应Flutter中有着相近功能的便是TaskRunner。
+上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。
+每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。
+ Step 1: 检查task，当task队列不为空，先执行一个task； Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；  可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。</description>
     </item>
     
     <item>
-      <title>BitmapX</title>
-      <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
+      <title>硬件加速绘制Source</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>BitmapX</title>
-      <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapx/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapx/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>BitmapX</title>
-      <link>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>BitmapXX</title>
-      <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapx/bitmapxx/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapx/bitmapxx/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>BitmapXX</title>
-      <link>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapxx/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/androidx/bitmapx/bitmapxx/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>BitmapXX</title>
-      <link>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmapxx/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/bitmap/bitmapx/bitmapxx/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>First_Bitmap</title>
-      <link>https://huanle19891345.github.io/en/bitmap/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/bitmap/</guid>
-      <description>[TOC]
-Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
-Android Bitmap变迁与原理解析（4.x-8.x）
-Bitmap: 从出生到死亡
-Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
- ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：</description>
-    </item>
-    
-    <item>
-      <title>First_Level2</title>
-      <link>https://huanle19891345.github.io/en/supporttoandroidx/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/supporttoandroidx/</guid>
-      <description>title1 Title2 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn
-https://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876
-是时候迁移至 AndroidX 了！
-新架构单独封装一个独立的module(使用androidx)，和xhcore相互独立，确保项目组可以选择使用
-support和androidx必须通过cherrypick进行修改同步，同时分别发布独立的maven
-test模块是support或者androidx都没关系，不影响发版仓库中的内容
-更基础的依赖模块，可能是support/androidx无关的，也可能有关的，有关时xhcore中调用的模块也要分离出support和androidx
-xhcorexxx_without_support_single_branch模块可以不存在
-androidx利用灰度版本去进行测试901
-graph TB app_support--component_support_branch app_support--xhcorexxx_without_support_single_branch  graph TB app_support--&amp;gt;component_support_branch app_support--&amp;gt;xhcorexxx_without_support_single_branch app_androidx--&amp;gt;component_androidx_branch app_androidx--&amp;gt;xhcorexxx_without_support_single_branch xhcorexxx_without_support_single_branch--&amp;gt;xhviewxxx_without_support_single_branch component_support_branch--&amp;gt;xhviewxxx_support_branch component_androidx_branch--&amp;gt;xhviewxxx_androidx_branch   在xhcore中搜索support进行处理,去除不必要的support库依赖
-  support升级到28
-  </description>
-    </item>
-    
-    <item>
-      <title>First_Level3</title>
-      <link>https://huanle19891345.github.io/en/android/androidx/supporttoandroidx/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/androidx/supporttoandroidx/</guid>
-      <description>title1 Title2 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn
-https://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876
-是时候迁移至 AndroidX 了！
-新架构单独封装一个独立的module(使用androidx)，和xhcore相互独立，确保项目组可以选择使用
-support和androidx必须通过cherrypick进行修改同步，同时分别发布独立的maven
-test模块是support或者androidx都没关系，不影响发版仓库中的内容
-更基础的依赖模块，可能是support/androidx无关的，也可能有关的，有关时xhcore中调用的模块也要分离出support和androidx
-xhcorexxx_without_support_single_branch模块可以不存在
-androidx利用灰度版本去进行测试901
-graph TB app_support--component_support_branch app_support--xhcorexxx_without_support_single_branch  graph TB app_support--&amp;gt;component_support_branch app_support--&amp;gt;xhcorexxx_without_support_single_branch app_androidx--&amp;gt;component_androidx_branch app_androidx--&amp;gt;xhcorexxx_without_support_single_branch xhcorexxx_without_support_single_branch--&amp;gt;xhviewxxx_without_support_single_branch component_support_branch--&amp;gt;xhviewxxx_support_branch component_androidx_branch--&amp;gt;xhviewxxx_androidx_branch   在xhcore中搜索support进行处理,去除不必要的support库依赖
-  support升级到28
-  </description>
-    </item>
-    
-    <item>
-      <title>First_Levelcopy</title>
-      <link>https://huanle19891345.github.io/en/android/androidx/supporttoandroidx-copy/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/androidx/supporttoandroidx-copy/</guid>
-      <description>title1 Title2 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn
-https://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876
-是时候迁移至 AndroidX 了！
-新架构单独封装一个独立的module(使用androidx)，和xhcore相互独立，确保项目组可以选择使用
-support和androidx必须通过cherrypick进行修改同步，同时分别发布独立的maven
-test模块是support或者androidx都没关系，不影响发版仓库中的内容
-更基础的依赖模块，可能是support/androidx无关的，也可能有关的，有关时xhcore中调用的模块也要分离出support和androidx
-xhcorexxx_without_support_single_branch模块可以不存在
-androidx利用灰度版本去进行测试901
-graph TB app_support--component_support_branch app_support--xhcorexxx_without_support_single_branch  graph TB app_support--&amp;gt;component_support_branch app_support--&amp;gt;xhcorexxx_without_support_single_branch app_androidx--&amp;gt;component_androidx_branch app_androidx--&amp;gt;xhcorexxx_without_support_single_branch xhcorexxx_without_support_single_branch--&amp;gt;xhviewxxx_without_support_single_branch component_support_branch--&amp;gt;xhviewxxx_support_branch component_androidx_branch--&amp;gt;xhviewxxx_androidx_branch   在xhcore中搜索support进行处理,去除不必要的support库依赖
-  support升级到28
-  </description>
-    </item>
-    
-    <item>
-      <title>First_post2</title>
-      <link>https://huanle19891345.github.io/en/first_post/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/first_post/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>硬件加速绘制</title>
-      <link>https://huanle19891345.github.io/en/android/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</link>
-      <pubDate>Thu, 07 Jan 2021 18:14:29 +0800</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</guid>
-      <description>graph TB IRenderPipeline--&amp;gt;OpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaOpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaVulkanPipeline graph TB Thread--&amp;gt;ThreadBase ThreadBase--&amp;gt;ReanderThread frameworks/base/core/java/android/view/IWindow.aidl
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</guid>
+      <description>RenderPipeLine类设计 graph TB IRenderPipeline--&amp;gt;OpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaOpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaVulkanPipeline RenderThread继承结构 graph TB Thread--&amp;gt;ThreadBase ThreadBase--&amp;gt;ReanderThread 流程研究 frameworks/base/core/java/android/view/IWindow.aidl
 IWindow /** * API back to a client window that the Window Manager uses to inform it of * interesting things happening. * * {@hide} */ oneway interface IWindow {} frameworks/base/core/java/android/view/IWindowSession.aidl
 IWindowSession /** * System private per-application interface to the window manager. * * {@hide} */ interface IWindowSession {} ViewRootImpl // These can be accessed by any thread, must be protected with a lock.</description>
     </item>
     
     <item>
-      <title></title>
-      <link>https://huanle19891345.github.io/en/android/androidx/first_post-copy/</link>
+      <title>软件绘制</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/androidx/first_post-copy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://huanle19891345.github.io/en/android/androidx/first_post/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/androidx/first_post/</guid>
-      <description></description>
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/</guid>
+      <description>软件绘制 深入理解Window
+Android的UI显示原理之Surface的创建
+Android的UI显示原理之Surface的渲染
+https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/Android%E8%A7%86%E5%9B%BE%E5%B1%82%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/Android%E7%9A%84UI%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93.md
+https://github.com/SusionSuc/AdvancedAndroid/blob/master/framework/Android%E8%A7%86%E5%9B%BE%E5%B1%82%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/README.md
+Android图形系统（九）-View、Canvas与Surface的关系
+ 整体流程 把整个流程再简单总结下，View、Canvas与Surface的关系也就一目了然了：
+Surface通过dequeueBuffer流程（具体操作在此不多赘述）获取一块存放绘制数据的buffer。
+View 在onDraw的时候，通过传入的Canvas进行绘制。（这里只是一个绘制的入口而已，本文是针对requestLayout 流程来讲述的，当然你单独用Canvas实现绘制也是一样的）。
+调用java层的CanvasAPI，实际真正负责绘制工作的是底层的Skia引擎，这里核心类包括SKCanvas（画家）以及SKBitmap（画布），绘制好的内容放入Surface 通过dequeueBuffer获取到的GraphicBuffer。
+绘制完毕后，Surface通过queueBuffer将存放好绘制数据的buffer投递到队列中，并通知SurfaceFlinger消费。
+ SurfaceFlinger可以说是Android UI渲染体系的核心，在Android系统启动时会启动SurfaceFlinger服务,它的主要作用就是被Android应用程序调用，把绘制(测量，布局，绘制)后的窗口(Surface)渲染到手机屏幕上
+SurfaceControl surface.lockCanvas(): //android_view_Surface.cpp static jlong nativeLockCanvas(JNIEnv* env, jclass clazz, jlong nativeObject, jobject canvasObj, jobject dirtyRectObj) { sp&amp;lt;Surface&amp;gt; surface(reinterpret_cast&amp;lt;Surface *&amp;gt;(nativeObject)); ... ANativeWindow_Buffer outBuffer; //调用了Surface的dequeueBuffer，从SurfaceFlinger中申请内存GraphicBuffer,这个buffer是用来传递绘制的元数据的  status_t err = surface-&amp;gt;lock(&amp;amp;outBuffer, dirtyRectPtr); ... SkImageInfo info = SkImageInfo::Make(outBuffer.width, outBuffer.height, convertPixelFormat(outBuffer.format), outBuffer.format == PIXEL_FORMAT_RGBX_8888 ? kOpaque_SkAlphaType : kPremul_SkAlphaType); //新建了一个SkBitmap，并进行了一系列设置  SkBitmap bitmap; ssize_t bpr = outBuffer.</description>
     </item>
     
   </channel>
