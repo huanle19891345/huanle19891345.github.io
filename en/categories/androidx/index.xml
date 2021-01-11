@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AndroidX on Documentation for Hugo Learn Theme</title>
+    <link>https://huanle19891345.github.io/en/categories/androidx/</link>
+    <description>Recent content in AndroidX on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://huanle19891345.github.io/en/categories/androidx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AndroidX</title>
+      <link>https://huanle19891345.github.io/en/android/androidx/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/androidx/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
