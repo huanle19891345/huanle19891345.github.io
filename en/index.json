@@ -4,7 +4,7 @@
 	"title": "android",
 	"tags": [],
 	"description": "",
-	"content": "  系统机制原理   "
+	"content": "android 探索总结android知识\n google    supportToAndroidx      系统机制原理    系统绘制    硬件加速绘制Source     软件绘制       "
 },
 {
 	"uri": "https://huanle19891345.github.io/en/categories/",
@@ -18,7 +18,7 @@
 	"title": "flutter",
 	"tags": [],
 	"description": "",
-	"content": "  通信   "
+	"content": "flutter 探索总结flutter知识\n 通信    Flutter消息机制      "
 },
 {
 	"uri": "https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/",
@@ -26,6 +26,20 @@
 	"tags": [],
 	"description": "",
 	"content": "消息机制 深入理解Flutter消息机制\nThreadHost初始化\n[-\u0026gt; flutter/shell/common/thread_host.cc] ThreadHost::ThreadHost(std::string name_prefix, uint64_t mask) { if (mask \u0026amp; ThreadHost::Type::Platform) { platform_thread = std::make_unique\u0026lt;fml::Thread\u0026gt;(name_prefix + \u0026quot;.platform\u0026quot;); } if (mask \u0026amp; ThreadHost::Type::UI) { //创建线程 [见小节2.2] ui_thread = std::make_unique\u0026lt;fml::Thread\u0026gt;(name_prefix + \u0026quot;.ui\u0026quot;); } if (mask \u0026amp; ThreadHost::Type::GPU) { gpu_thread = std::make_unique\u0026lt;fml::Thread\u0026gt;(name_prefix + \u0026quot;.gpu\u0026quot;); } if (mask \u0026amp; ThreadHost::Type::IO) { io_thread = std::make_unique\u0026lt;fml::Thread\u0026gt;(name_prefix + \u0026quot;.io\u0026quot;); } } TaskRunner初始化\n[-\u0026gt; flutter/fml/task_runner.cc] TaskRunner::TaskRunner(fml::RefPtr\u0026lt;MessageLoopImpl\u0026gt; loop) : loop_(std::move(loop)) {} Flutter引擎启动过程，会创建UI/GPU/IO这3个线程，并且会为每个线程依次创建MessageLoop对象，启动后处于epoll_wait等待状态。对于Flutter的消息机制跟Android原生的消息机制有很多相似之处，都有消息(或者任务)、消息队列以及Looper，有一点不同的是Android有一个Handler类，用于发送消息以及执行回调方法，相对应Flutter中有着相近功能的便是TaskRunner。\n上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。\n每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。\n Step 1: 检查task，当task队列不为空，先执行一个task； Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；  可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。\n了解了其工作机制，再来看看这4个Task Runner的具体工作内容。\n Platform Task Runner：运行在Android或者iOS的主线程，尽管阻塞该线程并不会影响Flutter渲染管道，平台线程建议不要执行耗时操作；否则可能触发watchdog来结束该应用。比如Android、iOS都是使用平台线程来传递用户输入事件，一旦平台线程被阻塞则会引起手势事件丢失。 UI Task Runner: 运行在ui线程，比如1.ui，用于引擎执行root isolate中的所有Dart代码，执行渲染与处理Vsync信号，将widget转换生成Layer Tree。除了渲染之外，还有处理Native Plugins消息、Timers、Microtasks等工作； GPU Task Runner：运行在gpu线程，比如1.gpu，用于将Layer Tree转换为具体GPU指令，执行设备GPU相关的skia调用，转换相应平台的绘制方式，比如OpenGL, vulkan, metal等。每一帧的绘制需要UI Runner和GPU Runner配合完成，任何一个环节延迟都可能导致掉帧； IO Task Runner：运行在io线程，比如1.io，前3个Task Runner都不允许执行耗时操作，该Runner用于将图片从磁盘读取出来，解压转换为GPU可识别的格式后，再上传给GPU线程。为了能访问GPU，IO Runner跟GPU Runner的Context在同一个ShareGroup。比如ui.image通过异步调用让IO Runner来异步加载图片，该线程不能执行其他耗时操作，否则可能会影响图片加载的性能。  深入理解Flutter异步Future机制\n深入理解Flutter的Isolate创建过程\n"
+},
+{
+	"uri": "https://huanle19891345.github.io/en/android/google/",
+	"title": "google",
+	"tags": [],
+	"description": "",
+	"content": "google 探索总结google知识\n supportToAndroidx     "
+},
+{
+	"uri": "https://huanle19891345.github.io/en/android/google/supporttoandroidx/",
+	"title": "supportToAndroidx",
+	"tags": [],
+	"description": "",
+	"content": "升级背景 为了升级公司客户端架构，促进更高效的开发效率，减少模板代码并提升稳定性，需要基础仓库从support迁移到androidx，并提供相应的升级方案以及基于androidx的基础组件。\n模块拆分方式命名   不依赖support/androidx的模块称为pure模块\n  依赖support的称为support模块\n  依赖androidx的称为androidx模块\n  升级方案  module内部，将原本的基础仓库old base module拆分为base_support + base_pure两个模块，剥离support依赖。其中base_pure模块拆分到一个单独的project中，而base_support项目需要新增base_androidx branch，分开两个branch迭代，并通过cherrypick进行修改同步，同时分别发布独立的maven。 old base module所依赖的模块，也需要按照1的方式进行拆分。同时pure模块只能依赖pure模块,非pure模块可以依赖对应的非pure模块和pure模块 pure模块的单测test模块是support或者androidx都没关系，不影响发版仓库中的内容 androidx利用灰度版本去进行测试  包依赖关系 graph TB app_support--\u0026gt;base_support app_support--\u0026gt;base_pure app_androidx--\u0026gt;base_androidx app_androidx--\u0026gt;base_pure base_pure--\u0026gt;xxx_pure base_support--\u0026gt;xxx_support base_support--\u0026gt;xxx_pure base_androidx--\u0026gt;xxx_androidx base_androidx--\u0026gt;xxx_pure 升级步骤 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn\nhttps://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876\n是时候迁移至 AndroidX 了！\ngraph LR olderSupport--\u0026gt;|APIchanges|28.0.0Support--\u0026gt;|namespaceChanges|androidx1.0  创建新分支准备迁移，停止同步进行的新功能开发和重构，防止冲突 在old base module中搜索support进行处理,去除不必要的support库依赖 support升级到28，这是因为，1.0.0 版本的 AndroidX 工件是与支持库 28.0.0 工件等效的二进制文件。 编译和测试用例通过 配置android.useAndroidX=true android.enableJetifier=true 更新依赖的仓库到支持androidx的版本 迁移到androidx: AS操作 Refactor \u0026gt; Migrate to AndroidX  基于androidx的后续基础架构封装 新架构单独封装一个独立的module(使用androidx)，提供基础能力\n"
 },
 {
 	"uri": "https://huanle19891345.github.io/en/tags/",
@@ -39,7 +53,7 @@
 	"title": "技术探索总结",
 	"tags": [],
 	"description": "",
-	"content": "  android   跨平台   "
+	"content": "技术探索总结 探索客户端技术背后的原理细节\n android    google    supportToAndroidx      系统机制原理    系统绘制    硬件加速绘制Source     软件绘制        跨平台    flutter      "
 },
 {
 	"uri": "https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/",
@@ -53,21 +67,21 @@
 	"title": "系统机制原理",
 	"tags": [],
 	"description": "",
-	"content": "  系统绘制   "
+	"content": "系统机制原理 探索总结系统机制原理知识\n 系统绘制    硬件加速绘制Source     软件绘制      "
 },
 {
 	"uri": "https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/",
 	"title": "系统绘制",
 	"tags": [],
 	"description": "",
-	"content": "  硬件加速绘制Source   软件绘制   "
+	"content": "系统绘制 探索总结系统绘制知识\n 硬件加速绘制Source     软件绘制     "
 },
 {
 	"uri": "https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/",
 	"title": "跨平台",
 	"tags": [],
 	"description": "",
-	"content": "  flutter   "
+	"content": "跨平台 探索总结跨平台知识\n flutter    android    google    supportToAndroidx      系统机制原理    硬件加速绘制Source     软件绘制       跨平台    flutter    通信    Flutter消息机制       "
 },
 {
 	"uri": "https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/",
@@ -81,5 +95,5 @@
 	"title": "通信",
 	"tags": [],
 	"description": "",
-	"content": "  Flutter消息机制   "
+	"content": "通信 探索总结通信知识\n Flutter消息机制     "
 }]

@@ -21,13 +21,23 @@
   margin-right: 8px;
 }
 
+/*title 2*/
 #TableOfContents > ul > li > a   {
-  font-weight: bold; padding: 0 18px; margin: 0 2px;
-}
-
-#TableOfContents > ul > li > ul > li > a {
   font-weight: bold;
 }
+/*title 3*/
+#TableOfContents > ul > li > ul > li > a {
+  font-weight: bold; padding: 0 10px;
+}
+
+#TableOfContents > ul > li > ul > li > a.highlight {
+    color: var(--MAIN-TITLES-TEXT-color) !important;
+}
+
+a.highlight.current {
+    font-size: 200%;
+}
+
 
 #TableOfContents > ul > li > ul > li > ul > li > ul > li > ul > li  {
     display: none;

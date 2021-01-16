@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>google on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/google/</link>
+    <description>Recent content in google on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/google/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>supportToAndroidx</title>
+      <link>https://huanle19891345.github.io/en/android/google/supporttoandroidx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/google/supporttoandroidx/</guid>
+      <description>升级背景 为了升级公司客户端架构，促进更高效的开发效率，减少模板代码并提升稳定性，需要基础仓库从support迁移到androidx，并提供相应的升级方案以及基于androidx的基础组件。
+模块拆分方式命名   不依赖support/androidx的模块称为pure模块
+  依赖support的称为support模块
+  依赖androidx的称为androidx模块
+  升级方案  module内部，将原本的基础仓库old base module拆分为base_support + base_pure两个模块，剥离support依赖。其中base_pure模块拆分到一个单独的project中，而base_support项目需要新增base_androidx branch，分开两个branch迭代，并通过cherrypick进行修改同步，同时分别发布独立的maven。 old base module所依赖的模块，也需要按照1的方式进行拆分。同时pure模块只能依赖pure模块,非pure模块可以依赖对应的非pure模块和pure模块 pure模块的单测test模块是support或者androidx都没关系，不影响发版仓库中的内容 androidx利用灰度版本去进行测试  包依赖关系 graph TB app_support--&amp;gt;base_support app_support--&amp;gt;base_pure app_androidx--&amp;gt;base_androidx app_androidx--&amp;gt;base_pure base_pure--&amp;gt;xxx_pure base_support--&amp;gt;xxx_support base_support--&amp;gt;xxx_pure base_androidx--&amp;gt;xxx_androidx base_androidx--&amp;gt;xxx_pure 升级步骤 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn
+https://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876
+是时候迁移至 AndroidX 了！
+graph LR olderSupport--&amp;gt;|APIchanges|28.0.0Support--&amp;gt;|namespaceChanges|androidx1.0  创建新分支准备迁移，停止同步进行的新功能开发和重构，防止冲突 在old base module中搜索support进行处理,去除不必要的support库依赖 support升级到28，这是因为，1.0.0 版本的 AndroidX 工件是与支持库 28.0.0 工件等效的二进制文件。 编译和测试用例通过 配置android.useAndroidX=true android.enableJetifier=true 更新依赖的仓库到支持androidx的版本 迁移到androidx: AS操作 Refactor &amp;gt; Migrate to AndroidX  基于androidx的后续基础架构封装 新架构单独封装一个独立的module(使用androidx)，提供基础能力</description>
+    </item>
+    
+  </channel>
+</rss>
