@@ -1,0 +1,2592 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>BitmapSource :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1611381690" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611381690" rel="stylesheet">
+    <link href="/css/hybrid.css?1611381690" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611381690" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611381690" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611381690" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1611381690" rel="stylesheet">
+    <link href="/css/theme.css?1611381690" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611381690" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1611381690" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1611381690"></script>
+
+    <script src="/js/auto_toc_scroll.js?1611381690"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1611381690"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611381690"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1611381690"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/google/" title="google" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/google/">
+          google
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/google/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/google/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item active">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/" title="Flutter消息机制" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/">
+        Flutter消息机制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/'>系统机制原理</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/'>bitmap</a> > BitmapSource
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#类设计">类设计</a></li>
+    <li><a href="#nativeallocationregistry-procedure">NativeAllocationRegistry procedure</a></li>
+    <li><a href="#imagedecoder">ImageDecoder</a>
+      <ul>
+        <li><a href="#decodedrawable">decodeDrawable</a></li>
+        <li><a href="#decodedrawableimpl">decodeDrawableImpl</a></li>
+        <li><a href="#decodebitmapinternal">decodeBitmapInternal</a></li>
+        <li><a href="#source">Source</a></li>
+      </ul>
+    </li>
+    <li><a href="#imagedecodercpp">ImageDecoder.cpp</a>
+      <ul>
+        <li><a href="#imagedecoder_ndecodebitmap">ImageDecoder_nDecodeBitmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#bitmapjava">Bitmap.java</a>
+      <ul>
+        <li><a href="#createbitmap">createBitmap</a></li>
+        <li><a href="#bitmapcons">BitmapCons()</a></li>
+      </ul>
+    </li>
+    <li><a href="#bitmapcppgraphics">Bitmap.cpp(graphics)</a>
+      <ul>
+        <li><a href="#gbitmapmethods">gBitmapMethods</a></li>
+        <li><a href="#bitmap_creator">Bitmap_creator</a></li>
+        <li><a href="#bitmapcreatebitmap">bitmap::createBitmap</a></li>
+        <li><a href="#bitmap_getnativefinalizer">Bitmap_getNativeFinalizer</a></li>
+        <li><a href="#bitmap_destruct">Bitmap_destruct</a></li>
+      </ul>
+    </li>
+    <li><a href="#nativeallocationregistryjava">NativeAllocationRegistry.java</a>
+      <ul>
+        <li><a href="#registernativeallocation">registerNativeAllocation</a></li>
+        <li><a href="#cleanerthunk">CleanerThunk</a></li>
+        <li><a href="#applyfreefunction">applyFreeFunction</a></li>
+        <li><a href="#registernativefree">registerNativeFree</a></li>
+        <li><a href="#registernativeallocation-1">registerNativeAllocation</a></li>
+        <li><a href="#cleanerrunner">CleanerRunner</a></li>
+      </ul>
+    </li>
+    <li><a href="#cleaner">Cleaner</a>
+      <ul>
+        <li><a href="#create">create</a></li>
+        <li><a href="#add">add</a></li>
+        <li><a href="#clean">clean</a></li>
+      </ul>
+    </li>
+    <li><a href="#vmruntimejava">VMRuntime.java</a>
+      <ul>
+        <li><a href="#registernativeallocation-2">registerNativeAllocation</a></li>
+      </ul>
+    </li>
+    <li><a href="#bitmapcpphwui">Bitmap.cpp(hwui)</a>
+      <ul>
+        <li><a href="#allocpixelref-function">AllocPixelRef function</a></li>
+        <li><a href="#allocateheapbitmap">allocateHeapBitmap</a></li>
+        <li><a href="#allocatebitmap">allocateBitmap</a></li>
+        <li><a href="#androidallocateheapbitmap">android::allocateHeapBitmap</a></li>
+        <li><a href="#getskbitmap">getSkBitmap</a></li>
+        <li><a href="#allocateashmembitmap">allocateAshmemBitmap</a></li>
+        <li><a href="#allocateashmembitmap-1">allocateAshmemBitmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#skbitmapcpp">SkBitmap.cpp</a>
+      <ul>
+        <li><a href="#setinfo">setInfo</a></li>
+        <li><a href="#setpixelref">setPixelRef</a></li>
+      </ul>
+    </li>
+    <li><a href="#skpixelref">SkPixelRef</a>
+      <ul>
+        <li><a href="#pixels">pixels</a></li>
+      </ul>
+    </li>
+    <li><a href="#skimageinfoh">SkImageInfo.h</a>
+      <ul>
+        <li><a href="#makealphatype">makeAlphaType</a></li>
+      </ul>
+    </li>
+    <li><a href="#skpixmap">SkPixmap</a>
+      <ul>
+        <li><a href="#reset">reset</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              BitmapSource
+            </h1>
+          
+
+        
+
+
+<h2 id="类设计">类设计</h2>
+<p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource.assets/bitmapsource.png" alt=""></p>
+<h2 id="nativeallocationregistry-procedure">NativeAllocationRegistry procedure</h2>
+<p>ART reclaim NativeAllocationRegistry procedure(only object which will be reclaim(GC not reachable) would be enqueued)</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph TB
+ReferenceQueueDaemon.runInernal--&gt;ReferenceQueue.enqueuePending
+ReferenceQueue.enqueuePending--&gt;ReferenceQueue.enqueueLocked
+ReferenceQueue.enqueueLocked--&gt;Cleaner.clean
+Cleaner.clean--&gt;CleanerChunk.run
+CleanerChunk.run--&gt;NativeAllocationRegistry.applyFreeFunction
+</code></pre><h2 id="imagedecoder">ImageDecoder</h2>
+<h3 id="decodedrawable">decodeDrawable</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Drawable <span style="color:#a6e22e">decodeDrawable</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@NonNull</span> Source src<span style="color:#f92672">,</span>
+            <span style="color:#a6e22e">@NonNull</span> OnHeaderDecodedListener listener<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> decodeDrawableImpl<span style="color:#f92672">(</span>src<span style="color:#f92672">,</span> listener<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="decodedrawableimpl">decodeDrawableImpl</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Drawable <span style="color:#a6e22e">decodeDrawableImpl</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@NonNull</span> Source src<span style="color:#f92672">,</span>
+            <span style="color:#a6e22e">@Nullable</span> OnHeaderDecodedListener listener<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+      ImageDecoder decoder <span style="color:#f92672">=</span> src<span style="color:#f92672">.</span><span style="color:#a6e22e">createImageDecoder</span><span style="color:#f92672">()</span>
+      decoder<span style="color:#f92672">.</span><span style="color:#a6e22e">mSource</span> <span style="color:#f92672">=</span> src<span style="color:#f92672">;</span>
+      decoder<span style="color:#f92672">.</span><span style="color:#a6e22e">callHeaderDecoded</span><span style="color:#f92672">(</span>listener<span style="color:#f92672">,</span> src<span style="color:#f92672">);</span>
+      
+      Bitmap bm <span style="color:#f92672">=</span> decoder<span style="color:#f92672">.</span><span style="color:#a6e22e">decodeBitmapInternal</span><span style="color:#f92672">();</span>
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> BitmapDrawable<span style="color:#f92672">(</span>res<span style="color:#f92672">,</span> bm<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="decodebitmapinternal">decodeBitmapInternal</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> Bitmap <span style="color:#a6e22e">decodeBitmapInternal</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        checkState<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> nDecodeBitmap<span style="color:#f92672">(</span>mNativePtr<span style="color:#f92672">,</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> mPostProcessor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span>
+                mDesiredWidth<span style="color:#f92672">,</span> mDesiredHeight<span style="color:#f92672">,</span> mCropRect<span style="color:#f92672">,</span>
+                mMutable<span style="color:#f92672">,</span> mAllocator<span style="color:#f92672">,</span> mUnpremultipliedRequired<span style="color:#f92672">,</span>
+                mConserveMemory<span style="color:#f92672">,</span> mDecodeAsAlphaMask<span style="color:#f92672">,</span> mDesiredColorSpace<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="source">Source</h3>
+<p>frameworks/base/core/jni/android/graphics/ImageDecoder.cpp</p>
+<h2 id="imagedecodercpp">ImageDecoder.cpp</h2>
+<h3 id="imagedecoder_ndecodebitmap">ImageDecoder_nDecodeBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> jobject <span style="color:#a6e22e">ImageDecoder_nDecodeBitmap</span>(JNIEnv<span style="color:#f92672">*</span> env, jobject <span style="color:#75715e">/*clazz*/</span>, jlong nativePtr,
+                                          jobject jdecoder, jboolean jpostProcess,
+                                          jint desiredWidth, jint desiredHeight, jobject jsubset,
+                                          jboolean requireMutable, jint allocator,
+                                          jboolean requireUnpremul, jboolean preferRamOverQuality,
+                                          jboolean asAlphaMask, jobject jcolorSpace) {	
+  ......
+    SkBitmap bm;
+    <span style="color:#66d9ef">auto</span> bitmapInfo <span style="color:#f92672">=</span> decodeInfo;
+    <span style="color:#66d9ef">if</span> (asAlphaMask <span style="color:#f92672">&amp;&amp;</span> colorType <span style="color:#f92672">==</span> kGray_8_SkColorType) {
+        bitmapInfo <span style="color:#f92672">=</span> bitmapInfo.makeColorType(kAlpha_8_SkColorType);
+    }
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>bm.setInfo(bitmapInfo)) {
+        doThrowIOE(env, <span style="color:#e6db74">&#34;Failed to setInfo properly&#34;</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+
+    sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> nativeBitmap;
+    <span style="color:#75715e">// If we are going to scale or subset, we will create a new bitmap later on,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// so use the heap for the temporary.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// FIXME: Use scanline decoding on only a couple lines to save memory. b/70709380.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (allocator <span style="color:#f92672">==</span> ImageDecoder<span style="color:#f92672">::</span>kSharedMemory_Allocator <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>scale <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>jsubset) {
+        nativeBitmap <span style="color:#f92672">=</span> Bitmap<span style="color:#f92672">::</span>allocateAshmemBitmap(<span style="color:#f92672">&amp;</span>bm);
+    } <span style="color:#66d9ef">else</span> {
+        nativeBitmap <span style="color:#f92672">=</span> Bitmap<span style="color:#f92672">::</span>allocateHeapBitmap(<span style="color:#f92672">&amp;</span>bm);<span style="color:#75715e">//nativeBitmap和bm都被赋值完毕
+</span><span style="color:#75715e"></span>    }
+   ......
+   <span style="color:#66d9ef">return</span> bitmap<span style="color:#f92672">::</span>createBitmap(env, nativeBitmap.release(), bitmapCreateFlags, ninePatchChunk,
+                                ninePatchInsets);
+}
+</code></pre></div><p><a href="#allocateheapbitmap">allocateheapbitmap</a></p>
+<p><a href="#bitmapcreatebitmap">createBitmap</a></p>
+<h2 id="bitmapjava">Bitmap.java</h2>
+<p>android/graphics/Bitmap.java</p>
+<h3 id="createbitmap">createBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Bitmap <span style="color:#a6e22e">createBitmap</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Nullable</span> DisplayMetrics display<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> width<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> height<span style="color:#f92672">,</span>
+        <span style="color:#a6e22e">@NonNull</span> Config config<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> hasAlpha<span style="color:#f92672">,</span> <span style="color:#a6e22e">@NonNull</span> ColorSpace colorSpace<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+       bm <span style="color:#f92672">=</span> nativeCreate<span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> width<span style="color:#f92672">,</span> width<span style="color:#f92672">,</span> height<span style="color:#f92672">,</span> config<span style="color:#f92672">.</span><span style="color:#a6e22e">nativeInt</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+       <span style="color:#66d9ef">return</span> bm<span style="color:#f92672">;</span>
+</code></pre></div><p><a href="#bitmap_creator">nativeCreate</a></p>
+<h3 id="bitmapcons">BitmapCons()</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Private constructor that must received an already allocated native bitmap
+</span><span style="color:#75715e"> * int (pointer).
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">// called from JNI
+</span><span style="color:#75715e"></span>Bitmap<span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> nativeBitmap<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> width<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> height<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> density<span style="color:#f92672">,</span>
+        <span style="color:#66d9ef">boolean</span> isMutable<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> requestPremultiplied<span style="color:#f92672">,</span>
+        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> ninePatchChunk<span style="color:#f92672">,</span> NinePatch<span style="color:#f92672">.</span><span style="color:#a6e22e">InsetStruct</span> ninePatchInsets<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    mWidth <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+    mHeight <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+    mIsMutable <span style="color:#f92672">=</span> isMutable<span style="color:#f92672">;</span>
+    mRequestPremultiplied <span style="color:#f92672">=</span> requestPremultiplied<span style="color:#f92672">;</span>
+
+    mNativePtr <span style="color:#f92672">=</span> nativeBitmap<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">long</span> nativeSize <span style="color:#f92672">=</span> NATIVE_ALLOCATION_SIZE <span style="color:#f92672">+</span> getAllocationByteCount<span style="color:#f92672">();</span>
+    NativeAllocationRegistry registry <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NativeAllocationRegistry<span style="color:#f92672">(</span>
+        Bitmap<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">(),</span> nativeGetNativeFinalizer<span style="color:#f92672">(),</span> nativeSize<span style="color:#f92672">);</span>
+    registry<span style="color:#f92672">.</span><span style="color:#a6e22e">registerNativeAllocation</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> nativeBitmap<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>frameworks/base/core/jni/android/graphics/</p>
+<h2 id="bitmapcppgraphics">Bitmap.cpp(graphics)</h2>
+<h3 id="gbitmapmethods">gBitmapMethods</h3>
+<p>nativeCreate &ndash;&gt; Bitmap_creator</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> JNINativeMethod gBitmapMethods[] <span style="color:#f92672">=</span> {
+    {   <span style="color:#e6db74">&#34;nativeCreate&#34;</span>,             <span style="color:#e6db74">&#34;([IIIIIIZ[FLandroid/graphics/ColorSpace$Rgb$TransferParameters;)Landroid/graphics/Bitmap;&#34;</span>,
+        (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_creator },
+    {   <span style="color:#e6db74">&#34;nativeCopy&#34;</span>,               <span style="color:#e6db74">&#34;(JIZ)Landroid/graphics/Bitmap;&#34;</span>,
+        (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_copy },
+    {   <span style="color:#e6db74">&#34;nativeCopyAshmem&#34;</span>,         <span style="color:#e6db74">&#34;(J)Landroid/graphics/Bitmap;&#34;</span>,
+        (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_copyAshmem },
+    {   <span style="color:#e6db74">&#34;nativeCopyAshmemConfig&#34;</span>,   <span style="color:#e6db74">&#34;(JI)Landroid/graphics/Bitmap;&#34;</span>,
+        (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_copyAshmemConfig },
+    {   <span style="color:#e6db74">&#34;nativeGetNativeFinalizer&#34;</span>, <span style="color:#e6db74">&#34;()J&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_getNativeFinalizer },
+    {   <span style="color:#e6db74">&#34;nativeRecycle&#34;</span>,            <span style="color:#e6db74">&#34;(J)Z&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_recycle },
+    {   <span style="color:#e6db74">&#34;nativeReconfigure&#34;</span>,        <span style="color:#e6db74">&#34;(JIIIZ)V&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_reconfigure },
+    {   <span style="color:#e6db74">&#34;nativeCompress&#34;</span>,           <span style="color:#e6db74">&#34;(JIILjava/io/OutputStream;[B)Z&#34;</span>,
+        (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_compress },
+    {   <span style="color:#e6db74">&#34;nativeErase&#34;</span>,              <span style="color:#e6db74">&#34;(JI)V&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_erase },
+    {   <span style="color:#e6db74">&#34;nativeRowBytes&#34;</span>,           <span style="color:#e6db74">&#34;(J)I&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_rowBytes },
+
+    {   <span style="color:#e6db74">&#34;nativeGetPixel&#34;</span>,           <span style="color:#e6db74">&#34;(JII)I&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_getPixel },
+    {   <span style="color:#e6db74">&#34;nativeGetPixels&#34;</span>,          <span style="color:#e6db74">&#34;(J[IIIIIII)V&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_getPixels },
+    {   <span style="color:#e6db74">&#34;nativeSetPixel&#34;</span>,           <span style="color:#e6db74">&#34;(JIII)V&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_setPixel },
+    {   <span style="color:#e6db74">&#34;nativeSetPixels&#34;</span>,          <span style="color:#e6db74">&#34;(J[IIIIIII)V&#34;</span>, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_setPixels },
+    {   <span style="color:#e6db74">&#34;nativeCopyPixelsToBuffer&#34;</span>, <span style="color:#e6db74">&#34;(JLjava/nio/Buffer;)V&#34;</span>,
+                                            (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_copyPixelsToBuffer },
+    {   <span style="color:#e6db74">&#34;nativeCopyPixelsFromBuffer&#34;</span>, <span style="color:#e6db74">&#34;(JLjava/nio/Buffer;)V&#34;</span>,
+                                            (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)Bitmap_copyPixelsFromBuffer },
+};
+</code></pre></div><h3 id="bitmap_creator">Bitmap_creator</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> jobject <span style="color:#a6e22e">Bitmap_creator</span>(JNIEnv<span style="color:#f92672">*</span> env, jobject, jintArray jColors,
+                              jint offset, jint stride, jint width, jint height,
+                              jint configHandle, jboolean isMutable,
+                              jfloatArray xyzD50, jobject transferParameters) {
+    
+    SkBitmap bitmap;
+    
+    sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> nativeBitmap <span style="color:#f92672">=</span> Bitmap<span style="color:#f92672">::</span>allocateHeapBitmap(<span style="color:#f92672">&amp;</span>bitmap);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>nativeBitmap) {
+        ALOGE(<span style="color:#e6db74">&#34;OOM allocating Bitmap with dimensions %i x %i&#34;</span>, width, height);
+        doThrowOOME(env);
+        <span style="color:#66d9ef">return</span> NULL;
+    }
+    <span style="color:#66d9ef">if</span> (jColors <span style="color:#f92672">!=</span> NULL) {
+        GraphicsJNI<span style="color:#f92672">::</span>SetPixels(env, jColors, offset, stride, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, width, height, bitmap);
+    }
+
+    <span style="color:#66d9ef">return</span> createBitmap(env, nativeBitmap.release(), getPremulBitmapCreateFlags(isMutable));
+</code></pre></div><p><a href="#allocateheapbitmap">allocateheapbitmap</a></p>
+<p><a href="#bitmapcreatebitmap">createBitmap</a></p>
+<h3 id="bitmapcreatebitmap">bitmap::createBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">jobject <span style="color:#a6e22e">createBitmap</span>(JNIEnv<span style="color:#f92672">*</span> env, Bitmap<span style="color:#f92672">*</span> bitmap,
+        <span style="color:#66d9ef">int</span> bitmapCreateFlags, jbyteArray ninePatchChunk, jobject ninePatchInsets,
+        <span style="color:#66d9ef">int</span> density) {
+    <span style="color:#66d9ef">bool</span> isMutable <span style="color:#f92672">=</span> bitmapCreateFlags <span style="color:#f92672">&amp;</span> kBitmapCreateFlag_Mutable;
+    <span style="color:#66d9ef">bool</span> isPremultiplied <span style="color:#f92672">=</span> bitmapCreateFlags <span style="color:#f92672">&amp;</span> kBitmapCreateFlag_Premultiplied;
+    <span style="color:#75715e">// The caller needs to have already set the alpha type properly, so the
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// native SkBitmap stays in sync with the Java Bitmap.
+</span><span style="color:#75715e"></span>    BitmapWrapper<span style="color:#f92672">*</span> bitmapWrapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BitmapWrapper(bitmap);
+    jobject obj <span style="color:#f92672">=</span> env<span style="color:#f92672">-&gt;</span>NewObject(gBitmap_class, gBitmap_constructorMethodID,
+            <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>jlong<span style="color:#f92672">&gt;</span>(bitmapWrapper), bitmap<span style="color:#f92672">-&gt;</span>width(), bitmap<span style="color:#f92672">-&gt;</span>height(), density,
+            isMutable, isPremultiplied, ninePatchChunk, ninePatchInsets);
+    <span style="color:#66d9ef">return</span> obj;
+}
+</code></pre></div><p><a href="#bitmapcons">bitmapcons</a></p>
+<h3 id="bitmap_getnativefinalizer">Bitmap_getNativeFinalizer</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> jlong <span style="color:#a6e22e">Bitmap_getNativeFinalizer</span>(JNIEnv<span style="color:#f92672">*</span>, jobject) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>jlong<span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(<span style="color:#f92672">&amp;</span>Bitmap_destruct));
+}
+</code></pre></div><h3 id="bitmap_destruct">Bitmap_destruct</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Bitmap_destruct</span>(BitmapWrapper<span style="color:#f92672">*</span> bitmap) {
+    <span style="color:#66d9ef">delete</span> bitmap;
+}
+</code></pre></div><p>libcore/luni/src/main/java/libcore/util</p>
+<h2 id="nativeallocationregistryjava">NativeAllocationRegistry.java</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * A NativeAllocationRegistry is used to associate native allocations with
+</span><span style="color:#75715e"> * Java objects and register them with the runtime.
+</span><span style="color:#75715e"> * There are two primary benefits of registering native allocations associated
+</span><span style="color:#75715e"> * with Java objects:
+</span><span style="color:#75715e"> * &lt;ol&gt;
+</span><span style="color:#75715e"> *  &lt;li&gt;The runtime will account for the native allocations when scheduling
+</span><span style="color:#75715e"> *  garbage collection to run.&lt;/li&gt;
+</span><span style="color:#75715e"> *  &lt;li&gt;The runtime will arrange for the native allocation to be automatically
+</span><span style="color:#75715e"> *  freed by a user-supplied function when the associated Java object becomes
+</span><span style="color:#75715e"> *  unreachable.&lt;/li&gt;
+</span><span style="color:#75715e"> * &lt;/ol&gt;
+</span><span style="color:#75715e"> * A separate NativeAllocationRegistry should be instantiated for each kind
+</span><span style="color:#75715e"> * of native allocation, where the kind of a native allocation consists of the
+</span><span style="color:#75715e"> * native function used to free the allocation and the estimated size of the
+</span><span style="color:#75715e"> * allocation. Once a NativeAllocationRegistry is instantiated, it can be
+</span><span style="color:#75715e"> * used to register any number of native allocations of that kind.
+</span><span style="color:#75715e"> * @hide
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NativeAllocationRegistry</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">NativeAllocationRegistry</span><span style="color:#f92672">(</span>ClassLoader classLoader<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> freeFunction<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> size<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">classLoader</span> <span style="color:#f92672">=</span> classLoader<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">freeFunction</span> <span style="color:#f92672">=</span> freeFunction<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> size<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="registernativeallocation">registerNativeAllocation</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Registers a new native allocation and associated Java object with the
+</span><span style="color:#75715e"> * runtime.
+</span><span style="color:#75715e"> * This NativeAllocationRegistry&#39;s &lt;code&gt;freeFunction&lt;/code&gt; will
+</span><span style="color:#75715e"> * automatically be called with &lt;code&gt;nativePtr&lt;/code&gt; as its sole
+</span><span style="color:#75715e"> * argument when &lt;code&gt;referent&lt;/code&gt; becomes unreachable. If you
+</span><span style="color:#75715e"> * maintain copies of &lt;code&gt;nativePtr&lt;/code&gt; outside
+</span><span style="color:#75715e"> * &lt;code&gt;referent&lt;/code&gt;, you must not access these after
+</span><span style="color:#75715e"> * &lt;code&gt;referent&lt;/code&gt; becomes unreachable, because they may be dangling
+</span><span style="color:#75715e"> * pointers.
+</span><span style="color:#75715e"> * &lt;p&gt;
+</span><span style="color:#75715e"> * The returned Runnable can be used to free the native allocation before
+</span><span style="color:#75715e"> * &lt;code&gt;referent&lt;/code&gt; becomes unreachable. The runnable will have no
+</span><span style="color:#75715e"> * effect if the native allocation has already been freed by the runtime
+</span><span style="color:#75715e"> * or by using the runnable.
+</span><span style="color:#75715e"> * &lt;p&gt;
+</span><span style="color:#75715e"> * WARNING: This unconditionally takes ownership, i.e. deallocation
+</span><span style="color:#75715e"> * responsibility of nativePtr. nativePtr will be DEALLOCATED IMMEDIATELY
+</span><span style="color:#75715e"> * if the registration attempt throws an exception (other than one reporting
+</span><span style="color:#75715e"> * a programming error).
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * @param referent      Non-null java object to associate the native allocation with
+</span><span style="color:#75715e"> * @param nativePtr     Non-zero address of the native allocation
+</span><span style="color:#75715e"> * @return runnable to explicitly free native allocation
+</span><span style="color:#75715e"> * @throws IllegalArgumentException if either referent or nativePtr is null.
+</span><span style="color:#75715e"> * @throws OutOfMemoryError  if there is not enough space on the Java heap
+</span><span style="color:#75715e"> *                           in which to register the allocation. In this
+</span><span style="color:#75715e"> *                           case, &lt;code&gt;freeFunction&lt;/code&gt; will be
+</span><span style="color:#75715e"> *                           called with &lt;code&gt;nativePtr&lt;/code&gt; as its
+</span><span style="color:#75715e"> *                           argument before the OutOfMemoryError is
+</span><span style="color:#75715e"> *                           thrown.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> Runnable <span style="color:#a6e22e">registerNativeAllocation</span><span style="color:#f92672">(</span>Object referent<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> nativePtr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>referent <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;referent is null&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nativePtr <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;nativePtr is null&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+        CleanerThunk thunk<span style="color:#f92672">;</span>
+        CleanerRunner result<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            thunk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CleanerThunk<span style="color:#f92672">();</span>
+            Cleaner cleaner <span style="color:#f92672">=</span> Cleaner<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>referent<span style="color:#f92672">,</span> thunk<span style="color:#f92672">);</span>
+            result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CleanerRunner<span style="color:#f92672">(</span>cleaner<span style="color:#f92672">);</span>
+            registerNativeAllocation<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>VirtualMachineError vme <span style="color:#75715e">/* probably OutOfMemoryError */</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            applyFreeFunction<span style="color:#f92672">(</span>freeFunction<span style="color:#f92672">,</span> nativePtr<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">throw</span> vme<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#75715e">// Other exceptions are impossible.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Enable the cleaner only after we can no longer throw anything, including OOME.
+</span><span style="color:#75715e"></span>        thunk<span style="color:#f92672">.</span><span style="color:#a6e22e">setNativePtr</span><span style="color:#f92672">(</span>nativePtr<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="cleanerthunk">CleanerThunk</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CleanerThunk</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">long</span> nativePtr<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CleanerThunk</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">nativePtr</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nativePtr <span style="color:#f92672">!=</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            applyFreeFunction<span style="color:#f92672">(</span>freeFunction<span style="color:#f92672">,</span> nativePtr<span style="color:#f92672">);</span>
+            registerNativeFree<span style="color:#f92672">(</span>size<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setNativePtr</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> nativePtr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">nativePtr</span> <span style="color:#f92672">=</span> nativePtr<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="applyfreefunction">applyFreeFunction</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Calls &lt;code&gt;freeFunction&lt;/code&gt;(&lt;code&gt;nativePtr&lt;/code&gt;).
+</span><span style="color:#75715e"> * Provided as a convenience in the case where you wish to manually free a
+</span><span style="color:#75715e"> * native allocation using a &lt;code&gt;freeFunction&lt;/code&gt; without using a
+</span><span style="color:#75715e"> * NativeAllocationRegistry.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">applyFreeFunction</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> freeFunction<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> nativePtr<span style="color:#f92672">);</span>
+</code></pre></div><h3 id="registernativefree">registerNativeFree</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">registerNativeFree</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> size<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    VMRuntime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">registerNativeFree</span><span style="color:#f92672">((</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>Math<span style="color:#f92672">.</span><span style="color:#a6e22e">min</span><span style="color:#f92672">(</span>size<span style="color:#f92672">,</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MAX_VALUE</span><span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="registernativeallocation-1">registerNativeAllocation</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">registerNativeAllocation</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> size<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+   VMRuntime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">registerNativeAllocation</span><span style="color:#f92672">((</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>Math<span style="color:#f92672">.</span><span style="color:#a6e22e">min</span><span style="color:#f92672">(</span>size<span style="color:#f92672">,</span>Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MAX_VALUE</span><span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="cleanerrunner">CleanerRunner</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CleanerRunner</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Cleaner cleaner<span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CleanerRunner</span><span style="color:#f92672">(</span>Cleaner cleaner<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cleaner</span> <span style="color:#f92672">=</span> cleaner<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            cleaner<span style="color:#f92672">.</span><span style="color:#a6e22e">clean</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>libcore/ojluni/src/main/java/sun/misc/Cleaner.java</p>
+<h2 id="cleaner">Cleaner</h2>
+<h3 id="create">create</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cleaner</span>
+    <span style="color:#66d9ef">extends</span> PhantomReference<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">{</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Creates a new cleaner.
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * @param  ob the referent object to be cleaned
+</span><span style="color:#75715e">     * @param  thunk
+</span><span style="color:#75715e">     *         The cleanup code to be run when the cleaner is invoked.  The
+</span><span style="color:#75715e">     *         cleanup code is run directly from the reference-handler thread,
+</span><span style="color:#75715e">     *         so it should be as simple and straightforward as possible.
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * @return  The new cleaner
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Cleaner <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>Object ob<span style="color:#f92672">,</span> Runnable thunk<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>thunk <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> add<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Cleaner<span style="color:#f92672">(</span>ob<span style="color:#f92672">,</span> thunk<span style="color:#f92672">));</span>
+    <span style="color:#f92672">}</span>
+    
+</code></pre></div><h3 id="add">add</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">synchronized</span> Cleaner <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>Cleaner cl<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>first <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            cl<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> first<span style="color:#f92672">;</span>
+            first<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> cl<span style="color:#f92672">;</span><span style="color:#75715e">//双向链表，插入表头
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+        first <span style="color:#f92672">=</span> cl<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> cl<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>	
+</code></pre></div><h3 id="clean">clean</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Runs this cleaner, if it has not been run before.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">clean</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>remove<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">))</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            thunk<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>libcore/libart/src/main/java/dalvik/system/</p>
+<h2 id="vmruntimejava">VMRuntime.java</h2>
+<h3 id="registernativeallocation-2">registerNativeAllocation</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Registers a native allocation so that the heap knows about it and performs GC as required.
+</span><span style="color:#75715e">     * If the number of native allocated bytes exceeds the native allocation watermark, the
+</span><span style="color:#75715e">     * function requests a concurrent GC. If the native bytes allocated exceeds a second higher
+</span><span style="color:#75715e">     * watermark, it is determined that the application is registering native allocations at an
+</span><span style="color:#75715e">     * unusually high rate and a GC is performed inside of the function to prevent memory usage
+</span><span style="color:#75715e">     * from excessively increasing. Memory allocated via system malloc() should not be included
+</span><span style="color:#75715e">     * in this count. The argument must be the same as that later passed to registerNativeFree(),
+</span><span style="color:#75715e">     * but may otherwise be approximate.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@UnsupportedAppUsage</span>
+    <span style="color:#a6e22e">@libcore.api.CorePlatformApi</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">registerNativeAllocation</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> bytes<span style="color:#f92672">);</span>
+</code></pre></div><p>frameworks/base/libs/hwui/hwui/Bitmap.cpp</p>
+<h2 id="bitmapcpphwui">Bitmap.cpp(hwui)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ANDROID_API</span> Bitmap : <span style="color:#66d9ef">public</span> SkPixelRef {}
+</code></pre></div><h3 id="allocpixelref-function">AllocPixelRef function</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">typedef</span> sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> (<span style="color:#f92672">*</span>AllocPixelRef)(size_t allocSize, <span style="color:#66d9ef">const</span> SkImageInfo<span style="color:#f92672">&amp;</span> info, size_t rowBytes);
+</code></pre></div><h3 id="allocateheapbitmap">allocateHeapBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> Bitmap<span style="color:#f92672">::</span>allocateHeapBitmap(SkBitmap<span style="color:#f92672">*</span> bitmap) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">allocateBitmap</span>(bitmap, <span style="color:#f92672">&amp;</span>android<span style="color:#f92672">::</span>allocateHeapBitmap);
+}
+</code></pre></div><h3 id="allocatebitmap">allocateBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> allocateBitmap(SkBitmap<span style="color:#f92672">*</span> bitmap, AllocPixelRef alloc) {
+    <span style="color:#66d9ef">const</span> SkImageInfo<span style="color:#f92672">&amp;</span> info <span style="color:#f92672">=</span> bitmap<span style="color:#f92672">-&gt;</span>info();
+    
+    <span style="color:#75715e">// we must respect the rowBytes value already set on the bitmap instead of
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// attempting to compute our own.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> size_t rowBytes <span style="color:#f92672">=</span> bitmap<span style="color:#f92672">-&gt;</span>rowBytes();
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>computeAllocationSize(rowBytes, bitmap<span style="color:#f92672">-&gt;</span>height(), <span style="color:#f92672">&amp;</span>size)) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+
+    <span style="color:#66d9ef">auto</span> wrapper <span style="color:#f92672">=</span> alloc(size, info, rowBytes);
+    <span style="color:#66d9ef">if</span> (wrapper) {
+        wrapper<span style="color:#f92672">-&gt;</span>getSkBitmap(bitmap);
+    }
+    <span style="color:#66d9ef">return</span> wrapper;
+</code></pre></div><p><a href="#androidallocateheapbitmap">alloc</a></p>
+<h3 id="androidallocateheapbitmap">android::allocateHeapBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> allocateHeapBitmap(size_t size, <span style="color:#66d9ef">const</span> SkImageInfo<span style="color:#f92672">&amp;</span> info, size_t rowBytes) {
+    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> addr <span style="color:#f92672">=</span> calloc(size, <span style="color:#ae81ff">1</span>);<span style="color:#75715e">//申请bitmap内存空间,单位bytes，默认初始化为0
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>addr) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+    <span style="color:#66d9ef">return</span> sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">new</span> Bitmap(addr, size, info, rowBytes));
+}
+</code></pre></div><h3 id="getskbitmap">getSkBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> Bitmap<span style="color:#f92672">::</span>getSkBitmap(SkBitmap<span style="color:#f92672">*</span> outBitmap) {
+    outBitmap<span style="color:#f92672">-&gt;</span>setHasHardwareMipMap(mHasHardwareMipMap);
+    <span style="color:#66d9ef">if</span> (isHardware()) {
+        <span style="color:#66d9ef">if</span> (uirenderer<span style="color:#f92672">::</span>Properties<span style="color:#f92672">::</span>isSkiaEnabled()) {
+            outBitmap<span style="color:#f92672">-&gt;</span>allocPixels(SkImageInfo<span style="color:#f92672">::</span>Make(info().width(), info().height(),
+                                                     info().colorType(), info().alphaType(),
+                                                     <span style="color:#66d9ef">nullptr</span>));
+        } <span style="color:#66d9ef">else</span> {
+            outBitmap<span style="color:#f92672">-&gt;</span>allocPixels(info());
+        }
+        uirenderer<span style="color:#f92672">::</span>renderthread<span style="color:#f92672">::</span>RenderProxy<span style="color:#f92672">::</span>copyGraphicBufferInto(graphicBuffer(), outBitmap);
+        <span style="color:#66d9ef">if</span> (mInfo.colorSpace()) {
+            sk_sp<span style="color:#f92672">&lt;</span>SkPixelRef<span style="color:#f92672">&gt;</span> pixelRef <span style="color:#f92672">=</span> sk_ref_sp(outBitmap<span style="color:#f92672">-&gt;</span>pixelRef());
+            outBitmap<span style="color:#f92672">-&gt;</span>setInfo(mInfo);
+            outBitmap<span style="color:#f92672">-&gt;</span>setPixelRef(std<span style="color:#f92672">::</span>move(pixelRef), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+        }
+        <span style="color:#66d9ef">return</span>;
+    }
+    outBitmap<span style="color:#f92672">-&gt;</span>setInfo(mInfo, rowBytes());
+    outBitmap<span style="color:#f92672">-&gt;</span>setPixelRef(sk_ref_sp(<span style="color:#66d9ef">this</span>), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+}
+</code></pre></div><p><a href="#setinfo">setinfo</a></p>
+<p><a href="#setpixelref">setpixelref</a></p>
+<h3 id="allocateashmembitmap">allocateAshmemBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> Bitmap<span style="color:#f92672">::</span>allocateAshmemBitmap<span style="color:#f92672">(</span>SkBitmap<span style="color:#f92672">*</span> bitmap<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> allocateBitmap<span style="color:#f92672">(</span>bitmap<span style="color:#f92672">,</span> <span style="color:#f92672">&amp;</span>Bitmap<span style="color:#f92672">::</span>allocateAshmemBitmap<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><a href="#allocatebitmap">allocatebitmap</a></p>
+<h3 id="allocateashmembitmap-1">allocateAshmemBitmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span> Bitmap<span style="color:#f92672">::</span>allocateAshmemBitmap(size_t size, <span style="color:#66d9ef">const</span> SkImageInfo<span style="color:#f92672">&amp;</span> info, size_t rowBytes) {
+    <span style="color:#75715e">// Create new ashmem region with read/write priv
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> fd <span style="color:#f92672">=</span> ashmem_create_region(<span style="color:#e6db74">&#34;bitmap&#34;</span>, size);
+    <span style="color:#66d9ef">if</span> (fd <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+
+    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> addr <span style="color:#f92672">=</span> mmap(NULL, size, PROT_READ <span style="color:#f92672">|</span> PROT_WRITE, MAP_SHARED, fd, <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">if</span> (addr <span style="color:#f92672">==</span> MAP_FAILED) {
+        close(fd);
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+
+    <span style="color:#66d9ef">if</span> (ashmem_set_prot_region(fd, PROT_READ) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        munmap(addr, size);
+        close(fd);
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+    <span style="color:#66d9ef">return</span> sk_sp<span style="color:#f92672">&lt;</span>Bitmap<span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">new</span> Bitmap(addr, fd, size, info, rowBytes));
+}
+</code></pre></div><p>external/skia/src/core/</p>
+<h2 id="skbitmapcpp">SkBitmap.cpp</h2>
+<h3 id="setinfo">setInfo</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> SkBitmap<span style="color:#f92672">::</span>setInfo(<span style="color:#66d9ef">const</span> SkImageInfo<span style="color:#f92672">&amp;</span> info, size_t rowBytes) {
+    fPixelRef <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;  <span style="color:#75715e">// Free pixels.
+</span><span style="color:#75715e"></span>    fPixmap.reset(info.makeAlphaType(newAT), <span style="color:#66d9ef">nullptr</span>, SkToU32(rowBytes));
+    <span style="color:#66d9ef">return</span> true;
+</code></pre></div><p><a href="#makealphatype">makealphatype</a></p>
+<h3 id="setpixelref">setPixelRef</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> SkBitmap<span style="color:#f92672">::</span>setPixelRef(sk_sp<span style="color:#f92672">&lt;</span>SkPixelRef<span style="color:#f92672">&gt;</span> pr, <span style="color:#66d9ef">int</span> dx, <span style="color:#66d9ef">int</span> dy) {
+    fPixelRef <span style="color:#f92672">=</span> kUnknown_SkColorType <span style="color:#f92672">!=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>colorType() <span style="color:#f92672">?</span> std<span style="color:#f92672">::</span>move(pr) <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    size_t rowBytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>rowBytes();
+    <span style="color:#75715e">// ignore dx,dy if there is no pixelref
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (fPixelRef) {
+        rowBytes <span style="color:#f92672">=</span> fPixelRef<span style="color:#f92672">-&gt;</span>rowBytes();
+        <span style="color:#75715e">// TODO(reed):  Enforce that PixelRefs must have non-null pixels.
+</span><span style="color:#75715e"></span>        p <span style="color:#f92672">=</span> fPixelRef<span style="color:#f92672">-&gt;</span>pixels();
+        <span style="color:#66d9ef">if</span> (p) {
+            p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)p <span style="color:#f92672">+</span> dy <span style="color:#f92672">*</span> rowBytes <span style="color:#f92672">+</span> dx <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>bytesPerPixel();
+        }
+    }
+    SkPixmapPriv<span style="color:#f92672">::</span>ResetPixmapKeepInfo(<span style="color:#f92672">&amp;</span>fPixmap, p, rowBytes);
+</code></pre></div><p><a href="#pixels">pixels</a></p>
+<p>external/skia/include/core/SkPixelRef.h</p>
+<h2 id="skpixelref">SkPixelRef</h2>
+<h3 id="pixels">pixels</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">pixels</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> fPixels; }
+
+size_t <span style="color:#a6e22e">rowBytes</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> fRowBytes; }
+</code></pre></div><p>external/skia/include/core/</p>
+<h2 id="skimageinfoh">SkImageInfo.h</h2>
+<h3 id="makealphatype">makeAlphaType</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">SkImageInfo <span style="color:#a6e22e">makeAlphaType</span>(SkAlphaType newAlphaType) <span style="color:#66d9ef">const</span> {
+    <span style="color:#66d9ef">return</span> Make(fWidth, fHeight, fColorType, newAlphaType, fColorSpace);
+}
+</code></pre></div><p>external/skia/src/core/</p>
+<h2 id="skpixmap">SkPixmap</h2>
+<h3 id="reset">reset</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> SkPixmap<span style="color:#f92672">::</span>reset(<span style="color:#66d9ef">const</span> SkImageInfo<span style="color:#f92672">&amp;</span> info, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> addr, size_t rowBytes) {
+    fPixels <span style="color:#f92672">=</span> addr;
+    fRowBytes <span style="color:#f92672">=</span> rowBytes;
+    fInfo <span style="color:#f92672">=</span> info;
+}
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611381690"></script>
+    <script src="/js/jquery.sticky.js?1611381690"></script>
+    <script src="/js/featherlight.min.js?1611381690"></script>
+    <script src="/js/highlight.pack.js?1611381690"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611381690"></script>
+    <script src="/js/learn.js?1611381690"></script>
+    <script src="/js/hugo-learn.js?1611381690"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1611381690"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

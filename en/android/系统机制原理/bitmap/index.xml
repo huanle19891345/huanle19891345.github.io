@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bitmap on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/</link>
+    <description>Recent content in bitmap on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bitmap</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/</guid>
+      <description>Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
+Android Bitmap变迁与原理解析（4.x-8.x）
+Bitmap: 从出生到死亡
+Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
+ ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：
+ Java 运行时在 GC 调度时可考虑 native 内存状态 Java 运行时在 Java 对象变得不可达时可以使用用户提供的函数来自动清理 native 内存  当 Java 层 Bitmap 对象不可达后关联的 native 内存会由 nativeGetNativeFinalizer() 指定的方法来回收</description>
+    </item>
+    
+    <item>
+      <title>BitmapSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/</guid>
+      <description>类设计 NativeAllocationRegistry procedure ART reclaim NativeAllocationRegistry procedure(only object which will be reclaim(GC not reachable) would be enqueued)
+graph TB ReferenceQueueDaemon.runInernal--&amp;gt;ReferenceQueue.enqueuePending ReferenceQueue.enqueuePending--&amp;gt;ReferenceQueue.enqueueLocked ReferenceQueue.enqueueLocked--&amp;gt;Cleaner.clean Cleaner.clean--&amp;gt;CleanerChunk.run CleanerChunk.run--&amp;gt;NativeAllocationRegistry.applyFreeFunction ImageDecoder decodeDrawable public static Drawable decodeDrawable(@NonNull Source src, @NonNull OnHeaderDecodedListener listener) throws IOException { return decodeDrawableImpl(src, listener); } decodeDrawableImpl private static Drawable decodeDrawableImpl(@NonNull Source src, @Nullable OnHeaderDecodedListener listener) throws IOException { ImageDecoder decoder = src.createImageDecoder() decoder.mSource = src; decoder.callHeaderDecoded(listener, src); Bitmap bm = decoder.decodeBitmapInternal(); return new BitmapDrawable(res, bm); } decodeBitmapInternal private Bitmap decodeBitmapInternal() throws IOException { checkState(); return nDecodeBitmap(mNativePtr, this, mPostProcessor !</description>
+    </item>
+    
+  </channel>
+</rss>

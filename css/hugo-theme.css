@@ -25,13 +25,28 @@
 #TableOfContents > ul > li > a   {
   font-weight: bold;
 }
-/*title 3*/
+/*title 3 */
 #TableOfContents > ul > li > ul > li > a {
-  font-weight: bold; padding: 0 10px;
+  font-weight: bold; padding: 0 8px;
+  color: var(--MAIN-TITLES-TEXT-color) !important;
 }
 
-#TableOfContents > ul > li > ul > li > a.highlight {
-    color: var(--MAIN-TITLES-TEXT-color) !important;
+/*title 4 green*/
+#TableOfContents > ul > li > ul > li > ul > li > a {
+  font-weight: bold; padding: 0 16px;
+  color: #599a3e !important;
+}
+
+/*title 5 purple*/
+#TableOfContents > ul > li > ul > li > ul > li > ul > li > a {
+  font-weight: bold; padding: 0 24px;
+  color: #8451a1 !important;
+}
+
+/*title 6 red*/
+#TableOfContents > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+  font-weight: bold; padding: 0 32px;
+  color: #f31c1c !important;
 }
 
 a.highlight.current {
@@ -40,7 +55,7 @@ a.highlight.current {
 
 
 #TableOfContents > ul > li > ul > li > ul > li > ul > li > ul > li  {
-    display: none;
+    /*display: none;*/
 }
 
 body {

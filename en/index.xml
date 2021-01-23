@@ -7,6 +7,99 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>BinderClient</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/</guid>
+      <description>Data Flow graph LR parcel_data--&amp;gt;flat_binder_object flat_binder_object--&amp;gt;binder_transaction_data getService SystemServiceRegistry ContextImpl.getSystemService @Override public Object getSystemService(String name) { return SystemServiceRegistry.getSystemService(this, name); } registerServices /** * Manages all of the system services that can be returned by {@link Context#getSystemService}. Used by {@link ContextImpl}. */ static { ...... registerService(Context.ACTIVITY_SERVICE, ActivityManager.class, new CachedServiceFetcher&amp;lt;ActivityManager&amp;gt;() { @Override public ActivityManager createService(ContextImpl ctx) { return new ActivityManager(ctx.getOuterContext(), ctx.mMainThread.getHandler()); }}); ...... registerService(Context.DISPLAY_SERVICE, DisplayManager.class, new CachedServiceFetcher&amp;lt;DisplayManager&amp;gt;() { @Override public DisplayManager createService(ContextImpl ctx) { return new DisplayManager(ctx.</description>
+    </item>
+    
+    <item>
+      <title>BinderDeath</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/</guid>
+      <description>原理总结 Binder死亡通知机制之linkToDeath
+UnlinkToDeath流程类似，参考上文，不做记录
+死亡通知是为了让Bp端(客户端进程)进能知晓Bn端(服务端进程)的生死情况，当Bn端进程死亡后能通知到Bp端。
+ 定义：AppDeathRecipient是继承IBinder::DeathRecipient类，主要需要实现其binderDied()来进行死亡通告。 注册：binder-&amp;gt;linkToDeath(AppDeathRecipient)是为了将AppDeathRecipient死亡通知注册到Binder上。  Bp端只需要覆写binderDied()方法，实现一些后尾清除类的工作，则在Bn端死掉后，会回调binderDied()进行相应处理。
+linkToDeath android_os_BinderProxy_linkToDeath static void android_os_BinderProxy_linkToDeath(JNIEnv* env, jobject obj, jobject recipient, jint flags) { //获取BinderProxy.mObject成员变量值, 即BpBinder对象  IBinder* target = (IBinder*)env-&amp;gt;GetLongField(obj, gBinderProxyOffsets.mObject); sp&amp;lt;JavaDeathRecipient&amp;gt; jdr = new JavaDeathRecipient(env, recipient, list); //建立死亡通知[见小节2.2]  status_t err = target-&amp;gt;linkToDeath(jdr, NULL, flags); }  获取DeathRecipientList: 其成员变量mList记录该BinderProxy的JavaDeathRecipient列表信息；  一个BpBinder可以注册多个死亡回调   创建JavaDeathRecipient: 继承于IBinder::DeathRecipient  linkToDeath status_t BpBinder::linkToDeath( const sp&amp;lt;DeathRecipient&amp;gt;&amp;amp; recipient, void* cookie, uint32_t flags) { IPCThreadState* self = IPCThreadState::self(); self-&amp;gt;requestDeathNotification(mHandle, this); self-&amp;gt;flushCommands(); } requestDeathNotification status_t IPCThreadState::requestDeathNotification(int32_t handle, BpBinder* proxy) { mOut.</description>
+    </item>
+    
+    <item>
+      <title>BinderKernel</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/</guid>
+      <description>binder_write_read struct binder_write_read { binder_size_t	write_size;	/* bytes to write */ binder_size_t	write_consumed;	/* bytes consumed by driver */ binder_uintptr_t	write_buffer; binder_size_t	read_size;	/* bytes to read */ binder_size_t	read_consumed;	/* bytes consumed by driver */ binder_uintptr_t	read_buffer; }; binder_transaction_data struct binder_transaction_data { /* The first two are only used for bcTRANSACTION and brTRANSACTION, * identifying the target and contents of the transaction. */ union { /* target descriptor of command transaction */ __u32	handle; /* target descriptor of return transaction */ binder_uintptr_t ptr; } target; binder_uintptr_t	cookie;	/* target object cookie */ __u32	code;	/* transaction command */ /* General information about the transaction.</description>
+    </item>
+    
+    <item>
+      <title>BinderServer</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/</guid>
+      <description>Binder Native And Java Design classDiagram class IBinder { +queryLocalInterface(descriptor) +linkToDeath(recipient, cookie, flags) status_t +unlinkToDeath(recipient, cookie, flags, outRecipient) status_t +transact(code, data, reply, flags) status_t +localBinder() BBinder +remoteBinder() BpBinder } class BpBinder { } class BBinder { +transact(code, data, reply, flags) #onTransact(code, data, reply, flags) } class BnInterface~INTERFACE~ { +queryLocalInterface(_descriptor) IInterface +getInterfaceDescriptor() descriptor #onAsBinder() IBinder } class BnGraphicBufferProducer { +onTransact() status_t } class IInterface { +asBinder(IInterface*) IBinder } class IGraphicBufferProducer { +ipcMethod() } class BufferQueueProducer { +ipcMethod() } class JavaBBinder { +onTransact() } IBinder &amp;lt;|-- BpBinder IBinder &amp;lt;|-- BBinder BBinder &amp;lt;|-- BnInterface : native type server BBinder &amp;lt;|-- JavaBBinder : java type server BnInterface &amp;lt;|-- BnGraphicBufferProducer : BnInterface&amp;lt;IGraphicBufferProducer&amp;gt; IInterface &amp;lt;|-- IGraphicBufferProducer BnGraphicBufferProducer &amp;lt;|-- BufferQueueProducer IGraphicBufferProducer &amp;lt;|.</description>
+    </item>
+    
+    <item>
+      <title>BinderServiceManager</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/</guid>
+      <description>Sequence svclist frameworks/native/cmds/servicemanager/service_manager.c
+service_manager.c(ServiceManger is single thread) main int main(int argc, char** argv) { struct binder_state *bs; union selinux_callback cb; char *driver; if (argc &amp;gt; 1) { driver = argv[1]; } else { driver = &amp;#34;/dev/binder&amp;#34;; } bs = binder_open(driver, 128*1024);//1  if (binder_become_context_manager(bs)) {//2  ALOGE(&amp;#34;cannot become context manager (%s)\n&amp;#34;, strerror(errno)); return -1; } binder_loop(bs, svcmgr_handler);//3  return 0; } binder_open
+binder_become_context_manager
+binder_loop
+svcmgr_handler int svcmgr_handler(struct binder_state *bs, struct binder_transaction_data *txn, struct binder_io *msg, struct binder_io *reply) { switch(txn-&amp;gt;code) { case SVC_MGR_GET_SERVICE: case SVC_MGR_CHECK_SERVICE: s = bio_get_string16(msg, &amp;amp;len); handle = do_find_service(s, len, txn-&amp;gt;sender_euid, txn-&amp;gt;sender_pid); if (!</description>
+    </item>
+    
+    <item>
+      <title>Binder原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/</guid>
+      <description>写给 android 应用工程师的 binder 原理剖析
+架构设计分析（三）Android 9.0 Binder机制
+彻底理解Android Binder通信架构 Android 6.0
+Binder系列5—注册服务(addService)
+Android IPC: Part 2 - Binder and Service Manager Perspective
+深入理解Binder通信原理及面试问题
+Binder | 内存拷贝的本质和变迁
+Linux 背景知识 传统 IPC 通信原理 Binder IPC 原理 BinderProcedure flow struct binder_write_read transact total </description>
+    </item>
+    
+    <item>
+      <title>Bitmap</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/</guid>
+      <description>Bitmap像素存储 03 | 内存优化（上）：4GB内存时代，再谈内存优化
+Android Bitmap变迁与原理解析（4.x-8.x）
+Bitmap: 从出生到死亡
+Bitmap创建 Java 层的创建 Bitmap 的所有 API 进入到 Native 层后，全都会走如下这四个步骤。
+ ==资源转换== - 这一步将 Java 层传来的不同类型的资源转换成解码器可识别的数据类型 ==内存分配== - 分配内存时会考虑是否复用 Bitmap、是否缩放 Bitmap 等因素 ==图片解码== - 实际的解码工作由第三方库完成，解码结果填在上一步分配的内存中。注，Bitmap.createBitmap() 和 Bitmap.copy() 创建的 Bitmap 不需要进行图片解码 ==创建对象== - 这一步将包含解码数据的内存块包装成 Java 层的 android.graphics.Bitmap 对象，方便 App 使用  1. 资源转换 2. 内存分配 3. 图片解码 创建Java对象 Bitmap销毁 Bitmap.recycle() 自动释放：NativeAllocationRegistry NativeAllocationRegistry 用于将 native 内存跟 Java 对象关联，并将它们注册到 Java 运行时。注册 Java 对象关联的 native 内存有几个好处：
+ Java 运行时在 GC 调度时可考虑 native 内存状态 Java 运行时在 Java 对象变得不可达时可以使用用户提供的函数来自动清理 native 内存  当 Java 层 Bitmap 对象不可达后关联的 native 内存会由 nativeGetNativeFinalizer() 指定的方法来回收</description>
+    </item>
+    
+    <item>
+      <title>BitmapSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/</guid>
+      <description>类设计 NativeAllocationRegistry procedure ART reclaim NativeAllocationRegistry procedure(only object which will be reclaim(GC not reachable) would be enqueued)
+graph TB ReferenceQueueDaemon.runInernal--&amp;gt;ReferenceQueue.enqueuePending ReferenceQueue.enqueuePending--&amp;gt;ReferenceQueue.enqueueLocked ReferenceQueue.enqueueLocked--&amp;gt;Cleaner.clean Cleaner.clean--&amp;gt;CleanerChunk.run CleanerChunk.run--&amp;gt;NativeAllocationRegistry.applyFreeFunction ImageDecoder decodeDrawable public static Drawable decodeDrawable(@NonNull Source src, @NonNull OnHeaderDecodedListener listener) throws IOException { return decodeDrawableImpl(src, listener); } decodeDrawableImpl private static Drawable decodeDrawableImpl(@NonNull Source src, @Nullable OnHeaderDecodedListener listener) throws IOException { ImageDecoder decoder = src.createImageDecoder() decoder.mSource = src; decoder.callHeaderDecoded(listener, src); Bitmap bm = decoder.decodeBitmapInternal(); return new BitmapDrawable(res, bm); } decodeBitmapInternal private Bitmap decodeBitmapInternal() throws IOException { checkState(); return nDecodeBitmap(mNativePtr, this, mPostProcessor !</description>
+    </item>
+    
+    <item>
       <title>Flutter消息机制</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -19,6 +112,46 @@ ThreadHost初始化
 上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。
 每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。
  Step 1: 检查task，当task队列不为空，先执行一个task； Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；  可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。</description>
+    </item>
+    
+    <item>
+      <title>Graphics</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</guid>
+      <description>https://source.android.com/devices/graphics/index.html
+Android graphics components No matter what rendering API developers use, everything is rendered onto a &amp;ldquo;surface.&amp;rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. A==ll of the visible surfaces rendered are composited onto the display by SurfaceFlinger.==
+The following diagram shows how the key components work together:</description>
+    </item>
+    
+    <item>
+      <title>Looper</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</guid>
+      <description>原理总结 Looper就是对epoll系统调用的封装层，屏蔽外部对epoll的直接使用
+Looper addFd int Looper::addFd(int fd, int ident, int events, Looper_callbackFunc callback, void* data) { // use SimpleLooperCallback as adapter from handleEvent to callback function  return addFd(fd, ident, events, callback ? new SimpleLooperCallback(callback) : NULL, data); } int Looper::addFd(int fd, int ident, int events, const sp&amp;lt;LooperCallback&amp;gt;&amp;amp; callback, void* data) { if (!callback.get()) { if (! mAllowNonCallbacks) { ALOGE(&amp;#34;Invalid attempt to set NULL callback but not allowed for this looper.</description>
+    </item>
+    
+    <item>
+      <title>MMKV</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/</guid>
+      <description>参考 https://github.com/Tencent/MMKV/wiki/android_ipc
+https://github.com/Tencent/MMKV/wiki/design
+原理总结 MMKV 本质上是将文件 mmap 到内存块中，将新增的 key-value 统统 append 到内存中；到达边界后，进行重整回写以腾出空间，空间还是不够的话，就 double 内存空间；对于内存文件中可能存在的重复键值，MMKV 只选用最后写入的作为有效键值。
+状态同步 写指针的同步 我们可以在每个进程内部缓存自己的写指针，然后在写入键值的同时，还要把最新的写指针位置也写到 mmap 内存中；这样每个进程只需要对比一下缓存的指针与 mmap 内存的写指针，如果不一样，就说明其他进程进行了写操作。事实上 MMKV 原本就在文件头部保存了有效内存的大小，这个数值刚好就是写指针的内存偏移量，我们可以重用这个数值来校对写指针。
+内存重整的感知 考虑使用一个单调递增的序列号，每次发生内存重整，就将序列号递增。将这个序列号也放到 mmap 内存中，每个进程内部也缓存一份，只需要对比序列号是否一致，就能够知道其他进程是否触发了内存重整。
+内存增长的感知 事实上 MMKV 在内存增长之前，会先尝试通过内存重整来腾出空间，重整后还不够空间才申请新的内存。所以内存增长可以跟内存重整一样处理。至于新的内存大小，可以通过查询文件大小来获得，无需在 mmap 内存另外存放。
+挑选进程锁  文件锁，优点是天然 robust，缺点是不支持递归加锁，也不支持读写锁升级/降级，需要自行实现。 pthread_mutex，优点是 pthread 库支持递归加锁，也支持读写锁升级/降级，缺点是不 robust，需要自行清理。  文件锁 到这里我们已经完成了数据的多进程同步工作，是时候回头处理锁事了，亦即前面提到的递归锁和锁升级/降级。
+递归锁 意思是如果一个进程/线程已经拥有了锁，那么后续的加锁操作不会导致卡死，并且解锁也不会导致外层的锁被解掉。对于文件锁来说，前者是满足的，后者则不然。因为文件锁是状态锁，没有计数器，无论加了多少次锁，一个解锁操作就全解掉。只要用到子函数，就非常需要递归锁。
+锁升级/降级 锁升级是指将已经持有的共享锁，升级为互斥锁，亦即将读锁升级为写锁；锁降级则是反过来。文件锁支持锁升级，但是容易死锁：假如 A、B 进程都持有了读锁，现在都想升级到写锁，就会陷入相互等待的困境，发生死锁。另外，由于文件锁不支持递归锁，也导致了锁降级无法进行，一降就降到没有锁。
+为了解决递归锁和锁升级/降级这两个难题，需要对文件锁(系统调用flock)进行封装，增加读锁、写锁计数器。处理逻辑如下表：
+   读锁计数器 写锁计数器 加读锁 加写锁 解读锁 解写锁     0 0 加读锁 加写锁 - -   0 1 +1 +1 - 解写锁   0 N +1 +1 - -1   1 0 +1 解读锁再加写锁 解读锁 -   1 1 +1 +1 -1 加读锁   1 N +1 +1 -1 -1   N 0 +1 解读锁再加写锁 -1 -   N 1 +1 +1 -1 加读锁   N N +1 +1 -1 -1    需要注意的地方有两点：</description>
     </item>
     
     <item>
@@ -38,14 +171,111 @@ graph LR olderSupport--&amp;gt;|APIchanges|28.0.0Support--&amp;gt;|namespaceChan
     </item>
     
     <item>
-      <title>硬件加速绘制Source</title>
-      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</link>
+      <title>SystemServerSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</guid>
-      <description>RenderPipeLine类设计 graph TB IRenderPipeline--&amp;gt;OpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaOpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaVulkanPipeline RenderThread继承结构 graph TB Thread--&amp;gt;ThreadBase ThreadBase--&amp;gt;ReanderThread 流程研究 frameworks/base/core/java/android/view/IWindow.aidl
-IWindow /** * API back to a client window that the Window Manager uses to inform it of * interesting things happening. * * {@hide} */ oneway interface IWindow {} frameworks/base/core/java/android/view/IWindowSession.aidl
-IWindowSession /** * System private per-application interface to the window manager. * * {@hide} */ interface IWindowSession {} ViewRootImpl // These can be accessed by any thread, must be protected with a lock.</description>
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/</guid>
+      <description>main /** * The main entry point from zygote. */ public static void main(String[] args) { new SystemServer().run(); } run private void run() { // The system server should never make non-oneway calls  Binder.setWarnOnBlocking(true); // Ensure binder calls into the system always run at foreground priority.  BinderInternal.disableBackgroundScheduling(true); // Increase the number of binder threads in system_server  BinderInternal.setMaxThreads(sMaxBinderThreads); // Prepare the main looper thread (this thread).  android.os.Process.setThreadPriority( android.</description>
+    </item>
+    
+    <item>
+      <title>ThreadLocal</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</guid>
+      <description>ThreadLocal模型 graph LR thread--&amp;gt;threadLocalMap threadLocalMap--&amp;gt;entry1 threadLocalMap--&amp;gt;entry2 threadLocalMap--&amp;gt;entry3 threadLocalMap--&amp;gt;entryxxx entry1--&amp;gt;key=threadlocal1,value=T1 entry2--&amp;gt;key=threadlocal2,value=T2 entry3--&amp;gt;key=threadlocal3,value=T3  线性探测解决hash冲突 超过默认长度(16)的2/3时rehash减少hash冲突，扩容一倍 threadlocal作为key保存在entry中时是WeakReference，在被回收时清除记录，因此需要外部定义TheadLocal实例的地方配置为static，否则在外部回收threadlocal时，threadlocalmap中的entry也会被清理掉 lazy模式，只有添加第一个 元素时才通过createMap创建ThreadLocalMap  Thread /* ThreadLocal values pertaining to this thread. This map is maintained * by the ThreadLocal class. */ ThreadLocal.ThreadLocalMap threadLocals = null; /* * InheritableThreadLocal values pertaining to this thread. This map is * maintained by the InheritableThreadLocal class. */ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null; ThreadLocal threadLocalHashCode public class ThreadLocal&amp;lt;T&amp;gt; { /** * ThreadLocals rely on per-thread linear-probe hash maps attached * to each thread (Thread.</description>
+    </item>
+    
+    <item>
+      <title>touchEventNative</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/</guid>
+      <description>原理图 SystemServer startOtherServices private void startOtherServices() { inputManager = new InputManagerService(context); wm = WindowManagerService.main(context, inputManager, mFactoryTestMode != FactoryTest.FACTORY_TEST_LOW_LEVEL, !mFirstBoot, mOnlyCore, new PhoneWindowManager()); ServiceManager.addService(Context.WINDOW_SERVICE, wm, /* allowIsolated= */ false, DUMP_FLAG_PRIORITY_CRITICAL | DUMP_FLAG_PROTO); ServiceManager.addService(Context.INPUT_SERVICE, inputManager, /* allowIsolated= */ false, DUMP_FLAG_PRIORITY_CRITICAL); ...... inputManager.setWindowManagerCallbacks(wm.getInputMonitor()); inputManager.start(); } InputManagerService public class InputManagerService extends IInputManager.Stub { public InputManagerService(Context context) { this.mContext = context; this.mHandler = new InputManagerHandler(DisplayThread.get().getLooper()); mPtr = nativeInit(this, mContext, mHandler.getLooper().getQueue()); } } start public void start() { Slog.</description>
+    </item>
+    
+    <item>
+      <title>Vsync</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/</guid>
+      <description>原理图 Vsync App进程 graph TB DisplayEventDispatcher::scheduleVsync--&amp;gt;eventConnection.requestNextVsync sequenceDiagram participant JavaDispalyEventReveiver participant NativeDisplayEventReceiver participant Looper participant BitTube NativeDisplayEventReceiver-&amp;gt;&amp;gt;+Looper: looper.addFd Looper--&amp;gt;&amp;gt;-NativeDisplayEventReceiver: fd可读 NativeDisplayEventReceiver-&amp;gt;&amp;gt;+NativeDisplayEventReceiver: handleEvent NativeDisplayEventReceiver-&amp;gt;&amp;gt;-BitTube: recvObjects BitTube--&amp;gt;&amp;gt;NativeDisplayEventReceiver: return NativeDisplayEventReceiver-&amp;gt;&amp;gt;JavaDispalyEventReveiver:dispatchVsnc frameworks/base/libs/androidfw/DisplayEventDispatcher.cpp
+DisplayEventDispatcher.cpp initialize status_t DisplayEventDispatcher::initialize() { status_t result = mReceiver.initCheck(); int rc = mLooper-&amp;gt;addFd(mReceiver.getFd(), 0, Looper::EVENT_INPUT, this, NULL); return OK; } handleEvent int DisplayEventDispatcher::handleEvent(int, int events, void*) { // Drain all pending events, keep the last vsync.  nsecs_t vsyncTimestamp; int32_t vsyncDisplayId; uint32_t vsyncCount; if (processPendingEvents(&amp;amp;vsyncTimestamp, &amp;amp;vsyncDisplayId, &amp;amp;vsyncCount)) { dispatchVsync(vsyncTimestamp, vsyncDisplayId, vsyncCount); } return 1; // keep the callback } scheduleVsync status_t DisplayEventDispatcher::scheduleVsync() { if (!</description>
+    </item>
+    
+    <item>
+      <title>Vsync_SurfaceFlinger</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</guid>
+      <description>Android-SurfaceFlinger启动与绘图原理
+创建 HWComposer 对象(通过 HAL 层的 HWComposer 硬件模块 或 软件模拟产生 Vsync 信号)，现在的 Android 系统基本上都可以看成是通过硬件 HWComposer 产生 Vsync 信号，而不使用软件模拟，所以下面解析都只谈及硬件 HWComposer 的 Vsync 信号；
+Choreographer 会通过上面创建的 APP 延时源 mEventThreadSource 对象及其对应的 EventThread 线程来监听同步模拟发出的 Vsync 信号，然后进行绘制(measure/layout/draw)操作。具体逻辑见 Android-Choreographer原理。
+SurfaceFlinger类设计 graph TB SurfaceFlinger--&amp;gt;BnSurfaceComposer--&amp;gt;BnInterface BnSurfaceComposer--&amp;gt;ISurfaceComposer ISurfaceComposer--&amp;gt;IInterface BnInterface--&amp;gt;BBinder--&amp;gt;IBinder system/core/rootdir/init.rc
+init.rc on property:vold.decrypt=trigger_restart_framework stop surfaceflinger start surfaceflinger # A/B update verifier that marks a successful boot. exec_start update_verifier class_start main class_start late_start frameworks/native/services/surfaceflinger/surfaceflinger.rc
+surfaceflinger.rc service surfaceflinger /system/bin/surfaceflinger class core animation user system group graphics drmrpc readproc onrestart restart zygote writepid /dev/stune/foreground/tasks socket pdx/system/vr/display/client stream 0666 system graphics u:object_r:pdx_display_client_endpoint_socket:s0 socket pdx/system/vr/display/manager stream 0666 system graphics u:object_r:pdx_display_manager_endpoint_socket:s0 socket pdx/system/vr/display/vsync stream 0666 system graphics u:object_r:pdx_display_vsync_endpoint_socket:s0 frameworks/native/services/surfaceflinger/main_surfaceflinger.</description>
+    </item>
+    
+    <item>
+      <title>ZygoteSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/</guid>
+      <description>原理图 ZygoteInit.main public static void main(String argv[]) { ZygoteServer zygoteServer = new ZygoteServer(); for (int i = 1; i &amp;lt; argv.length; i++) { if (&amp;#34;start-system-server&amp;#34;.equals(argv[i])) { startSystemServer = true; } else if (&amp;#34;--enable-lazy-preload&amp;#34;.equals(argv[i])) { enableLazyPreload = true; } else if (argv[i].startsWith(ABI_LIST_ARG)) { abiList = argv[i].substring(ABI_LIST_ARG.length()); } else if (argv[i].startsWith(SOCKET_NAME_ARG)) { socketName = argv[i].substring(SOCKET_NAME_ARG.length()); } else { throw new RuntimeException(&amp;#34;Unknown command line argument: &amp;#34; + argv[i]); } } zygoteServer.registerServerSocketFromEnv(socketName); if (startSystemServer) { Runnable r = forkSystemServer(abiList, socketName, zygoteServer); // {@code r == null} in the parent (zygote) process, and {@code r !</description>
+    </item>
+    
+    <item>
+      <title>Zygote进程</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/</guid>
+      <description>What is the Zygote copy-on-write heap?
+All &amp;ldquo;Zygote-based&amp;rdquo; processes have memory pages that are identical among them.
+Those pages are not copied, instead everything is linked to the same memory page. This reduces the amount on RAM used by all the &amp;ldquo;Zygote-based&amp;rdquo; processes.
+If one of those process writes new data into such a page the page is automatically copied before the write actually takes place (because otherwise the memory of all forks would be changed).</description>
+    </item>
+    
+    <item>
+      <title>匿名共享内存Ashmem</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</guid>
+      <description>原理图 sequenceDiagram sharedMemory-&amp;gt;&amp;gt;+ashmem_dev: 1: ashmem_create_region ashmem_dev-&amp;gt;&amp;gt;ashmem_dev : fd = __ashmem_open() 创建ashmem_area放入file-&amp;gt;private_data ashmem_dev-&amp;gt;&amp;gt;ashmem_dev: ioctl(fd, ASHMEM_SET_NAME, buf) ashmem_dev-&amp;gt;&amp;gt;ashmem_dev: ioctl(fd, ASHMEM_SET_SIZE, size) ashmem_dev-&amp;gt;&amp;gt;-sharedMemory: fd sharedMemory-&amp;gt;&amp;gt;+Os : 2: mmap Os-&amp;gt;&amp;gt;-ashmem : ashmem_mmap ashmem-&amp;gt;&amp;gt;+shmem: vmfile = shmem_file_setup shmem-&amp;gt;&amp;gt;shmem: shmem_get_inode shmem-&amp;gt;&amp;gt;-shmem: alloc_file ashmem-&amp;gt;&amp;gt;shmem: shmem_set_file sharedMemory-&amp;gt;&amp;gt;ashmem_dev: 3: native_write ashmem_dev-&amp;gt;&amp;gt;ashmem: unpinned &amp;amp;&amp;amp; ashmem_pin_region ashmem_dev-&amp;gt;&amp;gt;shmem: env-&amp;gt;GetByteArrayRegion shmem-&amp;gt;&amp;gt;+shmem: shmem_fault shmem-&amp;gt;&amp;gt;-shmem: shmem_getpage分配真实物理页 ashmem_dev-&amp;gt;&amp;gt;ashmem: ashmem_unpin_region MemoryFile public MemoryFile(String name, int length) throws IOException { try { mSharedMemory = SharedMemory.create(name, length); mMapping = mSharedMemory.</description>
+    </item>
+    
+    <item>
+      <title>硬件加速绘制</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</guid>
+      <description>硬件加速绘制 Android硬件加速过程分析
+理解Android硬件加速原理的小白文
+Android硬件加速原理与实现
+总结：
+ CPU更擅长复杂逻辑控制，而GPU得益于大量ALU和并行结构设计，更擅长数学运算。 页面由各种基础元素（DisplayList）构成，渲染时需要进行大量浮点运算。 硬件加速条件下，CPU用于控制复杂绘制逻辑，构建或更新DisplayList；GPU用于完成图形计算，渲染DisplayList。 硬件加速条件下，刷新界面尤其是播放动画时，CPU只重建或更新必要的DisplayList，进一步提高渲染效率。   软硬件加速的区别 软硬件加速的区别主要是==图形的绘制究竟是GPU来处理还是CPU，如果是GPU==，就认为是硬件加速绘制，反之，软件绘制。
+不仅仅限定在绘制方面，绘制之前，在如何构建绘制区域上，硬件加速也做出了很大优化，因此硬件加速特性可以从下面两部分来分析：
+ ==前期策略：如何构建需要绘制的区域== ==后期绘制：单独渲染线程，依赖GPU进行绘制==  无论是软件绘制还是硬件加速，==绘制内存的分配都是类似的，都是需要请求SurfaceFlinger服务分配一块内存==，只不过硬件加速有可能从FrameBuffer硬件缓冲区直接分配内存（SurfaceFlinger一直这么干的），==两者的绘制都是在APP端，绘制完成之后同样需要通知SurfaceFlinger进行合成，在这个流程上没有任何区别==，真正的区别在于在APP端如何完成UI数据绘制
+软件绘制同硬件加速的区别主要是在绘制上，内存分配、图层合成等整体流程是一样的，只不过硬件加速相比软件绘制算法更加合理，同时采用单独的渲染线程，减轻了主线程的负担。
+软件绘制跟硬件加速的分歧点 ViewRootImpl.java
+private void draw(boolean fullRedrawNeeded) { ... if (!dirty.isEmpty() || mIsAnimating || accessibilityFocusDirty) { //关键点1 是否开启硬件加速  if (mAttachInfo.mHardwareRenderer != null &amp;amp;&amp;amp; mAttachInfo.mHardwareRenderer.isEnabled()) { ... dirty.setEmpty(); mBlockResizeBuffer = false; //关键点2 硬件加速绘制  mAttachInfo.mHardwareRenderer.draw(mView, mAttachInfo, this); } else { ... //关键点3 软件绘制  if (!drawSoftware(surface, mAttachInfo, xOffset, yOffset, scalingRequired, dirty)) { return; } .</description>
+    </item>
+    
+    <item>
+      <title>绘制原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</guid>
+      <description>流程原理 ViewRootImpl.setView /** * We have one child */ public void setView(View view, WindowManager.LayoutParams attrs, View panelParentView) { // If the application owns the surface, don&amp;#39;t enable hardware acceleration  if (mSurfaceHolder == null) { // While this is supposed to enable only, it can effectively disable  // the acceleration too.  enableHardwareAcceleration(attrs); } // Schedule the first layout -before- adding to the window  // manager, to make sure we do the relayout before receiving  // any other events from the system.</description>
     </item>
     
     <item>

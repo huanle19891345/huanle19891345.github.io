@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>匿名共享内存Ashmem :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1611381690" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611381690" rel="stylesheet">
+    <link href="/css/hybrid.css?1611381690" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611381690" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611381690" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611381690" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1611381690" rel="stylesheet">
+    <link href="/css/theme.css?1611381690" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611381690" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1611381690" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1611381690"></script>
+
+    <script src="/js/auto_toc_scroll.js?1611381690"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1611381690"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611381690"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1611381690"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/google/" title="google" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/google/">
+          google
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/google/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/google/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item active">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/" title="Flutter消息机制" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/">
+        Flutter消息机制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/'>系统机制原理</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/'>ashmem</a> > 匿名共享内存Ashmem
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#原理图">原理图</a></li>
+    <li><a href="#memoryfile">MemoryFile</a></li>
+    <li><a href="#sharedmemory">SharedMemory</a>
+      <ul>
+        <li><a href="#create">create</a></li>
+        <li><a href="#sharedmemorycons">SharedMemory::cons</a></li>
+        <li><a href="#mapreadwrite">mapReadWrite</a></li>
+        <li><a href="#map">map</a></li>
+      </ul>
+    </li>
+    <li><a href="#os">Os</a></li>
+    <li><a href="#libcore">Libcore</a></li>
+    <li><a href="#linux">Linux</a>
+      <ul>
+        <li><a href="#mmap">mmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#android_os_sharedmemory">android_os_SharedMemory</a>
+      <ul>
+        <li><a href="#sharedmemory_create">SharedMemory_create</a></li>
+      </ul>
+    </li>
+    <li><a href="#jnihelp">JNIHelp</a>
+      <ul>
+        <li><a href="#jnicreatefiledescriptor">jniCreateFileDescriptor</a></li>
+      </ul>
+    </li>
+    <li><a href="#ashmem-dev">ashmem-dev</a>
+      <ul>
+        <li><a href="#ashmem_create_region">ashmem_create_region</a></li>
+        <li><a href="#__ashmem_open">__ashmem_open</a></li>
+        <li><a href="#__ashmem_open_locked">__ashmem_open_locked</a></li>
+      </ul>
+    </li>
+    <li><a href="#ashmemc">ashmem.c</a>
+      <ul>
+        <li><a href="#ashmem_open">ashmem_open</a></li>
+        <li><a href="#ashmem_mmap">ashmem_mmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#shmemc">shmem.c</a>
+      <ul>
+        <li><a href="#shmem_file_setup">shmem_file_setup</a></li>
+        <li><a href="#__shmem_file_setup">__shmem_file_setup</a></li>
+        <li><a href="#shmem_set_file">shmem_set_file</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              匿名共享内存Ashmem
+            </h1>
+          
+
+        
+
+
+<h2 id="原理图">原理图</h2>
+<pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+sharedMemory-&gt;&gt;+ashmem_dev: 1: ashmem_create_region
+ashmem_dev-&gt;&gt;ashmem_dev : fd = __ashmem_open() 创建ashmem_area放入file-&gt;private_data
+ashmem_dev-&gt;&gt;ashmem_dev: ioctl(fd, ASHMEM_SET_NAME, buf)
+ashmem_dev-&gt;&gt;ashmem_dev: ioctl(fd, ASHMEM_SET_SIZE, size)
+ashmem_dev-&gt;&gt;-sharedMemory: fd
+sharedMemory-&gt;&gt;+Os : 2: mmap
+Os-&gt;&gt;-ashmem : ashmem_mmap
+ashmem-&gt;&gt;+shmem: vmfile = shmem_file_setup
+shmem-&gt;&gt;shmem: shmem_get_inode
+shmem-&gt;&gt;-shmem: alloc_file
+ashmem-&gt;&gt;shmem: shmem_set_file
+sharedMemory-&gt;&gt;ashmem_dev: 3: native_write
+ashmem_dev-&gt;&gt;ashmem: unpinned &amp;&amp; ashmem_pin_region
+ashmem_dev-&gt;&gt;shmem: env-&gt;GetByteArrayRegion
+shmem-&gt;&gt;+shmem: shmem_fault
+shmem-&gt;&gt;-shmem: shmem_getpage分配真实物理页
+ashmem_dev-&gt;&gt;ashmem: ashmem_unpin_region
+</code></pre><p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem.assets/fee148574db20fbca04f1f77b3b56da7.jpeg" alt=""></p>
+<p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem.assets/6327d4a2a65122651c3d94ec76ab0f04.jpeg" alt=""></p>
+<h2 id="memoryfile">MemoryFile</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">MemoryFile</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> length<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            mSharedMemory <span style="color:#f92672">=</span> SharedMemory<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> length<span style="color:#f92672">);</span>
+            mMapping <span style="color:#f92672">=</span> mSharedMemory<span style="color:#f92672">.</span><span style="color:#a6e22e">mapReadWrite</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ErrnoException ex<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            ex<span style="color:#f92672">.</span><span style="color:#a6e22e">rethrowAsIOException</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h2 id="sharedmemory">SharedMemory</h2>
+<h3 id="create">create</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">@NonNull</span> SharedMemory <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Nullable</span> String name<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> size<span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">throws</span> ErrnoException <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> SharedMemory<span style="color:#f92672">(</span>nCreate<span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> size<span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><a href="#sharedmemory_create">nCreate</a></p>
+<h3 id="sharedmemorycons">SharedMemory::cons</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#a6e22e">SharedMemory</span><span style="color:#f92672">(</span>FileDescriptor fd<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    mFileDescriptor <span style="color:#f92672">=</span> fd<span style="color:#f92672">;</span>
+    mSize <span style="color:#f92672">=</span> nGetSize<span style="color:#f92672">(</span>mFileDescriptor<span style="color:#f92672">);</span>
+
+    mMemoryRegistration <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MemoryRegistration<span style="color:#f92672">(</span>mSize<span style="color:#f92672">);</span>
+    mCleaner <span style="color:#f92672">=</span> Cleaner<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>mFileDescriptor<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">new</span> Closer<span style="color:#f92672">(</span>mFileDescriptor<span style="color:#f92672">,</span> mMemoryRegistration<span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="mapreadwrite">mapReadWrite</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@NonNull</span> ByteBuffer <span style="color:#a6e22e">mapReadWrite</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> ErrnoException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> map<span style="color:#f92672">(</span>OsConstants<span style="color:#f92672">.</span><span style="color:#a6e22e">PROT_READ</span> <span style="color:#f92672">|</span> OsConstants<span style="color:#f92672">.</span><span style="color:#a6e22e">PROT_WRITE</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> mSize<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="map">map</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@NonNull</span> ByteBuffer <span style="color:#a6e22e">map</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> prot<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> offset<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> length<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ErrnoException <span style="color:#f92672">{</span>
+    checkOpen<span style="color:#f92672">();</span>
+    validateProt<span style="color:#f92672">(</span>prot<span style="color:#f92672">);</span>
+    <span style="color:#75715e">//mmap
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> address <span style="color:#f92672">=</span> Os<span style="color:#f92672">.</span><span style="color:#a6e22e">mmap</span><span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> length<span style="color:#f92672">,</span> prot<span style="color:#f92672">,</span> OsConstants<span style="color:#f92672">.</span><span style="color:#a6e22e">MAP_SHARED</span><span style="color:#f92672">,</span> mFileDescriptor<span style="color:#f92672">,</span> offset<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">boolean</span> readOnly <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>prot <span style="color:#f92672">&amp;</span> OsConstants<span style="color:#f92672">.</span><span style="color:#a6e22e">PROT_WRITE</span><span style="color:#f92672">)</span> <span style="color:#f92672">==</span> 0<span style="color:#f92672">;</span>
+    Runnable unmapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Unmapper<span style="color:#f92672">(</span>address<span style="color:#f92672">,</span> length<span style="color:#f92672">,</span> mMemoryRegistration<span style="color:#f92672">.</span><span style="color:#a6e22e">acquire</span><span style="color:#f92672">());</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DirectByteBuffer<span style="color:#f92672">(</span>length<span style="color:#f92672">,</span> address<span style="color:#f92672">,</span> mFileDescriptor<span style="color:#f92672">,</span> unmapper<span style="color:#f92672">,</span> readOnly<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="os">Os</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">mmap</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> address<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> byteCount<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> prot<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> flags<span style="color:#f92672">,</span> FileDescriptor fd<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> offset<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ErrnoException <span style="color:#f92672">{</span> 
+      <span style="color:#75715e">// BlockGuardOs extends ForwardingOs中被代理的Os的mmap,也就是Linux的mmap
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> Libcore<span style="color:#f92672">.</span><span style="color:#a6e22e">os</span><span style="color:#f92672">.</span><span style="color:#a6e22e">mmap</span><span style="color:#f92672">(</span>address<span style="color:#f92672">,</span> byteCount<span style="color:#f92672">,</span> prot<span style="color:#f92672">,</span> flags<span style="color:#f92672">,</span> fd<span style="color:#f92672">,</span> offset<span style="color:#f92672">);</span>                                                                                                                                      <span style="color:#f92672">}</span>
+</code></pre></div><h2 id="libcore">Libcore</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Libcore</span> {
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Libcore</span>() { }
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Direct access to syscalls. Code should strongly prefer using {@link #os}
+</span><span style="color:#75715e">     * unless it has a strong reason to bypass the helpful checks/guards that it
+</span><span style="color:#75715e">     * provides.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Os rawOs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Linux();
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Access to syscalls with helpful checks/guards.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Os os <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BlockGuardOs(rawOs);
+}
+</code></pre></div><h2 id="linux">Linux</h2>
+<h3 id="mmap">mmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">mmap</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> address<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> byteCount<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> prot<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> flags<span style="color:#f92672">,</span> FileDescriptor fd<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> offset<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ErrnoException<span style="color:#f92672">;</span>
+</code></pre></div><p>frameworks/base/core/jni/android_os_SharedMemory.cpp</p>
+<h2 id="android_os_sharedmemory">android_os_SharedMemory</h2>
+<h3 id="sharedmemory_create">SharedMemory_create</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> jobject <span style="color:#a6e22e">SharedMemory_create</span>(JNIEnv<span style="color:#f92672">*</span> env, jobject, jstring jname, jint size) {
+
+    <span style="color:#75715e">// Name is optional so we can&#39;t use ScopedUtfChars for this as it throws NPE on null
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> name <span style="color:#f92672">=</span> jname <span style="color:#f92672">?</span> env<span style="color:#f92672">-&gt;</span>GetStringUTFChars(jname, <span style="color:#66d9ef">nullptr</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+
+    <span style="color:#66d9ef">int</span> fd <span style="color:#f92672">=</span> ashmem_create_region(name, size);
+
+    <span style="color:#75715e">// Capture the error, if there is one, before calling ReleaseStringUTFChars
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> err <span style="color:#f92672">=</span> fd <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> errno : <span style="color:#ae81ff">0</span>;
+
+    <span style="color:#66d9ef">if</span> (name) {
+        env<span style="color:#f92672">-&gt;</span>ReleaseStringUTFChars(jname, name);
+    }
+
+    <span style="color:#66d9ef">return</span> jniCreateFileDescriptor(env, fd);
+}
+</code></pre></div><p>libnativehelper/JNIHelp.cpp</p>
+<h2 id="jnihelp">JNIHelp</h2>
+<h3 id="jnicreatefiledescriptor">jniCreateFileDescriptor</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">jobject <span style="color:#a6e22e">jniCreateFileDescriptor</span>(C_JNIEnv<span style="color:#f92672">*</span> env, <span style="color:#66d9ef">int</span> fd) {
+    JNIEnv<span style="color:#f92672">*</span> e <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>JNIEnv<span style="color:#f92672">*&gt;</span>(env);
+    <span style="color:#66d9ef">if</span> (fileDescriptorInitMethod <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+        InitFieldsAndMethods(e);
+    }
+    jobject fileDescriptor <span style="color:#f92672">=</span> (<span style="color:#f92672">*</span>env)<span style="color:#f92672">-&gt;</span>NewObject(e, JniConstants<span style="color:#f92672">::</span>fileDescriptorClass,
+            fileDescriptorInitMethod);
+    <span style="color:#75715e">// NOTE: NewObject ensures that an OutOfMemoryError will be seen by the Java
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// caller if the alloc fails, so we just return NULL when that happens.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (fileDescriptor <span style="color:#f92672">!=</span> NULL)  {
+        jniSetFileDescriptorOfFD(env, fileDescriptor, fd);
+    }
+    <span style="color:#66d9ef">return</span> fileDescriptor;
+}
+</code></pre></div><p>system/core/libcutils/ashmem-dev.cpp</p>
+<h2 id="ashmem-dev">ashmem-dev</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#define ASHMEM_DEVICE &#34;/dev/ashmem&#34;
+</span></code></pre></div><h3 id="ashmem_create_region">ashmem_create_region</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * ashmem_create_region - creates a new ashmem region and returns the file
+</span><span style="color:#75715e"> * descriptor, or &lt;0 on error
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * `name&#39; is an optional label to give the region (visible in /proc/pid/maps)
+</span><span style="color:#75715e"> * `size&#39; is the size of the region, in page-aligned bytes
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ashmem_create_region</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name, size_t size)
+{
+    <span style="color:#66d9ef">int</span> ret, save_errno;
+
+    <span style="color:#66d9ef">int</span> fd <span style="color:#f92672">=</span> __ashmem_open();
+    <span style="color:#66d9ef">if</span> (fd <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#66d9ef">return</span> fd;
+    }
+
+    <span style="color:#66d9ef">if</span> (name) {
+        <span style="color:#66d9ef">char</span> buf[ASHMEM_NAME_LEN] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+
+        strlcpy(buf, name, <span style="color:#66d9ef">sizeof</span>(buf));
+        ret <span style="color:#f92672">=</span> TEMP_FAILURE_RETRY(ioctl(fd, ASHMEM_SET_NAME, buf));
+    }
+
+    ret <span style="color:#f92672">=</span> TEMP_FAILURE_RETRY(ioctl(fd, ASHMEM_SET_SIZE, size));
+
+    <span style="color:#66d9ef">return</span> fd;
+}
+</code></pre></div><h3 id="__ashmem_open">__ashmem_open</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">__ashmem_open</span>()
+{
+    <span style="color:#66d9ef">int</span> fd;
+
+    pthread_mutex_lock(<span style="color:#f92672">&amp;</span>__ashmem_lock);
+    fd <span style="color:#f92672">=</span> __ashmem_open_locked();
+    pthread_mutex_unlock(<span style="color:#f92672">&amp;</span>__ashmem_lock);
+
+    <span style="color:#66d9ef">return</span> fd;
+}
+</code></pre></div><h3 id="__ashmem_open_locked">__ashmem_open_locked</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">/* logistics of getting file descriptor for ashmem */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">__ashmem_open_locked</span>()
+{
+    <span style="color:#66d9ef">int</span> ret;
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">stat</span> st;
+
+    <span style="color:#66d9ef">int</span> fd <span style="color:#f92672">=</span> TEMP_FAILURE_RETRY(open(ASHMEM_DEVICE, O_RDWR <span style="color:#f92672">|</span> O_CLOEXEC));
+    <span style="color:#66d9ef">if</span> (fd <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#66d9ef">return</span> fd;
+    }
+
+    ret <span style="color:#f92672">=</span> TEMP_FAILURE_RETRY(fstat(fd, <span style="color:#f92672">&amp;</span>st));
+
+    __ashmem_rdev <span style="color:#f92672">=</span> st.st_rdev;
+    <span style="color:#66d9ef">return</span> fd;
+}
+</code></pre></div><p>drivers/staging/android/ashmem.c</p>
+<h2 id="ashmemc">ashmem.c</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#75715e">#define ASHMEM_NAME_DEF		&#34;dev/ashmem&#34;
+</span></code></pre></div><h3 id="ashmem_open">ashmem_open</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ashmem_open</span>(<span style="color:#66d9ef">struct</span> inode <span style="color:#f92672">*</span>inode, <span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>file)
+{
+	<span style="color:#66d9ef">struct</span> ashmem_area <span style="color:#f92672">*</span>asma;
+	<span style="color:#66d9ef">int</span> ret;
+
+	ret <span style="color:#f92672">=</span> generic_file_open(inode, file);
+	<span style="color:#66d9ef">if</span> (unlikely(ret))
+		<span style="color:#66d9ef">return</span> ret;
+
+	asma <span style="color:#f92672">=</span> kmem_cache_zalloc(ashmem_area_cachep, GFP_KERNEL);
+	<span style="color:#66d9ef">if</span> (unlikely(<span style="color:#f92672">!</span>asma))
+		<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>ENOMEM;
+
+	INIT_LIST_HEAD(<span style="color:#f92672">&amp;</span>asma<span style="color:#f92672">-&gt;</span>unpinned_list);
+	memcpy(asma<span style="color:#f92672">-&gt;</span>name, ASHMEM_NAME_PREFIX, ASHMEM_NAME_PREFIX_LEN);
+	asma<span style="color:#f92672">-&gt;</span>prot_mask <span style="color:#f92672">=</span> PROT_MASK;
+	file<span style="color:#f92672">-&gt;</span>private_data <span style="color:#f92672">=</span> asma;
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="ashmem_mmap">ashmem_mmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ashmem_mmap</span>(<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>file, <span style="color:#66d9ef">struct</span> vm_area_struct <span style="color:#f92672">*</span>vma)
+{
+	<span style="color:#66d9ef">struct</span> ashmem_area <span style="color:#f92672">*</span>asma <span style="color:#f92672">=</span> file<span style="color:#f92672">-&gt;</span>private_data;
+	<span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  
+  	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>asma<span style="color:#f92672">-&gt;</span>file) {
+		<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name <span style="color:#f92672">=</span> ASHMEM_NAME_DEF;
+		<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>vmfile;
+
+		<span style="color:#66d9ef">if</span> (asma<span style="color:#f92672">-&gt;</span>name[ASHMEM_NAME_PREFIX_LEN] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>)
+			name <span style="color:#f92672">=</span> asma<span style="color:#f92672">-&gt;</span>name;
+
+		<span style="color:#75715e">/* ... and allocate the backing shmem file */</span>
+    <span style="color:#75715e">//shmem_file_setup是原生linux的共享内存机制,匿名共享内存其实就是在Linux共享内存的基础上做了改进
+</span><span style="color:#75715e"></span>		vmfile <span style="color:#f92672">=</span> shmem_file_setup(name, asma<span style="color:#f92672">-&gt;</span>size, vma<span style="color:#f92672">-&gt;</span>vm_flags);
+		<span style="color:#66d9ef">if</span> (IS_ERR(vmfile)) {
+			ret <span style="color:#f92672">=</span> PTR_ERR(vmfile);
+			<span style="color:#66d9ef">goto</span> out;
+		}
+		vmfile<span style="color:#f92672">-&gt;</span>f_mode <span style="color:#f92672">|=</span> FMODE_LSEEK;
+		asma<span style="color:#f92672">-&gt;</span>file <span style="color:#f92672">=</span> vmfile;
+	}
+	get_file(asma<span style="color:#f92672">-&gt;</span>file);
+
+	<span style="color:#66d9ef">if</span> (vma<span style="color:#f92672">-&gt;</span>vm_flags <span style="color:#f92672">&amp;</span> VM_SHARED)
+		shmem_set_file(vma, asma<span style="color:#f92672">-&gt;</span>file);
+	<span style="color:#66d9ef">else</span> {
+		<span style="color:#66d9ef">if</span> (vma<span style="color:#f92672">-&gt;</span>vm_file)
+			fput(vma<span style="color:#f92672">-&gt;</span>vm_file);
+		vma<span style="color:#f92672">-&gt;</span>vm_file <span style="color:#f92672">=</span> asma<span style="color:#f92672">-&gt;</span>file;
+	}
+  <span style="color:#66d9ef">return</span> ret;
+}
+</code></pre></div><p>mm/shmem.c</p>
+<h2 id="shmemc">shmem.c</h2>
+<h3 id="shmem_file_setup">shmem_file_setup</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * shmem_file_setup - get an unlinked file living in tmpfs
+</span><span style="color:#75715e"> * @name: name for dentry (to be seen in /proc/&lt;pid&gt;/maps
+</span><span style="color:#75715e"> * @size: size to be set for the file
+</span><span style="color:#75715e"> * @flags: VM_NORESERVE suppresses pre-accounting of the entire object size
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span><span style="color:#a6e22e">shmem_file_setup</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name, loff_t size, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> flags)
+{
+	<span style="color:#66d9ef">return</span> __shmem_file_setup(name, size, flags, <span style="color:#ae81ff">0</span>);
+}
+</code></pre></div><h3 id="__shmem_file_setup">__shmem_file_setup</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span><span style="color:#a6e22e">__shmem_file_setup</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name, loff_t size,
+				       <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> flags, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> i_flags)
+{
+	inode <span style="color:#f92672">=</span> shmem_get_inode(sb, NULL, S_IFREG <span style="color:#f92672">|</span> S_IRWXUGO, <span style="color:#ae81ff">0</span>, flags);<span style="color:#75715e">//分配inode，分配成功就好比建立了文件，也许并未存在真实文件映射
+</span><span style="color:#75715e"></span>  
+  res <span style="color:#f92672">=</span> alloc_file(<span style="color:#f92672">&amp;</span>path, FMODE_WRITE <span style="color:#f92672">|</span> FMODE_READ,
+		  <span style="color:#f92672">&amp;</span>shmem_file_operations);
+  
+  <span style="color:#66d9ef">return</span> res;
+}
+</code></pre></div><h3 id="shmem_set_file">shmem_set_file</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shmem_set_file</span>(<span style="color:#66d9ef">struct</span> vm_area_struct <span style="color:#f92672">*</span>vma, <span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>file)
+{
+	<span style="color:#66d9ef">if</span> (vma<span style="color:#f92672">-&gt;</span>vm_file)
+		fput(vma<span style="color:#f92672">-&gt;</span>vm_file);
+	vma<span style="color:#f92672">-&gt;</span>vm_file <span style="color:#f92672">=</span> file;
+	vma<span style="color:#f92672">-&gt;</span>vm_ops <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>shmem_vm_ops;
+}
+</code></pre></div><p>//TODO shmem_vm_ops结构体的定义是下面两者中的哪一种，通过debug确定</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">struct</span> vm_operations_struct shmem_vm_ops <span style="color:#f92672">=</span> {
+	.fault		<span style="color:#f92672">=</span> shmem_fault,
+	.map_pages	<span style="color:#f92672">=</span> filemap_map_pages,
+<span style="color:#75715e">#ifdef CONFIG_NUMA
+</span><span style="color:#75715e"></span>	.set_policy     <span style="color:#f92672">=</span> shmem_set_policy,
+	.get_policy     <span style="color:#f92672">=</span> shmem_get_policy,
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>};
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define shmem_vm_ops				generic_file_vm_ops
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">struct</span> vm_operations_struct generic_file_vm_ops <span style="color:#f92672">=</span> {
+	.fault		<span style="color:#f92672">=</span> filemap_fault,
+	.map_pages	<span style="color:#f92672">=</span> filemap_map_pages,
+	.page_mkwrite	<span style="color:#f92672">=</span> filemap_page_mkwrite,
+};
+</code></pre></div><h2 id="参考">参考</h2>
+<p><a href="https://juejin.im/post/59e818bb6fb9a044fd10de38">Android匿名共享内存（Ashmem）原理</a></p>
+<p><a href="https://developer.aliyun.com/article/407173">Android系统匿名共享内存（Anonymous Shared Memory）C++调用接口分析（1）</a></p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611381690"></script>
+    <script src="/js/jquery.sticky.js?1611381690"></script>
+    <script src="/js/featherlight.min.js?1611381690"></script>
+    <script src="/js/highlight.pack.js?1611381690"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611381690"></script>
+    <script src="/js/learn.js?1611381690"></script>
+    <script src="/js/hugo-learn.js?1611381690"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1611381690"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

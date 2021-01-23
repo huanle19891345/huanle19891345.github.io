@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>handler on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/</link>
+    <description>Recent content in handler on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Looper</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</guid>
+      <description>原理总结 Looper就是对epoll系统调用的封装层，屏蔽外部对epoll的直接使用
+Looper addFd int Looper::addFd(int fd, int ident, int events, Looper_callbackFunc callback, void* data) { // use SimpleLooperCallback as adapter from handleEvent to callback function  return addFd(fd, ident, events, callback ? new SimpleLooperCallback(callback) : NULL, data); } int Looper::addFd(int fd, int ident, int events, const sp&amp;lt;LooperCallback&amp;gt;&amp;amp; callback, void* data) { if (!callback.get()) { if (! mAllowNonCallbacks) { ALOGE(&amp;#34;Invalid attempt to set NULL callback but not allowed for this looper.</description>
+    </item>
+    
+    <item>
+      <title>ThreadLocal</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</guid>
+      <description>ThreadLocal模型 graph LR thread--&amp;gt;threadLocalMap threadLocalMap--&amp;gt;entry1 threadLocalMap--&amp;gt;entry2 threadLocalMap--&amp;gt;entry3 threadLocalMap--&amp;gt;entryxxx entry1--&amp;gt;key=threadlocal1,value=T1 entry2--&amp;gt;key=threadlocal2,value=T2 entry3--&amp;gt;key=threadlocal3,value=T3  线性探测解决hash冲突 超过默认长度(16)的2/3时rehash减少hash冲突，扩容一倍 threadlocal作为key保存在entry中时是WeakReference，在被回收时清除记录，因此需要外部定义TheadLocal实例的地方配置为static，否则在外部回收threadlocal时，threadlocalmap中的entry也会被清理掉 lazy模式，只有添加第一个 元素时才通过createMap创建ThreadLocalMap  Thread /* ThreadLocal values pertaining to this thread. This map is maintained * by the ThreadLocal class. */ ThreadLocal.ThreadLocalMap threadLocals = null; /* * InheritableThreadLocal values pertaining to this thread. This map is * maintained by the InheritableThreadLocal class. */ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null; ThreadLocal threadLocalHashCode public class ThreadLocal&amp;lt;T&amp;gt; { /** * ThreadLocals rely on per-thread linear-probe hash maps attached * to each thread (Thread.</description>
+    </item>
+    
+  </channel>
+</rss>

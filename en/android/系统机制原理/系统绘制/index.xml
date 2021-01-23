@@ -7,14 +7,65 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>硬件加速绘制Source</title>
-      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</link>
+      <title>Graphics</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6source/</guid>
-      <description>RenderPipeLine类设计 graph TB IRenderPipeline--&amp;gt;OpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaOpenGLPipeline IRenderPipeline--&amp;gt;SkiaPipeline--&amp;gt;SkiaVulkanPipeline RenderThread继承结构 graph TB Thread--&amp;gt;ThreadBase ThreadBase--&amp;gt;ReanderThread 流程研究 frameworks/base/core/java/android/view/IWindow.aidl
-IWindow /** * API back to a client window that the Window Manager uses to inform it of * interesting things happening. * * {@hide} */ oneway interface IWindow {} frameworks/base/core/java/android/view/IWindowSession.aidl
-IWindowSession /** * System private per-application interface to the window manager. * * {@hide} */ interface IWindowSession {} ViewRootImpl // These can be accessed by any thread, must be protected with a lock.</description>
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</guid>
+      <description>https://source.android.com/devices/graphics/index.html
+Android graphics components No matter what rendering API developers use, everything is rendered onto a &amp;ldquo;surface.&amp;rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. A==ll of the visible surfaces rendered are composited onto the display by SurfaceFlinger.==
+The following diagram shows how the key components work together:</description>
+    </item>
+    
+    <item>
+      <title>Vsync</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/</guid>
+      <description>原理图 Vsync App进程 graph TB DisplayEventDispatcher::scheduleVsync--&amp;gt;eventConnection.requestNextVsync sequenceDiagram participant JavaDispalyEventReveiver participant NativeDisplayEventReceiver participant Looper participant BitTube NativeDisplayEventReceiver-&amp;gt;&amp;gt;+Looper: looper.addFd Looper--&amp;gt;&amp;gt;-NativeDisplayEventReceiver: fd可读 NativeDisplayEventReceiver-&amp;gt;&amp;gt;+NativeDisplayEventReceiver: handleEvent NativeDisplayEventReceiver-&amp;gt;&amp;gt;-BitTube: recvObjects BitTube--&amp;gt;&amp;gt;NativeDisplayEventReceiver: return NativeDisplayEventReceiver-&amp;gt;&amp;gt;JavaDispalyEventReveiver:dispatchVsnc frameworks/base/libs/androidfw/DisplayEventDispatcher.cpp
+DisplayEventDispatcher.cpp initialize status_t DisplayEventDispatcher::initialize() { status_t result = mReceiver.initCheck(); int rc = mLooper-&amp;gt;addFd(mReceiver.getFd(), 0, Looper::EVENT_INPUT, this, NULL); return OK; } handleEvent int DisplayEventDispatcher::handleEvent(int, int events, void*) { // Drain all pending events, keep the last vsync.  nsecs_t vsyncTimestamp; int32_t vsyncDisplayId; uint32_t vsyncCount; if (processPendingEvents(&amp;amp;vsyncTimestamp, &amp;amp;vsyncDisplayId, &amp;amp;vsyncCount)) { dispatchVsync(vsyncTimestamp, vsyncDisplayId, vsyncCount); } return 1; // keep the callback } scheduleVsync status_t DisplayEventDispatcher::scheduleVsync() { if (!</description>
+    </item>
+    
+    <item>
+      <title>Vsync_SurfaceFlinger</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</guid>
+      <description>Android-SurfaceFlinger启动与绘图原理
+创建 HWComposer 对象(通过 HAL 层的 HWComposer 硬件模块 或 软件模拟产生 Vsync 信号)，现在的 Android 系统基本上都可以看成是通过硬件 HWComposer 产生 Vsync 信号，而不使用软件模拟，所以下面解析都只谈及硬件 HWComposer 的 Vsync 信号；
+Choreographer 会通过上面创建的 APP 延时源 mEventThreadSource 对象及其对应的 EventThread 线程来监听同步模拟发出的 Vsync 信号，然后进行绘制(measure/layout/draw)操作。具体逻辑见 Android-Choreographer原理。
+SurfaceFlinger类设计 graph TB SurfaceFlinger--&amp;gt;BnSurfaceComposer--&amp;gt;BnInterface BnSurfaceComposer--&amp;gt;ISurfaceComposer ISurfaceComposer--&amp;gt;IInterface BnInterface--&amp;gt;BBinder--&amp;gt;IBinder system/core/rootdir/init.rc
+init.rc on property:vold.decrypt=trigger_restart_framework stop surfaceflinger start surfaceflinger # A/B update verifier that marks a successful boot. exec_start update_verifier class_start main class_start late_start frameworks/native/services/surfaceflinger/surfaceflinger.rc
+surfaceflinger.rc service surfaceflinger /system/bin/surfaceflinger class core animation user system group graphics drmrpc readproc onrestart restart zygote writepid /dev/stune/foreground/tasks socket pdx/system/vr/display/client stream 0666 system graphics u:object_r:pdx_display_client_endpoint_socket:s0 socket pdx/system/vr/display/manager stream 0666 system graphics u:object_r:pdx_display_manager_endpoint_socket:s0 socket pdx/system/vr/display/vsync stream 0666 system graphics u:object_r:pdx_display_vsync_endpoint_socket:s0 frameworks/native/services/surfaceflinger/main_surfaceflinger.</description>
+    </item>
+    
+    <item>
+      <title>硬件加速绘制</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</guid>
+      <description>硬件加速绘制 Android硬件加速过程分析
+理解Android硬件加速原理的小白文
+Android硬件加速原理与实现
+总结：
+ CPU更擅长复杂逻辑控制，而GPU得益于大量ALU和并行结构设计，更擅长数学运算。 页面由各种基础元素（DisplayList）构成，渲染时需要进行大量浮点运算。 硬件加速条件下，CPU用于控制复杂绘制逻辑，构建或更新DisplayList；GPU用于完成图形计算，渲染DisplayList。 硬件加速条件下，刷新界面尤其是播放动画时，CPU只重建或更新必要的DisplayList，进一步提高渲染效率。   软硬件加速的区别 软硬件加速的区别主要是==图形的绘制究竟是GPU来处理还是CPU，如果是GPU==，就认为是硬件加速绘制，反之，软件绘制。
+不仅仅限定在绘制方面，绘制之前，在如何构建绘制区域上，硬件加速也做出了很大优化，因此硬件加速特性可以从下面两部分来分析：
+ ==前期策略：如何构建需要绘制的区域== ==后期绘制：单独渲染线程，依赖GPU进行绘制==  无论是软件绘制还是硬件加速，==绘制内存的分配都是类似的，都是需要请求SurfaceFlinger服务分配一块内存==，只不过硬件加速有可能从FrameBuffer硬件缓冲区直接分配内存（SurfaceFlinger一直这么干的），==两者的绘制都是在APP端，绘制完成之后同样需要通知SurfaceFlinger进行合成，在这个流程上没有任何区别==，真正的区别在于在APP端如何完成UI数据绘制
+软件绘制同硬件加速的区别主要是在绘制上，内存分配、图层合成等整体流程是一样的，只不过硬件加速相比软件绘制算法更加合理，同时采用单独的渲染线程，减轻了主线程的负担。
+软件绘制跟硬件加速的分歧点 ViewRootImpl.java
+private void draw(boolean fullRedrawNeeded) { ... if (!dirty.isEmpty() || mIsAnimating || accessibilityFocusDirty) { //关键点1 是否开启硬件加速  if (mAttachInfo.mHardwareRenderer != null &amp;amp;&amp;amp; mAttachInfo.mHardwareRenderer.isEnabled()) { ... dirty.setEmpty(); mBlockResizeBuffer = false; //关键点2 硬件加速绘制  mAttachInfo.mHardwareRenderer.draw(mView, mAttachInfo, this); } else { ... //关键点3 软件绘制  if (!drawSoftware(surface, mAttachInfo, xOffset, yOffset, scalingRequired, dirty)) { return; } .</description>
+    </item>
+    
+    <item>
+      <title>绘制原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</guid>
+      <description>流程原理 ViewRootImpl.setView /** * We have one child */ public void setView(View view, WindowManager.LayoutParams attrs, View panelParentView) { // If the application owns the surface, don&amp;#39;t enable hardware acceleration  if (mSurfaceHolder == null) { // While this is supposed to enable only, it can effectively disable  // the acceleration too.  enableHardwareAcceleration(attrs); } // Schedule the first layout -before- adding to the window  // manager, to make sure we do the relayout before receiving  // any other events from the system.</description>
     </item>
     
     <item>

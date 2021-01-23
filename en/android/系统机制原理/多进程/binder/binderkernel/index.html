@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>BinderKernel :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1611381690" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611381690" rel="stylesheet">
+    <link href="/css/hybrid.css?1611381690" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611381690" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611381690" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611381690" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1611381690" rel="stylesheet">
+    <link href="/css/theme.css?1611381690" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611381690" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1611381690" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1611381690"></script>
+
+    <script src="/js/auto_toc_scroll.js?1611381690"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1611381690"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611381690"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1611381690"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/google/" title="google" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/google/">
+          google
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/google/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/google/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item active">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/" title="Flutter消息机制" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/">
+        Flutter消息机制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/'>系统机制原理</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/'>多进程</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/'>binder</a> > BinderKernel
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#binder_write_read">binder_write_read</a></li>
+    <li><a href="#binder_transaction_data">binder_transaction_data</a></li>
+    <li><a href="#binderc">binder.c</a>
+      <ul>
+        <li><a href="#binder_ioctl">binder_ioctl</a></li>
+        <li><a href="#binder_ioctl_write_read">binder_ioctl_write_read</a></li>
+        <li><a href="#binder_thread_write">binder_thread_write</a></li>
+        <li><a href="#binder_transaction">binder_transaction</a></li>
+        <li><a href="#binder_alloc_new_buf">binder_alloc_new_buf</a></li>
+        <li><a href="#binder_get_ref_olocked">binder_get_ref_olocked</a></li>
+        <li><a href="#binder_get_node_refs_for_txn">binder_get_node_refs_for_txn</a></li>
+        <li><a href="#struct-binder_ref">struct binder_ref</a></li>
+        <li><a href="#binder_proc_transaction">binder_proc_transaction</a></li>
+        <li><a href="#binder_wakeup_thread_ilocked">binder_wakeup_thread_ilocked</a></li>
+      </ul>
+    </li>
+    <li><a href="#waith">wait.h</a></li>
+    <li><a href="#binder_alloch">binder_alloc.h</a>
+      <ul>
+        <li><a href="#struct-binder_alloc">struct binder_alloc</a></li>
+      </ul>
+    </li>
+    <li><a href="#rbtreeh红黑树">rbtree.h//红黑树</a>
+      <ul>
+        <li><a href="#rb_node">rb_node</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              BinderKernel
+            </h1>
+          
+
+        
+
+
+<h2 id="binder_write_read">binder_write_read</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">struct</span> binder_write_read {
+	binder_size_t		write_size;	<span style="color:#75715e">/* bytes to write */</span>
+	binder_size_t		write_consumed;	<span style="color:#75715e">/* bytes consumed by driver */</span>
+	binder_uintptr_t	write_buffer;
+	binder_size_t		read_size;	<span style="color:#75715e">/* bytes to read */</span>
+	binder_size_t		read_consumed;	<span style="color:#75715e">/* bytes consumed by driver */</span>
+	binder_uintptr_t	read_buffer;
+};
+</code></pre></div><p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel.assets/screenshot2020-04-26at23.12.55_0_o.png" alt=""></p>
+<h2 id="binder_transaction_data">binder_transaction_data</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">struct</span> binder_transaction_data {
+	<span style="color:#75715e">/* The first two are only used for bcTRANSACTION and brTRANSACTION,
+</span><span style="color:#75715e">	 * identifying the target and contents of the transaction.
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#66d9ef">union</span> {
+		<span style="color:#75715e">/* target descriptor of command transaction */</span>
+		__u32	handle;
+		<span style="color:#75715e">/* target descriptor of return transaction */</span>
+		binder_uintptr_t ptr;
+	} target;
+	binder_uintptr_t	cookie;	<span style="color:#75715e">/* target object cookie */</span>
+	__u32		code;		<span style="color:#75715e">/* transaction command */</span>
+
+	<span style="color:#75715e">/* General information about the transaction. */</span>
+	__u32	        flags;
+	pid_t		sender_pid;
+	uid_t		sender_euid;
+	binder_size_t	data_size;	<span style="color:#75715e">/* number of bytes of data */</span>
+	binder_size_t	offsets_size;	<span style="color:#75715e">/* number of bytes of offsets */</span>
+
+	<span style="color:#75715e">/* If this transaction is inline, the data immediately
+</span><span style="color:#75715e">	 * follows here; otherwise, it ends with a pointer to
+</span><span style="color:#75715e">	 * the data buffer.
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#66d9ef">union</span> {
+		<span style="color:#66d9ef">struct</span> {
+			<span style="color:#75715e">/* transaction data */</span>
+			binder_uintptr_t	buffer;
+			<span style="color:#75715e">/* offsets from buffer to flat_binder_object structs */</span>
+			binder_uintptr_t	offsets;
+		} ptr;
+		__u8	buf[<span style="color:#ae81ff">8</span>];
+	} data;
+};
+</code></pre></div><p>drivers/android/binder.c</p>
+<h2 id="binderc">binder.c</h2>
+<h3 id="binder_ioctl">binder_ioctl</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">binder_ioctl</span>(<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>filp, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> cmd, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> arg)
+{
+	<span style="color:#66d9ef">int</span> ret;
+    <span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc <span style="color:#f92672">=</span> filp<span style="color:#f92672">-&gt;</span>private_data;
+	<span style="color:#66d9ef">switch</span> (cmd) {
+	<span style="color:#66d9ef">case</span> BINDER_WRITE_READ:
+		ret <span style="color:#f92672">=</span> binder_ioctl_write_read(filp, cmd, arg, <span style="color:#66d9ef">thread</span>);
+    }
+}
+</code></pre></div><h3 id="binder_ioctl_write_read">binder_ioctl_write_read</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binder_ioctl_write_read</span>(<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>filp,
+				<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> cmd, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> arg,
+				<span style="color:#66d9ef">struct</span> binder_thread <span style="color:#f92672">*</span><span style="color:#66d9ef">thread</span>)
+{
+	<span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc <span style="color:#f92672">=</span> filp<span style="color:#f92672">-&gt;</span>private_data;
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> _IOC_SIZE(cmd);
+	<span style="color:#66d9ef">void</span> __user <span style="color:#f92672">*</span>ubuf <span style="color:#f92672">=</span> (<span style="color:#66d9ef">void</span> __user <span style="color:#f92672">*</span>)arg;
+	<span style="color:#66d9ef">struct</span> binder_write_read bwr;
+
+    <span style="color:#75715e">//将用户空间bwr结构体拷贝到内核空间
+</span><span style="color:#75715e"></span>    copy_from_user(<span style="color:#f92672">&amp;</span>bwr, ubuf, <span style="color:#66d9ef">sizeof</span>(bwr));
+    
+	binder_debug(BINDER_DEBUG_READ_WRITE,
+		     <span style="color:#e6db74">&#34;%d:%d write %lld at %016llx, read %lld at %016llx</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
+		     proc<span style="color:#f92672">-&gt;</span>pid, <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>pid,
+		     (u64)bwr.write_size, (u64)bwr.write_buffer,
+		     (u64)bwr.read_size, (u64)bwr.read_buffer);
+
+	<span style="color:#66d9ef">if</span> (bwr.write_size <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#75715e">//将数据放入目标进程
+</span><span style="color:#75715e"></span>		ret <span style="color:#f92672">=</span> binder_thread_write(proc, <span style="color:#66d9ef">thread</span>,
+					  bwr.write_buffer,
+					  bwr.write_size,
+					  <span style="color:#f92672">&amp;</span>bwr.write_consumed);
+	}
+    
+	<span style="color:#66d9ef">if</span> (bwr.read_size <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#75715e">//读取自己队列的数据
+</span><span style="color:#75715e"></span>		ret <span style="color:#f92672">=</span> binder_thread_read(proc, <span style="color:#66d9ef">thread</span>, bwr.read_buffer,
+					 bwr.read_size,
+					 <span style="color:#f92672">&amp;</span>bwr.read_consumed,
+					 filp<span style="color:#f92672">-&gt;</span>f_flags <span style="color:#f92672">&amp;</span> O_NONBLOCK);
+    }
+    <span style="color:#75715e">//将内核空间bwr结构体拷贝到用户空间
+</span><span style="color:#75715e"></span>    copy_to_user(ubuf, <span style="color:#f92672">&amp;</span>bwr, <span style="color:#66d9ef">sizeof</span>(bwr))
+    <span style="color:#66d9ef">return</span> ret;    
+}
+</code></pre></div><h3 id="binder_thread_write">binder_thread_write</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binder_thread_write</span>(<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc,
+			<span style="color:#66d9ef">struct</span> binder_thread <span style="color:#f92672">*</span><span style="color:#66d9ef">thread</span>,
+			binder_uintptr_t binder_buffer, size_t size,
+			binder_size_t <span style="color:#f92672">*</span>consumed)
+{
+	uint32_t cmd;
+	<span style="color:#66d9ef">struct</span> binder_context <span style="color:#f92672">*</span>context <span style="color:#f92672">=</span> proc<span style="color:#f92672">-&gt;</span>context;
+	<span style="color:#66d9ef">void</span> __user <span style="color:#f92672">*</span>buffer <span style="color:#f92672">=</span> (<span style="color:#66d9ef">void</span> __user <span style="color:#f92672">*</span>)(uintptr_t)binder_buffer;
+	<span style="color:#66d9ef">void</span> __user <span style="color:#f92672">*</span>ptr <span style="color:#f92672">=</span> buffer <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>consumed;
+	<span style="color:#66d9ef">void</span> __user <span style="color:#f92672">*</span>end <span style="color:#f92672">=</span> buffer <span style="color:#f92672">+</span> size;
+
+	<span style="color:#66d9ef">while</span> (ptr <span style="color:#f92672">&lt;</span> end <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>return_error.cmd <span style="color:#f92672">==</span> BR_OK) {
+		<span style="color:#66d9ef">if</span> (get_user(cmd, (uint32_t __user <span style="color:#f92672">*</span>)ptr))<span style="color:#75715e">////拷贝用户空间的cmd命令，此时为BC_TRANSACTION
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>EFAULT;
+		ptr <span style="color:#f92672">+=</span> <span style="color:#66d9ef">sizeof</span>(uint32_t);
+        
+		<span style="color:#66d9ef">switch</span> (cmd) {
+        <span style="color:#66d9ef">case</span> BC_TRANSACTION:
+		<span style="color:#66d9ef">case</span> BC_REPLY: {
+			<span style="color:#66d9ef">struct</span> binder_transaction_data tr;
+            <span style="color:#75715e">//拷贝用户空间的binder_transaction_data
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (copy_from_user(<span style="color:#f92672">&amp;</span>tr, ptr, <span style="color:#66d9ef">sizeof</span>(tr)))
+				<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>EFAULT;
+			ptr <span style="color:#f92672">+=</span> <span style="color:#66d9ef">sizeof</span>(tr);
+			binder_transaction(proc, <span style="color:#66d9ef">thread</span>, <span style="color:#f92672">&amp;</span>tr,
+					   cmd <span style="color:#f92672">==</span> BC_REPLY, <span style="color:#ae81ff">0</span>);
+			<span style="color:#66d9ef">break</span>;
+		}
+     }
+</code></pre></div><h3 id="binder_transaction">binder_transaction</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">binder_transaction</span>(<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc,
+			       <span style="color:#66d9ef">struct</span> binder_thread <span style="color:#f92672">*</span><span style="color:#66d9ef">thread</span>,
+			       <span style="color:#66d9ef">struct</span> binder_transaction_data <span style="color:#f92672">*</span>tr, <span style="color:#66d9ef">int</span> reply,
+			       binder_size_t extra_buffers_size)
+{
+	<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>target_proc <span style="color:#f92672">=</span> NULL;
+	<span style="color:#66d9ef">struct</span> binder_thread <span style="color:#f92672">*</span>target_thread <span style="color:#f92672">=</span> NULL;
+	<span style="color:#66d9ef">struct</span> binder_node <span style="color:#f92672">*</span>target_node <span style="color:#f92672">=</span> NULL;    
+    	<span style="color:#66d9ef">if</span> (reply) {
+            ......
+	    } <span style="color:#66d9ef">else</span> {
+		<span style="color:#66d9ef">if</span> (tr<span style="color:#f92672">-&gt;</span>target.handle) {
+			<span style="color:#66d9ef">struct</span> binder_ref <span style="color:#f92672">*</span>ref;
+			binder_proc_lock(proc);
+			ref <span style="color:#f92672">=</span> binder_get_ref_olocked(proc, tr<span style="color:#f92672">-&gt;</span>target.handle,
+						     true);
+			<span style="color:#66d9ef">if</span> (ref) {
+				target_node <span style="color:#f92672">=</span> binder_get_node_refs_for_txn(
+						ref<span style="color:#f92672">-&gt;</span>node, <span style="color:#f92672">&amp;</span>target_proc,
+						<span style="color:#f92672">&amp;</span>return_error);
+			} <span style="color:#66d9ef">else</span> {
+				binder_user_error(<span style="color:#e6db74">&#34;%d:%d got transaction to invalid handle</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,proc<span style="color:#f92672">-&gt;</span>pid, <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>pid);......
+			}
+			binder_proc_unlock(proc);
+		} <span style="color:#66d9ef">else</span> {  <span style="color:#75715e">// handle=0则找到servicemanager实体
+</span><span style="color:#75715e"></span>			mutex_lock(<span style="color:#f92672">&amp;</span>context<span style="color:#f92672">-&gt;</span>context_mgr_node_lock);
+			target_node <span style="color:#f92672">=</span> context<span style="color:#f92672">-&gt;</span>binder_context_mgr_node;
+			<span style="color:#66d9ef">if</span> (target_node)
+				target_node <span style="color:#f92672">=</span> binder_get_node_refs_for_txn(
+						target_node, <span style="color:#f92672">&amp;</span>target_proc,
+						<span style="color:#f92672">&amp;</span>return_error);
+			<span style="color:#66d9ef">else</span>
+				return_error <span style="color:#f92672">=</span> BR_DEAD_REPLY;
+			mutex_unlock(<span style="color:#f92672">&amp;</span>context<span style="color:#f92672">-&gt;</span>context_mgr_node_lock);
+		}
+            
+        t<span style="color:#f92672">-&gt;</span>buffer <span style="color:#f92672">=</span> binder_alloc_new_buf(<span style="color:#f92672">&amp;</span>target_proc<span style="color:#f92672">-&gt;</span>alloc, tr<span style="color:#f92672">-&gt;</span>data_size,
+		tr<span style="color:#f92672">-&gt;</span>offsets_size, extra_buffers_size, <span style="color:#f92672">!</span>reply <span style="color:#f92672">&amp;&amp;</span> (t<span style="color:#f92672">-&gt;</span>flags <span style="color:#f92672">&amp;</span> TF_ONE_WAY));
+            
+            ......
+                
+       <span style="color:#66d9ef">if</span> (reply) {
+   ......
+	} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(t<span style="color:#f92672">-&gt;</span>flags <span style="color:#f92672">&amp;</span> TF_ONE_WAY)) {
+		BUG_ON(t<span style="color:#f92672">-&gt;</span>buffer<span style="color:#f92672">-&gt;</span>async_transaction <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>);
+		<span style="color:#75715e">/*
+</span><span style="color:#75715e">		 * Defer the TRANSACTION_COMPLETE, so we don&#39;t return to
+</span><span style="color:#75715e">		 * userspace immediately; this allows the target process to
+</span><span style="color:#75715e">		 * immediately start processing this transaction, reducing
+</span><span style="color:#75715e">		 * latency. We will then return the TRANSACTION_COMPLETE when
+</span><span style="color:#75715e">		 * the target replies (or there is an error).
+</span><span style="color:#75715e">		 */</span>
+		binder_enqueue_deferred_thread_work_ilocked(<span style="color:#66d9ef">thread</span>, tcomplete);
+		t<span style="color:#f92672">-&gt;</span>need_reply <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+		t<span style="color:#f92672">-&gt;</span>from_parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>transaction_stack;
+		<span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>transaction_stack <span style="color:#f92672">=</span> t;
+		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>binder_proc_transaction(t, target_proc, target_thread)) {
+            ......
+			<span style="color:#66d9ef">goto</span> err_dead_proc_or_thread;
+		}
+	} <span style="color:#66d9ef">else</span> {
+		BUG_ON(target_node <span style="color:#f92672">==</span> NULL);
+		BUG_ON(t<span style="color:#f92672">-&gt;</span>buffer<span style="color:#f92672">-&gt;</span>async_transaction <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>);
+		binder_enqueue_thread_work(<span style="color:#66d9ef">thread</span>, tcomplete);
+		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>binder_proc_transaction(t, target_proc, NULL))
+			<span style="color:#66d9ef">goto</span> err_dead_proc_or_thread;
+	}
+</code></pre></div><h3 id="binder_alloc_new_buf">binder_alloc_new_buf</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * binder_alloc_new_buf() - Allocate a new binder buffer
+</span><span style="color:#75715e"> * @alloc:              binder_alloc for this proc
+</span><span style="color:#75715e"> * @data_size:          size of user data buffer
+</span><span style="color:#75715e"> * @offsets_size:       user specified buffer offset
+</span><span style="color:#75715e"> * @extra_buffers_size: size of extra space for meta-data (eg, security context)
+</span><span style="color:#75715e"> * @is_async:           buffer for async transaction
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Allocate a new buffer given the requested sizes. Returns
+</span><span style="color:#75715e"> * the kernel version of the buffer pointer. The size allocated
+</span><span style="color:#75715e"> * is the sum of the three given sizes (each rounded up to
+</span><span style="color:#75715e"> * pointer-sized boundary)
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Return:	The allocated buffer or %NULL if error
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">struct</span> binder_buffer <span style="color:#f92672">*</span><span style="color:#a6e22e">binder_alloc_new_buf</span>(<span style="color:#66d9ef">struct</span> binder_alloc <span style="color:#f92672">*</span>alloc,
+					   size_t data_size,
+					   size_t offsets_size,
+					   size_t extra_buffers_size,
+					   <span style="color:#66d9ef">int</span> is_async)
+{
+	<span style="color:#66d9ef">struct</span> binder_buffer <span style="color:#f92672">*</span>buffer;
+
+	mutex_lock(<span style="color:#f92672">&amp;</span>alloc<span style="color:#f92672">-&gt;</span>mutex);
+	buffer <span style="color:#f92672">=</span> binder_alloc_new_buf_locked(alloc, data_size, offsets_size,
+					     extra_buffers_size, is_async);
+	mutex_unlock(<span style="color:#f92672">&amp;</span>alloc<span style="color:#f92672">-&gt;</span>mutex);
+	<span style="color:#66d9ef">return</span> buffer;
+}
+</code></pre></div><h3 id="binder_get_ref_olocked">binder_get_ref_olocked</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">struct</span> binder_ref <span style="color:#f92672">*</span><span style="color:#a6e22e">binder_get_ref_olocked</span>(<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc,
+						 u32 desc, <span style="color:#66d9ef">bool</span> need_strong_ref)
+{
+	<span style="color:#66d9ef">struct</span> rb_node <span style="color:#f92672">*</span>n <span style="color:#f92672">=</span> proc<span style="color:#f92672">-&gt;</span>refs_by_desc.rb_node;
+	<span style="color:#66d9ef">struct</span> binder_ref <span style="color:#f92672">*</span>ref;
+
+	<span style="color:#66d9ef">while</span> (n) {
+		ref <span style="color:#f92672">=</span> rb_entry(n, <span style="color:#66d9ef">struct</span> binder_ref, rb_node_desc);
+
+		<span style="color:#66d9ef">if</span> (desc <span style="color:#f92672">&lt;</span> ref<span style="color:#f92672">-&gt;</span>data.desc) {
+			n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>rb_left;
+		} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (desc <span style="color:#f92672">&gt;</span> ref<span style="color:#f92672">-&gt;</span>data.desc) {
+			n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>rb_right;
+		} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (need_strong_ref <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>ref<span style="color:#f92672">-&gt;</span>data.strong) {
+			binder_user_error(<span style="color:#e6db74">&#34;tried to use weak ref as strong ref</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+			<span style="color:#66d9ef">return</span> NULL;
+		} <span style="color:#66d9ef">else</span> {
+			<span style="color:#66d9ef">return</span> ref;
+		}
+	}
+	<span style="color:#66d9ef">return</span> NULL;
+}
+</code></pre></div><h3 id="binder_get_node_refs_for_txn">binder_get_node_refs_for_txn</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/** Return: The target_node with refs taken or NULL if no @node-&gt;proc is NULL.
+</span><span style="color:#75715e"> * Also sets @proc if valid. If the @node-&gt;proc is NULL indicating that the
+</span><span style="color:#75715e"> * target proc has died, @error is set to BR_DEAD_REPLY
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">struct</span> binder_node <span style="color:#f92672">*</span><span style="color:#a6e22e">binder_get_node_refs_for_txn</span>(
+		<span style="color:#66d9ef">struct</span> binder_node <span style="color:#f92672">*</span>node,
+		<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">**</span>procp,
+		uint32_t <span style="color:#f92672">*</span>error)
+{
+	<span style="color:#66d9ef">struct</span> binder_node <span style="color:#f92672">*</span>target_node <span style="color:#f92672">=</span> NULL;
+
+	binder_node_inner_lock(node);
+	<span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>proc) {
+		target_node <span style="color:#f92672">=</span> node;
+		binder_inc_node_nilocked(node, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, NULL);
+		binder_inc_node_tmpref_ilocked(node);
+		node<span style="color:#f92672">-&gt;</span>proc<span style="color:#f92672">-&gt;</span>tmp_ref<span style="color:#f92672">++</span>;
+		<span style="color:#f92672">*</span>procp <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>proc;
+	} <span style="color:#66d9ef">else</span>
+		<span style="color:#f92672">*</span>error <span style="color:#f92672">=</span> BR_DEAD_REPLY;
+	binder_node_inner_unlock(node);
+
+	<span style="color:#66d9ef">return</span> target_node;
+}
+</code></pre></div><h3 id="struct-binder_ref">struct binder_ref</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> binder_ref {
+	<span style="color:#75715e">/* Lookups needed: */</span>
+	<span style="color:#75715e">/*   node + proc =&gt; ref (transaction) */</span>
+	<span style="color:#75715e">/*   desc + proc =&gt; ref (transaction, inc/dec ref) */</span>
+	<span style="color:#75715e">/*   node =&gt; refs + procs (proc exit) */</span>
+	<span style="color:#66d9ef">struct</span> binder_ref_data data;
+	<span style="color:#66d9ef">struct</span> rb_node rb_node_desc;
+	<span style="color:#66d9ef">struct</span> rb_node rb_node_node;
+	<span style="color:#66d9ef">struct</span> hlist_node node_entry;
+	<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc;
+	<span style="color:#66d9ef">struct</span> binder_node <span style="color:#f92672">*</span>node;
+	<span style="color:#66d9ef">struct</span> binder_ref_death <span style="color:#f92672">*</span>death;
+};
+</code></pre></div><h3 id="binder_proc_transaction">binder_proc_transaction</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * binder_proc_transaction() - sends a transaction to a process and wakes it up
+</span><span style="color:#75715e"> * @t:		transaction to send
+</span><span style="color:#75715e"> * @proc:	process to send the transaction to
+</span><span style="color:#75715e"> * @thread:	thread in @proc to send the transaction to (may be NULL)
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * This function queues a transaction to the specified process. It will try
+</span><span style="color:#75715e"> * to find a thread in the target process to handle the transaction and
+</span><span style="color:#75715e"> * wake it up. If no thread is found, the work is queued to the proc
+</span><span style="color:#75715e"> * waitqueue.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * If the @thread parameter is not NULL, the transaction is always queued
+</span><span style="color:#75715e"> * to the waitlist of that specific thread.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Return:	true if the transactions was successfully queued
+</span><span style="color:#75715e"> *		false if the target process or thread is dead
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">binder_proc_transaction</span>(<span style="color:#66d9ef">struct</span> binder_transaction <span style="color:#f92672">*</span>t,
+				    <span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc,
+				    <span style="color:#66d9ef">struct</span> binder_thread <span style="color:#f92672">*</span><span style="color:#66d9ef">thread</span>)
+{
+    <span style="color:#66d9ef">struct</span> binder_node <span style="color:#f92672">*</span>node <span style="color:#f92672">=</span> t<span style="color:#f92672">-&gt;</span>buffer<span style="color:#f92672">-&gt;</span>target_node;
+	<span style="color:#66d9ef">struct</span> binder_priority node_prio;
+	<span style="color:#66d9ef">bool</span> oneway <span style="color:#f92672">=</span> <span style="color:#f92672">!!</span>(t<span style="color:#f92672">-&gt;</span>flags <span style="color:#f92672">&amp;</span> TF_ONE_WAY);
+	<span style="color:#66d9ef">bool</span> pending_async <span style="color:#f92672">=</span> false;
+
+	<span style="color:#66d9ef">if</span> (oneway) {
+		BUG_ON(<span style="color:#66d9ef">thread</span>);
+		<span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>has_async_transaction) {
+			pending_async <span style="color:#f92672">=</span> true;
+		} <span style="color:#66d9ef">else</span> {
+			node<span style="color:#f92672">-&gt;</span>has_async_transaction <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+		}
+	}
+    
+	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">thread</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>pending_async)
+		<span style="color:#66d9ef">thread</span> <span style="color:#f92672">=</span> binder_select_thread_ilocked(proc);
+
+	<span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">thread</span>) {
+		binder_transaction_priority(<span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>task, t, node_prio,
+					    node<span style="color:#f92672">-&gt;</span>inherit_rt);
+		binder_enqueue_thread_work_ilocked(<span style="color:#66d9ef">thread</span>, <span style="color:#f92672">&amp;</span>t<span style="color:#f92672">-&gt;</span>work);
+	} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>pending_async) {
+		binder_enqueue_work_ilocked(<span style="color:#f92672">&amp;</span>t<span style="color:#f92672">-&gt;</span>work, <span style="color:#f92672">&amp;</span>proc<span style="color:#f92672">-&gt;</span>todo);
+	} <span style="color:#66d9ef">else</span> {
+		binder_enqueue_work_ilocked(<span style="color:#f92672">&amp;</span>t<span style="color:#f92672">-&gt;</span>work, <span style="color:#f92672">&amp;</span>node<span style="color:#f92672">-&gt;</span>async_todo);
+	}
+
+	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>pending_async)
+		binder_wakeup_thread_ilocked(proc, <span style="color:#66d9ef">thread</span>, <span style="color:#f92672">!</span>oneway <span style="color:#75715e">/* sync */</span>);
+    <span style="color:#66d9ef">return</span> true;
+}
+</code></pre></div><h3 id="binder_wakeup_thread_ilocked">binder_wakeup_thread_ilocked</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * binder_wakeup_thread_ilocked() - wakes up a thread for doing proc work.
+</span><span style="color:#75715e"> * @proc:	process to wake up a thread in
+</span><span style="color:#75715e"> * @thread:	specific thread to wake-up (may be NULL)
+</span><span style="color:#75715e"> * @sync:	whether to do a synchronous wake-up
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * This function wakes up a thread in the @proc process.
+</span><span style="color:#75715e"> * The caller may provide a specific thread to wake-up in
+</span><span style="color:#75715e"> * the @thread parameter. If @thread is NULL, this function
+</span><span style="color:#75715e"> * will wake up threads that have called poll().
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Note that for this function to work as expected, callers
+</span><span style="color:#75715e"> * should first call binder_select_thread() to find a thread
+</span><span style="color:#75715e"> * to handle the work (if they don&#39;t have a thread already),
+</span><span style="color:#75715e"> * and pass the result into the @thread parameter.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">binder_wakeup_thread_ilocked</span>(<span style="color:#66d9ef">struct</span> binder_proc <span style="color:#f92672">*</span>proc,
+					 <span style="color:#66d9ef">struct</span> binder_thread <span style="color:#f92672">*</span><span style="color:#66d9ef">thread</span>,
+					 <span style="color:#66d9ef">bool</span> sync)
+{
+	assert_spin_locked(<span style="color:#f92672">&amp;</span>proc<span style="color:#f92672">-&gt;</span>inner_lock);
+
+	<span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">thread</span>) {
+		<span style="color:#66d9ef">if</span> (sync)
+			wake_up_interruptible_sync(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>wait);
+		<span style="color:#66d9ef">else</span>
+			wake_up_interruptible(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>wait);
+		<span style="color:#66d9ef">return</span>;
+	}
+
+	<span style="color:#75715e">/* Didn&#39;t find a thread waiting for proc work; this can happen
+</span><span style="color:#75715e">	 * in two scenarios:
+</span><span style="color:#75715e">	 * 1. All threads are busy handling transactions
+</span><span style="color:#75715e">	 *    In that case, one of those threads should call back into
+</span><span style="color:#75715e">	 *    the kernel driver soon and pick up this work.
+</span><span style="color:#75715e">	 * 2. Threads are using the (e)poll interface, in which case
+</span><span style="color:#75715e">	 *    they may be blocked on the waitqueue without having been
+</span><span style="color:#75715e">	 *    added to waiting_threads. For this case, we just iterate
+</span><span style="color:#75715e">	 *    over all threads not handling transaction work, and
+</span><span style="color:#75715e">	 *    wake them all up. We wake all because we don&#39;t know whether
+</span><span style="color:#75715e">	 *    a thread that called into (e)poll is handling non-binder
+</span><span style="color:#75715e">	 *    work currently.
+</span><span style="color:#75715e">	 */</span>
+	binder_wakeup_poll_threads_ilocked(proc, sync);
+}
+</code></pre></div><p>include/linux/wait.h</p>
+<h2 id="waith">wait.h</h2>
+<pre><code>#define wake_up_interruptible(x)	__wake_up(x, TASK_INTERRUPTIBLE, 1, NULL)
+#define wake_up_interruptible_nr(x, nr)	__wake_up(x, TASK_INTERRUPTIBLE, nr, NULL)
+#define wake_up_interruptible_all(x)	__wake_up(x, TASK_INTERRUPTIBLE, 0, NULL)
+#define wake_up_interruptible_sync(x)	__wake_up_sync((x), TASK_INTERRUPTIBLE, 1)
+</code></pre><p>drivers/android/binder_alloc.h</p>
+<h2 id="binder_alloch">binder_alloc.h</h2>
+<h3 id="struct-binder_alloc">struct binder_alloc</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * struct binder_alloc - per-binder proc state for binder allocator
+</span><span style="color:#75715e"> * @vma:                vm_area_struct passed to mmap_handler
+</span><span style="color:#75715e"> *                      (invarient after mmap)
+</span><span style="color:#75715e"> * @tsk:                tid for task that called init for this proc
+</span><span style="color:#75715e"> *                      (invariant after init)
+</span><span style="color:#75715e"> * @vma_vm_mm:          copy of vma-&gt;vm_mm (invarient after mmap)
+</span><span style="color:#75715e"> * @buffer:             base of per-proc address space mapped via mmap
+</span><span style="color:#75715e"> * @user_buffer_offset: offset between user and kernel VAs for buffer
+</span><span style="color:#75715e"> * @buffers:            list of all buffers for this proc
+</span><span style="color:#75715e"> * @free_buffers:       rb tree of buffers available for allocation
+</span><span style="color:#75715e"> *                      sorted by size
+</span><span style="color:#75715e"> * @allocated_buffers:  rb tree of allocated buffers sorted by address
+</span><span style="color:#75715e"> * @free_async_space:   VA space available for async buffers. This is
+</span><span style="color:#75715e"> *                      initialized at mmap time to 1/2 the full VA space
+</span><span style="color:#75715e"> * @pages:              array of binder_lru_page
+</span><span style="color:#75715e"> * @buffer_size:        size of address space specified via mmap
+</span><span style="color:#75715e"> * @pid:                pid for associated binder_proc (invariant after init)
+</span><span style="color:#75715e"> * @pages_high:         high watermark of offset in @pages
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Bookkeeping structure for per-proc address space management for binder
+</span><span style="color:#75715e"> * buffers. It is normally initialized during binder_init() and binder_mmap()
+</span><span style="color:#75715e"> * calls. The address space is used for both user-visible buffers and for
+</span><span style="color:#75715e"> * struct binder_buffer objects used to track the user buffers
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">//open系统调用时返回的fd信息的private_data里是binder_proc，而mmap过程会修改这个binder_proc的alloc字段信息，从而确保申请的内存位于target process对应的内核空间
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> binder_alloc {
+}
+</code></pre></div><p>include/linux/rbtree.h</p>
+<h2 id="rbtreeh红黑树">rbtree.h//红黑树</h2>
+<h3 id="rb_node">rb_node</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">struct</span> rb_node {
+	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span>  __rb_parent_color;
+	<span style="color:#66d9ef">struct</span> rb_node <span style="color:#f92672">*</span>rb_right;
+	<span style="color:#66d9ef">struct</span> rb_node <span style="color:#f92672">*</span>rb_left;
+} __attribute__((aligned(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">long</span>))));
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611381690"></script>
+    <script src="/js/jquery.sticky.js?1611381690"></script>
+    <script src="/js/featherlight.min.js?1611381690"></script>
+    <script src="/js/highlight.pack.js?1611381690"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611381690"></script>
+    <script src="/js/learn.js?1611381690"></script>
+    <script src="/js/hugo-learn.js?1611381690"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1611381690"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

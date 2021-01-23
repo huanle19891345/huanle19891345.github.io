@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>MMKV :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1611381690" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611381690" rel="stylesheet">
+    <link href="/css/hybrid.css?1611381690" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611381690" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611381690" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611381690" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1611381690" rel="stylesheet">
+    <link href="/css/theme.css?1611381690" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611381690" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1611381690" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1611381690"></script>
+
+    <script src="/js/auto_toc_scroll.js?1611381690"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1611381690"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611381690"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1611381690"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/google/" title="google" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/google/">
+          google
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/google/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/google/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item active">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/" title="Flutter消息机制" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/">
+        Flutter消息机制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/'>系统机制原理</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/'>多进程</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/'>mmkv</a> > MMKV
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#参考">参考</a></li>
+    <li><a href="#原理总结">原理总结</a></li>
+    <li><a href="#状态同步">状态同步</a>
+      <ul>
+        <li><a href="#写指针的同步">写指针的同步</a></li>
+        <li><a href="#内存重整的感知">内存重整的感知</a></li>
+        <li><a href="#内存增长的感知">内存增长的感知</a></li>
+      </ul>
+    </li>
+    <li><a href="#挑选进程锁">挑选进程锁</a></li>
+    <li><a href="#文件锁">文件锁</a>
+      <ul>
+        <li><a href="#递归锁">递归锁</a></li>
+        <li><a href="#锁升级降级">锁升级/降级</a></li>
+      </ul>
+    </li>
+    <li><a href="#mmkv">MMKV</a>
+      <ul>
+        <li><a href="#initialize">initialize</a></li>
+        <li><a href="#registercontentchangenotify">registerContentChangeNotify</a></li>
+        <li><a href="#oncontentchangedbyouterprocess">onContentChangedByOuterProcess</a></li>
+        <li><a href="#defaultmmkv">defaultMMKV</a></li>
+      </ul>
+    </li>
+    <li><a href="#native-bridgecpp">native-bridge.cpp</a>
+      <ul>
+        <li><a href="#jni_onload">JNI_OnLoad</a></li>
+        <li><a href="#registernativemethods">registerNativeMethods</a></li>
+        <li><a href="#jniinitialize">jniInitialize</a></li>
+        <li><a href="#setwantscontentchangenotify">setWantsContentChangeNotify</a></li>
+        <li><a href="#oncontentchangedbyouterprocess_n">onContentChangedByOuterProcess_n</a></li>
+        <li><a href="#getdefaultmmkv">getDefaultMMKV</a></li>
+        <li><a href="#getmmkvwithid">getMMKVWithID</a></li>
+      </ul>
+    </li>
+    <li><a href="#mmkvcpp">MMKV.cpp</a>
+      <ul>
+        <li><a href="#initializemmkv">initializeMMKV</a></li>
+        <li><a href="#initialize-1">initialize</a></li>
+        <li><a href="#registercontentchangehandler">registerContentChangeHandler</a></li>
+        <li><a href="#defaultmmkv-1">defaultMMKV</a></li>
+        <li><a href="#mmkvwithid">mmkvWithID</a></li>
+        <li><a href="#mmkv-1">MMKV()</a></li>
+        <li><a href="#loadfromfile">loadFromFile</a></li>
+      </ul>
+    </li>
+    <li><a href="#memoryfile">MemoryFile</a>
+      <ul>
+        <li><a href="#reloadfromfile">reloadFromFile</a></li>
+        <li><a href="#mmap">mmap</a></li>
+        <li><a href="#getmemory">getMemory</a></li>
+      </ul>
+    </li>
+    <li><a href="#filelock">FileLock</a>
+      <ul>
+        <li><a href="#lock">lock</a></li>
+        <li><a href="#dolock">doLock</a></li>
+        <li><a href="#unlock">unlock</a></li>
+        <li><a href="#platformlock">platformLock</a></li>
+        <li><a href="#platformunlock">platformUnLock</a></li>
+      </ul>
+    </li>
+    <li><a href="#interprocesslock">InterProcessLock</a>
+      <ul>
+        <li><a href="#lock-1">lock</a></li>
+        <li><a href="#unlock-1">unlock</a></li>
+      </ul>
+    </li>
+    <li><a href="#scopedlock">ScopedLock</a>
+      <ul>
+        <li><a href="#lock-unlock">lock unLock</a></li>
+      </ul>
+    </li>
+    <li><a href="#threadlockcpp">ThreadLock.cpp</a>
+      <ul>
+        <li><a href="#threadonce">ThreadOnce</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              MMKV
+            </h1>
+          
+
+        
+
+
+<h2 id="参考">参考</h2>
+<p><a href="https://github.com/Tencent/MMKV/wiki/android_ipc">https://github.com/Tencent/MMKV/wiki/android_ipc</a></p>
+<p><a href="https://github.com/Tencent/MMKV/wiki/design">https://github.com/Tencent/MMKV/wiki/design</a></p>
+<h2 id="原理总结">原理总结</h2>
+<p>MMKV 本质上是将文件 mmap 到内存块中，将新增的 key-value 统统 append 到内存中；到达边界后，进行重整回写以腾出空间，空间还是不够的话，就 double 内存空间；对于内存文件中可能存在的重复键值，MMKV 只选用最后写入的作为有效键值。</p>
+<h2 id="状态同步">状态同步</h2>
+<h3 id="写指针的同步">写指针的同步</h3>
+<p>我们可以在每个进程内部缓存自己的写指针，然后在写入键值的同时，还要把最新的写指针位置也写到 mmap 内存中；这样每个进程只需要对比一下缓存的指针与 mmap 内存的写指针，如果不一样，就说明其他进程进行了写操作。事实上 MMKV 原本就在文件头部保存了有效内存的大小，这个数值刚好就是写指针的内存偏移量，我们可以重用这个数值来校对写指针。</p>
+<h3 id="内存重整的感知">内存重整的感知</h3>
+<p>考虑使用一个单调递增的序列号，每次发生内存重整，就将序列号递增。将这个序列号也放到 mmap 内存中，每个进程内部也缓存一份，只需要对比序列号是否一致，就能够知道其他进程是否触发了内存重整。</p>
+<h3 id="内存增长的感知">内存增长的感知</h3>
+<p>事实上 MMKV 在内存增长之前，会先尝试通过内存重整来腾出空间，重整后还不够空间才申请新的内存。所以内存增长可以跟内存重整一样处理。至于新的内存大小，可以通过查询文件大小来获得，无需在 mmap 内存另外存放。</p>
+<h2 id="挑选进程锁">挑选进程锁</h2>
+<ul>
+<li><strong>文件锁</strong>，优点是天然 robust，缺点是不支持递归加锁，也不支持读写锁升级/降级，需要自行实现。</li>
+<li><strong>pthread_mutex</strong>，优点是 pthread 库支持递归加锁，也支持读写锁升级/降级，缺点是不 robust，需要自行清理。</li>
+</ul>
+<h2 id="文件锁">文件锁</h2>
+<p>到这里我们已经完成了数据的多进程同步工作，是时候回头处理锁事了，亦即前面提到的递归锁和锁升级/降级。</p>
+<h3 id="递归锁">递归锁</h3>
+<p>意思是如果一个进程/线程已经拥有了锁，那么后续的加锁操作不会导致卡死，并且解锁也不会导致外层的锁被解掉。对于文件锁来说，前者是满足的，后者则不然。因为文件锁是状态锁，没有计数器，无论加了多少次锁，一个解锁操作就全解掉。只要用到子函数，就非常需要递归锁。</p>
+<h3 id="锁升级降级">锁升级/降级</h3>
+<p>锁升级是指将已经持有的共享锁，升级为互斥锁，亦即将读锁升级为写锁；锁降级则是反过来。文件锁支持锁升级，但是容易死锁：假如 A、B 进程都持有了读锁，现在都想升级到写锁，就会陷入相互等待的困境，发生死锁。另外，由于文件锁不支持递归锁，也导致了锁降级无法进行，一降就降到没有锁。</p>
+<p>为了解决递归锁和锁升级/降级这两个难题，需要对文件锁(系统调用flock)进行封装，增加读锁、写锁计数器。处理逻辑如下表：</p>
+<table>
+<thead>
+<tr>
+<th>读锁计数器</th>
+<th>写锁计数器</th>
+<th>加读锁</th>
+<th>加写锁</th>
+<th>解读锁</th>
+<th>解写锁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>加读锁</td>
+<td>加写锁</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>+1</td>
+<td>+1</td>
+<td>-</td>
+<td>解写锁</td>
+</tr>
+<tr>
+<td>0</td>
+<td>N</td>
+<td>+1</td>
+<td>+1</td>
+<td>-</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>+1</td>
+<td>解读锁再加写锁</td>
+<td>解读锁</td>
+<td>-</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>+1</td>
+<td>+1</td>
+<td>-1</td>
+<td>加读锁</td>
+</tr>
+<tr>
+<td>1</td>
+<td>N</td>
+<td>+1</td>
+<td>+1</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>N</td>
+<td>0</td>
+<td>+1</td>
+<td>解读锁再加写锁</td>
+<td>-1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>N</td>
+<td>1</td>
+<td>+1</td>
+<td>+1</td>
+<td>-1</td>
+<td>加读锁</td>
+</tr>
+<tr>
+<td>N</td>
+<td>N</td>
+<td>+1</td>
+<td>+1</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的地方有两点：</p>
+<ul>
+<li>加写锁时，如果当前已经持有读锁，那么先尝试加写锁，try_lock 失败说明其他进程持有了读锁，我们需要先将自己的读锁释放掉，再进行加写锁操作，以避免死锁的发生。(这里的死锁指的是：本进程先加了读锁，之后又尝试加写锁，而这个写锁要等到前面那个读锁释放之后才能加上，而这是不可能的，因此造成死锁)。</li>
+<li>解写锁时，假如之前曾经持有读锁，那么我们不能直接释放掉写锁，这样会导致读锁也解了。我们应该加一个读锁，将锁降级。</li>
+</ul>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+加读锁--&gt;直接加
+加写锁--&gt;非首次加写锁,直接+1
+加写锁--&gt;首次加写锁,如果有读锁,需要先unlock,防止死锁
+解读锁--&gt;直接解
+解写锁--&gt;写锁数量大于1直接-1
+解写锁--&gt;写锁数量为1,如果有读锁,加读锁锁降级,避免解写锁时读锁也解了,锁失效
+</code></pre><h2 id="mmkv">MMKV</h2>
+<h3 id="initialize">initialize</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">initialize</span><span style="color:#f92672">(</span>String rootDir<span style="color:#f92672">,</span> LibLoader loader<span style="color:#f92672">,</span> MMKVLogLevel logLevel<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>loader <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>BuildConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">FLAVOR</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;SharedCpp&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            loader<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c++_shared&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        loader<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mmkv&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>BuildConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">FLAVOR</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;SharedCpp&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c++_shared&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mmkv&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+    jniInitialize<span style="color:#f92672">(</span>rootDir<span style="color:#f92672">,</span> logLevel2Int<span style="color:#f92672">(</span>logLevel<span style="color:#f92672">));</span>
+    MMKV<span style="color:#f92672">.</span><span style="color:#a6e22e">rootDir</span> <span style="color:#f92672">=</span> rootDir<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> MMKV<span style="color:#f92672">.</span><span style="color:#a6e22e">rootDir</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><a href="#jni_onload">loadLibrary</a></p>
+<p><a href="#jniinitialize">jniinitialize</a></p>
+<h3 id="registercontentchangenotify">registerContentChangeNotify</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// content change notification of other process
+</span><span style="color:#75715e">// trigger by getXXX() or setXXX() or checkContentChangedByOuterProcess()
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> MMKVContentChangeNotification gContentChangeNotify<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">registerContentChangeNotify</span><span style="color:#f92672">(</span>MMKVContentChangeNotification notify<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    gContentChangeNotify <span style="color:#f92672">=</span> notify<span style="color:#f92672">;</span>
+    setWantsContentChangeNotify<span style="color:#f92672">(</span>gContentChangeNotify <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><a href="#setwantscontentchangenotify">setwantscontentchangenotify</a></p>
+<h3 id="oncontentchangedbyouterprocess">onContentChangedByOuterProcess</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onContentChangedByOuterProcess</span><span style="color:#f92672">(</span>String mmapID<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>gContentChangeNotify <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        gContentChangeNotify<span style="color:#f92672">.</span><span style="color:#a6e22e">onContentChangedByOuterProcess</span><span style="color:#f92672">(</span>mmapID<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="defaultmmkv">defaultMMKV</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> MMKV <span style="color:#a6e22e">defaultMMKV</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">long</span> handle <span style="color:#f92672">=</span> getDefaultMMKV<span style="color:#f92672">(</span>SINGLE_PROCESS_MODE<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> checkProcessMode<span style="color:#f92672">(</span>handle<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;DefaultMMKV&#34;</span><span style="color:#f92672">,</span> SINGLE_PROCESS_MODE<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="native-bridgecpp">native-bridge.cpp</h2>
+<h3 id="jni_onload">JNI_OnLoad</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">extern</span> <span style="color:#e6db74">&#34;C&#34;</span> JNIEXPORT JNICALL jint JNI_OnLoad(JavaVM <span style="color:#f92672">*</span>vm, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>reserved) {
+    g_currentJVM <span style="color:#f92672">=</span> vm;
+    JNIEnv <span style="color:#f92672">*</span>env;
+    <span style="color:#66d9ef">if</span> (vm<span style="color:#f92672">-&gt;</span>GetEnv(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span> <span style="color:#f92672">**&gt;</span>(<span style="color:#f92672">&amp;</span>env), JNI_VERSION_1_6) <span style="color:#f92672">!=</span> JNI_OK) {
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    }
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>clsName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;com/tencent/mmkv/MMKV&#34;</span>;
+    jclass instance <span style="color:#f92672">=</span> env<span style="color:#f92672">-&gt;</span>FindClass(clsName);
+    g_cls <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>jclass<span style="color:#f92672">&gt;</span>(env<span style="color:#f92672">-&gt;</span>NewGlobalRef(instance));
+  
+    <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> registerNativeMethods(env, g_cls);
+    <span style="color:#66d9ef">return</span> JNI_VERSION_1_6;
+}
+</code></pre></div><h3 id="registernativemethods">registerNativeMethods</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">registerNativeMethods</span>(JNIEnv <span style="color:#f92672">*</span>env, jclass cls) {
+    <span style="color:#66d9ef">return</span> env<span style="color:#f92672">-&gt;</span>RegisterNatives(cls, g_methods, <span style="color:#66d9ef">sizeof</span>(g_methods) <span style="color:#f92672">/</span> <span style="color:#66d9ef">sizeof</span>(g_methods[<span style="color:#ae81ff">0</span>]));
+}
+</code></pre></div><h3 id="jniinitialize">jniInitialize</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV_JNI <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">jniInitialize</span>(JNIEnv <span style="color:#f92672">*</span>env, jobject obj, jstring rootDir, jint logLevel) {
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>kstr <span style="color:#f92672">=</span> env<span style="color:#f92672">-&gt;</span>GetStringUTFChars(rootDir, <span style="color:#66d9ef">nullptr</span>);
+    <span style="color:#66d9ef">if</span> (kstr) {
+        MMKV<span style="color:#f92672">::</span>initializeMMKV(kstr, (MMKVLogLevel) logLevel);
+        env<span style="color:#f92672">-&gt;</span>ReleaseStringUTFChars(rootDir, kstr);
+    }
+}
+</code></pre></div><h3 id="setwantscontentchangenotify">setWantsContentChangeNotify</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV_JNI <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setWantsContentChangeNotify</span>(JNIEnv <span style="color:#f92672">*</span>env, jclass type, jboolean notify) {
+    <span style="color:#66d9ef">if</span> (notify <span style="color:#f92672">==</span> JNI_TRUE) {
+        MMKV<span style="color:#f92672">::</span>registerContentChangeHandler(onContentChangedByOuterProcess);
+    } <span style="color:#66d9ef">else</span> {
+        MMKV<span style="color:#f92672">::</span>unRegisterContentChangeHandler();
+    }
+}
+</code></pre></div><p><a href="#registercontentchangehandler">registercontentchangehandler</a></p>
+<h3 id="oncontentchangedbyouterprocess_n">onContentChangedByOuterProcess_n</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onContentChangedByOuterProcess</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>mmapID) {
+    <span style="color:#66d9ef">auto</span> currentEnv <span style="color:#f92672">=</span> getCurrentEnv();
+    <span style="color:#66d9ef">if</span> (currentEnv <span style="color:#f92672">&amp;&amp;</span> g_callbackOnContentChange) {
+        jstring str <span style="color:#f92672">=</span> string2jstring(currentEnv, mmapID);
+        currentEnv<span style="color:#f92672">-&gt;</span>CallStaticVoidMethod(g_cls, g_callbackOnContentChange, str);
+    }
+}
+</code></pre></div><p><a href="#oncontentchangedbyouterprocess">g_callbackOnContentChange</a></p>
+<h3 id="getdefaultmmkv">getDefaultMMKV</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV_JNI jlong <span style="color:#a6e22e">getDefaultMMKV</span>(JNIEnv <span style="color:#f92672">*</span>env, jobject obj, jint mode, jstring cryptKey) {
+    MMKV <span style="color:#f92672">*</span>kv <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+
+    <span style="color:#66d9ef">if</span> (cryptKey) {
+        string crypt <span style="color:#f92672">=</span> jstring2string(env, cryptKey);
+        <span style="color:#66d9ef">if</span> (crypt.length() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            kv <span style="color:#f92672">=</span> MMKV<span style="color:#f92672">::</span>defaultMMKV((MMKVMode) mode, <span style="color:#f92672">&amp;</span>crypt);
+        }
+    }
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>kv) {
+        kv <span style="color:#f92672">=</span> MMKV<span style="color:#f92672">::</span>defaultMMKV((MMKVMode) mode, <span style="color:#66d9ef">nullptr</span>);
+    }
+
+    <span style="color:#66d9ef">return</span> (jlong) kv;
+}
+</code></pre></div><h3 id="getmmkvwithid">getMMKVWithID</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV_JNI jlong <span style="color:#a6e22e">getMMKVWithID</span>(JNIEnv <span style="color:#f92672">*</span>env, jobject, jstring mmapID, jint mode, jstring cryptKey, jstring rootPath) {
+    string str <span style="color:#f92672">=</span> jstring2string(env, mmapID);
+    kv <span style="color:#f92672">=</span> MMKV<span style="color:#f92672">::</span>mmkvWithID(str, DEFAULT_MMAP_SIZE, (MMKVMode) mode, <span style="color:#f92672">&amp;</span>crypt, <span style="color:#f92672">&amp;</span>path);
+    <span style="color:#66d9ef">return</span> (jlong) kv;
+}
+</code></pre></div><p><a href="#mmkvwithid">mmkvwithid</a></p>
+<h2 id="mmkvcpp">MMKV.cpp</h2>
+<h3 id="initializemmkv">initializeMMKV</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> MMKV<span style="color:#f92672">::</span>initializeMMKV(<span style="color:#66d9ef">const</span> MMKVPath_t <span style="color:#f92672">&amp;</span>rootDir, MMKVLogLevel logLevel) {
+    g_currentLogLevel <span style="color:#f92672">=</span> logLevel;
+
+    ThreadLock<span style="color:#f92672">::</span>ThreadOnce(<span style="color:#f92672">&amp;</span>once_control, initialize);
+
+    g_rootDir <span style="color:#f92672">=</span> rootDir;
+    mkPath(g_rootDir);
+
+}
+</code></pre></div><h3 id="initialize-1">initialize</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialize</span>() {
+    g_instanceDic <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> unordered_map<span style="color:#f92672">&lt;</span>string, MMKV <span style="color:#f92672">*&gt;</span>;
+    g_instanceLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadLock();
+    g_instanceLock<span style="color:#f92672">-&gt;</span>initialize();
+
+    mmkv<span style="color:#f92672">::</span>DEFAULT_MMAP_SIZE <span style="color:#f92672">=</span> mmkv<span style="color:#f92672">::</span>getPageSize();
+}
+</code></pre></div><h3 id="registercontentchangehandler">registerContentChangeHandler</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> MMKV<span style="color:#f92672">::</span>registerContentChangeHandler(mmkv<span style="color:#f92672">::</span>ContentChangeHandler handler) {
+    g_contentChangeHandler <span style="color:#f92672">=</span> handler;
+}
+</code></pre></div><h3 id="defaultmmkv-1">defaultMMKV</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV <span style="color:#f92672">*</span>MMKV<span style="color:#f92672">::</span>defaultMMKV(MMKVMode mode, string <span style="color:#f92672">*</span>cryptKey) {
+<span style="color:#75715e">#ifndef MMKV_ANDROID
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">mmkvWithID</span>(DEFAULT_MMAP_ID, mode, cryptKey);
+<span style="color:#75715e">#else
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">mmkvWithID</span>(DEFAULT_MMAP_ID, DEFAULT_MMAP_SIZE, mode, cryptKey);
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="mmkvwithid">mmkvWithID</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV <span style="color:#f92672">*</span>MMKV<span style="color:#f92672">::</span>mmkvWithID(<span style="color:#66d9ef">const</span> string <span style="color:#f92672">&amp;</span>mmapID, <span style="color:#66d9ef">int</span> size, MMKVMode mode, string <span style="color:#f92672">*</span>cryptKey, string <span style="color:#f92672">*</span>rootPath) {
+    SCOPED_LOCK(g_instanceLock);
+
+    <span style="color:#66d9ef">auto</span> mmapKey <span style="color:#f92672">=</span> mmapedKVKey(mmapID, rootPath);
+    <span style="color:#66d9ef">auto</span> itr <span style="color:#f92672">=</span> g_instanceDic<span style="color:#f92672">-&gt;</span>find(mmapKey);
+    <span style="color:#66d9ef">if</span> (itr <span style="color:#f92672">!=</span> g_instanceDic<span style="color:#f92672">-&gt;</span>end()) {
+        MMKV <span style="color:#f92672">*</span>kv <span style="color:#f92672">=</span> itr<span style="color:#f92672">-&gt;</span>second;
+        <span style="color:#66d9ef">return</span> kv;
+    }
+    <span style="color:#66d9ef">auto</span> kv <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MMKV(mmapID, size, mode, cryptKey, rootPath);
+    (<span style="color:#f92672">*</span>g_instanceDic)[mmapKey] <span style="color:#f92672">=</span> kv;
+    <span style="color:#66d9ef">return</span> kv;
+}
+</code></pre></div><h3 id="mmkv-1">MMKV()</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MMKV<span style="color:#f92672">::</span>MMKV(<span style="color:#66d9ef">const</span> string <span style="color:#f92672">&amp;</span>mmapID, <span style="color:#66d9ef">int</span> size, MMKVMode mode, string <span style="color:#f92672">*</span>cryptKey, string <span style="color:#f92672">*</span>rootPath)
+    <span style="color:#f92672">:</span> m_mmapID(mmapedKVKey(mmapID, rootPath)) <span style="color:#75715e">// historically Android mistakenly use mmapKey as mmapID
+</span><span style="color:#75715e"></span>    , m_path(mappedKVPathWithID(m_mmapID, mode, rootPath))
+    , m_crcPath(crcPathWithID(m_mmapID, mode, rootPath))
+    , m_dic(<span style="color:#66d9ef">nullptr</span>)
+    , m_dicCrypt(<span style="color:#66d9ef">nullptr</span>)
+    , m_file(<span style="color:#66d9ef">new</span> MemoryFile(m_path, size, (mode <span style="color:#f92672">&amp;</span> MMKV_ASHMEM) <span style="color:#f92672">?</span> MMFILE_TYPE_ASHMEM : MMFILE_TYPE_FILE))
+    , m_metaFile(<span style="color:#66d9ef">new</span> MemoryFile(m_crcPath, DEFAULT_MMAP_SIZE, m_file<span style="color:#f92672">-&gt;</span>m_fileType))
+    , m_metaInfo(<span style="color:#66d9ef">new</span> MMKVMetaInfo())
+    , m_crypter(<span style="color:#66d9ef">nullptr</span>)
+    , m_lock(<span style="color:#66d9ef">new</span> ThreadLock())
+    , m_fileLock(<span style="color:#66d9ef">new</span> FileLock(m_metaFile<span style="color:#f92672">-&gt;</span>getFd(), (mode <span style="color:#f92672">&amp;</span> MMKV_ASHMEM)))
+    , m_sharedProcessLock(<span style="color:#66d9ef">new</span> InterProcessLock(m_fileLock, SharedLockType))
+    , m_exclusiveProcessLock(<span style="color:#66d9ef">new</span> InterProcessLock(m_fileLock, ExclusiveLockType))
+    , m_isInterProcess((mode <span style="color:#f92672">&amp;</span> MMKV_MULTI_PROCESS) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> (mode <span style="color:#f92672">&amp;</span> CONTEXT_MODE_MULTI_PROCESS) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+    m_actualSize <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    m_output <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+
+    <span style="color:#75715e">// force use fcntl(), otherwise will conflict with MemoryFile::reloadFromFile()
+</span><span style="color:#75715e"></span>    m_fileModeLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileLock(m_file<span style="color:#f92672">-&gt;</span>getFd(), true);
+    m_sharedProcessModeLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InterProcessLock(m_fileModeLock, SharedLockType);
+    m_exclusiveProcessModeLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+
+<span style="color:#75715e">#    ifndef MMKV_DISABLE_CRYPT
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (cryptKey <span style="color:#f92672">&amp;&amp;</span> cryptKey<span style="color:#f92672">-&gt;</span>length() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+        m_dicCrypt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MMKVMapCrypt();
+        m_crypter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AESCrypt(cryptKey<span style="color:#f92672">-&gt;</span>data(), cryptKey<span style="color:#f92672">-&gt;</span>length());
+    } <span style="color:#66d9ef">else</span>
+<span style="color:#75715e">#    endif
+</span><span style="color:#75715e"></span>    {
+        m_dic <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MMKVMap();
+    }
+
+    m_needLoadFromFile <span style="color:#f92672">=</span> true;
+    m_hasFullWriteback <span style="color:#f92672">=</span> false;
+
+    m_crcDigest <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+    m_sharedProcessLock<span style="color:#f92672">-&gt;</span>m_enable <span style="color:#f92672">=</span> m_isInterProcess;
+    m_exclusiveProcessLock<span style="color:#f92672">-&gt;</span>m_enable <span style="color:#f92672">=</span> m_isInterProcess;
+
+    <span style="color:#75715e">// sensitive zone
+</span><span style="color:#75715e"></span>    {
+        SCOPED_LOCK(m_sharedProcessLock);
+        loadFromFile();
+    }
+}
+</code></pre></div><h3 id="loadfromfile">loadFromFile</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> MMKV<span style="color:#f92672">::</span>loadFromFile() {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>m_file<span style="color:#f92672">-&gt;</span>isFileValid()) {
+        m_file<span style="color:#f92672">-&gt;</span>reloadFromFile();
+    }
+  
+    <span style="color:#66d9ef">auto</span> ptr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>) m_file<span style="color:#f92672">-&gt;</span>getMemory();
+  
+        <span style="color:#66d9ef">if</span> (loadFromFile <span style="color:#f92672">&amp;&amp;</span> m_actualSize <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            MMBuffer <span style="color:#a6e22e">inputBuffer</span>(ptr <span style="color:#f92672">+</span> Fixed32Size, m_actualSize, MMBufferNoCopy);
+        
+}
+</code></pre></div><h2 id="memoryfile">MemoryFile</h2>
+<h3 id="reloadfromfile">reloadFromFile</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> MemoryFile<span style="color:#f92672">::</span>reloadFromFile() {
+      m_fd <span style="color:#f92672">=</span> open(m_name.c_str(), O_RDWR <span style="color:#f92672">|</span> O_CREAT <span style="color:#f92672">|</span> O_CLOEXEC, S_IRWXU);
+  
+        FileLock <span style="color:#a6e22e">fileLock</span>(m_fd);
+        InterProcessLock <span style="color:#a6e22e">lock</span>(<span style="color:#f92672">&amp;</span>fileLock, ExclusiveLockType);
+        SCOPED_LOCK(<span style="color:#f92672">&amp;</span>lock);
+
+        mmkv<span style="color:#f92672">::</span>getFileSize(m_fd, m_size);
+        <span style="color:#75715e">// round up to (n * pagesize)
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (m_size <span style="color:#f92672">&lt;</span> DEFAULT_MMAP_SIZE <span style="color:#f92672">||</span> (m_size <span style="color:#f92672">%</span> DEFAULT_MMAP_SIZE <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)) {
+            size_t roundSize <span style="color:#f92672">=</span> ((m_size <span style="color:#f92672">/</span> DEFAULT_MMAP_SIZE) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> DEFAULT_MMAP_SIZE;
+            truncate(roundSize);
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#66d9ef">auto</span> ret <span style="color:#f92672">=</span> mmap();
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ret) {
+                doCleanMemoryCache(true);
+            }
+        }
+}
+</code></pre></div><h3 id="mmap">mmap</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> MemoryFile<span style="color:#f92672">::</span>mmap() {
+    m_ptr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) <span style="color:#f92672">::</span>mmap(m_ptr, m_size, PROT_READ <span style="color:#f92672">|</span> PROT_WRITE, MAP_SHARED, m_fd, <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">if</span> (m_ptr <span style="color:#f92672">==</span> MAP_FAILED) {
+        MMKVError(<span style="color:#e6db74">&#34;fail to mmap [%s], %s&#34;</span>, m_name.c_str(), strerror(errno));
+        m_ptr <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+        <span style="color:#66d9ef">return</span> false;
+    }
+
+    <span style="color:#66d9ef">return</span> true;
+}
+</code></pre></div><h3 id="getmemory">getMemory</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">getMemory</span>() { <span style="color:#66d9ef">return</span> m_ptr; }
+</code></pre></div><h2 id="filelock">FileLock</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">FileLock<span style="color:#f92672">::</span>FileLock(MMKVFileHandle_t fd, <span style="color:#66d9ef">bool</span> isAshmem)
+    <span style="color:#f92672">:</span> m_fd(fd), m_sharedLockCount(<span style="color:#ae81ff">0</span>), m_exclusiveLockCount(<span style="color:#ae81ff">0</span>), m_isAshmem(isAshmem) {
+    m_lockInfo.l_type <span style="color:#f92672">=</span> F_WRLCK;
+    m_lockInfo.l_start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    m_lockInfo.l_whence <span style="color:#f92672">=</span> SEEK_SET;
+    m_lockInfo.l_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    m_lockInfo.l_pid <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="lock">lock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> FileLock<span style="color:#f92672">::</span>lock(LockType lockType) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">doLock</span>(lockType, true);
+}
+</code></pre></div><h3 id="dolock">doLock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> FileLock<span style="color:#f92672">::</span>doLock(LockType lockType, <span style="color:#66d9ef">bool</span> wait, <span style="color:#66d9ef">bool</span> <span style="color:#f92672">*</span>tryAgain) {
+    <span style="color:#66d9ef">if</span> (lockType <span style="color:#f92672">==</span> SharedLockType) {
+        <span style="color:#75715e">// don&#39;t want shared-lock to break any existing locks
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (m_sharedLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> m_exclusiveLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            m_sharedLockCount<span style="color:#f92672">++</span>;
+            <span style="color:#66d9ef">return</span> true;
+        }
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">// don&#39;t want exclusive-lock to break existing exclusive-locks
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (m_exclusiveLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            m_exclusiveLockCount<span style="color:#f92672">++</span>;
+            <span style="color:#66d9ef">return</span> true;
+        }
+        <span style="color:#75715e">// prevent deadlock
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (m_sharedLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            unLockFirstIfNeeded <span style="color:#f92672">=</span> true;
+        }
+    }
+
+    <span style="color:#66d9ef">auto</span> ret <span style="color:#f92672">=</span> platformLock(lockType, wait, unLockFirstIfNeeded, tryAgain);
+    <span style="color:#66d9ef">if</span> (ret) {
+        <span style="color:#66d9ef">if</span> (lockType <span style="color:#f92672">==</span> SharedLockType) {
+            m_sharedLockCount<span style="color:#f92672">++</span>;
+        } <span style="color:#66d9ef">else</span> {
+            m_exclusiveLockCount<span style="color:#f92672">++</span>;
+        }
+    }
+    <span style="color:#66d9ef">return</span> ret;
+}
+</code></pre></div><h3 id="unlock">unlock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> FileLock<span style="color:#f92672">::</span>unlock(LockType lockType) {
+    <span style="color:#66d9ef">if</span> (lockType <span style="color:#f92672">==</span> SharedLockType) {
+        <span style="color:#66d9ef">if</span> (m_sharedLockCount <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span> false;
+        }
+        <span style="color:#75715e">// don&#39;t want shared-lock to break any existing locks
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (m_sharedLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> m_exclusiveLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            m_sharedLockCount<span style="color:#f92672">--</span>;
+            <span style="color:#66d9ef">return</span> true;
+        }
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">if</span> (m_exclusiveLockCount <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span> false;
+        }
+        <span style="color:#66d9ef">if</span> (m_exclusiveLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+            m_exclusiveLockCount<span style="color:#f92672">--</span>;
+            <span style="color:#66d9ef">return</span> true;
+        }
+        <span style="color:#75715e">// restore shared-lock when all exclusive-locks are done
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (m_sharedLockCount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            unlockToSharedLock <span style="color:#f92672">=</span> true;
+        }
+    }
+
+    <span style="color:#66d9ef">auto</span> ret <span style="color:#f92672">=</span> platformUnLock(unlockToSharedLock);
+    <span style="color:#66d9ef">if</span> (ret) {
+        <span style="color:#66d9ef">if</span> (lockType <span style="color:#f92672">==</span> SharedLockType) {
+            m_sharedLockCount<span style="color:#f92672">--</span>;
+        } <span style="color:#66d9ef">else</span> {
+            m_exclusiveLockCount<span style="color:#f92672">--</span>;
+        }
+    }
+    <span style="color:#66d9ef">return</span> ret;
+}
+</code></pre></div><h3 id="platformlock">platformLock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> FileLock<span style="color:#f92672">::</span>platformLock(LockType lockType, <span style="color:#66d9ef">bool</span> wait, <span style="color:#66d9ef">bool</span> unLockFirstIfNeeded, <span style="color:#66d9ef">bool</span> <span style="color:#f92672">*</span>tryAgain) {
+    <span style="color:#66d9ef">if</span> (m_isAshmem) {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ashmemLock</span>(lockType, wait, unLockFirstIfNeeded, tryAgain);
+    }
+    <span style="color:#66d9ef">auto</span> realLockType <span style="color:#f92672">=</span> LockType2FlockType(lockType);
+    <span style="color:#66d9ef">auto</span> cmd <span style="color:#f92672">=</span> wait <span style="color:#f92672">?</span> realLockType : (realLockType <span style="color:#f92672">|</span> LOCK_NB);
+    <span style="color:#66d9ef">if</span> (unLockFirstIfNeeded) {
+        <span style="color:#75715e">// try lock
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">auto</span> ret <span style="color:#f92672">=</span> flock(m_fd, realLockType <span style="color:#f92672">|</span> LOCK_NB);
+        <span style="color:#66d9ef">if</span> (ret <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span> true;
+        }
+        <span style="color:#75715e">// let&#39;s be gentleman: unlock my shared-lock to prevent deadlock
+</span><span style="color:#75715e"></span>        ret <span style="color:#f92672">=</span> flock(m_fd, LOCK_UN);
+        <span style="color:#66d9ef">if</span> (ret <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+            MMKVError(<span style="color:#e6db74">&#34;fail to try unlock first fd=%d, ret=%d, error:%s&#34;</span>, m_fd, ret, strerror(errno));
+        }
+    }
+  <span style="color:#66d9ef">auto</span> ret <span style="color:#f92672">=</span> flock(m_fd, cmd);
+  ......
+}
+</code></pre></div><h3 id="platformunlock">platformUnLock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> FileLock<span style="color:#f92672">::</span>platformUnLock(<span style="color:#66d9ef">bool</span> unlockToSharedLock) {
+    <span style="color:#66d9ef">if</span> (m_isAshmem) {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ashmemUnLock</span>(unlockToSharedLock);
+    }
+    <span style="color:#66d9ef">int</span> cmd <span style="color:#f92672">=</span> unlockToSharedLock <span style="color:#f92672">?</span> LOCK_SH : LOCK_UN;
+    <span style="color:#66d9ef">auto</span> ret <span style="color:#f92672">=</span> flock(m_fd, cmd);
+}
+</code></pre></div><h2 id="interprocesslock">InterProcessLock</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h">InterProcessLock(FileLock <span style="color:#f92672">*</span>fileLock, LockType lockType)
+    <span style="color:#f92672">:</span> m_fileLock(fileLock), m_lockType(lockType), m_enable(true) {
+    MMKV_ASSERT(m_fileLock);
+}
+</code></pre></div><h3 id="lock-1">lock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">lock</span>() {
+    <span style="color:#66d9ef">if</span> (m_enable) {
+        m_fileLock<span style="color:#f92672">-&gt;</span>lock(m_lockType);
+    }
+}
+</code></pre></div><h3 id="unlock-1">unlock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">unlock</span>() {
+    <span style="color:#66d9ef">if</span> (m_enable) {
+        m_fileLock<span style="color:#f92672">-&gt;</span>unlock(m_lockType);
+    }
+}
+</code></pre></div><h2 id="scopedlock">ScopedLock</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hpp" data-lang="hpp"><span style="color:#66d9ef">explicit</span> <span style="color:#a6e22e">ScopedLock</span>(T <span style="color:#f92672">*</span>oLock) <span style="color:#f92672">:</span> m_lock(oLock) {
+    MMKV_ASSERT(m_lock);
+    lock();
+}
+
+    <span style="color:#f92672">~</span>ScopedLock() {
+        unlock();
+        m_lock <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+</code></pre></div><h3 id="lock-unlock">lock unLock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hpp" data-lang="hpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScopedLock</span> {
+    T <span style="color:#f92672">*</span>m_lock;
+
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">lock</span>() {
+        <span style="color:#66d9ef">if</span> (m_lock) {
+            m_lock<span style="color:#f92672">-&gt;</span>lock();
+        }
+    }
+
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">unlock</span>() {
+        <span style="color:#66d9ef">if</span> (m_lock) {
+            m_lock<span style="color:#f92672">-&gt;</span>unlock();
+        }
+    }
+}
+</code></pre></div><h2 id="threadlockcpp">ThreadLock.cpp</h2>
+<h3 id="threadonce">ThreadOnce</h3>
+<p>pthread_once用来确保在C++下多线程并发时，callback只调用一次，可用于C++中的单例模式</p>
+<p><a href="https://blog.csdn.net/huntinux/article/details/51726039">pthread_once实现简析</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> ThreadLock<span style="color:#f92672">::</span>ThreadOnce(ThreadOnceToken_t <span style="color:#f92672">*</span>onceToken, <span style="color:#66d9ef">void</span> (<span style="color:#f92672">*</span>callback)()) {
+    pthread_once(onceToken, callback);
+}
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611381690"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611381690"></script>
+    <script src="/js/jquery.sticky.js?1611381690"></script>
+    <script src="/js/featherlight.min.js?1611381690"></script>
+    <script src="/js/highlight.pack.js?1611381690"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611381690"></script>
+    <script src="/js/learn.js?1611381690"></script>
+    <script src="/js/hugo-learn.js?1611381690"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1611381690"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+
