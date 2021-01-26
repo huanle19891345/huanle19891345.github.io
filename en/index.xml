@@ -126,6 +126,20 @@ The following diagram shows how the key components work together:</description>
     </item>
     
     <item>
+      <title>kernel</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/</guid>
+      <description>下载和编译内核步骤 Android 9.0内核编译
+下载内核 cd kernel git clone https://android.googlesource.com/kernel/goldfish 执行完这两条命令后就可以看到kernel目录下有一个goldfish目录了,goldfish内核专门是提供给emulator用的.
+cd goldfish git branch -r git checkout origin/android-goldfish-4.4-dev -b android-goldfish-4.4-dev 这里涉及到要下载哪个版本的内核,emulator命令默认用的是qemu内核, 一般跟这个版本的内核一样就可以了,可以直接启用emulator然后进入到Settings-&amp;gt;System-&amp;gt;About phone-&amp;gt;点击Android version,里面就有内核版本号.
+编译内核 一定要和Android编译时lunch选的一样, 可以进入到out/target/product目录下查看自己编的是什么版本, 如果是generic_x86_64,那lunch的就是aosp_x86_64_eng的,其他版本依此类推. 接下来就可以编译了,下面我提供了几个编译的脚本大家可以进行对比和参照,lunch不同的版本对应的脚本是不一样的,即使编译通过了,也不能运行,我因为这个浪费了很长的时间 使用方法:
+ 在goldfish目录下创建一个build.sh文件 将脚本里面的内容复制到build.sh中,或者根据脚本自己写, 注意lunch的版本 执行chmod a+rx build.sh并且执行./build.sh.  aosp_x86-eng #指定编译的内核类型 export ARCH=x86 #指定的gcc编译器的前缀, 就是下面PATH中的x86_64-linux-android-4.9的前缀 export CROSS_COMPILE=x86_64-linux-android- export REAL_CROSS_COMPILE=x86_64-linux-android- #这里android_root要写是android根目录的绝对地址例如: ~/google/android-9.0 PATH=$PATH:/home/zhenghuan/Android/Source/android-9.0.0_r3/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/bin #编译的配置,在arch/x86/configs目录下, make x86_64_ranchu_defconfig #编译内核命令 make -j16 编译内核大概10来分钟就可以完成了,之后会生成一个arch/x86_64/boot/bzImage的东西,不同kernel生成的是不一样的,要看清楚. 最后回到android根目录执行emulator -kernel kernel/goldfish/arch/x86/boot/bzImage启动虚拟机
+启动虚拟机 ~/Android/Source/android-9.0.0_r3$ emulator -show-kernel -kernel /home/zhenghuan/Android/Source/kernel/goldfish/arch/x86/boot/bzImage -qemu -s  -kernel use specific emulated kernel 指定模拟器的内核，这里指定我们自己编译的内核arch/x86/boot/bzImage -qemu args.</description>
+    </item>
+    
+    <item>
       <title>Looper</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -152,6 +166,16 @@ https://github.com/Tencent/MMKV/wiki/design
 锁升级/降级 锁升级是指将已经持有的共享锁，升级为互斥锁，亦即将读锁升级为写锁；锁降级则是反过来。文件锁支持锁升级，但是容易死锁：假如 A、B 进程都持有了读锁，现在都想升级到写锁，就会陷入相互等待的困境，发生死锁。另外，由于文件锁不支持递归锁，也导致了锁降级无法进行，一降就降到没有锁。
 为了解决递归锁和锁升级/降级这两个难题，需要对文件锁(系统调用flock)进行封装，增加读锁、写锁计数器。处理逻辑如下表：
    读锁计数器 写锁计数器 加读锁 加写锁 解读锁 解写锁     0 0 加读锁 加写锁 - -   0 1 +1 +1 - 解写锁   0 N +1 +1 - -1   1 0 +1 解读锁再加写锁 解读锁 -   1 1 +1 +1 -1 加读锁   1 N +1 +1 -1 -1   N 0 +1 解读锁再加写锁 -1 -   N 1 +1 +1 -1 加读锁   N N +1 +1 -1 -1    需要注意的地方有两点：</description>
+    </item>
+    
+    <item>
+      <title>SharedPreferences</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/</guid>
+      <description>1、加载/初始化 维护spName&amp;ndash;&amp;gt;file,file&amp;ndash;&amp;gt;sharedPreferencesImpl两个ArrayMap内存缓存 ContextImpl.java
+@Override public SharedPreferences getSharedPreferences(String name, int mode) { File file; synchronized (ContextImpl.class) { if (mSharedPrefsPaths == null) { mSharedPrefsPaths = new ArrayMap&amp;lt;&amp;gt;(); } file = mSharedPrefsPaths.get(name); if (file == null) { file = getSharedPreferencesPath(name); mSharedPrefsPaths.put(name, file); } } return getSharedPreferences(file, mode); } @Override public SharedPreferences getSharedPreferences(File file, int mode) { SharedPreferencesImpl sp; synchronized (ContextImpl.class) { final ArrayMap&amp;lt;File, SharedPreferencesImpl&amp;gt; cache = getSharedPreferencesCacheLocked(); sp = cache.get(file); if (sp == null) { checkMode(mode); sp = new SharedPreferencesImpl(file, mode); cache.</description>
     </item>
     
     <item>
@@ -185,7 +209,7 @@ graph LR olderSupport--&amp;gt;|APIchanges|28.0.0Support--&amp;gt;|namespaceChan
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</guid>
-      <description>ThreadLocal模型 graph LR thread--&amp;gt;threadLocalMap threadLocalMap--&amp;gt;entry1 threadLocalMap--&amp;gt;entry2 threadLocalMap--&amp;gt;entry3 threadLocalMap--&amp;gt;entryxxx entry1--&amp;gt;key=threadlocal1,value=T1 entry2--&amp;gt;key=threadlocal2,value=T2 entry3--&amp;gt;key=threadlocal3,value=T3  线性探测解决hash冲突 超过默认长度(16)的2/3时rehash减少hash冲突，扩容一倍 threadlocal作为key保存在entry中时是WeakReference，在被回收时清除记录，因此需要外部定义TheadLocal实例的地方配置为static，否则在外部回收threadlocal时，threadlocalmap中的entry也会被清理掉 lazy模式，只有添加第一个 元素时才通过createMap创建ThreadLocalMap  Thread /* ThreadLocal values pertaining to this thread. This map is maintained * by the ThreadLocal class. */ ThreadLocal.ThreadLocalMap threadLocals = null; /* * InheritableThreadLocal values pertaining to this thread. This map is * maintained by the InheritableThreadLocal class. */ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null; ThreadLocal threadLocalHashCode public class ThreadLocal&amp;lt;T&amp;gt; { /** * ThreadLocals rely on per-thread linear-probe hash maps attached * to each thread (Thread.</description>
+      <description>ThreadLocal模型 graph LR thread--&amp;gt;threadLocalMap threadLocalMap--&amp;gt;entry1 threadLocalMap--&amp;gt;entry2 threadLocalMap--&amp;gt;entryLooper threadLocalMap--&amp;gt;entryxxx entry1--&amp;gt;key=threadlocal1,value=T1 entry2--&amp;gt;key=threadlocal2,value=T2 entryLooper--&amp;gt;LooperEntry(key=threadlocal_Looper,value=Looper) LooperEntry--&amp;gt;MessageQueue  线性探测解决hash冲突 超过默认长度(16)的2/3时rehash减少hash冲突，扩容一倍 threadlocal作为key保存在entry中时是WeakReference，在被回收时清除记录，因此需要外部定义TheadLocal实例的地方配置为static，否则在外部回收threadlocal时，threadlocalmap中的entry也会被清理掉 lazy模式，只有添加第一个 元素时才通过createMap创建ThreadLocalMap  Thread /* ThreadLocal values pertaining to this thread. This map is maintained * by the ThreadLocal class. */ ThreadLocal.ThreadLocalMap threadLocals = null; /* * InheritableThreadLocal values pertaining to this thread. This map is * maintained by the InheritableThreadLocal class. */ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null; ThreadLocal threadLocalHashCode public class ThreadLocal&amp;lt;T&amp;gt; { /** * ThreadLocals rely on per-thread linear-probe hash maps attached * to each thread (Thread.</description>
     </item>
     
     <item>
@@ -249,6 +273,16 @@ If one of those process writes new data into such a page the page is automatical
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</guid>
       <description>原理图 sequenceDiagram sharedMemory-&amp;gt;&amp;gt;+ashmem_dev: 1: ashmem_create_region ashmem_dev-&amp;gt;&amp;gt;ashmem_dev : fd = __ashmem_open() 创建ashmem_area放入file-&amp;gt;private_data ashmem_dev-&amp;gt;&amp;gt;ashmem_dev: ioctl(fd, ASHMEM_SET_NAME, buf) ashmem_dev-&amp;gt;&amp;gt;ashmem_dev: ioctl(fd, ASHMEM_SET_SIZE, size) ashmem_dev-&amp;gt;&amp;gt;-sharedMemory: fd sharedMemory-&amp;gt;&amp;gt;+Os : 2: mmap Os-&amp;gt;&amp;gt;-ashmem : ashmem_mmap ashmem-&amp;gt;&amp;gt;+shmem: vmfile = shmem_file_setup shmem-&amp;gt;&amp;gt;shmem: shmem_get_inode shmem-&amp;gt;&amp;gt;-shmem: alloc_file ashmem-&amp;gt;&amp;gt;shmem: shmem_set_file sharedMemory-&amp;gt;&amp;gt;ashmem_dev: 3: native_write ashmem_dev-&amp;gt;&amp;gt;ashmem: unpinned &amp;amp;&amp;amp; ashmem_pin_region ashmem_dev-&amp;gt;&amp;gt;shmem: env-&amp;gt;GetByteArrayRegion shmem-&amp;gt;&amp;gt;+shmem: shmem_fault shmem-&amp;gt;&amp;gt;-shmem: shmem_getpage分配真实物理页 ashmem_dev-&amp;gt;&amp;gt;ashmem: ashmem_unpin_region MemoryFile public MemoryFile(String name, int length) throws IOException { try { mSharedMemory = SharedMemory.create(name, length); mMapping = mSharedMemory.</description>
+    </item>
+    
+    <item>
+      <title>应用启动</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</guid>
+      <description>原理图 上述流程4——5之间还有一个过程，即当ActivityManagerService调用attachApplicationLocked时会跨进程调用thread.bindApplication通知应用进程发消息并调用handleBindApplication，内部会第一次初始化应用进程的mResources和mClassLoader给LoadedApk
+Activity.startActivity public void startActivityForResult(@RequiresPermission Intent intent, int requestCode, @Nullable Bundle options) { if (mParent == null) { options = transferSpringboardActivityOptions(options); Instrumentation.ActivityResult ar = mInstrumentation.execStartActivity( this, mMainThread.getApplicationThread(), mToken, this, intent, requestCode, options); } } Instrumentation.execStartActivity public ActivityResult execStartActivity( Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options) { IApplicationThread whoThread = (IApplicationThread) contextThread; int result = ActivityManager.getService() .startActivity(whoThread, who.getBasePackageName(), intent, intent.resolveTypeIfNeeded(who.getContentResolver()), token, target != null ?</description>
     </item>
     
     <item>

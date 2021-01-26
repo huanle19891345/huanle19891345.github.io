@@ -1,0 +1,2969 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>应用启动 :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1611661807" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611661807" rel="stylesheet">
+    <link href="/css/hybrid.css?1611661807" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611661807" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611661807" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611661807" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1611661807" rel="stylesheet">
+    <link href="/css/theme.css?1611661807" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611661807" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1611661807" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1611661807"></script>
+
+    <script src="/js/auto_toc_scroll.js?1611661807"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1611661807"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611661807"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1611661807"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/google/" title="google" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/google/">
+          google
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/google/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/google/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/" title="kernel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/">
+          kernel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/" title="kernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/">
+        kernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/" title="sharedpreferences" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/">
+          sharedpreferences
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/" title="SharedPreferences" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/">
+        SharedPreferences
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/" title="应用启动退出" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/">
+          应用启动退出
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/" title="应用启动" class="dd-item active">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/">
+        应用启动
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/" title="Flutter消息机制" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/">
+        Flutter消息机制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/'>系统机制原理</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/'>应用启动退出</a> > 应用启动
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#原理图">原理图</a></li>
+    <li><a href="#activitystartactivity">Activity.startActivity</a>
+      <ul>
+        <li><a href="#instrumentationexecstartactivity">Instrumentation.execStartActivity</a></li>
+        <li><a href="#activitymanagergetservicestartactivity">ActivityManager.getService().startActivity</a></li>
+      </ul>
+    </li>
+    <li><a href="#activitymanagerservicestartactivity">ActivityManagerService.startActivity</a>
+      <ul>
+        <li><a href="#startprocesslocked">startProcessLocked</a></li>
+        <li><a href="#zygoteprocessstart">ZygoteProcess.start</a>
+          <ul>
+            <li><a href="#openzygotesocketifneeded">openZygoteSocketIfNeeded</a></li>
+            <li><a href="#zygotesendargsandgetresult">zygoteSendArgsAndGetResult</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#zygote启动appprocess">Zygote启动AppProcess</a></li>
+    <li><a href="#activitythreadmain">ActivityThread.main</a>
+      <ul>
+        <li><a href="#looperpreparemainlooper">Looper.prepareMainLooper();</a></li>
+        <li><a href="#iactivitymanagerattachapplication">IActivityManager.attachApplication</a></li>
+        <li><a href="#looperloop">Looper.loop()</a></li>
+      </ul>
+    </li>
+    <li><a href="#activitymanagerserviceattachapplication">ActivityManagerService.attachApplication</a>
+      <ul>
+        <li><a href="#linktodeath配置appdeathrecipient监听appdeath">linkToDeath配置AppDeathRecipient监听appDeath</a></li>
+        <li><a href="#threadbindapplication">thread.bindApplication</a>
+          <ul>
+            <li><a href="#getpackageinfo初始化loadedapk">getPackageInfo初始化LoadedApk</a></li>
+            <li><a href="#loadedapkmakeapplication">LoadedApk.makeApplication</a></li>
+            <li><a href="#appcomponentfactoryinstantiateapplication">AppComponentFactory.instantiateApplication</a></li>
+            <li><a href="#applicationattach">Application.attach</a></li>
+            <li><a href="#installcontentproviders">installContentProviders</a></li>
+            <li><a href="#minstrumentationcallapplicationoncreate">mInstrumentation.callApplicationOnCreate</a></li>
+          </ul>
+        </li>
+        <li><a href="#realstartactivitylocked">realStartActivityLocked</a>
+          <ul>
+            <li><a href="#create-activity-launch-transaction">Create activity launch transaction</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              应用启动
+            </h1>
+          
+
+        
+
+
+<h2 id="原理图">原理图</h2>
+<p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8.assets/image-20210126183751339.png" alt="image-20210126183751339"></p>
+<p>上述流程4——5之间还有一个过程，即当ActivityManagerService调用attachApplicationLocked时会跨进程调用thread.bindApplication通知应用进程发消息并调用handleBindApplication，内部会第一次初始化应用进程的mResources和mClassLoader给LoadedApk</p>
+<h2 id="activitystartactivity">Activity.startActivity</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">startActivityForResult</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@RequiresPermission</span> Intent intent<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> requestCode<span style="color:#f92672">,</span>
+            <span style="color:#a6e22e">@Nullable</span> Bundle options<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mParent <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            options <span style="color:#f92672">=</span> transferSpringboardActivityOptions<span style="color:#f92672">(</span>options<span style="color:#f92672">);</span>
+            Instrumentation<span style="color:#f92672">.</span><span style="color:#a6e22e">ActivityResult</span> ar <span style="color:#f92672">=</span>
+                mInstrumentation<span style="color:#f92672">.</span><span style="color:#a6e22e">execStartActivity</span><span style="color:#f92672">(</span>
+                    <span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> mMainThread<span style="color:#f92672">.</span><span style="color:#a6e22e">getApplicationThread</span><span style="color:#f92672">(),</span> mToken<span style="color:#f92672">,</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">,</span>
+                    intent<span style="color:#f92672">,</span> requestCode<span style="color:#f92672">,</span> options<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="instrumentationexecstartactivity">Instrumentation.execStartActivity</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> ActivityResult <span style="color:#a6e22e">execStartActivity</span><span style="color:#f92672">(</span>
+            Context who<span style="color:#f92672">,</span> IBinder contextThread<span style="color:#f92672">,</span> IBinder token<span style="color:#f92672">,</span> Activity target<span style="color:#f92672">,</span>
+            Intent intent<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> requestCode<span style="color:#f92672">,</span> Bundle options<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        IApplicationThread whoThread <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>IApplicationThread<span style="color:#f92672">)</span> contextThread<span style="color:#f92672">;</span>
+      
+                <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> ActivityManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getService</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">startActivity</span><span style="color:#f92672">(</span>whoThread<span style="color:#f92672">,</span> who<span style="color:#f92672">.</span><span style="color:#a6e22e">getBasePackageName</span><span style="color:#f92672">(),</span> intent<span style="color:#f92672">,</span>
+                        intent<span style="color:#f92672">.</span><span style="color:#a6e22e">resolveTypeIfNeeded</span><span style="color:#f92672">(</span>who<span style="color:#f92672">.</span><span style="color:#a6e22e">getContentResolver</span><span style="color:#f92672">()),</span>
+                        token<span style="color:#f92672">,</span> target <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> target<span style="color:#f92672">.</span><span style="color:#a6e22e">mEmbeddedID</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span>
+                        requestCode<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> options<span style="color:#f92672">);</span>
+</code></pre></div><h3 id="activitymanagergetservicestartactivity">ActivityManager.getService().startActivity</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IActivityManager <span style="color:#a6e22e">getService</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> IActivityManagerSingleton<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Singleton<span style="color:#f92672">&lt;</span>IActivityManager<span style="color:#f92672">&gt;</span> IActivityManagerSingleton <span style="color:#f92672">=</span>
+            <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">&lt;</span>IActivityManager<span style="color:#f92672">&gt;()</span> <span style="color:#f92672">{</span>
+                <span style="color:#a6e22e">@Override</span>
+                <span style="color:#66d9ef">protected</span> IActivityManager <span style="color:#a6e22e">create</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                    <span style="color:#66d9ef">final</span> IBinder b <span style="color:#f92672">=</span> ServiceManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getService</span><span style="color:#f92672">(</span>Context<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTIVITY_SERVICE</span><span style="color:#f92672">);</span>
+                    <span style="color:#66d9ef">final</span> IActivityManager am <span style="color:#f92672">=</span> IActivityManager<span style="color:#f92672">.</span><span style="color:#a6e22e">Stub</span><span style="color:#f92672">.</span><span style="color:#a6e22e">asInterface</span><span style="color:#f92672">(</span>b<span style="color:#f92672">);</span>
+                    <span style="color:#66d9ef">return</span> am<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">};</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> T mInstance<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">abstract</span> T <span style="color:#a6e22e">create</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> T <span style="color:#a6e22e">get</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mInstance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                mInstance <span style="color:#f92672">=</span> create<span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> mInstance<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="activitymanagerservicestartactivity">ActivityManagerService.startActivity</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">startActivity</span><span style="color:#f92672">(</span>IApplicationThread caller<span style="color:#f92672">,</span> String callingPackage<span style="color:#f92672">,</span>
+            Intent intent<span style="color:#f92672">,</span> String resolvedType<span style="color:#f92672">,</span> IBinder resultTo<span style="color:#f92672">,</span> String resultWho<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> requestCode<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">int</span> startFlags<span style="color:#f92672">,</span> ProfilerInfo profilerInfo<span style="color:#f92672">,</span> Bundle bOptions<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> startActivityAsUser<span style="color:#f92672">(</span>caller<span style="color:#f92672">,</span> callingPackage<span style="color:#f92672">,</span> intent<span style="color:#f92672">,</span> resolvedType<span style="color:#f92672">,</span> resultTo<span style="color:#f92672">,</span>
+                resultWho<span style="color:#f92672">,</span> requestCode<span style="color:#f92672">,</span> startFlags<span style="color:#f92672">,</span> profilerInfo<span style="color:#f92672">,</span> bOptions<span style="color:#f92672">,</span>
+                UserHandle<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallingUserId</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">startActivityAsUser</span><span style="color:#f92672">(</span>IApplicationThread caller<span style="color:#f92672">,</span> String callingPackage<span style="color:#f92672">,</span>
+            Intent intent<span style="color:#f92672">,</span> String resolvedType<span style="color:#f92672">,</span> IBinder resultTo<span style="color:#f92672">,</span> String resultWho<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> requestCode<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">int</span> startFlags<span style="color:#f92672">,</span> ProfilerInfo profilerInfo<span style="color:#f92672">,</span> Bundle bOptions<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> userId<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> validateIncomingUser<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        enforceNotIsolatedCaller<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;startActivity&#34;</span><span style="color:#f92672">);</span>
+
+        userId <span style="color:#f92672">=</span> mActivityStartController<span style="color:#f92672">.</span><span style="color:#a6e22e">checkTargetUser</span><span style="color:#f92672">(</span>userId<span style="color:#f92672">,</span> validateIncomingUser<span style="color:#f92672">,</span>
+                Binder<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallingPid</span><span style="color:#f92672">(),</span> Binder<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallingUid</span><span style="color:#f92672">(),</span> <span style="color:#e6db74">&#34;startActivityAsUser&#34;</span><span style="color:#f92672">);</span>
+
+        <span style="color:#75715e">// TODO: Switch to user app stacks here.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> mActivityStartController<span style="color:#f92672">.</span><span style="color:#a6e22e">obtainStarter</span><span style="color:#f92672">(</span>intent<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;startActivityAsUser&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setCaller</span><span style="color:#f92672">(</span>caller<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setCallingPackage</span><span style="color:#f92672">(</span>callingPackage<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setResolvedType</span><span style="color:#f92672">(</span>resolvedType<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setResultTo</span><span style="color:#f92672">(</span>resultTo<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setResultWho</span><span style="color:#f92672">(</span>resultWho<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setRequestCode</span><span style="color:#f92672">(</span>requestCode<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setStartFlags</span><span style="color:#f92672">(</span>startFlags<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setProfilerInfo</span><span style="color:#f92672">(</span>profilerInfo<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setActivityOptions</span><span style="color:#f92672">(</span>bOptions<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">setMayWait</span><span style="color:#f92672">(</span>userId<span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">();</span>
+
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Starts an activity based on the request parameters provided earlier.
+</span><span style="color:#75715e">     * @return The starter result.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> startActivity<span style="color:#f92672">(</span>mRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">caller</span><span style="color:#f92672">,</span> mRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">intent</span><span style="color:#f92672">,</span> mRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">ephemeralIntent</span><span style="color:#f92672">,</span>
+                        mRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">resolvedType</span><span style="color:#f92672">,</span> mRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">activityInfo</span><span style="color:#f92672">,......;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">startActivity</span><span style="color:#f92672">(</span>IApplicationThread caller<span style="color:#f92672">,</span> Intent intent<span style="color:#f92672">,</span> Intent ephemeralIntent<span style="color:#f92672">,......)</span> <span style="color:#f92672">{</span> 
+              ActivityRecord r <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ActivityRecord<span style="color:#f92672">(</span>mService<span style="color:#f92672">,</span> callerApp<span style="color:#f92672">,</span> callingPid<span style="color:#f92672">,</span> callingUid<span style="color:#f92672">,</span>
+                callingPackage<span style="color:#f92672">,</span> intent<span style="color:#f92672">,</span> resolvedType<span style="color:#f92672">,</span> aInfo<span style="color:#f92672">,</span> mService<span style="color:#f92672">.</span><span style="color:#a6e22e">getGlobalConfiguration</span><span style="color:#f92672">(),</span>
+                resultRecord<span style="color:#f92672">,</span> resultWho<span style="color:#f92672">,</span> requestCode<span style="color:#f92672">,</span> componentSpecified<span style="color:#f92672">,</span> voiceSession <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span>
+                mSupervisor<span style="color:#f92672">,</span> checkedOptions<span style="color:#f92672">,</span> sourceRecord<span style="color:#f92672">);</span>
+      
+        <span style="color:#66d9ef">return</span> startActivity<span style="color:#f92672">(</span>r<span style="color:#f92672">,</span> sourceRecord<span style="color:#f92672">,</span> voiceSession<span style="color:#f92672">,</span> voiceInteractor<span style="color:#f92672">,</span> startFlags<span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">true</span> <span style="color:#75715e">/* doResume */</span><span style="color:#f92672">,</span> checkedOptions<span style="color:#f92672">,</span> inTask<span style="color:#f92672">,</span> outActivity<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">startActivity</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> ActivityRecord r<span style="color:#f92672">,</span> ActivityRecord sourceRecord<span style="color:#f92672">,</span>
+                IVoiceInteractionSession voiceSession<span style="color:#f92672">,</span> IVoiceInteractor voiceInteractor<span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">int</span> startFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> doResume<span style="color:#f92672">,</span> ActivityOptions options<span style="color:#f92672">,</span> TaskRecord inTask<span style="color:#f92672">,</span>
+                ActivityRecord<span style="color:#f92672">[]</span> outActivity<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> START_CANCELED<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            result <span style="color:#f92672">=</span> startActivityUnchecked<span style="color:#f92672">(</span>r<span style="color:#f92672">,</span> sourceRecord<span style="color:#f92672">,</span> voiceSession<span style="color:#f92672">,</span> voiceInteractor<span style="color:#f92672">,</span>
+                    startFlags<span style="color:#f92672">,</span> doResume<span style="color:#f92672">,</span> options<span style="color:#f92672">,</span> inTask<span style="color:#f92672">,</span> outActivity<span style="color:#f92672">);</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">startActivityUnchecked</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> ActivityRecord r<span style="color:#f92672">,</span> ActivityRecord sourceRecord<span style="color:#f92672">,</span>
+            IVoiceInteractionSession voiceSession<span style="color:#f92672">,</span> IVoiceInteractor voiceInteractor<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">int</span> startFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> doResume<span style="color:#f92672">,</span> ActivityOptions options<span style="color:#f92672">,</span> TaskRecord inTask<span style="color:#f92672">,</span>
+            ActivityRecord<span style="color:#f92672">[]</span> outActivity<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      
+          <span style="color:#66d9ef">final</span> TaskRecord taskToAffiliate <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>mLaunchTaskBehind <span style="color:#f92672">&amp;&amp;</span> mSourceRecord <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">?</span> mSourceRecord<span style="color:#f92672">.</span><span style="color:#a6e22e">getTask</span><span style="color:#f92672">()</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+
+        <span style="color:#75715e">// Should this be considered a new task?
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> START_SUCCESS<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mStartActivity<span style="color:#f92672">.</span><span style="color:#a6e22e">resultTo</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> mInTask <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>mAddingToTask
+                <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span>mLaunchFlags <span style="color:#f92672">&amp;</span> FLAG_ACTIVITY_NEW_TASK<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            newTask <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+            result <span style="color:#f92672">=</span> setTaskFromReuseOrCreateNewTask<span style="color:#f92672">(</span>taskToAffiliate<span style="color:#f92672">,</span> topStack<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mSourceRecord <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            result <span style="color:#f92672">=</span> setTaskFromSourceRecord<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mInTask <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            result <span style="color:#f92672">=</span> setTaskFromInTask<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">// This not being started from an existing activity, and not part of a new task...
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// just put it in the top task, though these days this case should never happen.
+</span><span style="color:#75715e"></span>            setTaskToCurrentTopOrCreateNewTask<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+      
+       mSupervisor<span style="color:#f92672">.</span><span style="color:#a6e22e">resumeFocusedStackTopActivityLocked</span><span style="color:#f92672">(</span>mTargetStack<span style="color:#f92672">,</span> mStartActivity<span style="color:#f92672">,</span>mOptions<span style="color:#f92672">);</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">resumeFocusedStackTopActivityLocked</span><span style="color:#f92672">(</span>
+            ActivityStack targetStack<span style="color:#f92672">,</span> ActivityRecord target<span style="color:#f92672">,</span> ActivityOptions targetOptions<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">final</span> ActivityRecord r <span style="color:#f92672">=</span> mFocusedStack<span style="color:#f92672">.</span><span style="color:#a6e22e">topRunningActivityLocked</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>r <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">isState</span><span style="color:#f92672">(</span>RESUMED<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            mFocusedStack<span style="color:#f92672">.</span><span style="color:#a6e22e">resumeTopActivityUncheckedLocked</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">resumeTopActivityUncheckedLocked</span><span style="color:#f92672">(</span>ActivityRecord prev<span style="color:#f92672">,</span> ActivityOptions options<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">boolean</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">// Protect against recursion.
+</span><span style="color:#75715e"></span>            mStackSupervisor<span style="color:#f92672">.</span><span style="color:#a6e22e">inResumeTopActivity</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+            result <span style="color:#f92672">=</span> resumeTopActivityInnerLocked<span style="color:#f92672">(</span>prev<span style="color:#f92672">,</span> options<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+            mStackSupervisor<span style="color:#f92672">.</span><span style="color:#a6e22e">inResumeTopActivity</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mService&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">resumeTopActivityInnerLocked</span><span style="color:#f92672">(</span>ActivityRecord prev<span style="color:#f92672">,</span> ActivityOptions options<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      mStackSupervisor<span style="color:#f92672">.</span><span style="color:#a6e22e">startSpecificActivityLocked</span><span style="color:#f92672">(</span>next<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">startSpecificActivityLocked</span><span style="color:#f92672">(</span>ActivityRecord r<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> andResume<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> checkConfig<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Is this activity&#39;s application already running?
+</span><span style="color:#75715e"></span>        ProcessRecord app <span style="color:#f92672">=</span> mService<span style="color:#f92672">.</span><span style="color:#a6e22e">getProcessRecordLocked</span><span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">processName</span><span style="color:#f92672">,</span>
+                r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">applicationInfo</span><span style="color:#f92672">.</span><span style="color:#a6e22e">uid</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>app <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> app<span style="color:#f92672">.</span><span style="color:#a6e22e">thread</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+             <span style="color:#75715e">//进程已经启动
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">((</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">flags</span><span style="color:#f92672">&amp;</span>ActivityInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">FLAG_MULTIPROCESS</span><span style="color:#f92672">)</span> <span style="color:#f92672">==</span> 0
+                        <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#e6db74">&#34;android&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">packageName</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                    <span style="color:#75715e">// Don&#39;t add this if it is a platform component that is marked
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">// to run in multiple processes, because this is actually
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">// part of the framework so doesn&#39;t make sense to track as a
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">// separate apk in the process.
+</span><span style="color:#75715e"></span>                    app<span style="color:#f92672">.</span><span style="color:#a6e22e">addPackage</span><span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">packageName</span><span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">applicationInfo</span><span style="color:#f92672">.</span><span style="color:#a6e22e">longVersionCode</span><span style="color:#f92672">,</span>
+                            mService<span style="color:#f92672">.</span><span style="color:#a6e22e">mProcessStats</span><span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span>
+                realStartActivityLocked<span style="color:#f92672">(</span>r<span style="color:#f92672">,</span> app<span style="color:#f92672">,</span> andResume<span style="color:#f92672">,</span> checkConfig<span style="color:#f92672">);</span>
+                <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">//启动应用进程
+</span><span style="color:#75715e"></span>        mService<span style="color:#f92672">.</span><span style="color:#a6e22e">startProcessLocked</span><span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">processName</span><span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">applicationInfo</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span>
+                <span style="color:#e6db74">&#34;activity&#34;</span><span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">intent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getComponent</span><span style="color:#f92672">(),</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="startprocesslocked">startProcessLocked</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">final</span> ProcessRecord <span style="color:#a6e22e">startProcessLocked</span><span style="color:#f92672">(</span>String processName<span style="color:#f92672">,</span>
+            ApplicationInfo info<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> knownToBeDead<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> intentFlags<span style="color:#f92672">,</span>
+            String hostingType<span style="color:#f92672">,</span> ComponentName hostingName<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> allowWhileBooting<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> isolated<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> keepIfLarge<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> startProcessLocked<span style="color:#f92672">(</span>processName<span style="color:#f92672">,</span> info<span style="color:#f92672">,</span> knownToBeDead<span style="color:#f92672">,</span> intentFlags<span style="color:#f92672">,</span> hostingType<span style="color:#f92672">,</span>
+                hostingName<span style="color:#f92672">,</span> allowWhileBooting<span style="color:#f92672">,</span> isolated<span style="color:#f92672">,</span> 0 <span style="color:#75715e">/* isolatedUid */</span><span style="color:#f92672">,</span> keepIfLarge<span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">null</span> <span style="color:#75715e">/* ABI override */</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span> <span style="color:#75715e">/* entryPoint */</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span> <span style="color:#75715e">/* entryPointArgs */</span><span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">null</span> <span style="color:#75715e">/* crashHandler */</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">final</span> ProcessRecord <span style="color:#a6e22e">startProcessLocked</span><span style="color:#f92672">(</span>String processName<span style="color:#f92672">,</span> ApplicationInfo info<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> knownToBeDead<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> intentFlags<span style="color:#f92672">,</span> String hostingType<span style="color:#f92672">,</span> ComponentName hostingName<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> allowWhileBooting<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> isolated<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> isolatedUid<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> keepIfLarge<span style="color:#f92672">,</span>
+            String abiOverride<span style="color:#f92672">,</span> String entryPoint<span style="color:#f92672">,</span> String<span style="color:#f92672">[]</span> entryPointArgs<span style="color:#f92672">,</span> Runnable crashHandler<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        ProcessRecord app<span style="color:#f92672">;</span>
+      
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>app <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            app <span style="color:#f92672">=</span> newProcessRecordLocked<span style="color:#f92672">(</span>info<span style="color:#f92672">,</span> processName<span style="color:#f92672">,</span> isolated<span style="color:#f92672">,</span> isolatedUid<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> success <span style="color:#f92672">=</span> startProcessLocked<span style="color:#f92672">(</span>app<span style="color:#f92672">,</span> hostingType<span style="color:#f92672">,</span> hostingNameStr<span style="color:#f92672">,</span> abiOverride<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> success <span style="color:#f92672">?</span> app <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">startProcessLocked</span><span style="color:#f92672">(</span>ProcessRecord app<span style="color:#f92672">,</span>
+            String hostingType<span style="color:#f92672">,</span> String hostingNameStr<span style="color:#f92672">,</span> String abiOverride<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> startProcessLocked<span style="color:#f92672">(</span>app<span style="color:#f92672">,</span> hostingType<span style="color:#f92672">,</span> hostingNameStr<span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">false</span> <span style="color:#75715e">/* disableHiddenApiChecks */</span><span style="color:#f92672">,</span> abiOverride<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * @return {@code true} if process start is successful, false otherwise.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">startProcessLocked</span><span style="color:#f92672">(</span>ProcessRecord app<span style="color:#f92672">,</span> String hostingType<span style="color:#f92672">,</span>
+            String hostingNameStr<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> disableHiddenApiChecks<span style="color:#f92672">,</span> String abiOverride<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#f92672">......</span>
+                    <span style="color:#66d9ef">return</span> startProcessLocked<span style="color:#f92672">(</span>hostingType<span style="color:#f92672">,</span> hostingNameStr<span style="color:#f92672">,</span> entryPoint<span style="color:#f92672">,</span> app<span style="color:#f92672">,</span> uid<span style="color:#f92672">,</span> gids<span style="color:#f92672">,</span>
+                    runtimeFlags<span style="color:#f92672">,</span> mountExternal<span style="color:#f92672">,</span> seInfo<span style="color:#f92672">,</span> requiredAbi<span style="color:#f92672">,</span> instructionSet<span style="color:#f92672">,</span> invokeWith<span style="color:#f92672">,</span>
+                    startTime<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">startProcessLocked</span><span style="color:#f92672">(</span>String hostingType<span style="color:#f92672">,</span> String hostingNameStr<span style="color:#f92672">,</span> String entryPoint<span style="color:#f92672">,</span>
+            ProcessRecord app<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> uid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> gids<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> runtimeFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> mountExternal<span style="color:#f92672">,</span>
+            String seInfo<span style="color:#f92672">,</span> String requiredAbi<span style="color:#f92672">,</span> String instructionSet<span style="color:#f92672">,</span> String invokeWith<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">long</span> startTime<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                      <span style="color:#66d9ef">final</span> ProcessStartResult startResult <span style="color:#f92672">=</span> startProcess<span style="color:#f92672">(</span>hostingType<span style="color:#f92672">,</span> entryPoint<span style="color:#f92672">,</span> app<span style="color:#f92672">,</span>
+                        uid<span style="color:#f92672">,</span> gids<span style="color:#f92672">,</span> runtimeFlags<span style="color:#f92672">,</span> mountExternal<span style="color:#f92672">,</span> seInfo<span style="color:#f92672">,</span> requiredAbi<span style="color:#f92672">,</span> instructionSet<span style="color:#f92672">,</span>
+                        invokeWith<span style="color:#f92672">,</span> startTime<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> ProcessStartResult <span style="color:#a6e22e">startProcess</span><span style="color:#f92672">(</span>String hostingType<span style="color:#f92672">,</span> String entryPoint<span style="color:#f92672">,</span>
+            ProcessRecord app<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> uid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> gids<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> runtimeFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> mountExternal<span style="color:#f92672">,</span>
+            String seInfo<span style="color:#f92672">,</span> String requiredAbi<span style="color:#f92672">,</span> String instructionSet<span style="color:#f92672">,</span> String invokeWith<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">long</span> startTime<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                      startResult <span style="color:#f92672">=</span> Process<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span>entryPoint<span style="color:#f92672">,</span>
+                        app<span style="color:#f92672">.</span><span style="color:#a6e22e">processName</span><span style="color:#f92672">,</span> uid<span style="color:#f92672">,</span> uid<span style="color:#f92672">,</span> gids<span style="color:#f92672">,</span> runtimeFlags<span style="color:#f92672">,</span> mountExternal<span style="color:#f92672">,</span>
+                        app<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">targetSdkVersion</span><span style="color:#f92672">,</span> seInfo<span style="color:#f92672">,</span> requiredAbi<span style="color:#f92672">,</span> instructionSet<span style="color:#f92672">,</span>
+                        app<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">dataDir</span><span style="color:#f92672">,</span> invokeWith<span style="color:#f92672">,</span>
+                        <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span> <span style="color:#f92672">{</span>PROC_START_SEQ_IDENT <span style="color:#f92672">+</span> app<span style="color:#f92672">.</span><span style="color:#a6e22e">startSeq</span><span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> ZygoteProcess zygoteProcess <span style="color:#f92672">=</span>
+            <span style="color:#66d9ef">new</span> ZygoteProcess<span style="color:#f92672">(</span>ZYGOTE_SOCKET<span style="color:#f92672">,</span> SECONDARY_ZYGOTE_SOCKET<span style="color:#f92672">);</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> ProcessStartResult <span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> String processClass<span style="color:#f92672">,</span>
+                                  <span style="color:#66d9ef">final</span> String niceName<span style="color:#f92672">,</span>
+                                  <span style="color:#66d9ef">int</span> uid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> gid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> gids<span style="color:#f92672">,</span>
+                                  <span style="color:#66d9ef">int</span> runtimeFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> mountExternal<span style="color:#f92672">,</span>
+                                  <span style="color:#66d9ef">int</span> targetSdkVersion<span style="color:#f92672">,</span>
+                                  String seInfo<span style="color:#f92672">,</span>
+                                  String abi<span style="color:#f92672">,</span>
+                                  String instructionSet<span style="color:#f92672">,</span>
+                                  String appDataDir<span style="color:#f92672">,</span>
+                                  String invokeWith<span style="color:#f92672">,</span>
+                                  String<span style="color:#f92672">[]</span> zygoteArgs<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> zygoteProcess<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span>processClass<span style="color:#f92672">,</span> niceName<span style="color:#f92672">,</span> uid<span style="color:#f92672">,</span> gid<span style="color:#f92672">,</span> gids<span style="color:#f92672">,</span>
+                    runtimeFlags<span style="color:#f92672">,</span> mountExternal<span style="color:#f92672">,</span> targetSdkVersion<span style="color:#f92672">,</span> seInfo<span style="color:#f92672">,</span>
+                    abi<span style="color:#f92672">,</span> instructionSet<span style="color:#f92672">,</span> appDataDir<span style="color:#f92672">,</span> invokeWith<span style="color:#f92672">,</span> zygoteArgs<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>frameworks/base/core/java/android/os/ZygoteProcess.java</p>
+<h3 id="zygoteprocessstart">ZygoteProcess.start</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * The name of the socket used to communicate with the primary zygote.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> LocalSocketAddress mSocket<span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * The name of the secondary (alternate ABI) zygote socket.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> LocalSocketAddress mSecondarySocket<span style="color:#f92672">;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> Process<span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessStartResult</span> <span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> String processClass<span style="color:#f92672">,</span>
+                                                  <span style="color:#66d9ef">final</span> String niceName<span style="color:#f92672">,</span>
+                                                  <span style="color:#66d9ef">int</span> uid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> gid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> gids<span style="color:#f92672">,</span>
+                                                  <span style="color:#66d9ef">int</span> runtimeFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> mountExternal<span style="color:#f92672">,</span>
+                                                  <span style="color:#66d9ef">int</span> targetSdkVersion<span style="color:#f92672">,</span>
+                                                  String seInfo<span style="color:#f92672">,</span>
+                                                  String abi<span style="color:#f92672">,</span>
+                                                  String instructionSet<span style="color:#f92672">,</span>
+                                                  String appDataDir<span style="color:#f92672">,</span>
+                                                  String invokeWith<span style="color:#f92672">,</span>
+                                                  String<span style="color:#f92672">[]</span> zygoteArgs<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> startViaZygote<span style="color:#f92672">(</span>processClass<span style="color:#f92672">,</span> niceName<span style="color:#f92672">,</span> uid<span style="color:#f92672">,</span> gid<span style="color:#f92672">,</span> gids<span style="color:#f92672">,</span>
+                    runtimeFlags<span style="color:#f92672">,</span> mountExternal<span style="color:#f92672">,</span> targetSdkVersion<span style="color:#f92672">,</span> seInfo<span style="color:#f92672">,</span>
+                    abi<span style="color:#f92672">,</span> instructionSet<span style="color:#f92672">,</span> appDataDir<span style="color:#f92672">,</span> invokeWith<span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span> <span style="color:#75715e">/* startChildZygote */</span><span style="color:#f92672">,</span>
+                    zygoteArgs<span style="color:#f92672">);</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> Process<span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessStartResult</span> <span style="color:#a6e22e">startViaZygote</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> String processClass<span style="color:#f92672">,</span>
+                                                      <span style="color:#66d9ef">final</span> String niceName<span style="color:#f92672">,</span>
+                                                      <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> uid<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> gid<span style="color:#f92672">,</span>
+                                                      <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> gids<span style="color:#f92672">,</span>
+                                                      <span style="color:#66d9ef">int</span> runtimeFlags<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> mountExternal<span style="color:#f92672">,</span>
+                                                      <span style="color:#66d9ef">int</span> targetSdkVersion<span style="color:#f92672">,</span>
+                                                      String seInfo<span style="color:#f92672">,</span>
+                                                      String abi<span style="color:#f92672">,</span>
+                                                      String instructionSet<span style="color:#f92672">,</span>
+                                                      String appDataDir<span style="color:#f92672">,</span>
+                                                      String invokeWith<span style="color:#f92672">,</span>
+                                                      <span style="color:#66d9ef">boolean</span> startChildZygote<span style="color:#f92672">,</span>
+                                                      String<span style="color:#f92672">[]</span> extraArgs<span style="color:#f92672">)</span>
+                                                      <span style="color:#66d9ef">throws</span> ZygoteStartFailedEx <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span><span style="color:#f92672">(</span>mLock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> zygoteSendArgsAndGetResult<span style="color:#f92672">(</span>openZygoteSocketIfNeeded<span style="color:#f92672">(</span>abi<span style="color:#f92672">),</span> argsForZygote<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h4 id="openzygotesocketifneeded">openZygoteSocketIfNeeded</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Tries to open socket to Zygote process if not already open. If
+</span><span style="color:#75715e">     * already open, does nothing.  May block and retry.  Requires that mLock be held.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mLock&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> ZygoteState <span style="color:#a6e22e">openZygoteSocketIfNeeded</span><span style="color:#f92672">(</span>String abi<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ZygoteStartFailedEx <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>primaryZygoteState <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> primaryZygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">isClosed</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+                primaryZygoteState <span style="color:#f92672">=</span> ZygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span><span style="color:#f92672">(</span>mSocket<span style="color:#f92672">);</span>
+          <span style="color:#f92672">}</span>
+          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>primaryZygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">(</span>abi<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> primaryZygoteState<span style="color:#f92672">;</span>
+          <span style="color:#f92672">}</span>
+          <span style="color:#75715e">// The primary zygote didn&#39;t match. Try the secondary.
+</span><span style="color:#75715e"></span>          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>secondaryZygoteState <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> secondaryZygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">isClosed</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+                secondaryZygoteState <span style="color:#f92672">=</span> ZygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span><span style="color:#f92672">(</span>mSecondarySocket<span style="color:#f92672">);</span>
+          <span style="color:#f92672">}</span>
+          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>secondaryZygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">(</span>abi<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> secondaryZygoteState<span style="color:#f92672">;</span>
+          <span style="color:#f92672">}</span>
+              
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ZygoteState <span style="color:#a6e22e">connect</span><span style="color:#f92672">(</span>LocalSocketAddress address<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+            DataInputStream zygoteInputStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+            BufferedWriter zygoteWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">final</span> LocalSocket zygoteSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LocalSocket<span style="color:#f92672">();</span>
+
+            zygoteSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span><span style="color:#f92672">(</span>address<span style="color:#f92672">);</span>
+
+            <span style="color:#75715e">//inputStream，读取Zygote发来的数据
+</span><span style="color:#75715e"></span>            zygoteInputStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DataInputStream<span style="color:#f92672">(</span>zygoteSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">());</span>
+            <span style="color:#75715e">//outputStream,写入socket数据
+</span><span style="color:#75715e"></span>            zygoteWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedWriter<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> OutputStreamWriter<span style="color:#f92672">(</span>zygoteSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">()),</span> 256<span style="color:#f92672">);</span>
+            String abiListString <span style="color:#f92672">=</span> getAbiList<span style="color:#f92672">(</span>zygoteWriter<span style="color:#f92672">,</span> zygoteInputStream<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ZygoteState<span style="color:#f92672">(</span>zygoteSocket<span style="color:#f92672">,</span> zygoteInputStream<span style="color:#f92672">,</span> zygoteWriter<span style="color:#f92672">,</span>
+                    Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>abiListString<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">)));</span>
+        <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Queries the zygote for the list of ABIS it supports.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mLock&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getAbiList</span><span style="color:#f92672">(</span>BufferedWriter writer<span style="color:#f92672">,</span> DataInputStream inputStream<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Each query starts with the argument count (1 in this case)
+</span><span style="color:#75715e"></span>        writer<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// ... followed by a new-line.
+</span><span style="color:#75715e"></span>        writer<span style="color:#f92672">.</span><span style="color:#a6e22e">newLine</span><span style="color:#f92672">();</span>
+        <span style="color:#75715e">// ... followed by our only argument.
+</span><span style="color:#75715e"></span>        writer<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;--query-abi-list&#34;</span><span style="color:#f92672">);</span>
+        writer<span style="color:#f92672">.</span><span style="color:#a6e22e">newLine</span><span style="color:#f92672">();</span>
+        writer<span style="color:#f92672">.</span><span style="color:#a6e22e">flush</span><span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">// The response is a length prefixed stream of ASCII bytes.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> numBytes <span style="color:#f92672">=</span> inputStream<span style="color:#f92672">.</span><span style="color:#a6e22e">readInt</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>numBytes<span style="color:#f92672">];</span>
+        inputStream<span style="color:#f92672">.</span><span style="color:#a6e22e">readFully</span><span style="color:#f92672">(</span>bytes<span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">(</span>bytes<span style="color:#f92672">,</span> StandardCharsets<span style="color:#f92672">.</span><span style="color:#a6e22e">US_ASCII</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h4 id="zygotesendargsandgetresult">zygoteSendArgsAndGetResult</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Sends an argument list to the zygote process, which starts a new child
+</span><span style="color:#75715e">     * and returns the child&#39;s pid. Please note: the present implementation
+</span><span style="color:#75715e">     * replaces newlines in the argument list with spaces.
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * @throws ZygoteStartFailedEx if process start failed for any reason
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mLock&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Process<span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessStartResult</span> <span style="color:#a6e22e">zygoteSendArgsAndGetResult</span><span style="color:#f92672">(</span>
+            ZygoteState zygoteState<span style="color:#f92672">,</span> ArrayList<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> args<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">throws</span> ZygoteStartFailedEx <span style="color:#f92672">{</span>
+      
+            <span style="color:#75715e">/**
+</span><span style="color:#75715e">             * See com.android.internal.os.SystemZygoteInit.readArgumentList()
+</span><span style="color:#75715e">             * Presently the wire format to the zygote process is:
+</span><span style="color:#75715e">             * a) a count of arguments (argc, in essence)
+</span><span style="color:#75715e">             * b) a number of newline-separated argument strings equal to count
+</span><span style="color:#75715e">             *
+</span><span style="color:#75715e">             * After the zygote process reads these it will write the pid of
+</span><span style="color:#75715e">             * the child or -1 on failure, followed by boolean to
+</span><span style="color:#75715e">             * indicate whether a wrapper process was used.
+</span><span style="color:#75715e">             */</span>
+            <span style="color:#66d9ef">final</span> BufferedWriter writer <span style="color:#f92672">=</span> zygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">writer</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">final</span> DataInputStream inputStream <span style="color:#f92672">=</span> zygoteState<span style="color:#f92672">.</span><span style="color:#a6e22e">inputStream</span><span style="color:#f92672">;</span>
+      
+            writer<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>args<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()));</span>
+            writer<span style="color:#f92672">.</span><span style="color:#a6e22e">newLine</span><span style="color:#f92672">();</span>
+
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> sz<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+                String arg <span style="color:#f92672">=</span> args<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+                writer<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>arg<span style="color:#f92672">);</span>
+                writer<span style="color:#f92672">.</span><span style="color:#a6e22e">newLine</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+
+            writer<span style="color:#f92672">.</span><span style="color:#a6e22e">flush</span><span style="color:#f92672">();</span>
+
+            <span style="color:#75715e">// Should there be a timeout on this?
+</span><span style="color:#75715e"></span>            Process<span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessStartResult</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Process<span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessStartResult</span><span style="color:#f92672">();</span>
+
+            <span style="color:#75715e">// Always read the entire result from the input stream to avoid leaving
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// bytes in the stream for future process starts to accidentally stumble
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// upon.
+</span><span style="color:#75715e"></span>            result<span style="color:#f92672">.</span><span style="color:#a6e22e">pid</span> <span style="color:#f92672">=</span> inputStream<span style="color:#f92672">.</span><span style="color:#a6e22e">readInt</span><span style="color:#f92672">();</span>
+            result<span style="color:#f92672">.</span><span style="color:#a6e22e">usingWrapper</span> <span style="color:#f92672">=</span> inputStream<span style="color:#f92672">.</span><span style="color:#a6e22e">readBoolean</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+</code></pre></div><h2 id="zygote启动appprocess">Zygote启动AppProcess</h2>
+<p><a href="../../zygote/zygotesource#childprocess">参考</a></p>
+<h2 id="activitythreadmain">ActivityThread.main</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">final</span> ApplicationThread mAppThread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ApplicationThread<span style="color:#f92672">();</span>
+</code></pre></div><h3 id="looperpreparemainlooper">Looper.prepareMainLooper();</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      Looper<span style="color:#f92672">.</span><span style="color:#a6e22e">prepareMainLooper</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="iactivitymanagerattachapplication">IActivityManager.attachApplication</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  ActivityThread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ActivityThread<span style="color:#f92672">();</span>
+  thread<span style="color:#f92672">.</span><span style="color:#a6e22e">attach</span><span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">,</span> startSeq<span style="color:#f92672">);</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attach</span><span style="color:#f92672">(</span><span style="color:#66d9ef">boolean</span> system<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> startSeq<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            RuntimeInit<span style="color:#f92672">.</span><span style="color:#a6e22e">setApplicationObject</span><span style="color:#f92672">(</span>mAppThread<span style="color:#f92672">.</span><span style="color:#a6e22e">asBinder</span><span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">final</span> IActivityManager mgr <span style="color:#f92672">=</span> ActivityManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getService</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                mgr<span style="color:#f92672">.</span><span style="color:#a6e22e">attachApplication</span><span style="color:#f92672">(</span>mAppThread<span style="color:#f92672">,</span> startSeq<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>RemoteException ex<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">throw</span> ex<span style="color:#f92672">.</span><span style="color:#a6e22e">rethrowFromSystemServer</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="looperloop">Looper.loop()</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Looper<span style="color:#f92672">.</span><span style="color:#a6e22e">loop</span><span style="color:#f92672">();</span>
+</code></pre></div><h2 id="activitymanagerserviceattachapplication">ActivityManagerService.attachApplication</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attachApplication</span><span style="color:#f92672">(</span>IApplicationThread thread<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> startSeq<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">int</span> callingPid <span style="color:#f92672">=</span> Binder<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallingPid</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> callingUid <span style="color:#f92672">=</span> Binder<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallingUid</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> origId <span style="color:#f92672">=</span> Binder<span style="color:#f92672">.</span><span style="color:#a6e22e">clearCallingIdentity</span><span style="color:#f92672">();</span>
+            attachApplicationLocked<span style="color:#f92672">(</span>thread<span style="color:#f92672">,</span> callingPid<span style="color:#f92672">,</span> callingUid<span style="color:#f92672">,</span> startSeq<span style="color:#f92672">);</span>
+            Binder<span style="color:#f92672">.</span><span style="color:#a6e22e">restoreCallingIdentity</span><span style="color:#f92672">(</span>origId<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">attachApplicationLocked</span><span style="color:#f92672">(</span>IApplicationThread thread<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">int</span> pid<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> callingUid<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> startSeq<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      
+            AppDeathRecipient adr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AppDeathRecipient<span style="color:#f92672">(</span>app<span style="color:#f92672">,</span> pid<span style="color:#f92672">,</span> thread<span style="color:#f92672">);</span>
+            thread<span style="color:#f92672">.</span><span style="color:#a6e22e">asBinder</span><span style="color:#f92672">().</span><span style="color:#a6e22e">linkToDeath</span><span style="color:#f92672">(</span>adr<span style="color:#f92672">,</span> 0<span style="color:#f92672">);</span>
+            app<span style="color:#f92672">.</span><span style="color:#a6e22e">deathRecipient</span> <span style="color:#f92672">=</span> adr<span style="color:#f92672">;</span>
+      
+      
+            thread<span style="color:#f92672">.</span><span style="color:#a6e22e">bindApplication</span><span style="color:#f92672">(....)</span>
+              
+            StackSupervisor<span style="color:#f92672">.</span><span style="color:#a6e22e">attachApplicationLocked</span><span style="color:#f92672">(</span>app<span style="color:#f92672">)</span><span style="color:#75715e">//realStartActivityLocked
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="linktodeath配置appdeathrecipient监听appdeath">linkToDeath配置AppDeathRecipient监听appDeath</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AppDeathRecipient</span> <span style="color:#66d9ef">implements</span> IBinder<span style="color:#f92672">.</span><span style="color:#a6e22e">DeathRecipient</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">final</span> ProcessRecord mApp<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> mPid<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">final</span> IApplicationThread mAppThread<span style="color:#f92672">;</span>
+
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">binderDied</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">synchronized</span><span style="color:#f92672">(</span>ActivityManagerService<span style="color:#f92672">.</span><span style="color:#a6e22e">this</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                appDiedLocked<span style="color:#f92672">(</span>mApp<span style="color:#f92672">,</span> mPid<span style="color:#f92672">,</span> mAppThread<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="threadbindapplication">thread.bindApplication</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApplicationThread</span> <span style="color:#f92672">{</span>  
+   <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bindApplication</span><span style="color:#f92672">(</span>String processName<span style="color:#f92672">,</span> ApplicationInfo appInfo<span style="color:#f92672">,</span>
+                List<span style="color:#f92672">&lt;</span>ProviderInfo<span style="color:#f92672">&gt;</span> providers<span style="color:#f92672">,</span> ComponentName instrumentationName<span style="color:#f92672">,</span>
+                ProfilerInfo profilerInfo<span style="color:#f92672">,</span> Bundle instrumentationArgs<span style="color:#f92672">,</span>
+                IInstrumentationWatcher instrumentationWatcher<span style="color:#f92672">,</span>
+                IUiAutomationConnection instrumentationUiConnection<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> debugMode<span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">boolean</span> enableBinderTracking<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> trackAllocation<span style="color:#f92672">,</span>
+                <span style="color:#66d9ef">boolean</span> isRestrictedBackupMode<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> persistent<span style="color:#f92672">,</span> Configuration config<span style="color:#f92672">,</span>
+                CompatibilityInfo compatInfo<span style="color:#f92672">,</span> Map services<span style="color:#f92672">,</span> Bundle coreSettings<span style="color:#f92672">,</span>
+                String buildSerial<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> autofillCompatibilityEnabled<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+     sendMessage<span style="color:#f92672">(</span>H<span style="color:#f92672">.</span><span style="color:#a6e22e">BIND_APPLICATION</span><span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
+   <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleMessage</span><span style="color:#f92672">(</span>Message msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>msg<span style="color:#f92672">.</span><span style="color:#a6e22e">what</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">case</span> BIND_APPLICATION<span style="color:#f92672">:</span>
+                    AppBindData data <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>AppBindData<span style="color:#f92672">)</span>msg<span style="color:#f92672">.</span><span style="color:#a6e22e">obj</span><span style="color:#f92672">;</span>
+                    handleBindApplication<span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
+                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleBindApplication</span><span style="color:#f92672">(</span>AppBindData data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+  data<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span> <span style="color:#f92672">=</span> getPackageInfoNoCheck<span style="color:#f92672">(</span>data<span style="color:#f92672">.</span><span style="color:#a6e22e">appInfo</span><span style="color:#f92672">,</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">compatInfo</span><span style="color:#f92672">);</span>
+  
+  app <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">.</span><span style="color:#a6e22e">makeApplication</span><span style="color:#f92672">(</span>data<span style="color:#f92672">.</span><span style="color:#a6e22e">restrictedBackupMode</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+  
+  installContentProviders<span style="color:#f92672">(</span>app<span style="color:#f92672">,</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">providers</span><span style="color:#f92672">);</span>
+  
+  mInstrumentation<span style="color:#f92672">.</span><span style="color:#a6e22e">callApplicationOnCreate</span><span style="color:#f92672">(</span>app<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h4 id="getpackageinfo初始化loadedapk">getPackageInfo初始化LoadedApk</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> LoadedApk <span style="color:#a6e22e">getPackageInfoNoCheck</span><span style="color:#f92672">(</span>ApplicationInfo ai<span style="color:#f92672">,</span>
+            CompatibilityInfo compatInfo<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> getPackageInfo<span style="color:#f92672">(</span>ai<span style="color:#f92672">,</span> compatInfo<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> LoadedApk <span style="color:#a6e22e">getPackageInfo</span><span style="color:#f92672">(</span>ApplicationInfo aInfo<span style="color:#f92672">,</span> CompatibilityInfo compatInfo<span style="color:#f92672">,</span>
+            ClassLoader baseLoader<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> securityViolation<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> includeCode<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> registerPackage<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+              packageInfo <span style="color:#f92672">=</span>
+                    <span style="color:#66d9ef">new</span> LoadedApk<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> aInfo<span style="color:#f92672">,</span> compatInfo<span style="color:#f92672">,</span> baseLoader<span style="color:#f92672">,</span>
+                            securityViolation<span style="color:#f92672">,</span> includeCode <span style="color:#f92672">&amp;&amp;</span>
+                            <span style="color:#f92672">(</span>aInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">flags</span><span style="color:#f92672">&amp;</span>ApplicationInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">FLAG_HAS_CODE</span><span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> 0<span style="color:#f92672">,</span> registerPackage<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h4 id="loadedapkmakeapplication">LoadedApk.makeApplication</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> Application <span style="color:#a6e22e">makeApplication</span><span style="color:#f92672">(</span><span style="color:#66d9ef">boolean</span> forceDefaultAppClass<span style="color:#f92672">,</span>
+            Instrumentation instrumentation<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      
+            java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ClassLoader</span> cl <span style="color:#f92672">=</span> getClassLoader<span style="color:#f92672">();</span>
+            ContextImpl appContext <span style="color:#f92672">=</span> ContextImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">createAppContext</span><span style="color:#f92672">(</span>mActivityThread<span style="color:#f92672">,</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">);</span>
+            app <span style="color:#f92672">=</span> mActivityThread<span style="color:#f92672">.</span><span style="color:#a6e22e">mInstrumentation</span><span style="color:#f92672">.</span><span style="color:#a6e22e">newApplication</span><span style="color:#f92672">(</span>cl<span style="color:#f92672">,</span> appClass<span style="color:#f92672">,</span> appContext<span style="color:#f92672">);</span>
+            appContext<span style="color:#f92672">.</span><span style="color:#a6e22e">setOuterContext</span><span style="color:#f92672">(</span>app<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> ClassLoader <span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mClassLoader <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                createOrUpdateClassLoaderLocked<span style="color:#f92672">(</span><span style="color:#66d9ef">null</span> <span style="color:#75715e">/*addedPaths*/</span><span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> mClassLoader<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> Application <span style="color:#a6e22e">newApplication</span><span style="color:#f92672">(</span>ClassLoader cl<span style="color:#f92672">,</span> String className<span style="color:#f92672">,</span> Context context<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">throws</span> InstantiationException<span style="color:#f92672">,</span> IllegalAccessException<span style="color:#f92672">,</span> 
+            ClassNotFoundException <span style="color:#f92672">{</span>
+        Application app <span style="color:#f92672">=</span> getFactory<span style="color:#f92672">(</span>context<span style="color:#f92672">.</span><span style="color:#a6e22e">getPackageName</span><span style="color:#f92672">())</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">instantiateApplication</span><span style="color:#f92672">(</span>cl<span style="color:#f92672">,</span> className<span style="color:#f92672">);</span>
+        app<span style="color:#f92672">.</span><span style="color:#a6e22e">attach</span><span style="color:#f92672">(</span>context<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> app<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> AppComponentFactory <span style="color:#a6e22e">getFactory</span><span style="color:#f92672">(</span>String pkg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>pkg <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            Log<span style="color:#f92672">.</span><span style="color:#a6e22e">e</span><span style="color:#f92672">(</span>TAG<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;No pkg specified, disabling AppComponentFactory&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> AppComponentFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">DEFAULT</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mThread <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            Log<span style="color:#f92672">.</span><span style="color:#a6e22e">e</span><span style="color:#f92672">(</span>TAG<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Uninitialized ActivityThread, likely app-created Instrumentation,&#34;</span>
+                    <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; disabling AppComponentFactory&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> Throwable<span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">return</span> AppComponentFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">DEFAULT</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        LoadedApk apk <span style="color:#f92672">=</span> mThread<span style="color:#f92672">.</span><span style="color:#a6e22e">peekPackageInfo</span><span style="color:#f92672">(</span>pkg<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// This is in the case of starting up &#34;android&#34;.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>apk <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> apk <span style="color:#f92672">=</span> mThread<span style="color:#f92672">.</span><span style="color:#a6e22e">getSystemContext</span><span style="color:#f92672">().</span><span style="color:#a6e22e">mPackageInfo</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> apk<span style="color:#f92672">.</span><span style="color:#a6e22e">getAppFactory</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h4 id="appcomponentfactoryinstantiateapplication">AppComponentFactory.instantiateApplication</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@NonNull</span> Application <span style="color:#a6e22e">instantiateApplication</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@NonNull</span> ClassLoader cl<span style="color:#f92672">,</span>
+            <span style="color:#a6e22e">@NonNull</span> String className<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">throws</span> InstantiationException<span style="color:#f92672">,</span> IllegalAccessException<span style="color:#f92672">,</span> ClassNotFoundException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>Application<span style="color:#f92672">)</span> cl<span style="color:#f92672">.</span><span style="color:#a6e22e">loadClass</span><span style="color:#f92672">(</span>className<span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h4 id="applicationattach">Application.attach</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/* package */</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attach</span><span style="color:#f92672">(</span>Context context<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        attachBaseContext<span style="color:#f92672">(</span>context<span style="color:#f92672">);</span>
+        mLoadedApk <span style="color:#f92672">=</span> ContextImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">getImpl</span><span style="color:#f92672">(</span>context<span style="color:#f92672">).</span><span style="color:#a6e22e">mPackageInfo</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h4 id="installcontentproviders">installContentProviders</h4>
+<h4 id="minstrumentationcallapplicationoncreate">mInstrumentation.callApplicationOnCreate</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">callApplicationOnCreate</span><span style="color:#f92672">(</span>Application app<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        app<span style="color:#f92672">.</span><span style="color:#a6e22e">onCreate</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="realstartactivitylocked">realStartActivityLocked</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">attachApplicationLocked</span><span style="color:#f92672">(</span>ProcessRecord app<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> RemoteException <span style="color:#f92672">{</span>
+    realStartActivityLocked<span style="color:#f92672">(</span>activity<span style="color:#f92672">,</span> app<span style="color:#f92672">,</span> top <span style="color:#f92672">==</span> activity <span style="color:#75715e">/* andResume */</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span> <span style="color:#75715e">/* checkConfig */</span><span style="color:#f92672">))</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h4 id="create-activity-launch-transaction">Create activity launch transaction</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">realStartActivityLocked</span><span style="color:#f92672">(</span>ActivityRecord r<span style="color:#f92672">,</span> ProcessRecord app<span style="color:#f92672">,</span>
+            <span style="color:#66d9ef">boolean</span> andResume<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> checkConfig<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> RemoteException <span style="color:#f92672">{</span>
+      
+                 <span style="color:#75715e">// Create activity launch transaction.
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">final</span> ClientTransaction clientTransaction <span style="color:#f92672">=</span> ClientTransaction<span style="color:#f92672">.</span><span style="color:#a6e22e">obtain</span><span style="color:#f92672">(</span>app<span style="color:#f92672">.</span><span style="color:#a6e22e">thread</span><span style="color:#f92672">,</span>
+                        r<span style="color:#f92672">.</span><span style="color:#a6e22e">appToken</span><span style="color:#f92672">);</span>
+                clientTransaction<span style="color:#f92672">.</span><span style="color:#a6e22e">addCallback</span><span style="color:#f92672">(</span>LaunchActivityItem<span style="color:#f92672">.</span><span style="color:#a6e22e">obtain</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">intent</span><span style="color:#f92672">),</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">identityHashCode</span><span style="color:#f92672">(</span>r<span style="color:#f92672">),</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">,</span>
+                        <span style="color:#75715e">// TODO: Have this take the merged configuration instead of separate global
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// and override configs.
+</span><span style="color:#75715e"></span>                        mergedConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">getGlobalConfiguration</span><span style="color:#f92672">(),</span>
+                        mergedConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">getOverrideConfiguration</span><span style="color:#f92672">(),</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">compat</span><span style="color:#f92672">,</span>
+                        r<span style="color:#f92672">.</span><span style="color:#a6e22e">launchedFromPackage</span><span style="color:#f92672">,</span> task<span style="color:#f92672">.</span><span style="color:#a6e22e">voiceInteractor</span><span style="color:#f92672">,</span> app<span style="color:#f92672">.</span><span style="color:#a6e22e">repProcState</span><span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">icicle</span><span style="color:#f92672">,</span>
+                        r<span style="color:#f92672">.</span><span style="color:#a6e22e">persistentState</span><span style="color:#f92672">,</span> results<span style="color:#f92672">,</span> newIntents<span style="color:#f92672">,</span> mService<span style="color:#f92672">.</span><span style="color:#a6e22e">isNextTransitionForward</span><span style="color:#f92672">(),</span>
+                        profilerInfo<span style="color:#f92672">));</span>
+
+                <span style="color:#75715e">// Set desired final state.
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">final</span> ActivityLifecycleItem lifecycleItem<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>andResume<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    lifecycleItem <span style="color:#f92672">=</span> ResumeActivityItem<span style="color:#f92672">.</span><span style="color:#a6e22e">obtain</span><span style="color:#f92672">(</span>mService<span style="color:#f92672">.</span><span style="color:#a6e22e">isNextTransitionForward</span><span style="color:#f92672">());</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                    lifecycleItem <span style="color:#f92672">=</span> PauseActivityItem<span style="color:#f92672">.</span><span style="color:#a6e22e">obtain</span><span style="color:#f92672">();</span>
+                <span style="color:#f92672">}</span>
+                clientTransaction<span style="color:#f92672">.</span><span style="color:#a6e22e">setLifecycleStateRequest</span><span style="color:#f92672">(</span>lifecycleItem<span style="color:#f92672">);</span>
+
+                <span style="color:#75715e">// Schedule transaction.
+</span><span style="color:#75715e"></span>                mService<span style="color:#f92672">.</span><span style="color:#a6e22e">getLifecycleManager</span><span style="color:#f92672">().</span><span style="color:#a6e22e">scheduleTransaction</span><span style="color:#f92672">(</span>clientTransaction<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Schedule a transaction, which may consist of multiple callbacks and a lifecycle request.
+</span><span style="color:#75715e">     * @param transaction A sequence of client transaction items.
+</span><span style="color:#75715e">     * @throws RemoteException
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * @see ClientTransaction
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scheduleTransaction</span><span style="color:#f92672">(</span>ClientTransaction transaction<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> RemoteException <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">final</span> IApplicationThread client <span style="color:#f92672">=</span> transaction<span style="color:#f92672">.</span><span style="color:#a6e22e">getClient</span><span style="color:#f92672">();</span>
+        transaction<span style="color:#f92672">.</span><span style="color:#a6e22e">schedule</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!(</span>client <span style="color:#66d9ef">instanceof</span> Binder<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">// If client is not an instance of Binder - it&#39;s a remote call and at this point it is
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// safe to recycle the object. All objects used for local calls will be recycled after
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// the transaction is executed on client in ActivityThread.
+</span><span style="color:#75715e"></span>            transaction<span style="color:#f92672">.</span><span style="color:#a6e22e">recycle</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>ClientTransaction.java</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/** Get the target client of the transaction. */</span>
+    <span style="color:#66d9ef">public</span> IApplicationThread <span style="color:#a6e22e">getClient</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> mClient<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Schedule the transaction after it was initialized. It will be send to client and all its
+</span><span style="color:#75715e">     * individual parts will be applied in the following sequence:
+</span><span style="color:#75715e">     * 1. The client calls {@link #preExecute(ClientTransactionHandler)}, which triggers all work
+</span><span style="color:#75715e">     *    that needs to be done before actually scheduling the transaction for callbacks and
+</span><span style="color:#75715e">     *    lifecycle state request.
+</span><span style="color:#75715e">     * 2. The transaction message is scheduled.
+</span><span style="color:#75715e">     * 3. The client calls {@link TransactionExecutor#execute(ClientTransaction)}, which executes
+</span><span style="color:#75715e">     *    all callbacks and necessary lifecycle transitions.
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">schedule</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> RemoteException <span style="color:#f92672">{</span>
+        mClient<span style="color:#f92672">.</span><span style="color:#a6e22e">scheduleTransaction</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/" title="应用启动退出"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1611661807"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611661807"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611661807"></script>
+    <script src="/js/jquery.sticky.js?1611661807"></script>
+    <script src="/js/featherlight.min.js?1611661807"></script>
+    <script src="/js/highlight.pack.js?1611661807"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611661807"></script>
+    <script src="/js/learn.js?1611661807"></script>
+    <script src="/js/hugo-learn.js?1611661807"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1611661807"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+
