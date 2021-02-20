@@ -3,7 +3,35 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
   </url>
   
   <url>
@@ -70,15 +98,59 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/databinding/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</loc>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/google/</loc>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/</loc>
   </url>
   
   <url>
@@ -90,7 +162,31 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/</loc>
   </url>
   
   <url>
@@ -102,7 +198,63 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/kotlin/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/lifecycle/lifecycle/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/lifecycle/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/</loc>
   </url>
   
   <url>
@@ -114,6 +266,14 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/</loc>
   </url>
   
@@ -122,7 +282,39 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/google/supporttoandroidx/</loc>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/supporttoandroidx/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/</loc>
   </url>
   
   <url>
@@ -149,11 +341,39 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</loc>
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</loc>
   </url>
   
   <url>
@@ -162,6 +382,10 @@
   
   <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</loc>
   </url>
   
   <url>
@@ -177,7 +401,39 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
   </url>
   
   <url>
@@ -190,6 +446,14 @@
   
   <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
   </url>
   
   <url>
@@ -212,7 +476,55 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/</loc>
   </url>
   
   <url>
@@ -228,7 +540,23 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/</loc>
   </url>
   
   <url>

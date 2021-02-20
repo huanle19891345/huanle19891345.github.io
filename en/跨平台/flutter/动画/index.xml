@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>动画 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/</link>
+    <description>Recent content in 动画 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>动画</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</guid>
+      <description>类设计 原理图 AnimationController() /// An [AnimationController] needs a [TickerProvider], which is configured using  /// the `vsync` argument on the constructor.  ///  /// The [TickerProvider] interface describes a factory for [Ticker] objects. A  /// [Ticker] is an object that knows how to register itself with the  /// [SchedulerBinding] and fires a callback every frame. The  /// [AnimationController] class uses a [Ticker] to step through the animation  /// that it controls.</description>
+    </item>
+    
+  </channel>
+</rss>

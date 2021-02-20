@@ -7,6 +7,65 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Alloc</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</guid>
+      <description>heap.cc
+Heap::ChangeCollector(CollectorType) void Heap::ChangeCollector(CollectorType collector_type) { /*CollectorType是一个枚举变量，用于定义不同的回收器类型。collector_type_是 Heap类的成员变量，描述当前设定的回收器类型。对笔者所搭建的模拟器而言，虚拟机使用的 回收器类型为kCollectorTypeCMS。CMS是ConcurrentMarkSweep的缩写。它是标记 清除垃圾回收算法的一种。本书后续章节会详细介绍它们。此处，读者仅作简单了解即可。 */ if (collector_type != collector_type_) { collector_type_ = collector_type;//设置垃圾回收器类型  ...... switch (collector_type_) { case kCollectorTypeCC: {//CC是Concurrent Copying的缩写  ..... if (use_tlab_) {//是否使用TLAB。本例中不使用它，所以use_tlab_为false  //ChangeAllocator函数将设置内存分配器的类型  ChangeAllocator(kAllocatorTypeRegionTLAB); } else { ChangeAllocator(kAllocatorTypeRegion); } break; } case kCollectorTypeMC://MC:Mark Compact  case kCollectorTypeSS://SS:Semi-space  //GSS:改进版的SS  case kCollectorTypeGSS:{ ..... if (use_tlab_) { ChangeAllocator(kAllocatorTypeTLAB); } else { ChangeAllocator(kAllocatorTypeBumpPointer); } break; } case kCollectorTypeMS: {//MS：mark-sweep  .</description>
+    </item>
+    
+    <item>
+      <title>AllocRelated</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/</guid>
+      <description>Instruction::NEW_INSTANCE ExecuteSwitchImplCpp template&amp;lt;bool do_access_check, bool transaction_active&amp;gt; void ExecuteSwitchImplCpp(SwitchImplContext* ctx) { switch (inst-&amp;gt;Opcode(inst_data)) { case Instruction::NEW_INSTANCE: { PREAMBLE(); ObjPtr&amp;lt;mirror::Object&amp;gt; obj = nullptr; ObjPtr&amp;lt;mirror::Class&amp;gt; c = ResolveVerifyAndClinit(dex::TypeIndex(inst-&amp;gt;VRegB_21c()), shadow_frame.GetMethod(), self, false, do_access_check); if (LIKELY(c != nullptr)) { if (UNLIKELY(c-&amp;gt;IsStringClass())) { gc::AllocatorType allocator_type = Runtime::Current()-&amp;gt;GetHeap()-&amp;gt;GetCurrentAllocator(); obj = mirror::String::AllocEmptyString&amp;lt;true&amp;gt;(self, allocator_type); } else { obj = AllocObjectFromCode&amp;lt;true&amp;gt;( c.Ptr(), self, Runtime::Current()-&amp;gt;GetHeap()-&amp;gt;GetCurrentAllocator()); } } if (UNLIKELY(obj == nullptr)) { HANDLE_PENDING_EXCEPTION(); } else { obj-&amp;gt;GetClass()-&amp;gt;AssertInitializedOrInitializingInThread(self); // Don&amp;#39;t allow finalizable objects to be allocated during a transaction since these can&amp;#39;t  // be finalized without a started runtime.</description>
+    </item>
+    
+    <item>
+      <title>Android_N混合编译与对热补丁影响解析</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</guid>
+      <description>Android_N混合编译与对热补丁影响解析.md
+入口文件位于dex2oat.cc中，在这里并不想贴具体的调用函数，简单的描述一下流程：若dex2oat参数中有输入profile文件，会读取profile中的数据。与以往不同的是，这里不仅会根据profile文件来生成base.odex文件，同时还会生成称为app_image的base.art文件。与boot.art类似，base.art文件主要为了加快应用的对“热代码”的加载与缓存。
+那么我们就剩下最后一个问题，app image文件是什么时候被加载，并且为什么它会影响热补丁的机制？
+###App image文件的加载 在apk启动时我们需要加载应用的oat文件以及可能存在的app image文件，它的大致流程如下：
+ 通过OpenDexFilesFromOat加载oat时，若app image存在，则通过调用OpenImageSpace函数加载； 在加载app image文件时，通过UpdateAppImageClassLoadersAndDexCaches函数，将art文件中的dex_cache中dex的所有class插入到ClassTable，同时将method更新到dex_cache; 在类加载时，使用时ClassLinker::LookupClass会先从ClassTable中去查找，找不到时才会走到DefineClass中。   非常简单的说，app image的作用是记录已经编译好的“热代码”，并且在启动时一次性把它们加载到缓存。预先加载代替用时查找以提升应用的性能，到这里我们终于明白为什么base.art会影响热补丁的机制。
+无论是使用插入pathlist还是parent classloader的方式，若补丁修改的class已经存在与app image，它们都是无法通过热补丁更新的。它们在启动app时已经加入到PathClassLoader的ClassTable中，系统在查找类时会直接使用base.apk中的class。
+最后我们再来总结一下Android N混合编译运行的整个流程，它就像一个小型生态系统那样和谐。
+##Android N上热补丁的出路 假设base.art文件在补丁前已经存在，这里存在三种情况：
+ 补丁修改的类都不app image中；这种情况是最理想的，此时补丁机制依然有效； 补丁修改的类部分在app image中；这种情况我们只能更新一部分的类，此时是最危险的。一部分类是新的，一部分类是旧的，app可能会出现地址错乱而出现crash。 补丁修改的类全部在app image中；这种情况只是造成补丁不生效，app并不会因此造成crash。  ###运行时替换PathClassLoader方案 事实上，App image中的class是插入到PathClassloader中的ClassTable中。假设我们完全废弃掉PathClassloader，而采用一个新建Classloader来加载后续的所有类，即可达到将cache无用化的效果。
+实际代码对应AndroidNClassLoader中的findClass和findLibrary方法，通过调用super.findClass和super.findLibrary来避开调用原本应用PathClassLoader的find方法，原本的findClass方法会先查找classTable造成修复的class无法加载到</description>
+    </item>
+    
+    <item>
+      <title>ART_Lock</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/</guid>
+      <description>ObjectLock&amp;lt;mirror::Class&amp;gt; lock(self, klass); art/runtime/object_lock.cc
+object_lock.cc ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::ObjectLock(Thread* self, Handle&amp;lt;T&amp;gt; object) : self_(self), obj_(object) { CHECK(object != nullptr); obj_-&amp;gt;MonitorEnter(self_); } ~ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::~ObjectLock() { obj_-&amp;gt;MonitorExit(self_); } art/runtime/mirror/object-inl.h
+object-inl.h MonitorEnter inline mirror::Object* Object::MonitorEnter(Thread* self) { return Monitor::MonitorEnter(self, this, /*trylock*/false); } art/runtime/monitor.cc
+monitor.cc MonitorEnter mirror::Object* Monitor::MonitorEnter(Thread* self, mirror::Object* obj, bool trylock) { StackHandleScope&amp;lt;1&amp;gt; hs(self); Handle&amp;lt;mirror::Object&amp;gt; h_obj(hs.NewHandle(obj)); while (true) { // We initially read the lockword with ordinary Java/relaxed semantics.</description>
+    </item>
+    
+    <item>
+      <title>ART启动流程</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</guid>
+      <description>graph TB Init(&amp;quot;init进程通过解析配置脚本&amp;quot;)--&amp;gt;|fork子进程运行Zygote服务|AppProcess(&amp;quot;/system/bin/app_process: frameworks\base\cmds\app_process\app_main.cc&amp;quot;) frameworks\base\cmds\app_process\app_main.cpp
+int main(int argc, char* const argv[]) { if (zygote) { runtime.start(&amp;#34;com.android.internal.os.ZygoteInit&amp;#34;, args, zygote); } else if (className) { runtime.start(&amp;#34;com.android.internal.os.RuntimeInit&amp;#34;, args, zygote); } else { fprintf(stderr, &amp;#34;Error: no class name or --zygote supplied.\n&amp;#34;); app_usage(); LOG_ALWAYS_FATAL(&amp;#34;app_process: no class name or --zygote supplied.&amp;#34;); return 10; } void AndroidRuntime::start(const char* className, const Vector&amp;lt;String8&amp;gt;&amp;amp; options, bool zygote) { ...... JniInvocation jni_invocation; jni_invocation.Init(NULL); //它将加载ART虚拟机的核心动态库。  JNIEnv* env; startVm(&amp;amp;mJavaVM, &amp;amp;env, zygote) != 0) { .</description>
+    </item>
+    
+    <item>
       <title>BinderClient</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -100,18 +159,112 @@ graph TB ReferenceQueueDaemon.runInernal--&amp;gt;ReferenceQueue.enqueuePending 
     </item>
     
     <item>
-      <title>Flutter消息机制</title>
-      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</link>
+      <title>C启动Java</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</guid>
-      <description>消息机制 深入理解Flutter消息机制
-ThreadHost初始化
-[-&amp;gt; flutter/shell/common/thread_host.cc] ThreadHost::ThreadHost(std::string name_prefix, uint64_t mask) { if (mask &amp;amp; ThreadHost::Type::Platform) { platform_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.platform&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::UI) { //创建线程 [见小节2.2] ui_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.ui&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::GPU) { gpu_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.gpu&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::IO) { io_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.io&amp;quot;); } } TaskRunner初始化
-[-&amp;gt; flutter/fml/task_runner.cc] TaskRunner::TaskRunner(fml::RefPtr&amp;lt;MessageLoopImpl&amp;gt; loop) : loop_(std::move(loop)) {} Flutter引擎启动过程，会创建UI/GPU/IO这3个线程，并且会为每个线程依次创建MessageLoop对象，启动后处于epoll_wait等待状态。对于Flutter的消息机制跟Android原生的消息机制有很多相似之处，都有消息(或者任务)、消息队列以及Looper，有一点不同的是Android有一个Handler类，用于发送消息以及执行回调方法，相对应Flutter中有着相近功能的便是TaskRunner。
-上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。
-每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。
- Step 1: 检查task，当task队列不为空，先执行一个task； Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；  可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。</description>
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/</guid>
+      <description>AndroidRuntime::start void AndroidRuntime::start(const char* className, const Vector&amp;lt;String8&amp;gt;&amp;amp; options, bool zygote){ ...... JniInvocation jni_invocation; jni_invocation.Init(NULL); JNIEnv* env; //startVm将启动虚拟机  if (startVm(&amp;amp;mJavaVM, &amp;amp;env, zygote) != 0) { return; } onVmCreated(env); ...... jclass stringClass; jobjectArray strArray; jstring classNameStr; ...... char* slashClassName = toSlashClassName(className);//&amp;#34;com.android.internal.os.RuntimeInit&amp;#34;  //找到目标类对应的mirror Class对象  jclass startClass = env-&amp;gt;FindClass(slashClassName);//main  if (startClass == NULL) {} else { //找到该类中的静态main函数对应的ArtMethod对象  jmethodID startMeth = env-&amp;gt;GetStaticMethodID(startClass, &amp;#34;main&amp;#34;,//main  &amp;#34;([Ljava/lang/String;)V&amp;#34;); if (startMeth == NULL) {} else { //调用这个main函数  env-&amp;gt;CallStaticVoidMethod(startClass, startMeth, strArray);//main  .</description>
+    </item>
+    
+    <item>
+      <title>Databinding</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/databinding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/databinding/</guid>
+      <description>类设计 基于androidx.databinding:databinding-runtime:4.0.1
+DataBindingUtil private static DataBinderMapper sMapper = new DataBinderMapperImpl(); private static DataBindingComponent sDefaultComponent = null; setContentView public static &amp;lt;T extends ViewDataBinding&amp;gt; T setContentView(@NonNull Activity activity, int layoutId) { return setContentView(activity, layoutId, sDefaultComponent); } public static &amp;lt;T extends ViewDataBinding&amp;gt; T setContentView(@NonNull Activity activity, int layoutId, @Nullable DataBindingComponent bindingComponent) { activity.setContentView(layoutId); View decorView = activity.getWindow().getDecorView(); ViewGroup contentView = (ViewGroup) decorView.findViewById(android.R.id.content); return bindToAddedViews(bindingComponent, contentView, 0, layoutId); } bindToAddedViews private static &amp;lt;T extends ViewDataBinding&amp;gt; T bindToAddedViews(DataBindingComponent component, ViewGroup parent, int startChildren, int layoutId) { final int endChildren = parent.</description>
+    </item>
+    
+    <item>
+      <title>dex2oat</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</guid>
+      <description>pre-compilation的好处 Code pre-compilation: We pre-compile all the hot code. When the apps execute, the most important parts of the code are already optimized and ready to be natively executed. The app no longer needs to wait for the JIT compiler to kick in.
+The benefit is that the code is mapped as clean memory (compared to the JIT dirty memory) which improves the overall memory efficiency. The clean memory can be released by the kernel when under memory pressure while the dirty memory cannot, lessening the chances that the kernel will kill the app.</description>
+    </item>
+    
+    <item>
+      <title>DumpHprof</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/</guid>
+      <description>art/runtime/native/dalvik_system_VMDebug.cc
+VMDebug_dumpHprofData /* * static void dumpHprofData(String fileName, FileDescriptor fd) * * Cause &amp;#34;hprof&amp;#34; data to be dumped. We can throw an IOException if an * error occurs during file handling. */ static void VMDebug_dumpHprofData(JNIEnv* env, jclass, jstring javaFilename, jint javaFd) { std::string filename; if (javaFilename != nullptr) { ScopedUtfChars chars(env, javaFilename); if (env-&amp;gt;ExceptionCheck()) { return; } filename = chars.c_str(); } else { filename = &amp;#34;[fd]&amp;#34;; } int fd = javaFd; hprof::DumpHeap(filename.</description>
+    </item>
+    
+    <item>
+      <title>Engine</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/</guid>
+      <description>window.dart lib/ui
+/// Requests that, at the next appropriate opportunity, the [onBeginFrame]  /// and [onDrawFrame] callbacks be invoked.  ///  /// See also:  ///  /// * [SchedulerBinding], the Flutter framework class which manages the  /// scheduling of frames.  void scheduleFrame() native &amp;#39;PlatformConfiguration_scheduleFrame&amp;#39;; lib/ui/window/platform_configuration.cc
+PlatformConfiguration void PlatformConfiguration::RegisterNatives( tonic::DartLibraryNatives* natives) { natives-&amp;gt;Register({ {&amp;#34;PlatformConfiguration_defaultRouteName&amp;#34;, DefaultRouteName, 1, true}, {&amp;#34;PlatformConfiguration_scheduleFrame&amp;#34;, ScheduleFrame, 1, true}, {&amp;#34;PlatformConfiguration_sendPlatformMessage&amp;#34;, _SendPlatformMessage, 4, true}, {&amp;#34;PlatformConfiguration_respondToPlatformMessage&amp;#34;, _RespondToPlatformMessage, 3, true}, {&amp;#34;PlatformConfiguration_render&amp;#34;, Render, 2, true}, {&amp;#34;PlatformConfiguration_updateSemantics&amp;#34;, UpdateSemantics, 2, true}, {&amp;#34;PlatformConfiguration_setIsolateDebugName&amp;#34;, SetIsolateDebugName, 2, true}, {&amp;#34;PlatformConfiguration_reportUnhandledException&amp;#34;, ReportUnhandledException, 2, true}, {&amp;#34;PlatformConfiguration_setNeedsReportTimings&amp;#34;, SetNeedsReportTimings, 2, true}, {&amp;#34;PlatformConfiguration_getPersistentIsolateData&amp;#34;, GetPersistentIsolateData, 1, true}, {&amp;#34;PlatformConfiguration_computePlatformResolvedLocale&amp;#34;, _ComputePlatformResolvedLocale, 2, true}, }); } void ScheduleFrame(Dart_NativeArguments args) { UIDartState::ThrowIfUIOperationsProhibited(); UIDartState::Current()-&amp;gt;platform_configuration()-&amp;gt;client()-&amp;gt;ScheduleFrame(); } runtime/runtime_controller.</description>
+    </item>
+    
+    <item>
+      <title>FlutterBoost</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/</guid>
+      <description>BoostFlutterActivity.onCreate BoostFlutterActivity implements FlutterActivityAndFragmentDelegate.Host { private FlutterActivityAndFragmentDelegate delegate; public static class NewEngineIntentBuilder { public Intent build(@NonNull Context context) { SerializableMap serializableMap = new SerializableMap(); serializableMap.setMap(params); return new Intent(context, activityClass) .putExtra(EXTRA_BACKGROUND_MODE, backgroundMode) .putExtra(EXTRA_DESTROY_ENGINE_WITH_ACTIVITY, false) .putExtra(EXTRA_URL, url) .putExtra(EXTRA_PARAMS, serializableMap); } @Override public String getContainerUrl() { if (getIntent().hasExtra(EXTRA_URL)) { return getIntent().getStringExtra(EXTRA_URL); } } @Override protected void onCreate(@Nullable Bundle savedInstanceState) { delegate = new FlutterActivityAndFragmentDelegate(this); delegate.onAttach(this); setContentView(createFlutterView()); } FlutterActivityAndFragmentDelegate implements IFlutterViewContainer { protected IOperateSyncer mSyncer; FlutterActivityAndFragmentDelegate(@NonNull Host host) { this.</description>
+    </item>
+    
+    <item>
+      <title>GC</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/</guid>
+      <description>类设计 runtime.cc
+Runtime::VisitRoots void Runtime::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { /*RootVisitor是一个纯虚类，其定义了几个函数，供root访问时调用。参数flags有一个默认 值，为kVisitRootFlagAllRoots，表示要访问所有的root。*/ VisitNonConcurrentRoots(visitor); VisitConcurrentRoots(visitor, flags); } Runtime::VisitNonConcurrentRoots void Runtime::VisitNonConcurrentRoots(RootVisitor* visitor) { //1：调用所有Thread对象的VisitRoots函数  thread_list_-&amp;gt;VisitRoots(visitor); VisitNonThreadRoots(visitor);//接着看该函数的代码 } Thread::VisitRoots void Thread::VisitRoots(RootVisitor* visitor) { /*GetThreadId返回的是Thread tlsPtr_ thin_lock_thread_id thin_lock_id。 我们在12.2.1节中介绍过它。该id并不是代表操作系统里线程的tid，而是由虚拟机自己维护的用 于线程同步的id。*/ const uint32_t thread_id = GetThreadId(); //tlsPtr_opeer指向一个Java层Thread对象，它是一个mirror Thread对象在Java层  //的对应物。这类根对象的类型为kRootThreadObject  visitor-&amp;gt;VisitRootIfNonNull(&amp;amp;tlsPtr_.opeer, RootInfo(kRootThreadObject, thread_id)); /*tlsPtr_ exception指向一个Java异常对象。注意，GetDeoptimizationException返 回的值非常特殊（为-1）。所以，它并不是一个真正的Java异常对象，只是用-1来表示和 HDeoptimize有关的处理（详情可参考10.4节的内容） */ if (tlsPtr_.exception != nullptr &amp;amp;&amp;amp; tlsPtr_.exception != GetDeoptimizationException()) { //使用kRootNativeStack作为tlsPtr_ exception的root类型  visitor-&amp;gt;VisitRoot(reinterpret_cast&amp;lt;mirror::Object**&amp;gt;( &amp;amp;tlsPtr_.exception), RootInfo(kRootNativeStack, thread_id)); } //tlsPtr_ monitor_enter_object指向用于monitor-enter的那个Java对象。详情可参考  //12.</description>
+    </item>
+    
+    <item>
+      <title>GC_ConcurrentCopying</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/</guid>
+      <description>ConcurrentCopying virtual GcType GetGcType() const OVERRIDE { //ConcurrentCopying仅支持kGcTypePartial，也就是不扫描ImageSpace和  //ZygoteSpace（除了那些有dirty card的对象）  return kGcTypePartial; } virtual CollectorType GetCollectorType() const OVERRIDE { return kCollectorTypeCC;//返回回收器类型 } void SetRegionSpace(space::RegionSpace* region_space) { //region_space_是ConcurrentCopying的成员变量  //ConcurrentCopying要回收的垃圾对象就在这个region_space_中  region_space_ = region_space; } RunPhases void ConcurrentCopying::RunPhases() { is_active_ = true; Thread* self = Thread::Current(); thread_running_gc_ = self; { ReaderMutexLock mu(self, *Locks::mutator_lock_); InitializePhase();//①初始化阶段  } FlipThreadRoots();//②完成半空间Flip工作  { ReaderMutexLock mu(self, *Locks::mutator_lock_); MarkingPhase();//③标记  } ...... { ReaderMutexLock mu(self, *Locks::mutator_lock_); ReclaimPhase();//④回收  } FinishPhase();//收尾工作，非常简单，请读者自行阅读  is_active_ = false; thread_running_gc_ = nullptr; } InitializePhase void ConcurrentCopying::InitializePhase() { .</description>
+    </item>
+    
+    <item>
+      <title>GC_MarkCompact</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/</guid>
+      <description>mark_compact.h/cc virtual GcType GetGcType() const OVERRIDE { return kGcTypePartial;//MarkCompact不处理ImageSpace和ZygoteSpace } virtual CollectorType GetCollectorType() const OVERRIDE { return kCollectorTypeMC; } void MarkCompact::SetSpace(space::BumpPointerSpace* space) { space_ = space;//space_是MarkCompact成员变量 } RunPhases void MarkCompact::RunPhases() { Thread* self = Thread::Current(); /* InitializePhase非常简单，其中需要注意的是MarkCompact下面两个成员变量的设置： (1) mark_stack_ = heap_-&amp;gt;GetMarkStack(); (2) mark_bitmap_ = heap_-&amp;gt;GetMarkBitmap(); */ InitializePhase(); { ScopedPause pause(this);//MarkCompact是stop-the-world类型的回收器  ...... MarkingPhase();//①标记阶段，详情见下文分析  ReclaimPhase();//②回收阶段，详情见下文分析  } ...... FinishPhase();//收尾工作，非常简单，读者可自行阅读 } MarkingPhase void MarkCompact::MarkingPhase() { Thread* self = Thread::Current(); /*MarkCompact基于Mark-Compact回收原理，所以它也需要标记能搜索到的对象。不过，由于 BumpPointerSpace空间对象不包含位图对象，所以下面将为space_（指向一个 BumpPointerSpace空间）创建一个位图对象objects_before_forwarding。它用于记录 搜索到的对象。*/ objects_before_forwarding_.</description>
+    </item>
+    
+    <item>
+      <title>GC_MS_CMS</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/</guid>
+      <description>MarkSweep类家族 表14-1　MarkSweep类家族GetGcType取值情况
+集合Live和集合Mark构成 CMS时Heap space相关成员变量取值情况 CMS时Heap位图相关成员变量取值情况 图14-7　CMS时Heap位图相关成员变量取值情况
+一个HeapBitmap对象可以管理多个ContinuousSpace的某一种位图对象
+CMS时Heap mark_stack_等成员变量的情况 MarkSweep::MarkSweep MarkSweep::MarkSweep(Heap* heap, bool is_concurrent, const std::string&amp;amp; name_prefix) : GarbageCollector(heap, name_prefix + (is_concurrent ? &amp;#34;concurrent mark sweep&amp;#34;: &amp;#34;mark sweep&amp;#34;)), current_space_bitmap_(nullptr), mark_bitmap_(nullptr), mark_stack_(nullptr), ..... is_concurrent_(is_concurrent),...... { /*MarkSweep构造函数并不复杂，此处先介绍下它的几个成员变量（其作用留待后续代码分析时时再详细讲解）： current_space_bitmap_：类型为ContinuousSpaceBitmap*。 mark_bitmap_：类型为HeapBitmap*。 mark_stack_：类型为ObjectStack*。 */ ..... /*下面的代码行将创建一个内存映射对象。ART内部大量使用内存映射对象。下面的 sweep_array_free_buffer_mem_map_的用法需要到介绍StickyMarkSweep时才能见到。总之，读者将它看作一块内存即可。*/ MemMap* mem_map = MemMap::MapAnonymous(......); sweep_array_free_buffer_mem_map_.reset(mem_map); ..... } MarkSweep::RunPhases graph TB IsConcurrent{IsConcurrent}--&amp;gt;|yes|MarkingPhaseC(MarkingPhase) MarkingPhaseC--&amp;gt;pauseC(pause) pauseC--&amp;gt;PausePhaseC(&amp;quot;PausePhase_reMark&amp;quot;) PausePhaseC--&amp;gt;RevokeAllThreadLocalBuffers RevokeAllThreadLocalBuffers--&amp;gt;ReclaimPhase ReclaimPhase--&amp;gt;FinishPhase IsConcurrent--&amp;gt;|no|pause pause--&amp;gt;MarkingPhase MarkingPhase--&amp;gt;PausePhase PausePhase--&amp;gt;RevokeAllThreadLocalBuffers void MarkSweep::RunPhases() { Thread* self = Thread::Current(); //初始化MarkSweep类的几个成员变量。其中，MarkSweep的mark_bitmap_将设置为Heap的成员变量mark_bitmap_（读者可回顾图14-7）  InitializePhase(); if (IsConcurrent()) {//if条件为true，则是CMS的行为  .</description>
+    </item>
+    
+    <item>
+      <title>GC_Semi_Space</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/</guid>
+      <description>semi_space.cc
+RunPhases void SemiSpace::RunPhases() { Thread* self = Thread::Current(); InitializePhase();//①回收器初始化  //if为true，说明mutator线程已被暂停。这种情况的出现和SemiSpace的用法有关，  //我们暂且不用考虑这些  if (Locks::mutator_lock_-&amp;gt;IsExclusiveHeld(self)) { MarkingPhase();//②标记工作  ReclaimPhase();//回收工作，非常简单，留给读者自行研究  } else { //如果mutator未暂停，则SemiSpace只有标记阶段需要暂停mutator  { ScopedPause pause(this);//暂停mutator  MarkingPhase();//标记工作  } {//mutator恢复运行，可同时开展回收工作  ReaderMutexLock mu(self, *Locks::mutator_lock_); ReclaimPhase(); } } FinishPhase(); } </description>
     </item>
     
     <item>
@@ -123,6 +276,70 @@ ThreadHost初始化
       <description>https://source.android.com/devices/graphics/index.html
 Android graphics components No matter what rendering API developers use, everything is rendered onto a &amp;ldquo;surface.&amp;rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. A==ll of the visible surfaces rendered are composited onto the display by SurfaceFlinger.==
 The following diagram shows how the key components work together:</description>
+    </item>
+    
+    <item>
+      <title>Hprof_binary_dump_format</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/</guid>
+      <description>JVM HPROF_查看_Binary Dump Format (format=b) graph LR STRING_IN_UTF8--&amp;gt;xxxx HEAP_DUMP_SEGMENT--&amp;gt;ROOT_UNKNOWN HEAP_DUMP_SEGMENT--&amp;gt;ROOT_JNI_GLOBAL HEAP_DUMP_SEGMENT--&amp;gt;...... HEAP_DUMP_SEGMENT--&amp;gt;CLASS_DUMP HEAP_DUMP_SEGMENT--&amp;gt;INSTANCE_DUMP HEAP_DUMP_SEGMENT--&amp;gt;OBJECT_ARRAY_DUMP HEAP_DUMP_SEGMENT--&amp;gt;PRIMITIVE_ARRAY_DUMP HEAP_DUMP_END--&amp;gt;xxx Binary Dump Format (format=b) The basic fields in the binary output are u1 (1 byte), u2 (2 byte), u4 (4 byte), and u8 (8 byte). An ID in this implementation is a u4, however the size of an ID is really determined by the &amp;ldquo;size of identifiers&amp;rdquo; field in the header.
+WARNING: This format is still considered highly experimental, however, all attempts were made to match the format of past HPROF implementations.</description>
+    </item>
+    
+    <item>
+      <title>java_jni方法调用原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</guid>
+      <description>Method Execute Flow graph TB PerformCall(PerformCall)--&amp;gt;|Interpreter|ArtInterpreterToInterpreterBridge(interpreter::ArtInterpreterToInterpreterBridge) ArtInterpreterToInterpreterBridge--&amp;gt;ExecuteSwitchImplCpp(interpreter::ExecuteSwitchImplCpp) ExecuteSwitchImplCpp--&amp;gt;DoInvoke(case Instruction::xxx: interpreter::DoInvoke, find called ArtMethod) DoInvoke--&amp;gt;DoCallCommon(interpreter::DoCallCommon, prepare shadow frame) DoCallCommon--&amp;gt;PerformCall ArtMethod::Invoke--&amp;gt;art_quick_invoke_stub(art_quick_invoke_stub: function in quick_entry_point.S) artQuickToInterpreterBridge(artQuickToInterpreterBridge, prepare shadow frame)--&amp;gt;EnterInterpreterFromEntryPoint(interpreter::EnterInterpreterFromEntryPoint) EnterInterpreterFromEntryPoint--&amp;gt;ExecuteSwitchImplCpp PerformCall--&amp;gt;|CompiledCode|ArtInterpreterToCompiledCodeBridge(interpreter::ArtInterpreterToCompiledCodeBridge) ArtInterpreterToCompiledCodeBridge--&amp;gt;ArtMethod::Invoke compiledCode--&amp;gt;|Interpreter|artQuickToInterpreterBridge art_quick_invoke_stub--&amp;gt;|ART_METHOD_QUICK_CODE_OFFSET_32|IsJniMethod{Is JNI method?} IsJniMethod--&amp;gt;|no|entry_point_from_quick_compiled_code_(entry_point_from_quick_compiled_code_ linkCode时设置) IsJniMethod--&amp;gt;|yes|art_quick_generic_jni_trampoline_汇编 art_quick_generic_jni_trampoline_汇编--&amp;gt;artQuickGenericJniTrampoline artQuickGenericJniTrampoline--&amp;gt;data_(data_RegisterNative时设置) data_--&amp;gt;IsJniDlsymLookupStub{IsJniDlsymLookupStub?} IsJniDlsymLookupStub--&amp;gt;|no|nativeCode IsJniDlsymLookupStub--&amp;gt;|yes|artFindNativeMethod entry_point_from_quick_compiled_code_--&amp;gt;IsCompiled{Is Compiled?} IsCompiled--&amp;gt;|yes|compiledCode IsCompiled--&amp;gt;|no|art_quick_to_interpreter_bridge汇编 art_quick_to_interpreter_bridge汇编--&amp;gt;artQuickToInterpreterBridge Trampoline code 所有Trampoline code都是一段汇编代码编写的函数，这段汇编代码函数内部一般会跳转到一个由更高级的编程语言（C++）实现的函数。
+class Thread{ ...... struct PACKED(sizeof(void*)) tls_ptr_sized_values { ...... //针对jni方法的Trampoline code，只包含一个pDlsymLookup函数指针,对应的Trampoline code在jni_entrypoints_x86.S里实现。  //结构体，和JNI调用有关。里边只有一个函数指针成员变量，名为pDlsymLookup。当JNI函数未注册时，这个成员变量将被调用以找到目标JNI函数  JniEntryPoints jni_entrypoints; //针对非jni方法的Trampoline code，一共包含132个函数指针,对应的Trampoline code在quick_entrypoints_x86.S里实现。  //结构体，其成员变量全是个函数指针类型，其定义可参考quick_entrypoints_list.</description>
+    </item>
+    
+    <item>
+      <title>Jni数据转换</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</guid>
+      <description>数据转换总结 graph TB jstring--&amp;gt;|soa.decode|mirror::String* mirror::String*--&amp;gt;|encode/AddLocalReference|jstring mirror::String*--&amp;gt;char* char*--&amp;gt;|mirror::String::AllocFromModifiedUtf8|mirror::String* jmethodid--&amp;gt;|decode|ArtMethod* ArtMethod*--&amp;gt;|encode|jmethodid jobject(&amp;quot;jobject/IndirectRef&amp;quot;)--&amp;gt;|decode|mirrorObject(&amp;quot;art::mirror::Object*&amp;quot;) mirrorObject--&amp;gt;|Assign/Compress|StackReference(&amp;quot;art::StackReference&amp;lt;mirror::Object&amp;gt;*&amp;quot;) StackReference--&amp;gt;|AsMirrorPtr/UnCompress|mirrorObject StackReference--&amp;gt;|OwnedBy|Handle(&amp;quot;art::Handle~T~&amp;quot;) StackHandleScope--&amp;gt;|Provided|Handle StackHandleScope--&amp;gt;|OwnsMulti|StackReference ThreadTlsPtr--&amp;gt;|OwnsLinkedList|StackHandleScope mirrorObject--&amp;gt;|encode|jobject HandleScope的作用 类设计 //8.2.2 ScopedObjectAccess等辅助类
+ScopedObjectAccessAlreadyRunnable DecodeMethod ArtMethod* DecodeMethod(jmethodID mid) const SHARED_REQUIRES(Locks::mutator_lock_) { Locks::mutator_lock_-&amp;gt;AssertSharedHeld(Self()); return reinterpret_cast&amp;lt;ArtMethod*&amp;gt;(mid);//main  } EncodeMethod jmethodID EncodeMethod(ArtMethod* method) const SHARED_REQUIRES(Locks::mutator_lock_) { Locks::mutator_lock_-&amp;gt;AssertSharedHeld(Self()); return reinterpret_cast&amp;lt;jmethodID&amp;gt;(method);//main  } T AddLocalReference(mirror::Object* obj) /* * Add a local reference for an object to the indirect reference table associated with the * current stack frame. When the native function returns, the reference will be discarded.</description>
+    </item>
+    
+    <item>
+      <title>JVM_JIT</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/</guid>
+      <description>JVM解释器和编译器 JVM：JVM有自己完善的硬件架构，如处理器、堆栈（Stack）、寄存器等，还具有相应的指令系统（字节码就是一种指令格式）。JVM屏蔽了与具体操作系统平台相关的信息，使得Java程序只需要生成在Java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。JVM是Java平台无关的基础。JVM负责运行字节码：JVM把每一条要执行的字节码交给解释器，翻译成对应的机器码，然后由解释器执行。JVM解释执行字节码文件就是JVM操作Java解释器进行解释执行字节码文件的过程。
+Java编译器：将Java源文件（.java文件）编译成字节码文件（.class文件，是特殊的二进制文件，二进制字节码文件），这种字节码就是JVM的“机器语言”。javac.exe可以简单看成是Java编译器。
+Java解释器：是JVM的一部分。Java解释器用来解释执行Java编译器编译后的程序。java.exe可以简单看成是Java解释器。
+注意：通常情况下，一个平台上的二进制可执行文件不能在其他平台上工作，因为此可执行文件包含了对目标处理器的机器语言。而Class文件这种特殊的二进制文件，是可以运行在任何支持Java虚拟机的硬件平台和操作系统上的！
+维基百科定义：
+JVM：一种能够运行Java字节码（Java bytecode）的虚拟机。
+字节码：字节码是已经经过编译，但与特定机器码无关，需要解释器转译后才能成为机器码的中间代码。
+Java字节码：是Java虚拟机执行的一种指令格式。
+解释器：是一种电脑程序，能够把高级编程语言一行一行直接翻译运行。解释器不会一次把整个程序翻译出来，只像一位“中间人”，每次运行程序时都要先转成另一种语言再作运行，因此解释器的程序运行速度比较缓慢。它每翻译一行程序叙述就立刻运行，然后再翻译下一行，再运行，如此不停地进行下去。它会先将源码翻译成另一种语言，以供多次运行而无需再经编译。其制成品无需依赖编译器而运行，程序运行速度比较快。
+即时编译(Just-in-time compilation: JIT)：又叫实时编译、及时编译。是指一种在运行时期把字节码编译成原生机器码的技术，一句一句翻译源代码，但是会将翻译过的代码缓存起来以降低性能耗损。这项技术是被用来改善虚拟机的性能的。
+JIT编译器是JRE的一部分。原本的Java程序都是要经过解释执行的，其执行速度肯定比可执行的二进制字节码程序慢。为了提高执行速度，引入了JIT。在运行时，JIT会把翻译过来的机器码保存起来，以备下次使用。而如果JIT对每条字节码都进行编译，则会负担过重，所以，JIT只会对经常执行的字节码进行编译，如循环，高频度使用的方法等。它会以整个方法为单位，一次性将整个方法的字节码编译为本地机器码，然后直接运行编译后的机器码。
+ 深入理解java虚拟机（程序编译与代码优化）
+编译对象与触发条件 编译对象 程序在运行过程中会被即时编译器编译的「热点代码」有两类：
+ 被多次调用的方法； 被多次执行的循环体。 这两种被多次重复执行的代码，称之为「热点代码」。  对于被多次调用的方法，方法体内的代码自然会被执行多次，理所当然的就是热点代码。
+而对于多次执行的循环体则是为了解决一个方法只被调用一次或者少量几次，但是方法体内部存在循环次数较多的循环体问题，这样循环体的代码也被重复执行多次，因此这些代码也是热点代码。
+对于第一种情况，由于是方法调用触发的编译，因此编译器理所当然地会以整个方法作为编译对象，这种编译也是虚拟机中标准的 JIT 编译方式。而对于后一种情况，尽管编译动作是由循环体所触发的，但是编译器依然会以整个方法（而不是单独的循环体）作为编译对象。这种编译方式因为发生在方法执行过程中，因此形象地称之为栈上替换（On Stack Replacement，简称 OSR 编译，即方法栈帧还在栈上，方法就被替换了）。
+即时编译器的触发条件 判断一段代码是不是热点代码，是不是需要触发即时编译，这样的行为称为「热点探测」。其实进行热点探测并不一定需要知道方法具体被调用了多少次，目前主要的热点探测判定方式有两种。
+  基于采样的热点探测：采用这种方法的虚拟机会周期性地检查各个线程栈顶，如果发现某个（或某些）方法经常出现在栈顶，那这个方法就是「热点方法」。基于采样的热点探测的好处是实现简单、高效，还可以很容易地获取方法调用关系（将调用栈展开即可），缺点是很难精确地确认一个方法的热度，容易因为受到线程阻塞或别的外界因数的影响而扰乱热点探测。
+  基于计数器的热点探测：采用这种方法的虚拟机会为每个方法（甚至代码块）建立计数器，统计方法的执行次数，如果执行次数超过一定的阈值就认为它是「热点方法」。这种统计方法实现起来麻烦一些，需要为每个方法建立并维护计数器，而且不能直接获取到方法的调用关系，但是统计结果相对来说更加精确和严谨。
+  HotSpot 虚拟机采用的是第二种：基于计数器的热点探测。因此它为每个方法准备了两类计数器：方法调用计数器（Invocation Counter）和回边计数器（Back Edge Counter）。在确定虚拟机运行参数的情况下，这两个计数器都有一个确定的阈值，当计数器超过阈值就会触发 JIT 编译。
+方法调用计数器 顾名思义，这个计数器用于统计方法被调用的次数。当一个方法被调用时，会首先检查该方法是否存在被 JIT 编译过的版本，如果存在，则优先使用编译后的本地代码来执行。如果不存在，则将此方法的调用计数器加 1，==然后判断方法调用计数器与回边计数器之和是否超过方法调用计数器的阈值==。如果超过阈值，将会向即时编译器提交一个该方法的代码编译请求。
+如果不做任何设置，执行引擎不会同步等待编译请求完成，而是继续进入解释器按照解释方式执行字节码，直到提交的请求被编译器编译完成。当编译完成后，这个方法的调用入口地址就会被系统自动改写成新的，下一次调用该方法时就会使用已编译的版本。
+热度衰减 如果不做任何设置，方法调用计数器统计的并不是方法被调用的绝对次数，而是一个相对的执行频率，即一段时间内方法调用的次数。当超过一定的时间限度，如果方法的调用次数仍然不足以让它提交给即时编译器编译，那这个方法的调用计数器值就会被减少一半，这个过程称为方法调用计数器热度的衰减，而这段时间就称为此方法统计的==半衰期==。
+进行热度衰减的动作是在虚拟机进行 GC 时顺便进行的，可以设置虚拟机参数来关闭热度衰减，让方法计数器统计方法调用的绝对次数，这样，只要系统运行时间足够长，绝大部分方法都会被编译成本地代码。此外还可以设置虚拟机参数调整半衰期的时间。
+回边计数器 回边计数器的作用是统计一个方法中循环体代码执行的次数，在字节码中遇到控制流向后跳转的指令称为「回边」（Back Edge）。建立回边计数器统计的目的是为了触发 OSR 编译。
+当解释器遇到一条回边指令时，会先查找将要执行的代码片段是否已经有编译好的版本，如果有，它将优先执行已编译的代码，否则就把回边计数器值加 1，然后判断方法调用计数器和回边计数器值之和是否超过计数器的阈值。当超过阈值时，将会提交一个 OSR 编译请求，并且把回边计数器的值降低一些，以便继续在解释器中执行循环，等待编译器输出编译结果。</description>
     </item>
     
     <item>
@@ -140,6 +357,95 @@ cd goldfish git branch -r git checkout origin/android-goldfish-4.4-dev -b androi
     </item>
     
     <item>
+      <title>kotlin协程</title>
+      <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</guid>
+      <description>协程是通过编译技术实现(不需要虚拟机VM/操作系统OS的支持),通过插入相关代码来生效！ 与之相反,线程/进程是需要虚拟机VM/操作系统OS的支持,通过调度CPU执行生效!
+优秀文章 Kotlin Coroutines(协程) 完全解析（一），协程简介
+Kotlin Coroutines(协程) 完全解析（二），深入理解协程的挂起、恢复与调度
+Kotlin Coroutines(协程) 完全解析（三），封装异步回调、协程间关系及协程的取消
+Kotlin Coroutines(协程) 完全解析（四），协程的异常处理
+Kotlin Coroutines(协程) 完全解析（五），协程的并发
+谷歌开发者 在 android 开发中使用协程 | 背景介绍
+在 View 上使用挂起函数
+协程中的取消和异常 | 异常处理详解
+官网doc 英文:
+https://kotlinlang.org/docs/reference/coroutines/basics.html
+https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/coroutines-guide.md
+https://github.com/Kotlin/KEEP/blob/master/proposals/coroutines.md
+中文:
+https://www.kotlincn.net/docs/reference/coroutines/coroutines-guide.html
+和Android Jetpack结合 https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope
+异步编程模型 异步的含义是被调用的方法执行完之后，无法直接拿到返回值(切换了线程)，需要通过回调接收返回值
+协程相当于提前切换到子线程，然后同步走逻辑，进而改变每一层的异步调用为同步，
+协程将同步方法和线程切换两者相隔离，所有方法都是同步方法，单独控制执行线程，避免异步方法去接收回调参数
+区别：
+ 回调调用时机: 回调接口可以有多个method，并在不同时机调用(对应的也可以在return对象中区分处理) 回调方法参数: 可以封装成method的return参数， 调用方上下文: 需要利用调用方的上下文(提供变量等)  异步回调 fun requestTokenAsync(cb: (Token) -&amp;gt; Unit) { ... } fun createPostAsync(token: Token, item: Item, cb: (Post) -&amp;gt; Unit) { .</description>
+    </item>
+    
+    <item>
+      <title>kotlin协程Source</title>
+      <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</guid>
+      <description>总结 类设计 协程的三层包装  常用的launch和async返回的Job、Deferred，里面封装了协程状态，提供了取消协程接口，而它们的实例都是继承自AbstractCoroutine，它是协程的第一层包装。 第二层包装是编译器生成的SuspendLambda的子类，封装了协程的真正运算逻辑，继承自BaseContinuationImpl，其中completion属性就是协程的第一层包装。 第三层包装是前面分析协程的线程调度时提到的DispatchedContinuation，封装了线程调度逻辑，包含了协程的第二层包装。三层包装都实现了Continuation接口，通过代理模式将协程的各层包装组合在一起，每层负责不同的功能。  resumeWith CoroutineContext graph LR coroutineContext--&amp;gt;Element1[&amp;quot;Element1: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;Element2[&amp;quot;Element2: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;ContinuationInterceptor[&amp;quot;ContinuationInterceptor: DefaultDispatcher.&amp;quot;] coroutineContext--&amp;gt;ElementXxx[&amp;quot;ElementXxx: a singleton context by itself.&amp;quot;] Coroutine构造和启动 CoroutineScope.launch public val coroutineContext: CoroutineContext launch本质上也是将用户配置的协程闭包作为一个suspend函数(()-&amp;gt;Unit),并将该函数在指定的dispatcher上执行，和withContext类似
+public fun CoroutineScope.launch( context: CoroutineContext = EmptyCoroutineContext, start: CoroutineStart = CoroutineStart.DEFAULT, block: suspend CoroutineScope.() -&amp;gt; Unit ): Job { val newContext = newCoroutineContext(context) val coroutine = if (start.isLazy) LazyStandaloneCoroutine(newContext, block) else StandaloneCoroutine(newContext, active = true) coroutine.</description>
+    </item>
+    
+    <item>
+      <title>LayoutInflater</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/</guid>
+      <description>原理图 视图层级 AppCompatActivity.setContentView @Override public void setContentView(@LayoutRes int layoutResID) { getDelegate().setContentView(layoutResID); } AppCompatDelegateImpl.java
+@Override public void setContentView(int resId) { ensureSubDecor(); ViewGroup contentParent = mSubDecor.findViewById(android.R.id.content); contentParent.removeAllViews(); LayoutInflater.from(mContext).inflate(resId, contentParent); } installDecor,createSubDecor private void ensureSubDecor() { if (!mSubDecorInstalled) { mSubDecor = createSubDecor(); } } private ViewGroup createSubDecor() { // Now let&amp;#39;s make sure that the Window has installed its decor by retrieving it  //确保优先初始化 DecorView  mWindow.getDecorView();//PhoneWindow  ViewGroup subDecor = null; //根据不同的设置来对 subDecor 进行初始化  if (!</description>
+    </item>
+    
+    <item>
+      <title>LeakCanary2Source</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</guid>
+      <description>Procedure graph TB HeapAnalyzer.analyze--&amp;gt;Hprof.open:HprofFile HeapAnalyzer.analyze--&amp;gt;HprofHeapGraph.indexHprof HeapAnalyzer.analyze--&amp;gt;FindLeakInput.analyzeGraph HprofHeapGraph.indexHprof--&amp;gt;reader.readHprofRecords--&amp;gt;|callback HprofRecord|indexBuilderListener.onHprofRecord--&amp;gt;UnsortedByteEntries(&amp;quot;UnsortedByteEntries,ScatterMap&amp;quot;) HprofHeapGraph.indexHprof--&amp;gt;indexBuilderListener.buildIndex--&amp;gt;|Sort entries by keys|SortedBytesMap--&amp;gt;HprofInMemoryIndex--&amp;gt;HprofHeapGraph FindLeakInput.analyzeGraph--&amp;gt;FindLeakInput.findLeaks FindLeakInput.findLeaks--&amp;gt;State.findPathsFromGcRoots:BFS--&amp;gt;|start by enqueueGcRoots|findObjectById(&amp;quot;graph.findObjectById&amp;quot;)--&amp;gt;readFieldsAndEnqueue Data Flow graph TB HprofFile--&amp;gt;HprofRecord HprofRecord--&amp;gt;UnsortedByteEntries(&amp;quot;UnsortedByteEntries(class,instance,objectArray,primitiveArray)&amp;quot;) UnsortedByteEntries--&amp;gt;|Sort entries by keys|SortedBytesMap(SortedBytesMap: get perform binarySearch) SortedBytesMap--&amp;gt;HprofInMemoryIndex SortedBytesMap--&amp;gt;|get return|ByteSubArray ByteSubArray--&amp;gt;|indexedObjectOrNull|IndexedObject IndexedObject--&amp;gt;|wrapIndexedObject|HeapObject HprofRecord--&amp;gt;ScatterMap(&amp;quot;ScatterMap(hprofStringCache, classNames)&amp;quot;) ScatterMap--&amp;gt;HprofInMemoryIndex HprofInMemoryIndex--&amp;gt;HprofHeapGraph LruCache:objectCache--&amp;gt;|cached when readObjectRecord|HprofHeapGraph //ScatterMap contains: classNames and hprofStringCache  // LRU cache size of 3000 is a sweet spot to balance hits vs memory usage. // This is based on running InstrumentationLeakDetectorTest a bunch of time on a // Pixel 2 XL API 28.</description>
+    </item>
+    
+    <item>
+      <title>Lifecycle</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/lifecycle/lifecycle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/lifecycle/lifecycle/</guid>
+      <description>设计图 https://developer.android.com/topic/libraries/architecture/lifecycle
+生命周期感知型组件的最佳做法  使界面控制器（Activity 和 Fragment）尽可能保持精简。它们不应试图获取自己的数据，而应使用 ViewModel 执行此操作，并观察 LiveData 对象以将更改体现到视图中。 设法编写数据驱动型界面，对于此类界面，界面控制器的责任是随着数据更改而更新视图，或者将用户操作通知给 ViewModel。 将数据逻辑放在 ViewModel 类中。ViewModel 应充当界面控制器与应用其余部分之间的连接器。不过要注意，ViewModel 不负责获取数据（例如，从网络获取）。但是，ViewModel 应调用相应的组件来获取数据，然后将结果提供给界面控制器。 使用数据绑定在视图与界面控制器之间维持干净的接口。这样一来，您可以使视图更具声明性，并尽量减少需要在 Activity 和 Fragment 中编写的更新代码。如果您更愿意使用 Java 编程语言执行此操作，请使用诸如 Butter Knife 之类的库，以避免样板代码并实现更好的抽象化。 如果界面很复杂，不妨考虑创建 presenter 类来处理界面的修改。这可能是一项艰巨的任务，但这样做可使界面组件更易于测试。 避免在 ViewModel 中引用 View 或 Activity 上下文。如果 ViewModel 存在的时间比 Activity 更长（在配置更改的情况下），Activity 将泄漏并且不会获得垃圾回收器的妥善处置。 使用 Kotlin 协程管理长时间运行的任务和其他可以异步运行的操作。  </description>
+    </item>
+    
+    <item>
+      <title>LiveData</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata/</guid>
+      <description>类设计 androidx.lifecycle:lifecycle-livedata:2.0.0
+androidx.lifecycle:lifecycle-livedata-core:2.0.0
+observe private SafeIterableMap&amp;lt;Observer&amp;lt;? super T&amp;gt;, ObserverWrapper&amp;gt; mObservers = new SafeIterableMap&amp;lt;&amp;gt;(); observe @MainThread public void observe(@NonNull LifecycleOwner owner, @NonNull Observer&amp;lt;? super T&amp;gt; observer) { assertMainThread(&amp;#34;observe&amp;#34;); if (owner.getLifecycle().getCurrentState() == DESTROYED) { // ignore  return; } LifecycleBoundObserver wrapper = new LifecycleBoundObserver(owner, observer); ObserverWrapper existing = mObservers.putIfAbsent(observer, wrapper); if (existing != null &amp;amp;&amp;amp; !existing.isAttachedTo(owner)) { throw new IllegalArgumentException(&amp;#34;Cannot add the same observer&amp;#34; + &amp;#34; with different lifecycles&amp;#34;); } if (existing !</description>
+    </item>
+    
+    <item>
+      <title>LiveData封装</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</guid>
+      <description>https://developer.android.com/kotlin/ktx#livedata
+LiveData协程 @UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit internal class CoroutineLiveData&amp;lt;T&amp;gt;( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, block: Block&amp;lt;T&amp;gt; ) : MediatorLiveData&amp;lt;T&amp;gt;() { private var blockRunner: BlockRunner&amp;lt;T&amp;gt;? private var emittedSource: EmittedSource? = null init { // use an intermediate supervisor job so that if we cancel individual block runs due to losing  // observers, it won&amp;#39;t cancel the given context as we only cancel w/ the intention of possibly  // relaunching using the same parent context.</description>
+    </item>
+    
+    <item>
       <title>Looper</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -147,6 +453,33 @@ cd goldfish git branch -r git checkout origin/android-goldfish-4.4-dev -b androi
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</guid>
       <description>原理总结 Looper就是对epoll系统调用的封装层，屏蔽外部对epoll的直接使用
 Looper addFd int Looper::addFd(int fd, int ident, int events, Looper_callbackFunc callback, void* data) { // use SimpleLooperCallback as adapter from handleEvent to callback function  return addFd(fd, ident, events, callback ? new SimpleLooperCallback(callback) : NULL, data); } int Looper::addFd(int fd, int ident, int events, const sp&amp;lt;LooperCallback&amp;gt;&amp;amp; callback, void* data) { if (!callback.get()) { if (! mAllowNonCallbacks) { ALOGE(&amp;#34;Invalid attempt to set NULL callback but not allowed for this looper.</description>
+    </item>
+    
+    <item>
+      <title>MediatorLiveData</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</guid>
+      <description>MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.postValue(value); } @Override public void setValue(T value) { super.setValue(value); } } MediatorLiveData public class MediatorLiveData&amp;lt;T&amp;gt; extends MutableLiveData&amp;lt;T&amp;gt; { private SafeIterableMap&amp;lt;LiveData&amp;lt;?</description>
+    </item>
+    
+    <item>
+      <title>MessageLoop</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/</guid>
+      <description>TaskRunners::TaskRunners(std::string label, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; platform, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; gpu, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; ui, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; io) : label_(std::move(label)), platform_(std::move(platform)), gpu_(std::move(gpu)), ui_(std::move(ui)), io_(std::move(io)) {} ThreadHost::ThreadHost /// The collection of all the threads used by the engine. ThreadHost enum Type { Platform = 1 &amp;lt;&amp;lt; 0, UI = 1 &amp;lt;&amp;lt; 1, GPU = 1 &amp;lt;&amp;lt; 2, IO = 1 &amp;lt;&amp;lt; 3, }; std::unique_ptr&amp;lt;fml::Thread&amp;gt; platform_thread; std::unique_ptr&amp;lt;fml::Thread&amp;gt; ui_thread; std::unique_ptr&amp;lt;fml::Thread&amp;gt; gpu_thread; std::unique_ptr&amp;lt;fml::Thread&amp;gt; io_thread; ThreadHost(std::string name_prefix, uint64_t type_mask); ThreadHost::ThreadHost(std::string name_prefix, uint64_t mask) { if (mask &amp;amp; ThreadHost::Type::Platform) { platform_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;#34;.</description>
+    </item>
+    
+    <item>
+      <title>MethodChannel</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/</guid>
+      <description>整体设计 graph TB Dart(DartFramework)--&amp;gt;|await|Engine--&amp;gt;|GetPlatformTaskRunner-&amp;gt;PostTask|PlatformC++--&amp;gt;PlatformJava PlatformJava--&amp;gt;PlatformC++ PlatformC++--&amp;gt;|ui_task_runner_-&amp;gt;PostTask|Engine--&amp;gt;Dart 注册监听MethodChannel().setMethodCallHandler((call, result) -&amp;gt; {}) class MainActivity() : FlutterActivity() { private val CHANNEL = &amp;#34;samples.flutter.dev/battery&amp;#34; override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) GeneratedPluginRegistrant.registerWith(this) MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result -&amp;gt; // Note: this method is invoked on the main thread.  if (call.method == &amp;#34;getBatteryLevel&amp;#34;) { val batteryLevel = getBatteryLevel()//android平台api调用获取  if (batteryLevel != -1) { result.success(batteryLevel) } else { result.error(&amp;#34;UNAVAILABLE&amp;#34;, &amp;#34;Battery level not available.&amp;#34;, null) } } else { result.</description>
     </item>
     
     <item>
@@ -169,6 +502,32 @@ https://github.com/Tencent/MMKV/wiki/design
     </item>
     
     <item>
+      <title>OOM</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/</guid>
+      <description>OOM原因分析 要定位OOM问题，首先需要弄明白Android中有哪些原因会导致OOM，Android中导致OOM的原因主要可以划分为以下几个类型：
+Android 虚拟机最终抛出OutOfMemoryError的代码位于/art/runtime/thread.cc。
+void Thread::ThrowOutOfMemoryError(const char* msg) 参数 msg 携带了 OOM 时的错误信息 下面两个地方都会调用上面方法抛出OutOfMemoryError错误，这也是Android中发生OOM的主要原因。
+堆内存分配失败 系统源码文件：/art/runtime/gc/heap.cc
+void Heap::ThrowOutOfMemoryError(Thread* self, size_t byte_count, AllocatorType allocator_type) 抛出时的错误信息： oss &amp;lt;&amp;lt; &amp;#34;Failed to allocate a &amp;#34; &amp;lt;&amp;lt; byte_count &amp;lt;&amp;lt; &amp;#34; byte allocation with &amp;#34; &amp;lt;&amp;lt; total_bytes_free &amp;lt;&amp;lt; &amp;#34; free bytes and &amp;#34; &amp;lt;&amp;lt; PrettySize(GetFreeMemoryUntilOOME()) &amp;lt;&amp;lt; &amp;#34; until OOM&amp;#34;; 这是在进行堆内存分配时抛出的OOM错误，这里也可以细分成两种不同的类型：
+ 为对象分配内存时达到进程的内存上限。由Runtime.getRuntime.MaxMemory()可以得到Android中每个进程被系统分配的内存上限，当进程占用内存达到这个上限时就会发生OOM，这也是Android中最常见的OOM类型。 没有足够大小的连续地址空间。这种情况一般是进程中存在大量的内存碎片导致的，其堆栈信息会比第一种OOM堆栈多出一段信息：failed due to fragmentation (required continguous free “&amp;laquo; required_bytes &amp;laquo; “ bytes for a new buffer where largest contiguous free ” &amp;laquo; largest_continuous_free_pages &amp;laquo; “ bytes)”; 其详细代码在art/runtime/gc/allocator/rosalloc.</description>
+    </item>
+    
+    <item>
+      <title>Runtime_VisitRoots</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</guid>
+      <description>art/runtime/runtime.cc
+Runtime::VisitRoots void Runtime::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { VisitNonConcurrentRoots(visitor, flags); VisitConcurrentRoots(visitor, flags); } VisitNonConcurrentRoots void Runtime::VisitNonConcurrentRoots(RootVisitor* visitor, VisitRootFlags flags) { VisitThreadRoots(visitor, flags); VisitNonThreadRoots(visitor); } VisitThreadRoots void Runtime::VisitThreadRoots(RootVisitor* visitor, VisitRootFlags flags) { thread_list_-&amp;gt;VisitRoots(visitor, flags); } art/runtime/thread_list.cc
+ThreadList::VisitRoots void ThreadList::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) const { MutexLock mu(Thread::Current(), *Locks::thread_list_lock_); for (const auto&amp;amp; thread : list_) { thread-&amp;gt;VisitRoots(visitor, flags); } } art/runtime/thread.cc
+Thread::VisitRoots void Thread::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { if ((flags &amp;amp; VisitRootFlags::kVisitRootFlagPrecise) != 0) { VisitRoots&amp;lt;/* kPrecise */ true&amp;gt;(visitor); } else { VisitRoots&amp;lt;/* kPrecise */ false&amp;gt;(visitor); } } //define the meaning of enum RootType template &amp;lt;bool kPrecise&amp;gt; void Thread::VisitRoots(RootVisitor* visitor) { const pid_t thread_id = GetThreadId(); visitor-&amp;gt;VisitRootIfNonNull(&amp;amp;tlsPtr_.</description>
+    </item>
+    
+    <item>
       <title>SharedPreferences</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -179,19 +538,96 @@ https://github.com/Tencent/MMKV/wiki/design
     </item>
     
     <item>
-      <title>supportToAndroidx</title>
-      <link>https://huanle19891345.github.io/en/android/google/supporttoandroidx/</link>
+      <title>Space</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/google/supporttoandroidx/</guid>
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/</guid>
+      <description>类设计 ART虚拟机提供了多种内存分配手段，它们分别由LargeObjectSpace、BumpPointerSpace、ZygoteSpace、RegionSpace、DlMallocSpace和RosAllocSpace六个类(叶子节点)来实现。ImageSpace用于.art文件的加载
+classDiagram class Space { +GetNames() +Contains() +IsImageSpace() +IsMallocSpace() +isZygoteSpace() +isBumpPointerSpace() +IsRegionSpace() } class AllocSpace { +GetByteAllocated() +GetObjectsAllocated() +Alloc() +AllocThreadSafe() +Free() +FreeList() } Space &amp;lt;|-- ContinuousSpace ContinuousSpace &amp;lt;|-- MemMapSpace MemMapSpace &amp;lt;|-- ImageSpace MemMapSpace &amp;lt;|-- ContinuousMemMapAllocSpace AllocSpace &amp;lt;|-- ContinuousMemMapAllocSpace AllocSpace &amp;lt;|-- LargeObjectSpace Space &amp;lt;|-- DiscontinuousSpace DiscontinuousSpace &amp;lt;|-- LargeObjectSpace ContinuousMemMapAllocSpace &amp;lt;|-- BumpPointerSpace ContinuousMemMapAllocSpace &amp;lt;|-- RegionSpace ContinuousMemMapAllocSpace &amp;lt;|-- ZygoteSpace ContinuousMemMapAllocSpace &amp;lt;|-- MallocSpace MallocSpace &amp;lt;|-- DlMallocSpace MallocSpace &amp;lt;|-- RosAllocSpace LargeObjectSpace &amp;lt;|-- LargeObjectMapSpace LargeObjectSpace &amp;lt;|-- FreeListSpace SpaceBitmap space_bitmap(-inl).</description>
+    </item>
+    
+    <item>
+      <title>StackTraceElement</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/</guid>
+      <description>9.0.0_r3
+Throwable.getStackTrace public StackTraceElement[] getStackTrace() { return getOurStackTrace().clone(); } private synchronized StackTraceElement[] getOurStackTrace() { // Initialize stack trace field with information from // backtrace if this is the first call to this method // // Android-changed: test explicitly for equality with // STACK_TRACE_ELEMENT if (stackTrace == libcore.util.EmptyArray.STACK_TRACE_ELEMENT || (stackTrace == null &amp;amp;&amp;amp; backtrace != null) /* Out of protocol state */) { stackTrace = nativeGetStackTrace(backtrace);//main  backtrace = null; } return stackTrace; } /art/runtime/native/java_lang_Throwable.</description>
+    </item>
+    
+    <item>
+      <title>startup</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/</guid>
+      <description>Flutter 安卓平台源码剖析
+Flutter启动流程源码分析
+深入理解Flutter引擎启动&amp;ndash;详细
+Flutter作为一款跨平台的框架，可以运行在Android、iOS等平台，Android为例讲解如何从Android应用启动流程中衔接到Flutter框架，如何启动Flutter引擎的启动流程。 熟悉Android的开发者，应该都了解APP启动过程，会执行Application和Activity的初始化，并调用它们的onCreate()方法。那么FlutterApplication和FlutterActivity的onCreate()方法是连接Native和Flutter的枢纽。
+ FlutterApplication.java的onCreate过程：初始化配置文件/加载libflutter.so/注册JNI方法； FlutterActivity.java的onCreate过程：创建FlutterView、Engine, Dart虚拟机、Isolate、taskRunner等对象，最终执行执行到Dart的main()方法，执行runApp(Widget app)来处理整个Dart业务代码。  深入理解Flutter应用启动&amp;ndash;runApp(Widget app)方法开始
+runApp(MyApp)是flutter应用开始真正执行业务逻辑代码的起点，整个过程主要工作：
+ WidgetsFlutterBinding初始化：这是一个单例模式，负责创建WidgetsFlutterBinding对象，WidgetsFlutterBinding继承抽象类BindingBase，并且附带7个mixin，初始化渲染、语义化、绘制、平台消息以及手势等一系列操作； attachRootWidget：遍历挂载整个视图树，并建立Widget、Element、RenderObject之间的连接与关系，此处Element的具体类型为RenderObjectToWidgetElement； scheduleWarmUpFrame：调度预热帧，执行帧绘制方法handleBeginFrame和handleDrawFrame。  从WidgetsFlutterBinding是单例模式，从小节[2.4]得WidgetsBinding的renderViewElement记录着唯一的RenderObjectToWidgetElement对象，从小节[2.3.2]可知RendererBinding的renderView记录着唯一的RenderView对象；也就是说每个flutter应用创建的Root Widget跟Element、RenderObject一一对应，且单例唯一。
+MyApp是用户定义的根Widget，为了建立三棵树的关系，RenderObjectToWidgetAdapter起到重要的桥接功能，该类的createElement方法创建RenderObjectToWidgetElement对象，createRenderObject()方法获取的是RenderView。
+ </description>
+    </item>
+    
+    <item>
+      <title>startup_dart_framework</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/</guid>
+      <description>类设计 runApp main.dart
+void main() =&amp;gt; runApp(MyApp()); widgets/binding.dart
+void runApp(Widget app) { WidgetsFlutterBinding.ensureInitialized() ..attachRootWidget(app) ..scheduleWarmUpFrame(); } WidgetsFlutterBinding.ensureInitialized() /// A concrete binding for applications based on the Widgets framework. /// This is the glue that binds the framework to the Flutter engine.  class WidgetsFlutterBinding extends BindingBase with GestureBinding, ServicesBinding, SchedulerBinding, PaintingBinding, SemanticsBinding, RendererBinding, WidgetsBinding { /// Returns an instance of the [WidgetsBinding], creating and  /// initializing it if necessary. If one is created, it will be a  /// [WidgetsFlutterBinding].</description>
+    </item>
+    
+    <item>
+      <title>startup_embedder_framwwork</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/</guid>
+      <description>FlutterApplication.onCreate /** * Flutter implementation of {@link android.app.Application}, managing * application-level global initializations. */ //FlutterApplication @CallSuper public void onCreate() { super.onCreate(); FlutterMain.startInitialization(this); } /** FlutterMain * Starts initialization of the native system. * @param applicationContext The Android application context. */ public static void startInitialization(@NonNull Context applicationContext) { if (isRunningInRobolectricTest) { return; } FlutterLoader.getInstance().startInitialization(applicationContext); } FlutterLoader.startInitialization() /** Finds Flutter resources in an application APK and also loads Flutter&amp;#39;s native library.*/ //FlutterLoader  /** * Starts initialization of the native system.</description>
+    </item>
+    
+    <item>
+      <title>supportToAndroidx</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/supporttoandroidx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/supporttoandroidx/</guid>
       <description>升级背景 为了升级公司客户端架构，促进更高效的开发效率，减少模板代码并提升稳定性，需要基础仓库从support迁移到androidx，并提供相应的升级方案以及基于androidx的基础组件。
 模块拆分方式命名   不依赖support/androidx的模块称为pure模块
   依赖support的称为support模块
   依赖androidx的称为androidx模块
-  升级方案  module内部，将原本的基础仓库old base module拆分为base_support + base_pure两个模块，剥离support依赖。其中base_pure模块拆分到一个单独的project中，而base_support项目需要新增base_androidx branch，分开两个branch迭代，并通过cherrypick进行修改同步，同时分别发布独立的maven。 old base module所依赖的模块，也需要按照1的方式进行拆分。同时pure模块只能依赖pure模块,非pure模块可以依赖对应的非pure模块和pure模块 pure模块的单测test模块是support或者androidx都没关系，不影响发版仓库中的内容 androidx利用灰度版本去进行测试  包依赖关系 graph TB app_support--&amp;gt;base_support app_support--&amp;gt;base_pure app_androidx--&amp;gt;base_androidx app_androidx--&amp;gt;base_pure base_pure--&amp;gt;xxx_pure base_support--&amp;gt;xxx_support base_support--&amp;gt;xxx_pure base_androidx--&amp;gt;xxx_androidx base_androidx--&amp;gt;xxx_pure 升级步骤 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn
+  升级方案  module内部，将原本的基础仓库old base module拆分为base_support + base_pure两个模块，剥离support依赖。其中base_pure模块拆分到一个单独的project中，而base_support项目需要新增base_androidx branch，分开两个branch迭代，并通过cherrypick进行修改同步，同时分别发布独立的maven。 old base module所依赖的模块，也需要按照1的方式进行拆分。同时pure模块只能依赖pure模块,非pure模块可以依赖对应的非pure模块和pure模块 pure模块的单测test模块是support或者androidx都没关系，不影响发版仓库中的内容 androidx利用灰度版本去进行测试  包依赖关系 graph TB app_support--&amp;gt;base_support app_support--&amp;gt;base_pure app_androidx--&amp;gt;base_androidx app_androidx--&amp;gt;base_pure base_support--&amp;gt;xxx_pure base_pure--&amp;gt;xxx_pure base_support--&amp;gt;xxx_support base_androidx--&amp;gt;xxx_androidx base_androidx--&amp;gt;xxx_pure 升级步骤 https://developer.android.google.cn/jetpack/androidx/migrate?hl=zh-cn
 https://medium.com/androiddevelopers/migrating-to-androidx-tip-tricks-and-guidance-88d5de238876
 是时候迁移至 AndroidX 了！
 graph LR olderSupport--&amp;gt;|APIchanges|28.0.0Support--&amp;gt;|namespaceChanges|androidx1.0  创建新分支准备迁移，停止同步进行的新功能开发和重构，防止冲突 在old base module中搜索support进行处理,去除不必要的support库依赖 support升级到28，这是因为，1.0.0 版本的 AndroidX 工件是与支持库 28.0.0 工件等效的二进制文件。 编译和测试用例通过 配置android.useAndroidX=true android.enableJetifier=true 更新依赖的仓库到支持androidx的版本 迁移到androidx: AS操作 Refactor &amp;gt; Migrate to AndroidX  基于androidx的后续基础架构封装 新架构单独封装一个独立的module(使用androidx)，提供基础能力</description>
+    </item>
+    
+    <item>
+      <title>Syscall查找方式</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</guid>
+      <description>Android9.0采用如下Tips3,4进行定位
+Tips 1： 用户空间的方法xxx，对应系统调用层方法则是sys_xxx； Tips 2： unistd.h文件记录着系统调用中断号的信息。(搜索__SYSCALL找到unistd.d文件位置) /* kernel/signal.c */ __SYSCALL(__NR_kill, sys_kill) Tips 3： 宏定义SYSCALL_DEFINEx(xxx,…)，展开后对应的方法则是sys_xxx； Tips 4： 方法参数的个数x，对应于SYSCALL_DEFINEx。 kill(int pid, int sig)方法共两个参数，则对应方法于SYSCALL_DEFINE2(kill,...)，进入signal.c文件，再次搜索关键字，便能看到方法： include/linux/syscalls.h
+syscalls.h #define SYSCALL_DEFINE1(name, ...) SYSCALL_DEFINEx(1, _##name, __VA_ARGS__) #define SYSCALL_DEFINE2(name, ...) SYSCALL_DEFINEx(2, _##name, __VA_ARGS__) #define SYSCALL_DEFINE3(name, ...) SYSCALL_DEFINEx(3, _##name, __VA_ARGS__) #define SYSCALL_DEFINE4(name, ...) SYSCALL_DEFINEx(4, _##name, __VA_ARGS__) #define SYSCALL_DEFINE5(name, ...) SYSCALL_DEFINEx(5, _##name, __VA_ARGS__) #define SYSCALL_DEFINE6(name, ...) SYSCALL_DEFINEx(6, _##name, __VA_ARGS__)  #define SYSCALL_DEFINEx(x, sname, ...)	\ SYSCALL_METADATA(sname, x, __VA_ARGS__)	\ __SYSCALL_DEFINEx(x, sname, __VA_ARGS__)  #define __SYSCALL_DEFINEx(x, name, .</description>
+    </item>
+    
+    <item>
+      <title>SystemLoadLibrary</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/</guid>
+      <description>Runtime.getRuntime().load /** * Loads the native library specified by the filename argument. The filename * argument must be an absolute path name. * (for example * &amp;lt;code&amp;gt;Runtime.getRuntime().load(&amp;#34;/home/avh/lib/libX11.so&amp;#34;);&amp;lt;/code&amp;gt;). */ public void load(String filename) { load0(VMStack.getStackClass1(), filename); } synchronized void load0(Class&amp;lt;?&amp;gt; fromClass, String filename) { if (!(new File(filename).isAbsolute())) { throw new UnsatisfiedLinkError(&amp;#34;Expecting an absolute path of the library: &amp;#34; + filename); } String error = nativeLoad(filename, fromClass.getClassLoader()); if (error != null) { throw new UnsatisfiedLinkError(error); } } java/lang/System.</description>
     </item>
     
     <item>
@@ -213,12 +649,55 @@ graph LR olderSupport--&amp;gt;|APIchanges|28.0.0Support--&amp;gt;|namespaceChan
     </item>
     
     <item>
+      <title>ThreadState</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/</guid>
+      <description>浅析android 线程状态 java的6种线程状态定义在/java/lang/Thread.java中:
+https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html
+//Thread.java public class Thread implements Runnable { ... public enum State { /** * The thread has been created, but has never been started. */ NEW, /** * The thread may be run. */ RUNNABLE, /** * The thread is blocked and waiting for a lock. */ BLOCKED, /** * The thread is waiting. */ WAITING, /** * The thread is waiting for a specified amount of time.</description>
+    </item>
+    
+    <item>
+      <title>Touch</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/</guid>
+      <description>原理图 graph TB PointerDownEvent--&amp;gt;|hitTest|HitTestResult--&amp;gt;HitTestTarget1 HitTestResult--&amp;gt;|handleEvent|RawGestureDetectorState._handlePointerDown--&amp;gt;|addPointer_event|gestureRecognizer1 HitTestResult--&amp;gt;HitTestTargetXxx HitTestResult--&amp;gt;|handleEvent|GestureBinding.handleEvent--&amp;gt;pointerRouter.route_event GestureBinding.handleEvent--&amp;gt;|Down?|gestureArena.close GestureBinding.handleEvent--&amp;gt;|Up?|gestureArena.sweep RawGestureDetectorState._handlePointerDown--&amp;gt;|addPointer_event|gestureRecognizerXxx--&amp;gt;pointerRouter.addRoute gestureRecognizerXxx--&amp;gt;gestureArena.add PointerOtherEvent--&amp;gt;|dispatchEvent|HitTestResult 类设计 GestureBinding.initInstances /// A binding for the gesture subsystem. //mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, HitTestTarget @override void initInstances() { super.initInstances(); _instance = this; window.onPointerDataPacket = _handlePointerDataPacket; } GestureBinding._handlePointerDataPacket void _handlePointerDataPacket(ui.PointerDataPacket packet) { // We convert pointer data to logical pixels so that e.g. the touch slop can be  // defined in a device-independent manner.  _pendingPointerEvents.</description>
+    </item>
+    
+    <item>
       <title>touchEventNative</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/</guid>
       <description>原理图 SystemServer startOtherServices private void startOtherServices() { inputManager = new InputManagerService(context); wm = WindowManagerService.main(context, inputManager, mFactoryTestMode != FactoryTest.FACTORY_TEST_LOW_LEVEL, !mFirstBoot, mOnlyCore, new PhoneWindowManager()); ServiceManager.addService(Context.WINDOW_SERVICE, wm, /* allowIsolated= */ false, DUMP_FLAG_PRIORITY_CRITICAL | DUMP_FLAG_PROTO); ServiceManager.addService(Context.INPUT_SERVICE, inputManager, /* allowIsolated= */ false, DUMP_FLAG_PRIORITY_CRITICAL); ...... inputManager.setWindowManagerCallbacks(wm.getInputMonitor()); inputManager.start(); } InputManagerService public class InputManagerService extends IInputManager.Stub { public InputManagerService(Context context) { this.mContext = context; this.mHandler = new InputManagerHandler(DisplayThread.get().getLooper()); mPtr = nativeInit(this, mContext, mHandler.getLooper().getQueue()); } } start public void start() { Slog.</description>
+    </item>
+    
+    <item>
+      <title>ViewModel</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</guid>
+      <description>类设计 基于androidx.lifecycle:lifecycle-viewmodel:2.1.0
+保存viewModelStore handleDestroyActivity ActivityThread.java
+@Override public void handleDestroyActivity(IBinder token, boolean finishing, int configChanges, boolean getNonConfigInstance, String reason) {//转屏时传递的getNonConfigInstance为true  ActivityClientRecord r = performDestroyActivity(token, finishing, configChanges, getNonConfigInstance, reason); } handledestroyactivity由来
+/** Core implementation of activity destroy call. */ ActivityClientRecord performDestroyActivity(IBinder token, boolean finishing, int configChanges, boolean getNonConfigInstance, String reason) { ActivityClientRecord r = mActivities.get(token); Class&amp;lt;? extends Activity&amp;gt; activityClass = null; if (r != null) { if (finishing) { r.activity.mFinished = true; } performPauseActivityIfNeeded(r, &amp;#34;destroy&amp;#34;); if (!</description>
+    </item>
+    
+    <item>
+      <title>ViewModel封装</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</guid>
+      <description>ViewModel初始化精简 https://stackoverflow.com/questions/58106707/how-does-kotlin-use-this-by-delegate-to-instantiate-the-viewmodel
+by viewModels(...) is part of fragment-ktx library, it&amp;rsquo;s a convienience short hand for creating a lazy delegate obtaining ViewModels.
+// creates lazy delegate for obtaining zero-argument MyViewModel private val viewModel : MyViewModel by viewModels() // it&amp;#39;s functionally equal to: private val viewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) } // with factory: private val viewModel : MyViewModel by viewModels { getViewModelFactory() } // is equal to: private val viewModel by lazy { ViewModelProvider(this, getViewModelFactory()).</description>
     </item>
     
     <item>
@@ -246,6 +725,15 @@ surfaceflinger.rc service surfaceflinger /system/bin/surfaceflinger class core a
     </item>
     
     <item>
+      <title>Widget</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</guid>
+      <description>graph LR State--&amp;gt;|持有|Widget Element--&amp;gt;|持有|State Element--&amp;gt;|持有|Widget Build 触发State.build时机 graph LR after_initState--&amp;gt;State.build after_didUpdateWidget--&amp;gt;State.build after_setState--&amp;gt;State.build after_dependencyChange--&amp;gt;State.build after_deactiveAndReinsertIntoTree--&amp;gt;State.build 挂载树核心方法调用 graph LR mount--&amp;gt;_firstBuild--&amp;gt;reBuild--&amp;gt;performRebuild--&amp;gt;|1|build--&amp;gt;|stateless|StatelessWidget.build build--&amp;gt;|stateful|State.build buildOwner.buildScope--&amp;gt;reBuild performRebuild--&amp;gt;|2|updateChild updateChild--&amp;gt;|优先更新而非重新创建child|canUpdate{&amp;quot;canUpdate?&amp;quot;}--&amp;gt;|yes|child.updateWithNewWidget; canUpdate--&amp;gt;|no|inflateWidgetForNewChildElement--&amp;gt;mount 挂载树挂载过程 graph TB parentElement--&amp;gt;|2:performRebuild|currentElement currentElement--&amp;gt;|1:mount|parentElement currentElement--&amp;gt;|3:buildMyWidget|currentElement currentElement--&amp;gt;|4:newWidget.createElement|childElement childElement--&amp;gt;|5:mount|currentElement 类设计 State.setState //State&amp;lt;T extends StatefulWidget&amp;gt; /** setState方法标记对应的element需要build 如果当前位于一帧内例如点击(input处理+动画+drawFrame)，在调用setState方法之后会触发drawFrame进而触发reBuild 如果当前不位于一帧内，则会策划一次frame*/ @protected void setState(VoidCallback fn) { final dynamic result = fn() as dynamic; _element.markNeedsBuild(); } Element.markNeedsBuild /// Marks the element as dirty and adds it to the global list of widgets to  /// rebuild in the next frame.</description>
+    </item>
+    
+    <item>
       <title>ZygoteSource</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -267,12 +755,51 @@ If one of those process writes new data into such a page the page is automatical
     </item>
     
     <item>
+      <title>动画</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</guid>
+      <description>类设计 原理图 AnimationController() /// An [AnimationController] needs a [TickerProvider], which is configured using  /// the `vsync` argument on the constructor.  ///  /// The [TickerProvider] interface describes a factory for [Ticker] objects. A  /// [Ticker] is an object that knows how to register itself with the  /// [SchedulerBinding] and fires a callback every frame. The  /// [AnimationController] class uses a [Ticker] to step through the animation  /// that it controls.</description>
+    </item>
+    
+    <item>
       <title>匿名共享内存Ashmem</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</guid>
       <description>原理图 sequenceDiagram sharedMemory-&amp;gt;&amp;gt;+ashmem_dev: 1: ashmem_create_region ashmem_dev-&amp;gt;&amp;gt;ashmem_dev : fd = __ashmem_open() 创建ashmem_area放入file-&amp;gt;private_data ashmem_dev-&amp;gt;&amp;gt;ashmem_dev: ioctl(fd, ASHMEM_SET_NAME, buf) ashmem_dev-&amp;gt;&amp;gt;ashmem_dev: ioctl(fd, ASHMEM_SET_SIZE, size) ashmem_dev-&amp;gt;&amp;gt;-sharedMemory: fd sharedMemory-&amp;gt;&amp;gt;+Os : 2: mmap Os-&amp;gt;&amp;gt;-ashmem : ashmem_mmap ashmem-&amp;gt;&amp;gt;+shmem: vmfile = shmem_file_setup shmem-&amp;gt;&amp;gt;shmem: shmem_get_inode shmem-&amp;gt;&amp;gt;-shmem: alloc_file ashmem-&amp;gt;&amp;gt;shmem: shmem_set_file sharedMemory-&amp;gt;&amp;gt;ashmem_dev: 3: native_write ashmem_dev-&amp;gt;&amp;gt;ashmem: unpinned &amp;amp;&amp;amp; ashmem_pin_region ashmem_dev-&amp;gt;&amp;gt;shmem: env-&amp;gt;GetByteArrayRegion shmem-&amp;gt;&amp;gt;+shmem: shmem_fault shmem-&amp;gt;&amp;gt;-shmem: shmem_getpage分配真实物理页 ashmem_dev-&amp;gt;&amp;gt;ashmem: ashmem_unpin_region MemoryFile public MemoryFile(String name, int length) throws IOException { try { mSharedMemory = SharedMemory.create(name, length); mMapping = mSharedMemory.</description>
+    </item>
+    
+    <item>
+      <title>后台任务处理</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</guid>
+      <description>https://developer.android.com/guide/background/
+图 1. 此决策树可帮助您确定哪个类别最适合您的后台任务。
+推荐的解决方案 下面几部分将介绍针对各个后台任务类型的推荐解决方案。
+即时任务 对于应在用户离开特定作用域或完成某项互动时结束的任务，我们建议使用 Kotlin 协程。许多 Android KTX 库都包含适用于常见应用组件（如 ViewModel）和常见应用生命周期的现成可用的协程作用域。
+如果您是 Java 编程语言用户，请参阅 Android 上的线程处理，了解推荐的选项。
+对于应立即执行并需要继续处理的任务，即使用户将应用放在后台运行或重启设备，我们也建议使用 WorkManager 并利用其对长时间运行的任务的支持。
+在特定情况下（例如使用媒体播放或主动导航功能时），您可能希望直接使用前台服务。
+延期任务 凡是不直接与用户互动相关且日后可随时运行的任务，都可以延期执行。建议为延期任务使用 WorkManager 解决方案。
+如果您希望某些可延期异步任务即使在应用退出或设备重启后仍能正常运行，使用 WorkManager 可以轻松地调度这些任务。如需了解如何调度这些类型的任务，请参阅 WorkManager 相关文档。
+精确任务 需要在精确时间点执行的任务可以使用 AlarmManager。
+如需详细了解 AlarmManager，请参阅设置重复闹铃时间。</description>
+    </item>
+    
+    <item>
+      <title>基础数据结构</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>dex文件里class_def ArtField 一个ArtField对象仅仅是代表一个Java类的成员变量，但它自己并不提供空间来存储这个Java成员变量的内容。Class LinkFields时我们将看到这个Java成员变量所需的存储空间在什么地方
+.... private： GcRoot&amp;lt;mirror::Class&amp;gt; declaring_class_; //该成员变量在哪个类中被定义  uint32_t access_flags_; //该成员变量的访问标记  //该成员变量在dex文件中field_ids数组中的索引，注意，它是由图8-7中encoded_field结  //构体中field_idx_diff计算而来  uint32_t field_dex_idx_; //如果ArtField所代表的成员变量是类的静态成员变量，则下面的offset_代表是该变量实际的存储  //空间在图8-13里Class内存布局中的起始位置。如果是非静态成员变量，则offset_指向图8-13中  //Object内存布局里对应的位置。  uint32_t offset_; ArtMethod 7.0
+...... protected: //下面这四个成员变量的解释可参考图8-7  GcRoot&amp;lt;mirror::Class&amp;gt; declaring_class_; //本函数在哪个类中声明  uint32_t access_flags_; uint32_t dex_code_item_offset_; //表示某个方法在dex文件method_ids数组中的索引  uint32_t dex_method_index_; //与ArtField的field_index_类似，下面这个成员变量和Class类如何管理它的成员函数有关。  //如果这个ArtMethod对应的是一个static或direct函数，则method_index_是指向定义它的类的methods_中的索引。 //如果这个ArtMethod是virtual函数，则method_index_是指向它的VTable中的索引。注意，可能多个类的VTable都包含该//ArtMethod对象（比如Object的那11个方法），所以要保证这个method_index_在不同VTable中都有相同的值——这也是//LinkMethods中那三个函数比较复杂的原因。  uint16_t method_index_; //热度。函数每被调用一次，该值递增1。一旦超过某个阈值，该函数可能就需要被编译成本地方法以加  //快执行速度了。  uint16_t hotness_count_; struct PACKED(4) PtrSizedFields { //指向declaring_class_-&amp;gt;dex_cache_的resolved_methods_成员，详情需结合下文对Dex-Cache的介绍。  ArtMethod** dex_cache_resolved_methods_; //指针的指针，指向declaring_class_-&amp;gt;dex_cache_的dex_cache_resolved_types_成员，详情需结合下文对DexCache的介绍  GcRoot&amp;lt;mirror::Class&amp;gt;* dex_cache_resolved_types_; //下面两个变量是函数指针，它们是一个ArtMethod对象代表的Java方法的入口函数地址。  //我们后续章节介绍Java代码执行的时候再来讨论它  void* entry_point_from_jni_; // Method dispatch from quick compiled code invokes this pointer which may cause bridging into  // the interpreter.</description>
     </item>
     
     <item>
@@ -283,6 +810,70 @@ If one of those process writes new data into such a page the page is automatical
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</guid>
       <description>原理图 上述流程4——5之间还有一个过程，即当ActivityManagerService调用attachApplicationLocked时会跨进程调用thread.bindApplication通知应用进程发消息并调用handleBindApplication，内部会第一次初始化应用进程的mResources和mClassLoader给LoadedApk
 Activity.startActivity public void startActivityForResult(@RequiresPermission Intent intent, int requestCode, @Nullable Bundle options) { if (mParent == null) { options = transferSpringboardActivityOptions(options); Instrumentation.ActivityResult ar = mInstrumentation.execStartActivity( this, mMainThread.getApplicationThread(), mToken, this, intent, requestCode, options); } } Instrumentation.execStartActivity public ActivityResult execStartActivity( Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options) { IApplicationThread whoThread = (IApplicationThread) contextThread; int result = ActivityManager.getService() .startActivity(whoThread, who.getBasePackageName(), intent, intent.resolveTypeIfNeeded(who.getContentResolver()), token, target != null ?</description>
+    </item>
+    
+    <item>
+      <title>异常</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/</guid>
+      <description>解释执行异常抛出和处理 被抛出的异常对象赋值给Thread tlsPtr_exception的成员变量，异常投递的工作就算完成；
+接下来就是异常处理的过程。以switch/case方式来解释执行的代码中，下面这个宏用于判断是否有异常发生并处理它。
+Dex_instruction_list.h
+#define DEX_INSTRUCTION_LIST(V) \ V(0x27, THROW, &amp;#34;throw&amp;#34;, k11x, false, kIndexNone, kThrow, kVerifyRegA) \ interpreter_switch_impl.cc
+ExecuteSwitchImpl template&amp;lt;bool do_access_check, bool transaction_active&amp;gt; JValue ExecuteSwitchImpl(......) { ......　//该函数详情见10.2.3.1节  do { dex_pc = inst-&amp;gt;GetDexPc(insns); ...... inst_data = inst-&amp;gt;Fetch16(0); switch (inst-&amp;gt;Opcode(inst_data)) { //switch/case方式执行不同的dex指令  ...... case Instruction::THROW: { //抛异常  PREAMBLE(); Object* exception = shadow_frame.GetVRegReference( inst-&amp;gt;VRegA_11x(inst_data)); if (UNLIKELY(exception == nullptr)) { //Throw抛出的异常对象为空，则重新抛一个空指针异常  ThrowNullPointerException(&amp;#34;throw with null exception&amp;#34;); } else if (.....) {.</description>
+    </item>
+    
+    <item>
+      <title>数据保存和恢复</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</guid>
+      <description>转屏场景 数据保存 android/app/servertransaction/ActivityRelaunchItem.java
+@Override public void execute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) { client.handleRelaunchActivity(mActivityClientRecord, pendingActions); } ActivityThread.java
+@Override public void handleRelaunchActivity(ActivityClientRecord tmp, PendingTransactionActions pendingActions) { handleRelaunchActivityInner(r, configChanges, tmp.pendingResults, tmp.pendingIntents, pendingActions, tmp.startsNotResumed, tmp.overrideConfig, &amp;#34;handleRelaunchActivity&amp;#34;); } private void handleRelaunchActivityInner(ActivityClientRecord r, int configChanges, List&amp;lt;ResultInfo&amp;gt; pendingResults, List&amp;lt;ReferrerIntent&amp;gt; pendingIntents, PendingTransactionActions pendingActions, boolean startsNotResumed, Configuration overrideConfig, String reason) { // Preserve last used intent, it may be set from Activity#setIntent().  final Intent customIntent = r.activity.mIntent; // Need to ensure state is saved.</description>
+    </item>
+    
+    <item>
+      <title>混合开发</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</guid>
+      <description>Flutter和native混合开发 Binding to native C/C++ code using dart:ffi
+Writing custom platform-specific code Writing custom platform-specific code
+Flutter’s platform-specific API support does not rely on code generation, but rather on a flexible message passing style:
+ The Flutter portion of the app sends messages to its host, the iOS or Android portion of the app, over a platform channel.  static const platform = const MethodChannel(&amp;#39;samples.flutter.dev/battery&amp;#39;); try { final int result = await platform.</description>
+    </item>
+    
+    <item>
+      <title>混合编译_运行</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</guid>
+      <description>How ART works ART uses ahead-of-time (AOT) compilation, and starting in Android 7.0 (Nougat or N), it uses a hybrid ==combination of AOT, just-in-time (JIT) compilation, and profile-guided compilation==. The combination of all these compilation modes is ==configurable== and will be discussed in this section. As an example, Pixel devices are configured with the following compilation flow:
+ An application is initially installed without any AOT compilation. The first few times the application runs, it will be ==interpreted, and methods frequently executed will be JIT compiled==.</description>
+    </item>
+    
+    <item>
+      <title>渲染</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</guid>
+      <description>绘制渲染 三棵树 Widget Tree，Element Tree 以及 RenderObject Tree 。根据它们的功能我将它翻译成模型树，状态树和渲染树，也正是通过这三棵树维护起了整个应用的视图数据。
+开发者通过Widget配置，Framework通过比对Widget配置来更新Element，最后调度RenderObject Tree完成布局排列和绘制。
+ Widget Tree  存放属性的描述信息，更像是一个Model。同一个Widget可以同时描述多个渲染树中的节点，但是它是不可修改的，因此它只会被创建或销毁。
+Widget是为Element描述需要的配置， 负责创建Element，决定Element是否需要更新。Flutter Framework通过差分算法比对Widget树前后的变化，决定Element的State是否改变。当重建Widget树后并未发生改变， 则Element不会触发重绘，则就是Widget树的重建并不一定会触发Element树的重建。
+ Element Tree  存放上下文状态信息，同时持有 Widget和RenderObject的引用。像是一个Controller控制着状态的更新(initial, mount,amount,activate,deactivate,update)。
+Element表示Widget配置树的特定位置的一个实例，同时持有Widget和RenderObject，负责管理Widget配置和RenderObject渲染。Element状态由Flutter Framework管理， 开发人员只需更改Widget即可。
+ RenderObject Tree  实现了layout和paint事件，是最终渲染的View视图。
+RenderObject表示渲染树的一个对象，负责真正的渲染工作，比如测量大小、位置、绘制等都由RenderObject完成。
+渲染库（Rendering） Flutter的控件树在实际显示时会转换成对应的渲染对象（RenderObject）树来实现布局和绘制操作。渲染库主要提供的功能类有：
+abstract class RendererBinding extends BindingBase with ServicesBinding, SchedulerBinding, HitTestable { ... } abstract class RenderObject extends AbstractNode with DiagnosticableTreeMixin implements HitTestTarget { abstract class RenderBox extends RenderObject { ... } class RenderParagraph extends RenderBox { .</description>
     </item>
     
     <item>
@@ -304,12 +895,63 @@ private void draw(boolean fullRedrawNeeded) { ... if (!dirty.isEmpty() || mIsAni
     </item>
     
     <item>
+      <title>类加载</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</guid>
+      <description>动态加载dex和so https://alibaba.github.io/atlas/update/principle.html
+PathClassLoader自身负责主Apk的类和c库的查找路口；其parent BootClassloader负责framework sdk的内容的查找。
+PathClassLoader本身也是一个class，继承了BaseDexClassLoader（同DexClassLoader），里面查找过程在DexPathList里面实现（如下图） &amp;gt;
+DexPathList最终通过DexFile去loadClass，DexPathList可以理解为持有者DexFile以及nativeLibrary目录，再查找的时候遍历这些对象，直到找到需要的类或者c库，那么动态部署的方式就是把新修改的内容添加到这些对象的最前面，从而使得查找的过程中新修改的内容能够提前找到从而替换原有的（如下图）
+BaseDexClassLoader构造方法 private final DexPathList pathList; /** \* Constructs an instance. \* Note that all the *.jar and *.apk files from {@code dexPath} might be \* first extracted in-memory before the code is loaded. This can be avoided \* by passing raw dex files (*.dex) in the {@code dexPath}. * \* @param dexPath the list of jar/apk files containing classes and \* resources, delimited by {@code File.</description>
+    </item>
+    
+    <item>
+      <title>类加载虚拟机层</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</guid>
+      <description>Flow load class trigger flow graph TB EnsureInitialized--&amp;gt;InitializeClass InitializeClass--&amp;gt;MethodVerifier::VerifyClass MethodVerifier::VerifyClass--&amp;gt;MethodVerifier::VerifyMethods MethodVerifier::VerifyMethods--&amp;gt;MethodVerifier::VerifyMethod MethodVerifier::VerifyMethod--&amp;gt;MethodVerifier::CodeFlowVerifyInstruction MethodVerifier::CodeFlowVerifyInstruction--&amp;gt;ResolveType MethodVerifier::VerifyMethod--&amp;gt;ResolveType ResolveType--&amp;gt;FindClass FindClass--&amp;gt;DefineClass ClassLinkerSummary ClassLinker中其他一些常见函数。包括：
+·Resolve相关函数。虽然名称叫Resolve，但在ART代码里，它并非是图8-5类加载、链接和初始化阶段中提到的Resolve。相反，它甚至可能触发一个类的加载和链接流程。
+·FindClass：根据类的字符串名称搜索一个类。如果没有的话，则可能触发类的加载和链接流程。
+graph LR ResolveMethod--&amp;gt;ResolveType ResolveField--&amp;gt;ResolveType ResolveType--&amp;gt;FindClass FindClass--&amp;gt;FindClassInBaseDexClassLoader--&amp;gt;FindClassInBaseDexClassLoaderClassPath--&amp;gt;DefineClass ResolveMethod template &amp;lt;ClassLinker::ResolveMode kResolveMode&amp;gt; ArtMethod* ClassLinker::ResolveMethod(const DexFile&amp;amp; dex_file, uint32_t method_idx, Handle&amp;lt;mirror::DexCache&amp;gt; dex_cache, Handle&amp;lt;mirror::ClassLoader&amp;gt; class_loader, ArtMethod* referrer, InvokeType type) { //和ResolveType类似，首先判断dex_cache中是否已经解析过这个方法了。  ArtMethod* resolved = dex_cache-&amp;gt;GetResolvedMethod(method_idx, image_pointer_size_); if (resolved != nullptr &amp;amp;&amp;amp; !resolved-&amp;gt;IsRuntimeMethod()) { if (kResolveMode == ClassLinker::kForceICCECheck) { //Java有诸如1.5、1.6这样的版本，在早期Java版本里，有些信息和现在的版本有差异，  //此处将检查是否有信息不兼容的地方（即check incompatible class change），  //如果检查失败，则会设置一个IncompatibleClassChangeError异常，笔者此处不拟讨论。  if (resolved-&amp;gt;CheckIncompatibleClassChange(type)) { .</description>
+    </item>
+    
+    <item>
       <title>绘制原理</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</guid>
       <description>流程原理 ViewRootImpl.setView /** * We have one child */ public void setView(View view, WindowManager.LayoutParams attrs, View panelParentView) { // If the application owns the surface, don&amp;#39;t enable hardware acceleration  if (mSurfaceHolder == null) { // While this is supposed to enable only, it can effectively disable  // the acceleration too.  enableHardwareAcceleration(attrs); } // Schedule the first layout -before- adding to the window  // manager, to make sure we do the relayout before receiving  // any other events from the system.</description>
+    </item>
+    
+    <item>
+      <title>解释执行7_0</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</guid>
+      <description>quick_entrypoints_x86.S art_quick_invoke_stub /*这段注释来自于源码，它展示了调用art_quick_invoke_stub函数时，相关参数在栈中的布局 * Quick invocation stub (non-static). * On entry: * [sp] = return address 返回值地址，这是由函数调用指令自动压入栈的 * [sp + 4] = method pointer 代表方法C的ArtMethod对象 * [sp + 8] = argument array or null for no argument methods * [sp + 12] = size of argument array in bytes * [sp + 16] = (managed) thread pointer 这是代表调用线程的Thread对象 * [sp + 20] = JValue* result * [sp + 24] = shorty */ DEFINE_FUNCTION art_quick_invoke_stub #定义art_quick_invoke_stub函数  PUSH ebp // save ebp PUSH ebx // save ebx PUSH esi // save esi PUSH edi // save edi .</description>
+    </item>
+    
+    <item>
+      <title>路由</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/</guid>
+      <description>原理    可能你会比较好奇_Theatre中 offstage 是如何做到不绘制的。
+你应该知道 Element 树的是通过其内部的mout方法将自己挂载到父 Element 上的。_Theatre的 mout方法不太一样， onstage走正常的挂载流程，加入到Element 树中； offstage集合中的 Widget 仅创建了对应的 Element，并没有挂载到 Element 树中。没有进入到Element中，也就不会进入到 RenderObject树中，也就不走到绘制流程了。
+这样你应该能理解Overlay其实是Stack的扩展。Overlay预先进行过滤，从而避免了无用的绘制。
+我们看下当路由中只有一个 Page 时的示意图：
+我们再看下当路由中又被 push 进一个 Page时的情况：
+因为通常 Page 的 opaque=true, maintainState=true,所以 Page2 进入 onstage， Page1 不在需要被绘制，但需要保持状态，进入了offstage。
+因为通常 popupWindow（dialog） 的 opaque=false,我们再向路由中 push 一个 dialog:
+类设计 参考 Flutter 路由原理解析
+Flutter 路由源码解析</description>
     </item>
     
     <item>

@@ -1,0 +1,5985 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>GC_MarkCompact :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1613805603" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1613805603" rel="stylesheet">
+    <link href="/css/hybrid.css?1613805603" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1613805603" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1613805603" rel="stylesheet">
+    <link href="/css/auto-complete.css?1613805603" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1613805603" rel="stylesheet">
+    <link href="/css/theme.css?1613805603" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1613805603" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1613805603" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1613805603"></script>
+
+    <script src="/js/auto_toc_scroll.js?1613805603"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1613805603"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1613805603"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1613805603"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/" title="jetpack" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/">
+          jetpack
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/" title="arch" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/">
+          arch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/databinding/" title="databinding" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/databinding/">
+          databinding
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/databinding/databinding/" title="Databinding" class="dd-item ">
+        <a href="/en/android/jetpack/arch/databinding/databinding/">
+        Databinding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/lifecycle/" title="lifecycle" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/lifecycle/">
+          lifecycle
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/lifecycle/lifecycle/" title="Lifecycle" class="dd-item ">
+        <a href="/en/android/jetpack/arch/lifecycle/lifecycle/">
+        Lifecycle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/livedata/" title="livedata" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/livedata/">
+          livedata
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/livedata/" title="LiveData" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/livedata/">
+        LiveData
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/" title="LiveData封装" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/">
+        LiveData封装
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/mediatorlivedata/" title="MediatorLiveData" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/mediatorlivedata/">
+        MediatorLiveData
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/viewmodel/" title="viewmodel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/viewmodel/">
+          viewmodel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/viewmodel/" title="ViewModel" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/viewmodel/">
+        ViewModel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/" title="ViewModel封装" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/">
+        ViewModel封装
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/" title="数据保存和恢复" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/">
+        数据保存和恢复
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/jetpack/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+          性能优化
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/" title="内存优化" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/">
+          内存优化
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/" title="DumpHprof" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/">
+        DumpHprof
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/" title="Hprof_binary_dump_format" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/">
+        Hprof_binary_dump_format
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/" title="LeakCanary2Source" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/">
+        LeakCanary2Source
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/" title="OOM" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/">
+        OOM
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/" title="kernel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/">
+          kernel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/" title="kernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/">
+        kernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/" title="layoutinflater" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/">
+          layoutinflater
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/" title="LayoutInflater" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/">
+        LayoutInflater
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/" title="sharedpreferences" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/">
+          sharedpreferences
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/" title="SharedPreferences" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/">
+        SharedPreferences
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/" title="thread" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/">
+          thread
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/" title="StackTraceElement" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/">
+        StackTraceElement
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/" title="ThreadState" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/">
+        ThreadState
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/" title="后台任务" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/">
+          后台任务
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/" title="后台任务处理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/">
+        后台任务处理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/" title="应用启动退出" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/">
+          应用启动退出
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/" title="应用启动" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/">
+        应用启动
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/" title="源码研究方法" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/">
+          源码研究方法
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/" title="Syscall查找方式" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/">
+        Syscall查找方式
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+          虚拟机
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/" title="alloc_gc" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/">
+          alloc_gc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/" title="Alloc" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/">
+        Alloc
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/" title="AllocRelated" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/">
+        AllocRelated
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/" title="GC" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/">
+        GC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/" title="GC_ConcurrentCopying" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/">
+        GC_ConcurrentCopying
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/" title="GC_MarkCompact" class="dd-item active">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/">
+        GC_MarkCompact
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/" title="GC_MS_CMS" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/">
+        GC_MS_CMS
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/" title="GC_Semi_Space" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/">
+        GC_Semi_Space
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/" title="Runtime_VisitRoots" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/">
+        Runtime_VisitRoots
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/" title="Space" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/">
+        Space
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/" title="ART_Lock" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/">
+        ART_Lock
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/" title="jni" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/">
+          jni
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/" title="C启动Java" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/">
+        C启动Java
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
+        java_jni方法调用原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Jni数据转换" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">
+        Jni数据转换
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/" title="SystemLoadLibrary" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/">
+        SystemLoadLibrary
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/">
+        异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="启动流程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+          启动流程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="ART启动流程" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+        ART启动流程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="基础数据结构" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        基础数据结构
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/" title="混合编译_运行" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/">
+          混合编译_运行
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/" title="JVM_JIT" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/">
+        JVM_JIT
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/" title="混合编译_运行" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/">
+        混合编译_运行
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" title="类加载" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+          类加载
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/" title="Android_N混合编译与对热补丁影响解析" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/">
+        Android_N混合编译与对热补丁影响解析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" title="类加载" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+        类加载
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/" title="类加载虚拟机层" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/">
+        类加载虚拟机层
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/" title="类编译" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/">
+          类编译
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/" title="dex2oat" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/">
+        dex2oat
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/kotlin/" title="kotlin" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/kotlin/">
+          kotlin
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/" title="协程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/">
+          协程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/" title="kotlin协程" class="dd-item ">
+        <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/">
+        kotlin协程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/" title="kotlin协程Source" class="dd-item ">
+        <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/">
+        kotlin协程Source
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/" title="engine" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/">
+          engine
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/" title="Engine" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/">
+        Engine
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/" title="startup" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/">
+          startup
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/" title="startup" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/">
+        startup
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/" title="startup_dart_framework" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/">
+        startup_dart_framework
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/" title="startup_embedder_framwwork" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/">
+        startup_embedder_framwwork
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/" title="touch" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/">
+          touch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/" title="Touch" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/">
+        Touch
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/" title="动画" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/">
+          动画
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" title="动画" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/">
+        动画
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" title="混合开发" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+          混合开发
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/" title="FlutterBoost" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/">
+        FlutterBoost
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" title="混合开发" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+        混合开发
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/" title="渲染" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/">
+          渲染
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/" title="Widget" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/">
+        Widget
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/" title="渲染" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/">
+        渲染
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/" title="路由" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/">
+          路由
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/" title="路由" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/">
+        路由
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/" title="MessageLoop" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/">
+        MessageLoop
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/" title="MethodChannel" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/">
+        MethodChannel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/'>虚拟机</a> > <a href='/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/'>alloc_gc</a> > GC_MarkCompact
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mark_compacthcc">mark_compact.h/cc</a></li>
+    <li><a href="#runphases">RunPhases</a>
+      <ul>
+        <li><a href="#markingphase">MarkingPhase</a></li>
+        <li><a href="#reclaimphase">ReclaimPhase</a>
+          <ul>
+            <li><a href="#compact">Compact</a>
+              <ul>
+                <li><a href="#calculateobjectforwardingaddresses">CalculateObjectForwardingAddresses</a></li>
+                <li><a href="#updatereferences">UpdateReferences</a></li>
+                <li><a href="#moveobjects">MoveObjects</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              GC_MarkCompact
+            </h1>
+          
+
+        
+
+
+<h2 id="mark_compacthcc">mark_compact.h/cc</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">virtual</span> GcType <span style="color:#a6e22e">GetGcType</span>() <span style="color:#66d9ef">const</span> OVERRIDE {
+    <span style="color:#66d9ef">return</span> kGcTypePartial;<span style="color:#75715e">//MarkCompact不处理ImageSpace和ZygoteSpace
+</span><span style="color:#75715e"></span>}
+<span style="color:#66d9ef">virtual</span> CollectorType <span style="color:#a6e22e">GetCollectorType</span>() <span style="color:#66d9ef">const</span> OVERRIDE {
+    <span style="color:#66d9ef">return</span> kCollectorTypeMC;
+}
+
+<span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>SetSpace(space<span style="color:#f92672">::</span>BumpPointerSpace<span style="color:#f92672">*</span> space) {
+    space_ <span style="color:#f92672">=</span> space;<span style="color:#75715e">//space_是MarkCompact成员变量
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h2 id="runphases">RunPhases</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>RunPhases() {
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    <span style="color:#75715e">/* InitializePhase非常简单，其中需要注意的是MarkCompact下面两个成员变量的设置：
+</span><span style="color:#75715e">      (1) mark_stack_ = heap_-&gt;GetMarkStack();
+</span><span style="color:#75715e">      (2) mark_bitmap_ = heap_-&gt;GetMarkBitmap();
+</span><span style="color:#75715e">    */</span>
+    InitializePhase();
+    {
+        ScopedPause <span style="color:#a6e22e">pause</span>(<span style="color:#66d9ef">this</span>);<span style="color:#75715e">//MarkCompact是stop-the-world类型的回收器
+</span><span style="color:#75715e"></span>        ......
+        MarkingPhase();<span style="color:#75715e">//①标记阶段，详情见下文分析
+</span><span style="color:#75715e"></span>        ReclaimPhase();<span style="color:#75715e">//②回收阶段，详情见下文分析
+</span><span style="color:#75715e"></span>    }
+    ......
+    FinishPhase();<span style="color:#75715e">//收尾工作，非常简单，读者可自行阅读
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="markingphase">MarkingPhase</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>MarkingPhase() {
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    <span style="color:#75715e">/*MarkCompact基于Mark-Compact回收原理，所以它也需要标记能搜索到的对象。不过，由于
+</span><span style="color:#75715e">      BumpPointerSpace空间对象不包含位图对象，所以下面将为space_（指向一个
+</span><span style="color:#75715e">      BumpPointerSpace空间）创建一个位图对象objects_before_forwarding。它用于记录
+</span><span style="color:#75715e">      搜索到的对象。*/</span>
+    objects_before_forwarding_.reset(accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">::</span>Create(
+        <span style="color:#e6db74">&#34;objects before forwarding&#34;</span>, space_<span style="color:#f92672">-&gt;</span>Begin(), space_<span style="color:#f92672">-&gt;</span>Size()));
+    <span style="color:#75715e">//此外还创建了一个位图对象objects_with_lockword_，它和GC没有什么关系，只是用于
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//保存一些信息。下文将见到objects_with_lockword_的作用
+</span><span style="color:#75715e"></span>    objects_with_lockword_.reset(accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">::</span>Create(
+        <span style="color:#e6db74">&#34;objects with lock words&#34;</span>, space_<span style="color:#f92672">-&gt;</span>Begin(), space_<span style="color:#f92672">-&gt;</span>Size()));
+
+    <span style="color:#75715e">//将ImageSpace或ZygoteSpace加到MarkCompact immune_space_容器中
+</span><span style="color:#75715e"></span>    BindBitmaps();
+    <span style="color:#75715e">/*ProcessCards和ClearCardTable用于处理CardTable中对应的card。此处请读者注意，
+</span><span style="color:#75715e">      虽然MarkCompact也是通过移动对象来实现内存回收，但MarkCompact移动对象的过程是在
+</span><span style="color:#75715e">      最后的回收阶段。此时，所有的非垃圾对象都已经标记。所以，MarkCompact中可以使用Write
+</span><span style="color:#75715e">      Barrier来记录跨空间的对象引用。作为对比，ConcurrentCopying在标记阶段可能就会移动
+</span><span style="color:#75715e">      对象，这时就不方便使用Write Barrier了，而只能使用Read Barrier。  */</span>
+    heap_<span style="color:#f92672">-&gt;</span>ProcessCards(GetTimings(), false, false, true);
+    heap_<span style="color:#f92672">-&gt;</span>GetCardTable()<span style="color:#f92672">-&gt;</span>ClearCardTable();
+    <span style="color:#75715e">//下面几个函数我们都介绍过
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (kUseThreadLocalAllocationStack) {
+        ......
+        heap_<span style="color:#f92672">-&gt;</span>RevokeAllThreadLocalAllocationStacks(self);
+    }
+    ......
+    heap_<span style="color:#f92672">-&gt;</span>SwapStacks();
+    {
+        WriterMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>heap_bitmap_lock_);
+        MarkRoots();<span style="color:#75715e">//搜索并标记根对象，详情见下文
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//借助CardTable来处理ImageSpace或ZygoteSpace中存在跨空间引用的对象，每找到
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//这样一个对象就对其做标记并压入mark_stack_中。读者可先了解上面的MarkRoots函数
+</span><span style="color:#75715e"></span>        UpdateAndMarkModUnion();
+        MarkReachableObjects();<span style="color:#75715e">//从根对象出发，扫描它们所引用的对象
+</span><span style="color:#75715e"></span>    }
+    ......<span style="color:#75715e">//Java Reference对象的处理等
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="reclaimphase">ReclaimPhase</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>ReclaimPhase() {
+    ......
+    WriterMutexLock mu(Thread<span style="color:#f92672">::</span>Current(), <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>heap_bitmap_lock_);
+    <span style="color:#75715e">/*Sweep将回收除space_、immune_spaces_外其他空间对象中的垃圾。内部代码逻辑非常简单，
+</span><span style="color:#75715e">      就是调用ContinuousMemMapAllocSpace的Sweep函数进行回收。这些空间的垃圾回收使用
+</span><span style="color:#75715e">      的是Mark-Sweep方法，不是Mark-Compact。*/</span>
+    Sweep(false);
+    <span style="color:#75715e">//调用GarbageCollector SwapBitmaps函数，该函数在MarkSweep类中已经介绍过了
+</span><span style="color:#75715e"></span>    SwapBitmaps();
+    GetHeap()<span style="color:#f92672">-&gt;</span>UnBindBitmaps();<span style="color:#75715e">//该函数在MarkSweep中已经介绍过了
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">//压缩，这才是MarkCompact的精髓
+</span><span style="color:#75715e"></span>    Compact();
+}
+</code></pre></div><h4 id="compact">Compact</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>Compact() {
+    .....
+    <span style="color:#75715e">/*Compact中有三个关键函数，此处先简单介绍它们的作用：
+</span><span style="color:#75715e">     1:  CalculateObjectForwardingAddresses：计算每个存活对象的forwarding address。
+</span><span style="color:#75715e">      这个地址也就是这些对象的新的内存地址。
+</span><span style="color:#75715e">      2: UpdateReferences：更新对象的引用关系，将所引用的对象修改为对应的forwarding
+</span><span style="color:#75715e">      address。这个函数没有什么特殊的知识，读者可自行阅读。
+</span><span style="color:#75715e">      3:  MoveObjects：将对象移动到它的forwarding address处。  */</span>
+    CalculateObjectForwardingAddresses();
+    UpdateReferences();
+    MoveObjects();
+    ......
+    <span style="color:#75715e">/*更新space_的末尾位置。经过上面压缩处理后，space_中的垃圾对象被清除，而非垃圾对象们
+</span><span style="color:#75715e">      又被移动到了一起。这些非垃圾对象在space_中的末尾位置由bump_pointer_标示。  */</span>
+    space_<span style="color:#f92672">-&gt;</span>SetEnd(bump_pointer_);
+    <span style="color:#75715e">//清零[bump_Pointer_,bump_pointer_+bytes_freed)这段空间。这段空间就是垃圾对象所
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//占据的内存大小
+</span><span style="color:#75715e"></span>    memset(bump_pointer_, <span style="color:#ae81ff">0</span>, bytes_freed);
+}
+</code></pre></div><h5 id="calculateobjectforwardingaddresses">CalculateObjectForwardingAddresses</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">//CalculateObjectForwardingAddress展示了MarkCompact中Compact的方法，就是将非垃圾对象一个一个排列起来。显然，要支持这种操作的话非BumpPointerSpace不可。
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>CalculateObjectForwardingAddresses() {
+    ......
+    <span style="color:#75715e">//bump_pointer_初值为space_的起始位置
+</span><span style="color:#75715e"></span>    bump_pointer_ <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*&gt;</span>(space_<span style="color:#f92672">-&gt;</span>Begin());
+    <span style="color:#75715e">/*objects_before_forwarding_记录了space_中非垃圾对象的位图信息。下面的代码
+</span><span style="color:#75715e">      将遍历space_中的非垃圾对象，然后调用函数对象进行处理。
+</span><span style="color:#75715e">      CalculateObjectForwardingAddressVisitor内部调用MarkCompact ForwardObject
+</span><span style="color:#75715e">      对每一个非垃圾对象进行处理。我们直接来看ForwardObject。*/</span>
+    CalculateObjectForwardingAddressVisitor <span style="color:#a6e22e">visitor</span>(<span style="color:#66d9ef">this</span>);
+    objects_before_forwarding_<span style="color:#f92672">-&gt;</span>VisitMarkedRange(
+                    <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(space_<span style="color:#f92672">-&gt;</span>Begin()),
+                    <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(space_<span style="color:#f92672">-&gt;</span>End()),
+                    visitor);
+}
+
+<span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>ForwardObject(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> obj) {
+    <span style="color:#75715e">//获取这个对象的所占内存的大小
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> size_t alloc_size <span style="color:#f92672">=</span> RoundUp(obj<span style="color:#f92672">-&gt;</span>SizeOf(), space<span style="color:#f92672">::</span>BumpPointerSpace<span style="color:#f92672">::</span>kAlignment);
+    LockWord lock_word <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>GetLockWord(false);
+    <span style="color:#75715e">/*如果这个obj之前有设置LockWord（可能代表一个用于线程同步的Monitor），下面的if代码将
+</span><span style="color:#75715e">      把LockWord旧值保存起来。等后续对象移动完毕后，我们需要恢复Obj的LockWord的旧值。  */</span>
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>LockWord<span style="color:#f92672">::</span>IsDefault(lock_word)) {
+        <span style="color:#75715e">//objects_with_lockword_记录哪个对象存在LockWord的旧值
+</span><span style="color:#75715e"></span>        objects_with_lockword_<span style="color:#f92672">-&gt;</span>Set(obj);
+        <span style="color:#75715e">//lock_words_to_restore_是一个stddqueue（双端队列），用于保存obj的
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//LockWord旧值
+</span><span style="color:#75715e"></span>        lock_words_to_restore_.push_back(lock_word);
+    }
+    <span style="color:#75715e">//设置obj的forwarding address，为bump_pointer_
+</span><span style="color:#75715e"></span>    obj<span style="color:#f92672">-&gt;</span>SetLockWord(LockWord<span style="color:#f92672">::</span>FromForwardingAddress(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span>(bump_pointer_)),false);
+    <span style="color:#75715e">//移动bump_poionter_，使得它指向下一个对象的forwarding address
+</span><span style="color:#75715e"></span>    bump_pointer_ <span style="color:#f92672">+=</span> alloc_size;
+    <span style="color:#f92672">++</span>live_objects_in_space_;
+}
+</code></pre></div><h5 id="updatereferences">UpdateReferences</h5>
+<p>&hellip;&hellip;</p>
+<h5 id="moveobjects">MoveObjects</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>MoveObjects() {
+    ......
+    <span style="color:#75715e">/*遍历存活对象，MoveObjectVisitor内部调用MoveObject函数进行处理，下面将直接介绍
+</span><span style="color:#75715e">      MoveObject的内容。*/</span>
+    MoveObjectVisitor visitor(<span style="color:#66d9ef">this</span>);<span style="color:#75715e">//内部调用MoveObject
+</span><span style="color:#75715e"></span>    objects_before_forwarding_<span style="color:#f92672">-&gt;</span>VisitMarkedRange(
+                <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(space_<span style="color:#f92672">-&gt;</span>Begin()),
+                <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(space_<span style="color:#f92672">-&gt;</span>End()),
+                visitor);
+    ......
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> MarkCompact<span style="color:#f92672">::</span>MoveObject(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> obj, size_t len) {
+    <span style="color:#75715e">//从LockWord中获取obj的目标地址
+</span><span style="color:#75715e"></span>    uintptr_t dest_addr <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>GetLockWord(false).ForwardingAddress();
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> dest_obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*&gt;</span>(dest_addr);
+    <span style="color:#75715e">//使用memmove将obj移动到dest_addr处。
+</span><span style="color:#75715e"></span>    memmove(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">*&gt;</span>(dest_addr),
+                            <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*&gt;</span>(obj), len);
+    LockWord lock_word <span style="color:#f92672">=</span> LockWord<span style="color:#f92672">::</span>Default();
+    <span style="color:#75715e">//如果obj之前有LockWord旧值，则需要从lock_words_to_restore_中拿到旧值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (UNLIKELY(objects_with_lockword_<span style="color:#f92672">-&gt;</span>Test(obj))) {
+        lock_word <span style="color:#f92672">=</span> lock_words_to_restore_.front();
+        lock_words_to_restore_.pop_front();
+    }
+    <span style="color:#75715e">//设置dest_obj的LockWord。
+</span><span style="color:#75715e"></span>    dest_obj<span style="color:#f92672">-&gt;</span>SetLockWord(lock_word, false);
+}
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/" title="GC_ConcurrentCopying"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/" title="GC_MS_CMS" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1613805603"></script>
+    <script src="/js/perfect-scrollbar.min.js?1613805603"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1613805603"></script>
+    <script src="/js/jquery.sticky.js?1613805603"></script>
+    <script src="/js/featherlight.min.js?1613805603"></script>
+    <script src="/js/highlight.pack.js?1613805603"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1613805603"></script>
+    <script src="/js/learn.js?1613805603"></script>
+    <script src="/js/hugo-learn.js?1613805603"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1613805603"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>viewmodel on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/</link>
+    <description>Recent content in viewmodel on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ViewModel</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</guid>
+      <description>类设计 基于androidx.lifecycle:lifecycle-viewmodel:2.1.0
+保存viewModelStore handleDestroyActivity ActivityThread.java
+@Override public void handleDestroyActivity(IBinder token, boolean finishing, int configChanges, boolean getNonConfigInstance, String reason) {//转屏时传递的getNonConfigInstance为true  ActivityClientRecord r = performDestroyActivity(token, finishing, configChanges, getNonConfigInstance, reason); } handledestroyactivity由来
+/** Core implementation of activity destroy call. */ ActivityClientRecord performDestroyActivity(IBinder token, boolean finishing, int configChanges, boolean getNonConfigInstance, String reason) { ActivityClientRecord r = mActivities.get(token); Class&amp;lt;? extends Activity&amp;gt; activityClass = null; if (r != null) { if (finishing) { r.activity.mFinished = true; } performPauseActivityIfNeeded(r, &amp;#34;destroy&amp;#34;); if (!</description>
+    </item>
+    
+    <item>
+      <title>ViewModel封装</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</guid>
+      <description>ViewModel初始化精简 https://stackoverflow.com/questions/58106707/how-does-kotlin-use-this-by-delegate-to-instantiate-the-viewmodel
+by viewModels(...) is part of fragment-ktx library, it&amp;rsquo;s a convienience short hand for creating a lazy delegate obtaining ViewModels.
+// creates lazy delegate for obtaining zero-argument MyViewModel private val viewModel : MyViewModel by viewModels() // it&amp;#39;s functionally equal to: private val viewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) } // with factory: private val viewModel : MyViewModel by viewModels { getViewModelFactory() } // is equal to: private val viewModel by lazy { ViewModelProvider(this, getViewModelFactory()).</description>
+    </item>
+    
+    <item>
+      <title>数据保存和恢复</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</guid>
+      <description>转屏场景 数据保存 android/app/servertransaction/ActivityRelaunchItem.java
+@Override public void execute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) { client.handleRelaunchActivity(mActivityClientRecord, pendingActions); } ActivityThread.java
+@Override public void handleRelaunchActivity(ActivityClientRecord tmp, PendingTransactionActions pendingActions) { handleRelaunchActivityInner(r, configChanges, tmp.pendingResults, tmp.pendingIntents, pendingActions, tmp.startsNotResumed, tmp.overrideConfig, &amp;#34;handleRelaunchActivity&amp;#34;); } private void handleRelaunchActivityInner(ActivityClientRecord r, int configChanges, List&amp;lt;ResultInfo&amp;gt; pendingResults, List&amp;lt;ReferrerIntent&amp;gt; pendingIntents, PendingTransactionActions pendingActions, boolean startsNotResumed, Configuration overrideConfig, String reason) { // Preserve last used intent, it may be set from Activity#setIntent().  final Intent customIntent = r.activity.mIntent; // Need to ensure state is saved.</description>
+    </item>
+    
+  </channel>
+</rss>

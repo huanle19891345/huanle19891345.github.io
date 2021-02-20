@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>engine on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/</link>
+    <description>Recent content in engine on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Engine</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/</guid>
+      <description>window.dart lib/ui
+/// Requests that, at the next appropriate opportunity, the [onBeginFrame]  /// and [onDrawFrame] callbacks be invoked.  ///  /// See also:  ///  /// * [SchedulerBinding], the Flutter framework class which manages the  /// scheduling of frames.  void scheduleFrame() native &amp;#39;PlatformConfiguration_scheduleFrame&amp;#39;; lib/ui/window/platform_configuration.cc
+PlatformConfiguration void PlatformConfiguration::RegisterNatives( tonic::DartLibraryNatives* natives) { natives-&amp;gt;Register({ {&amp;#34;PlatformConfiguration_defaultRouteName&amp;#34;, DefaultRouteName, 1, true}, {&amp;#34;PlatformConfiguration_scheduleFrame&amp;#34;, ScheduleFrame, 1, true}, {&amp;#34;PlatformConfiguration_sendPlatformMessage&amp;#34;, _SendPlatformMessage, 4, true}, {&amp;#34;PlatformConfiguration_respondToPlatformMessage&amp;#34;, _RespondToPlatformMessage, 3, true}, {&amp;#34;PlatformConfiguration_render&amp;#34;, Render, 2, true}, {&amp;#34;PlatformConfiguration_updateSemantics&amp;#34;, UpdateSemantics, 2, true}, {&amp;#34;PlatformConfiguration_setIsolateDebugName&amp;#34;, SetIsolateDebugName, 2, true}, {&amp;#34;PlatformConfiguration_reportUnhandledException&amp;#34;, ReportUnhandledException, 2, true}, {&amp;#34;PlatformConfiguration_setNeedsReportTimings&amp;#34;, SetNeedsReportTimings, 2, true}, {&amp;#34;PlatformConfiguration_getPersistentIsolateData&amp;#34;, GetPersistentIsolateData, 1, true}, {&amp;#34;PlatformConfiguration_computePlatformResolvedLocale&amp;#34;, _ComputePlatformResolvedLocale, 2, true}, }); } void ScheduleFrame(Dart_NativeArguments args) { UIDartState::ThrowIfUIOperationsProhibited(); UIDartState::Current()-&amp;gt;platform_configuration()-&amp;gt;client()-&amp;gt;ScheduleFrame(); } runtime/runtime_controller.</description>
+    </item>
+    
+  </channel>
+</rss>

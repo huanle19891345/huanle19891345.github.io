@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>路由 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/</link>
+    <description>Recent content in 路由 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>路由</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/</guid>
+      <description>原理    可能你会比较好奇_Theatre中 offstage 是如何做到不绘制的。
+你应该知道 Element 树的是通过其内部的mout方法将自己挂载到父 Element 上的。_Theatre的 mout方法不太一样， onstage走正常的挂载流程，加入到Element 树中； offstage集合中的 Widget 仅创建了对应的 Element，并没有挂载到 Element 树中。没有进入到Element中，也就不会进入到 RenderObject树中，也就不走到绘制流程了。
+这样你应该能理解Overlay其实是Stack的扩展。Overlay预先进行过滤，从而避免了无用的绘制。
+我们看下当路由中只有一个 Page 时的示意图：
+我们再看下当路由中又被 push 进一个 Page时的情况：
+因为通常 Page 的 opaque=true, maintainState=true,所以 Page2 进入 onstage， Page1 不在需要被绘制，但需要保持状态，进入了offstage。
+因为通常 popupWindow（dialog） 的 opaque=false,我们再向路由中 push 一个 dialog:
+类设计 参考 Flutter 路由原理解析
+Flutter 路由源码解析</description>
+    </item>
+    
+  </channel>
+</rss>

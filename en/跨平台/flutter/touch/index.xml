@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>touch on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/</link>
+    <description>Recent content in touch on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Touch</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/</guid>
+      <description>原理图 graph TB PointerDownEvent--&amp;gt;|hitTest|HitTestResult--&amp;gt;HitTestTarget1 HitTestResult--&amp;gt;|handleEvent|RawGestureDetectorState._handlePointerDown--&amp;gt;|addPointer_event|gestureRecognizer1 HitTestResult--&amp;gt;HitTestTargetXxx HitTestResult--&amp;gt;|handleEvent|GestureBinding.handleEvent--&amp;gt;pointerRouter.route_event GestureBinding.handleEvent--&amp;gt;|Down?|gestureArena.close GestureBinding.handleEvent--&amp;gt;|Up?|gestureArena.sweep RawGestureDetectorState._handlePointerDown--&amp;gt;|addPointer_event|gestureRecognizerXxx--&amp;gt;pointerRouter.addRoute gestureRecognizerXxx--&amp;gt;gestureArena.add PointerOtherEvent--&amp;gt;|dispatchEvent|HitTestResult 类设计 GestureBinding.initInstances /// A binding for the gesture subsystem. //mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, HitTestTarget @override void initInstances() { super.initInstances(); _instance = this; window.onPointerDataPacket = _handlePointerDataPacket; } GestureBinding._handlePointerDataPacket void _handlePointerDataPacket(ui.PointerDataPacket packet) { // We convert pointer data to logical pixels so that e.g. the touch slop can be  // defined in a device-independent manner.  _pendingPointerEvents.</description>
+    </item>
+    
+  </channel>
+</rss>

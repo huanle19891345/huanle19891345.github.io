@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>livedata on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/</link>
+    <description>Recent content in livedata on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/livedata/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LiveData</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata/</guid>
+      <description>类设计 androidx.lifecycle:lifecycle-livedata:2.0.0
+androidx.lifecycle:lifecycle-livedata-core:2.0.0
+observe private SafeIterableMap&amp;lt;Observer&amp;lt;? super T&amp;gt;, ObserverWrapper&amp;gt; mObservers = new SafeIterableMap&amp;lt;&amp;gt;(); observe @MainThread public void observe(@NonNull LifecycleOwner owner, @NonNull Observer&amp;lt;? super T&amp;gt; observer) { assertMainThread(&amp;#34;observe&amp;#34;); if (owner.getLifecycle().getCurrentState() == DESTROYED) { // ignore  return; } LifecycleBoundObserver wrapper = new LifecycleBoundObserver(owner, observer); ObserverWrapper existing = mObservers.putIfAbsent(observer, wrapper); if (existing != null &amp;amp;&amp;amp; !existing.isAttachedTo(owner)) { throw new IllegalArgumentException(&amp;#34;Cannot add the same observer&amp;#34; + &amp;#34; with different lifecycles&amp;#34;); } if (existing !</description>
+    </item>
+    
+    <item>
+      <title>LiveData封装</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</guid>
+      <description>https://developer.android.com/kotlin/ktx#livedata
+LiveData协程 @UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit internal class CoroutineLiveData&amp;lt;T&amp;gt;( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, block: Block&amp;lt;T&amp;gt; ) : MediatorLiveData&amp;lt;T&amp;gt;() { private var blockRunner: BlockRunner&amp;lt;T&amp;gt;? private var emittedSource: EmittedSource? = null init { // use an intermediate supervisor job so that if we cancel individual block runs due to losing  // observers, it won&amp;#39;t cancel the given context as we only cancel w/ the intention of possibly  // relaunching using the same parent context.</description>
+    </item>
+    
+    <item>
+      <title>MediatorLiveData</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</guid>
+      <description>MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.postValue(value); } @Override public void setValue(T value) { super.setValue(value); } } MediatorLiveData public class MediatorLiveData&amp;lt;T&amp;gt; extends MutableLiveData&amp;lt;T&amp;gt; { private SafeIterableMap&amp;lt;LiveData&amp;lt;?</description>
+    </item>
+    
+  </channel>
+</rss>

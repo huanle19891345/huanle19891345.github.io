@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>渲染 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/</link>
+    <description>Recent content in 渲染 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Widget</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</guid>
+      <description>graph LR State--&amp;gt;|持有|Widget Element--&amp;gt;|持有|State Element--&amp;gt;|持有|Widget Build 触发State.build时机 graph LR after_initState--&amp;gt;State.build after_didUpdateWidget--&amp;gt;State.build after_setState--&amp;gt;State.build after_dependencyChange--&amp;gt;State.build after_deactiveAndReinsertIntoTree--&amp;gt;State.build 挂载树核心方法调用 graph LR mount--&amp;gt;_firstBuild--&amp;gt;reBuild--&amp;gt;performRebuild--&amp;gt;|1|build--&amp;gt;|stateless|StatelessWidget.build build--&amp;gt;|stateful|State.build buildOwner.buildScope--&amp;gt;reBuild performRebuild--&amp;gt;|2|updateChild updateChild--&amp;gt;|优先更新而非重新创建child|canUpdate{&amp;quot;canUpdate?&amp;quot;}--&amp;gt;|yes|child.updateWithNewWidget; canUpdate--&amp;gt;|no|inflateWidgetForNewChildElement--&amp;gt;mount 挂载树挂载过程 graph TB parentElement--&amp;gt;|2:performRebuild|currentElement currentElement--&amp;gt;|1:mount|parentElement currentElement--&amp;gt;|3:buildMyWidget|currentElement currentElement--&amp;gt;|4:newWidget.createElement|childElement childElement--&amp;gt;|5:mount|currentElement 类设计 State.setState //State&amp;lt;T extends StatefulWidget&amp;gt; /** setState方法标记对应的element需要build 如果当前位于一帧内例如点击(input处理+动画+drawFrame)，在调用setState方法之后会触发drawFrame进而触发reBuild 如果当前不位于一帧内，则会策划一次frame*/ @protected void setState(VoidCallback fn) { final dynamic result = fn() as dynamic; _element.markNeedsBuild(); } Element.markNeedsBuild /// Marks the element as dirty and adds it to the global list of widgets to  /// rebuild in the next frame.</description>
+    </item>
+    
+    <item>
+      <title>渲染</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</guid>
+      <description>绘制渲染 三棵树 Widget Tree，Element Tree 以及 RenderObject Tree 。根据它们的功能我将它翻译成模型树，状态树和渲染树，也正是通过这三棵树维护起了整个应用的视图数据。
+开发者通过Widget配置，Framework通过比对Widget配置来更新Element，最后调度RenderObject Tree完成布局排列和绘制。
+ Widget Tree  存放属性的描述信息，更像是一个Model。同一个Widget可以同时描述多个渲染树中的节点，但是它是不可修改的，因此它只会被创建或销毁。
+Widget是为Element描述需要的配置， 负责创建Element，决定Element是否需要更新。Flutter Framework通过差分算法比对Widget树前后的变化，决定Element的State是否改变。当重建Widget树后并未发生改变， 则Element不会触发重绘，则就是Widget树的重建并不一定会触发Element树的重建。
+ Element Tree  存放上下文状态信息，同时持有 Widget和RenderObject的引用。像是一个Controller控制着状态的更新(initial, mount,amount,activate,deactivate,update)。
+Element表示Widget配置树的特定位置的一个实例，同时持有Widget和RenderObject，负责管理Widget配置和RenderObject渲染。Element状态由Flutter Framework管理， 开发人员只需更改Widget即可。
+ RenderObject Tree  实现了layout和paint事件，是最终渲染的View视图。
+RenderObject表示渲染树的一个对象，负责真正的渲染工作，比如测量大小、位置、绘制等都由RenderObject完成。
+渲染库（Rendering） Flutter的控件树在实际显示时会转换成对应的渲染对象（RenderObject）树来实现布局和绘制操作。渲染库主要提供的功能类有：
+abstract class RendererBinding extends BindingBase with ServicesBinding, SchedulerBinding, HitTestable { ... } abstract class RenderObject extends AbstractNode with DiagnosticableTreeMixin implements HitTestTarget { abstract class RenderBox extends RenderObject { ... } class RenderParagraph extends RenderBox { .</description>
+    </item>
+    
+  </channel>
+</rss>

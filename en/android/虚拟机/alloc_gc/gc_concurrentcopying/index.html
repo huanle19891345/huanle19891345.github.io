@@ -1,0 +1,6386 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>GC_ConcurrentCopying :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1613805603" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1613805603" rel="stylesheet">
+    <link href="/css/hybrid.css?1613805603" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1613805603" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1613805603" rel="stylesheet">
+    <link href="/css/auto-complete.css?1613805603" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1613805603" rel="stylesheet">
+    <link href="/css/theme.css?1613805603" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1613805603" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1613805603" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1613805603"></script>
+
+    <script src="/js/auto_toc_scroll.js?1613805603"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1613805603"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1613805603"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1613805603"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/" title="jetpack" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/">
+          jetpack
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/" title="arch" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/">
+          arch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/databinding/" title="databinding" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/databinding/">
+          databinding
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/databinding/databinding/" title="Databinding" class="dd-item ">
+        <a href="/en/android/jetpack/arch/databinding/databinding/">
+        Databinding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/lifecycle/" title="lifecycle" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/lifecycle/">
+          lifecycle
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/lifecycle/lifecycle/" title="Lifecycle" class="dd-item ">
+        <a href="/en/android/jetpack/arch/lifecycle/lifecycle/">
+        Lifecycle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/livedata/" title="livedata" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/livedata/">
+          livedata
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/livedata/" title="LiveData" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/livedata/">
+        LiveData
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/" title="LiveData封装" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/">
+        LiveData封装
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/mediatorlivedata/" title="MediatorLiveData" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/mediatorlivedata/">
+        MediatorLiveData
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/viewmodel/" title="viewmodel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/viewmodel/">
+          viewmodel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/viewmodel/" title="ViewModel" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/viewmodel/">
+        ViewModel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/" title="ViewModel封装" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/">
+        ViewModel封装
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/" title="数据保存和恢复" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/">
+        数据保存和恢复
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/jetpack/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+          性能优化
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/" title="内存优化" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/">
+          内存优化
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/" title="DumpHprof" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/">
+        DumpHprof
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/" title="Hprof_binary_dump_format" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/">
+        Hprof_binary_dump_format
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/" title="LeakCanary2Source" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/">
+        LeakCanary2Source
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/" title="OOM" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/">
+        OOM
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/" title="kernel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/">
+          kernel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/" title="kernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/">
+        kernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/" title="layoutinflater" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/">
+          layoutinflater
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/" title="LayoutInflater" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/">
+        LayoutInflater
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/" title="sharedpreferences" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/">
+          sharedpreferences
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/" title="SharedPreferences" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/">
+        SharedPreferences
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/" title="thread" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/">
+          thread
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/" title="StackTraceElement" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/">
+        StackTraceElement
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/" title="ThreadState" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/">
+        ThreadState
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/" title="后台任务" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/">
+          后台任务
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/" title="后台任务处理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/">
+        后台任务处理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/" title="应用启动退出" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/">
+          应用启动退出
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/" title="应用启动" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/">
+        应用启动
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/" title="源码研究方法" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/">
+          源码研究方法
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/" title="Syscall查找方式" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/">
+        Syscall查找方式
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+          虚拟机
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/" title="alloc_gc" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/">
+          alloc_gc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/" title="Alloc" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/">
+        Alloc
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/" title="AllocRelated" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/">
+        AllocRelated
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/" title="GC" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/">
+        GC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/" title="GC_ConcurrentCopying" class="dd-item active">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/">
+        GC_ConcurrentCopying
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/" title="GC_MarkCompact" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/">
+        GC_MarkCompact
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/" title="GC_MS_CMS" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/">
+        GC_MS_CMS
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/" title="GC_Semi_Space" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/">
+        GC_Semi_Space
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/" title="Runtime_VisitRoots" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/">
+        Runtime_VisitRoots
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/" title="Space" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/">
+        Space
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/" title="ART_Lock" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/">
+        ART_Lock
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/" title="jni" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/">
+          jni
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/" title="C启动Java" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/">
+        C启动Java
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
+        java_jni方法调用原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Jni数据转换" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">
+        Jni数据转换
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/" title="SystemLoadLibrary" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/">
+        SystemLoadLibrary
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/">
+        异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="启动流程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+          启动流程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="ART启动流程" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+        ART启动流程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="基础数据结构" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        基础数据结构
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/" title="混合编译_运行" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/">
+          混合编译_运行
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/" title="JVM_JIT" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/">
+        JVM_JIT
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/" title="混合编译_运行" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/">
+        混合编译_运行
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" title="类加载" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+          类加载
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/" title="Android_N混合编译与对热补丁影响解析" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/">
+        Android_N混合编译与对热补丁影响解析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" title="类加载" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+        类加载
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/" title="类加载虚拟机层" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/">
+        类加载虚拟机层
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/" title="类编译" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/">
+          类编译
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/" title="dex2oat" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/">
+        dex2oat
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/kotlin/" title="kotlin" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/kotlin/">
+          kotlin
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/" title="协程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/">
+          协程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/" title="kotlin协程" class="dd-item ">
+        <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/">
+        kotlin协程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/" title="kotlin协程Source" class="dd-item ">
+        <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/">
+        kotlin协程Source
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/" title="engine" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/">
+          engine
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/" title="Engine" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/">
+        Engine
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/" title="startup" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/">
+          startup
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/" title="startup" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/">
+        startup
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/" title="startup_dart_framework" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/">
+        startup_dart_framework
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/" title="startup_embedder_framwwork" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/">
+        startup_embedder_framwwork
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/" title="touch" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/">
+          touch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/" title="Touch" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/">
+        Touch
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/" title="动画" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/">
+          动画
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" title="动画" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/">
+        动画
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" title="混合开发" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+          混合开发
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/" title="FlutterBoost" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/">
+        FlutterBoost
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" title="混合开发" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+        混合开发
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/" title="渲染" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/">
+          渲染
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/" title="Widget" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/">
+        Widget
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/" title="渲染" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/">
+        渲染
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/" title="路由" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/">
+          路由
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/" title="路由" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/">
+        路由
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/" title="MessageLoop" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/">
+        MessageLoop
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/" title="MethodChannel" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/">
+        MethodChannel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/'>虚拟机</a> > <a href='/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/'>alloc_gc</a> > GC_ConcurrentCopying
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#concurrentcopying">ConcurrentCopying</a></li>
+    <li><a href="#runphases">RunPhases</a>
+      <ul>
+        <li><a href="#initializephase">InitializePhase</a>
+          <ul>
+            <li><a href="#checkemptymarkstack">CheckEmptyMarkStack</a></li>
+            <li><a href="#bindbitmaps">BindBitmaps</a></li>
+          </ul>
+        </li>
+        <li><a href="#flipthreadroots">FlipThreadRoots</a>
+          <ul>
+            <li><a href="#flipcallback">FlipCallback</a>
+              <ul>
+                <li><a href="#regionspacesetfromspace">RegionSpace::SetFromSpace</a></li>
+              </ul>
+            </li>
+            <li><a href="#threadflipvisitor">ThreadFlipVisitor</a>
+              <ul>
+                <li><a href="#concurrentcopyingmark">ConcurrentCopying::Mark</a></li>
+                <li><a href="#concurrentcopyingcopy">ConcurrentCopying::Copy</a></li>
+                <li><a href="#concurrentcopyingpushontomarkstac">ConcurrentCopying::PushOntoMarkStac</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#markingphase">MarkingPhase</a></li>
+        <li><a href="#reclaimphase">ReclaimPhase</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              GC_ConcurrentCopying
+            </h1>
+          
+
+        
+
+
+<h2 id="concurrentcopying">ConcurrentCopying</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">virtual</span> GcType <span style="color:#a6e22e">GetGcType</span>() <span style="color:#66d9ef">const</span> OVERRIDE {
+    <span style="color:#75715e">//ConcurrentCopying仅支持kGcTypePartial，也就是不扫描ImageSpace和
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//ZygoteSpace（除了那些有dirty card的对象）
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> kGcTypePartial;
+}
+<span style="color:#66d9ef">virtual</span> CollectorType <span style="color:#a6e22e">GetCollectorType</span>() <span style="color:#66d9ef">const</span> OVERRIDE {
+    <span style="color:#66d9ef">return</span> kCollectorTypeCC;<span style="color:#75715e">//返回回收器类型
+</span><span style="color:#75715e"></span>}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetRegionSpace</span>(space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">*</span> region_space) {
+    <span style="color:#75715e">//region_space_是ConcurrentCopying的成员变量
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//ConcurrentCopying要回收的垃圾对象就在这个region_space_中
+</span><span style="color:#75715e"></span>    region_space_ <span style="color:#f92672">=</span> region_space;
+}
+</code></pre></div><h2 id="runphases">RunPhases</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>RunPhases() {
+    is_active_ <span style="color:#f92672">=</span> true;
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    thread_running_gc_ <span style="color:#f92672">=</span> self;
+    {
+        ReaderMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>mutator_lock_);
+        InitializePhase();<span style="color:#75715e">//①初始化阶段
+</span><span style="color:#75715e"></span>    }
+    FlipThreadRoots();<span style="color:#75715e">//②完成半空间Flip工作
+</span><span style="color:#75715e"></span>    {
+        ReaderMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>mutator_lock_);
+        MarkingPhase();<span style="color:#75715e">//③标记
+</span><span style="color:#75715e"></span>    }
+    ......
+    {
+        ReaderMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>mutator_lock_);
+        ReclaimPhase();<span style="color:#75715e">//④回收
+</span><span style="color:#75715e"></span>    }
+    FinishPhase();<span style="color:#75715e">//收尾工作，非常简单，请读者自行阅读
+</span><span style="color:#75715e"></span>    is_active_ <span style="color:#f92672">=</span> false;
+    thread_running_gc_ <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+}
+</code></pre></div><h3 id="initializephase">InitializePhase</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>InitializePhase() {
+    ......
+    CheckEmptyMarkStack();<span style="color:#75715e">//详情见下文代码分析
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//immune_spaces_类型为ImmuneSpace，保存了不需要GC的空间对象
+</span><span style="color:#75715e"></span>    immune_spaces_.Reset();
+    .....
+    <span style="color:#75715e">/*下面的代码逻辑将设置force_evacuate_all_成员变量，它和RegionSpace有关，我们
+</span><span style="color:#75715e">      后续用到该变量时再介绍其含义。*/</span>
+    <span style="color:#66d9ef">if</span> (GetCurrentIteration()<span style="color:#f92672">-&gt;</span>GetGcCause() <span style="color:#f92672">==</span> kGcCauseExplicit <span style="color:#f92672">||</span>
+        GetCurrentIteration()<span style="color:#f92672">-&gt;</span>GetGcCause() <span style="color:#f92672">==</span> kGcCauseForNativeAlloc <span style="color:#f92672">||</span>
+        GetCurrentIteration()<span style="color:#f92672">-&gt;</span>GetClearSoftReferences()) {
+        force_evacuate_all_ <span style="color:#f92672">=</span> true;
+    } <span style="color:#66d9ef">else</span> {
+        force_evacuate_all_ <span style="color:#f92672">=</span> false;
+    }
+    BindBitmaps();<span style="color:#75715e">//详解见下文代码分析
+</span><span style="color:#75715e"></span>    ......
+}
+</code></pre></div><h4 id="checkemptymarkstack">CheckEmptyMarkStack</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>CheckEmptyMarkStack() {
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    <span style="color:#75715e">/*Thread tlsPtr_中有一个名为thread_local_mark_stack的成员变量，其定义如下：
+</span><span style="color:#75715e">      AtomicStack&lt;:Object&gt;* thread_local_mark_stack;
+</span><span style="color:#75715e">      thread_local_mark_stack是专门配合ConcurrentCopying而使用的，其数据类型就是
+</span><span style="color:#75715e">      AtomicStack（和上文提到的Heap allocation_stack_、mark_stack_一样）
+</span><span style="color:#75715e">      tlsPtr_ thread_local_mark_stack的具体用法我们后文碰到时再介绍。
+</span><span style="color:#75715e">      MarkStackMode是枚举变量，其中定义了4个枚举值（它们的含义们下文碰到时再介绍）：
+</span><span style="color:#75715e">      enum MarkStackMode {
+</span><span style="color:#75715e">          kMarkStackModeOff = 0, kMarkStackModeThreadLocal,
+</span><span style="color:#75715e">          kMarkStackModeShared, kMarkStackModeGcExclusive
+</span><span style="color:#75715e">      };
+</span><span style="color:#75715e">      mark_stack_mode_是ConcurrentCopying成员变量，初始值为kMarkStackModeOff。
+</span><span style="color:#75715e">      GC过程中将修改它。*/</span>
+    MarkStackMode mark_stack_mode <span style="color:#f92672">=</span> mark_stack_mode_.LoadRelaxed();
+    <span style="color:#75715e">//mark_stack_mode取值为kMarkStackModeThreadLocal的处理逻辑
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (mark_stack_mode <span style="color:#f92672">==</span> kMarkStackModeThreadLocal) {
+        <span style="color:#75715e">/*RevokeThreadLocalMarkStack将要求各个Java Thread执行一个CheckPoint任务，
+</span><span style="color:#75715e">          该任务有三个关键处理，笔者列举如下：
+</span><span style="color:#75715e">        (1) 获取线程对象的tlsPtr_ thread_local_mark_stack对象（通过Thread
+</span><span style="color:#75715e">            GetThreadLocalMarkStack）。该对象初值为空，ConcurrentCopying GC过程中
+</span><span style="color:#75715e">            会设置它（详情见后文分析）。
+</span><span style="color:#75715e">        (2) 如果线程的thread_local_mark_stack不为空，则将它保存到ConcurrentCopying
+</span><span style="color:#75715e">            revoked_mark_stacks_（类型为vector&lt;ObjectStack*&gt;）成员变量中。
+</span><span style="color:#75715e">        (3) 调用Thread SetThreadLocalMarkStack，将thread_local_mark_stack设置为空。
+</span><span style="color:#75715e">        RevokeThreadLocalMarkStacks的调用结果就是将线程对象中不为空的
+</span><span style="color:#75715e">        thread_local_mark_stack放到revoked_mark_stacks_数组中。  */</span>
+        RevokeThreadLocalMarkStacks(false);
+        MutexLock <span style="color:#a6e22e">mu</span>(Thread<span style="color:#f92672">::</span>Current(), mark_stack_lock_);
+        <span style="color:#75715e">//如果revoked_mark_stacks_不为空，则需要逐个清除其中所包含的Object对象
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>revoked_mark_stacks_.empty()) {
+            <span style="color:#66d9ef">for</span> (accounting<span style="color:#f92672">::</span>AtomicStack<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;*</span> mark_stack : revoked_mark_stacks_) {
+             <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>mark_stack<span style="color:#f92672">-&gt;</span>IsEmpty()) {
+                    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> mark_stack<span style="color:#f92672">-&gt;</span>PopBack();
+                    ......<span style="color:#75715e">//打印信息
+</span><span style="color:#75715e"></span>                }
+            }
+        }
+    } <span style="color:#66d9ef">else</span> {<span style="color:#75715e">//如果mark_stack_mode取值为其他值
+</span><span style="color:#75715e"></span>        MutexLock <span style="color:#a6e22e">mu</span>(Thread<span style="color:#f92672">::</span>Current(), mark_stack_lock_);
+        <span style="color:#75715e">//gc_mark_stack_指向一个ObjectStack对象
+</span><span style="color:#75715e"></span>        CHECK(gc_mark_stack_<span style="color:#f92672">-&gt;</span>IsEmpty());
+        CHECK(revoked_mark_stacks_.empty());
+    }
+}
+</code></pre></div><h4 id="bindbitmaps">BindBitmaps</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>BindBitmaps() {
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    WriterMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>heap_bitmap_lock_);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> space : heap_<span style="color:#f92672">-&gt;</span>GetContinuousSpaces()) {
+        <span style="color:#75715e">//ConcurrentCopying只支持kGcTypePartial，所以ImageSpace、ZygoteSpace
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//同样会被加到immune_spaces_中
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (space<span style="color:#f92672">-&gt;</span>GetGcRetentionPolicy() <span style="color:#f92672">==</span> space<span style="color:#f92672">::</span>kGcRetentionPolicyNeverCollect <span style="color:#f92672">||</span>
+                space<span style="color:#f92672">-&gt;</span>GetGcRetentionPolicy() <span style="color:#f92672">==</span> space<span style="color:#f92672">::</span>kGcRetentionPolicyFullCollect) {
+            CHECK(space<span style="color:#f92672">-&gt;</span>IsZygoteSpace() <span style="color:#f92672">||</span> space<span style="color:#f92672">-&gt;</span>IsImageSpace());
+            immune_spaces_.AddSpace(space);
+            <span style="color:#75715e">/*cc_heap_bitmap_类型为HeapBitmap，cc_bitamps_类型为
+</span><span style="color:#75715e">              vector&lt; SpaceBitmap&lt;kObjectAlignment&gt;*&gt;。这两个成员变量由
+</span><span style="color:#75715e">              ConcurrentCopying内部使用。*/</span>
+            <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> bitmap_name <span style="color:#f92672">=</span> space<span style="color:#f92672">-&gt;</span>IsImageSpace() <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;cc image space bitmap&#34;</span> <span style="color:#f92672">:</span>  <span style="color:#e6db74">&#34;cc zygote space bitmap&#34;</span>;
+            accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">*</span> bitmap <span style="color:#f92672">=</span>
+                accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">::</span>Create(bitmap_name,space<span style="color:#f92672">-&gt;</span>Begin(), space<span style="color:#f92672">-&gt;</span>Capacity());
+            cc_heap_bitmap_<span style="color:#f92672">-&gt;</span>AddContinuousSpaceBitmap(bitmap);
+            cc_bitmaps_.push_back(bitmap);
+        } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (space <span style="color:#f92672">==</span> region_space_) {
+            accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">*</span> bitmap <span style="color:#f92672">=</span>
+                accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">::</span>Create( <span style="color:#e6db74">&#34;cc region space bitmap&#34;</span>, 
+                                      space<span style="color:#f92672">-&gt;</span>Begin(), space<span style="color:#f92672">-&gt;</span>Capacity());
+            cc_heap_bitmap_<span style="color:#f92672">-&gt;</span>AddContinuousSpaceBitmap(bitmap);
+            cc_bitmaps_.push_back(bitmap);
+            region_space_bitmap_ <span style="color:#f92672">=</span> bitmap;
+        }
+    }
+}
+</code></pre></div><h3 id="flipthreadroots">FlipThreadRoots</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>FlipThreadRoots() {
+    ......
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    Locks<span style="color:#f92672">::</span>mutator_lock_<span style="color:#f92672">-&gt;</span>AssertNotHeld(self);
+    gc_barrier_<span style="color:#f92672">-&gt;</span>Init(self, <span style="color:#ae81ff">0</span>);
+    ThreadFlipVisitor <span style="color:#a6e22e">thread_flip_visitor</span>(<span style="color:#66d9ef">this</span>, heap_<span style="color:#f92672">-&gt;</span>use_tlab_);
+    FlipCallback <span style="color:#a6e22e">flip_callback</span>(<span style="color:#66d9ef">this</span>);
+    heap_<span style="color:#f92672">-&gt;</span>ThreadFlipBegin(self);
+    <span style="color:#75715e">/*Runtime FlipThreadRoots将先暂停线程对象，然后设置它们的flip_function，
+</span><span style="color:#75715e">      接着再恢复它们的运行。FlipThreadRoots前两个参数分别是两个闭包对象，其中：
+</span><span style="color:#75715e">      (1) GC线程（也就是当前调用FlipThreadRoots的线程）先执行flip_callback。
+</span><span style="color:#75715e">      (2) 其他所有Java线程对象再执行thread_flip_visitor。
+</span><span style="color:#75715e">      根据ThreadList的注释，FlipThreadRoots只由ConcurrentCopying使用。 */</span>
+    size_t barrier_count <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>FlipThreadRoots(<span style="color:#f92672">&amp;</span>thread_flip_visitor, <span style="color:#f92672">&amp;</span>flip_callback, <span style="color:#66d9ef">this</span>);
+    heap_<span style="color:#f92672">-&gt;</span>ThreadFlipEnd(self);
+    ......
+    is_asserting_to_space_invariant_ <span style="color:#f92672">=</span> true;
+    ......
+}
+</code></pre></div><h4 id="flipcallback">FlipCallback</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FlipCallback</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Closure {
+    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+        ......
+        <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Run(Thread<span style="color:#f92672">*</span> <span style="color:#66d9ef">thread</span>) OVERRIDE {
+            ConcurrentCopying<span style="color:#f92672">*</span> cc <span style="color:#f92672">=</span> concurrent_copying_;
+            ......
+            Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+            ......
+            <span style="color:#75715e">/*调用RegionSpace的SetFromSpace。rb_table_为ReadBarrierTable，来自Heap的成员
+</span><span style="color:#75715e">            变量rb_table_。ReadBarrieTable的启用需要设置前台回收器类型为
+</span><span style="color:#75715e">            kCollectorTypeCC，并且定义编译宏kUseTableLookupReadBarrier。*/</span>
+            cc<span style="color:#f92672">-&gt;</span>region_space_<span style="color:#f92672">-&gt;</span>SetFromSpace(cc<span style="color:#f92672">-&gt;</span>rb_table_,cc<span style="color:#f92672">-&gt;</span>force_evacuate_all_);
+            <span style="color:#75715e">//内部调用HeapSwapStacks。交换Heap allocation_stack_和live_stack_
+</span><span style="color:#75715e"></span>            cc<span style="color:#f92672">-&gt;</span>SwapStacks();
+            ......
+            cc<span style="color:#f92672">-&gt;</span>is_marking_ <span style="color:#f92672">=</span> true;
+            <span style="color:#75715e">//设置mark_stack_mode_的值为kMarkStackModeThreadLocal
+</span><span style="color:#75715e"></span>            cc<span style="color:#f92672">-&gt;</span>mark_stack_mode_.StoreRelaxed(ConcurrentCopying<span style="color:#f92672">::</span>kMarkStackModeThreadLocal);
+            .......
+    }
+    ......
+};
+</code></pre></div><p>region_space.cc</p>
+<h5 id="regionspacesetfromspace">RegionSpace::SetFromSpace</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> RegionSpace<span style="color:#f92672">::</span>SetFromSpace(accounting<span style="color:#f92672">::</span>ReadBarrierTable<span style="color:#f92672">*</span> rb_table,
+                <span style="color:#66d9ef">bool</span> force_evacuate_all) {
+    <span style="color:#75715e">/*回顾13.3.2节的内容可知，RegionSpace把内存资源划分成数个块，每一个块由一个Region对象
+</span><span style="color:#75715e">      描述。num_regions_是Region的个数，而region_数组保存了各个内存块对应的Region信息。*/</span>
+    ......
+    <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span>num_regions_; <span style="color:#f92672">++</span>i) {
+        Region<span style="color:#f92672">*</span> r <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>regions_[i];
+        <span style="color:#75715e">/*RegionState枚举变量描述了一个Region的状态，我们重点看前两个枚举值的含义：
+</span><span style="color:#75715e">          (1) kRegionStateFree：表示Region为空闲待使用状态
+</span><span style="color:#75715e">          (2) kRegionStateAllocated：表示Region已经有一部分内存被分配了。
+</span><span style="color:#75715e">          RegionType枚举变量描述了一个Region的类型，它有如下五种取值：
+</span><span style="color:#75715e">          (1) kRegionTypeAll：代码中没有明确使用它的地方，读者可不考虑
+</span><span style="color:#75715e">          (2) kRegionTypeFromSpace：Region位于From Space中，需要被清除（evacuate）
+</span><span style="color:#75715e">          (3) kRegionTypeUnevacFromSpace：该Region位于From Space，但是不需要被清除
+</span><span style="color:#75715e">          (4) kRegionTypeToSpace：Region位于To Space中。
+</span><span style="color:#75715e">          (5) kRegionTypeNone：Region的默认类型。
+</span><span style="color:#75715e">        如果一个Region首先被使用，其类型将从kRegionTypeNone转换为 kRegionTypeToSpace。相关代码见Region Unfree函数。  */</span>
+        RegionState state <span style="color:#f92672">=</span> r<span style="color:#f92672">-&gt;</span>State();
+        RegionType type <span style="color:#f92672">=</span> r<span style="color:#f92672">-&gt;</span>Type();
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>r<span style="color:#f92672">-&gt;</span>IsFree()) {<span style="color:#75715e">//IsFree返回false，说明该Region已经被使用
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (LIKELY(num_expected_large_tails <span style="color:#f92672">==</span> <span style="color:#ae81ff">0U</span>)) {
+            <span style="color:#75715e">/*ShouldBeEvacuated用于判断一个Region是否需要被清除。Region中有两个成员变量
+</span><span style="color:#75715e">              与之相关：
+</span><span style="color:#75715e">            (1) is_newly_allocated_：bool型。一个Region从kRegionStateFree到kRegion-
+</span><span style="color:#75715e">                StateAllocated时，该成员变量被设置为true（通过调用Region SetNewlyAllocated
+</span><span style="color:#75715e">                函数来完成）。如果is_newly_allocated_为true，ShouldBeEvacuated返回也为true。
+</span><span style="color:#75715e">            (2) live_bytes_：非垃圾对象所占内存的字节数。如果它和该Region中所分配的总内存字节数
+</span><span style="color:#75715e">                之比小于75%（kEvaculateLivePercentThreshold），则ShouldBeEvacuated也返
+</span><span style="color:#75715e">                回true。*/</span>
+          <span style="color:#66d9ef">bool</span> should_evacuate <span style="color:#f92672">=</span> force_evacuate_all <span style="color:#f92672">||</span> r<span style="color:#f92672">-&gt;</span>ShouldBeEvacuated();
+          <span style="color:#66d9ef">if</span> (should_evacuate) {
+             r<span style="color:#f92672">-&gt;</span>SetAsFromSpace();<span style="color:#75715e">//设置Region的类型为kRegionTypeFromSpace
+</span><span style="color:#75715e"></span>          } <span style="color:#66d9ef">else</span> {
+             <span style="color:#75715e">//设置Region的类型为kRegionTypeUnevacFromSpace
+</span><span style="color:#75715e"></span>             r<span style="color:#f92672">-&gt;</span>SetAsUnevacFromSpace();
+            }
+            ........
+            }.......
+        } <span style="color:#66d9ef">else</span> {
+            ......
+        }
+    }
+    current_region_ <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>full_region_;
+    evac_region_ <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>full_region_;
+}
+</code></pre></div><h4 id="threadflipvisitor">ThreadFlipVisitor</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadFlipVisitor</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Closure {
+    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    ......
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Run(Thread<span style="color:#f92672">*</span> <span style="color:#66d9ef">thread</span>) OVERRIDE {
+        Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+        <span style="color:#75715e">//设置线程对象tls32_is_gc_marking为true
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>SetIsGcMarking(true);
+        <span style="color:#66d9ef">if</span> (use_tlab_ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>HasTlab()) {
+            <span style="color:#66d9ef">if</span> (ConcurrentCopying<span style="color:#f92672">::</span>kEnableFromSpaceAccountingCheck) {
+                ......
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#75715e">//撤销RegionSpace为线程thread分配的TLAB
+</span><span style="color:#75715e"></span>                concurrent_copying_<span style="color:#f92672">-&gt;</span>region_space_<span style="color:#f92672">-&gt;</span>RevokeThreadLocalBuffers(<span style="color:#66d9ef">thread</span>);
+            }
+        }
+        <span style="color:#66d9ef">if</span> (kUseThreadLocalAllocationStack) {
+            <span style="color:#75715e">//撤销线程本地Allocation Stack
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>RevokeThreadLocalAllocationStack();
+        }
+        ReaderMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>heap_bitmap_lock_);
+        <span style="color:#75715e">//访问线程根对象。ConcurrentCopying的VisitRoots函数将被调用，其内部调用
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//MarkRoot。我们下文将重点分析MarkRoot函数
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">thread</span><span style="color:#f92672">-&gt;</span>VisitRoots(concurrent_copying_);
+        concurrent_copying_<span style="color:#f92672">-&gt;</span>GetBarrier().Pass(self);
+    }
+    ......
+};
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">// Process some roots.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>VisitRoots(
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">***</span> roots, size_t count, <span style="color:#66d9ef">const</span> RootInfo<span style="color:#f92672">&amp;</span> info ATTRIBUTE_UNUSED) {
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> count; <span style="color:#f92672">++</span>i) {
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">**</span> root <span style="color:#f92672">=</span> roots[i];
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> ref <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>root;
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref <span style="color:#f92672">=</span> Mark(ref);
+    ......
+  }
+}
+
+<span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>VisitRoots(
+    mirror<span style="color:#f92672">::</span>CompressedReference<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;**</span> roots, size_t count,
+    <span style="color:#66d9ef">const</span> RootInfo<span style="color:#f92672">&amp;</span> info ATTRIBUTE_UNUSED) {
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> count; <span style="color:#f92672">++</span>i) {
+    mirror<span style="color:#f92672">::</span>CompressedReference<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;*</span> <span style="color:#66d9ef">const</span> root <span style="color:#f92672">=</span> roots[i];
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root<span style="color:#f92672">-&gt;</span>IsNull()) {
+      <span style="color:#75715e">// kGrayImmuneObject is true because this is used for the thread flip.
+</span><span style="color:#75715e"></span>      MarkRoot<span style="color:#f92672">&lt;</span><span style="color:#75715e">/*kGrayImmuneObject*/</span>true<span style="color:#f92672">&gt;</span>(root);
+    }
+  }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>MarkRoot(CompressedReference<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;*</span> root) {
+    <span style="color:#75715e">//ref是当前正在被访问的某个线程根对象
+</span><span style="color:#75715e"></span>    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> <span style="color:#66d9ef">const</span> ref <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>AsMirrorPtr();
+    <span style="color:#75715e">/*调用ConcurrentCopying Mark，返回一个to_ref对象。to_ref的内容和ref一样，
+</span><span style="color:#75715e">      但它可能位于其他空间中（这就是拷贝的含义，详情见下文对Mark的分析）。
+</span><span style="color:#75715e">      如果to_ref和ref不相同，则需要修改存储ref的内存，使得它指向新的to_ref。
+</span><span style="color:#75715e">      具体的修改方式是先将root转换为一个Atomic&lt;CompressedReference&lt;Object&gt;&gt;*对象，
+</span><span style="color:#75715e">      然后进行原子操作。总之，在Mark函数后，原线程根对象可能被更新为位于另外一个空间中的对象。*/</span>
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref <span style="color:#f92672">=</span> Mark(ref);
+    <span style="color:#66d9ef">if</span> (to_ref <span style="color:#f92672">!=</span> ref) {
+        <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> addr <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>Atomic<span style="color:#f92672">&lt;</span>CompressedReference<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;&gt;*&gt;</span> (root);
+        <span style="color:#66d9ef">auto</span> expected_ref <span style="color:#f92672">=</span> CompressedReference<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;::</span>FromMirrorPtr(ref);
+        <span style="color:#66d9ef">auto</span> new_ref <span style="color:#f92672">=</span> CompressedReference<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;::</span>FromMirrorPtr(to_ref);
+        <span style="color:#66d9ef">do</span> {
+            <span style="color:#66d9ef">if</span> (ref <span style="color:#f92672">!=</span> addr<span style="color:#f92672">-&gt;</span>LoadRelaxed().AsMirrorPtr()) {
+        <span style="color:#66d9ef">break</span>;
+        }
+        } <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>addr<span style="color:#f92672">-&gt;</span>CompareExchangeWeakRelaxed(expected_ref, new_ref));
+    }
+}
+</code></pre></div><h5 id="concurrentcopyingmark">ConcurrentCopying::Mark</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">inline</span> mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> ConcurrentCopying<span style="color:#f92672">::</span>Mark(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> from_ref) {
+    ......
+    <span style="color:#75715e">//获取from_ref所在的Region的类型。注意，如果from_ref不是region_space_的对象，
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//则GetRegionType返回kRegionTypeNone
+</span><span style="color:#75715e"></span>    space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">::</span>RegionType rtype <span style="color:#f92672">=</span> region_space_<span style="color:#f92672">-&gt;</span>GetRegionType(from_ref);
+    <span style="color:#66d9ef">switch</span> (rtype) {
+        <span style="color:#66d9ef">case</span> space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">::</span>RegionType<span style="color:#f92672">::</span>kRegionTypeToSpace:
+            <span style="color:#75715e">//如果from_ref已经在To Space中，则直接返回它。不需要后续的拷贝
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> from_ref;
+        <span style="color:#66d9ef">case</span> space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">::</span>RegionType<span style="color:#f92672">::</span>kRegionTypeFromSpace: {
+        <span style="color:#75715e">/*如果from_ref位于From Space中（由Region ShouldEvacuate函数决定），则调用
+</span><span style="color:#75715e">            GetFwdPtr找到from_ref的拷贝对象。下文将介绍GetFwdPtr函数。main*/</span>
+            mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref <span style="color:#f92672">=</span> GetFwdPtr(from_ref);
+        ......
+        <span style="color:#66d9ef">if</span> (to_ref <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+            <span style="color:#75715e">//如果from_ref不存在对应的拷贝对象，则调用Copy生成一个拷贝对象
+</span><span style="color:#75715e"></span>            to_ref <span style="color:#f92672">=</span> Copy(from_ref);
+        }
+            <span style="color:#66d9ef">return</span> to_ref;
+        }
+        <span style="color:#66d9ef">case</span> space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">::</span>RegionType<span style="color:#f92672">::</span>kRegionTypeUnevacFromSpace: {
+            mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref <span style="color:#f92672">=</span> from_ref;
+            <span style="color:#75715e">//如果from_ref位于from space中不需要清理的Region的话，则对该对象进行标记
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (region_space_bitmap_<span style="color:#f92672">-&gt;</span>AtomicTestAndSet(from_ref)) {
+            } <span style="color:#66d9ef">else</span> {
+            <span style="color:#75715e">//如果from_ref是初次标记，则调用PushOntoMarkStack，下文将介绍该函数,main
+</span><span style="color:#75715e"></span>            PushOntoMarkStack(to_ref);
+            }
+            <span style="color:#66d9ef">return</span> to_ref;
+        }
+        <span style="color:#66d9ef">case</span> space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">::</span>RegionType<span style="color:#f92672">::</span>kRegionTypeNone:
+        <span style="color:#75715e">/*如果Region类型为kRegionTypeNone，说明from_ref不是region_space_中的
+</span><span style="color:#75715e">          对象（有可能是ImageSpace或ZygoteSpace中的对象），则调用MarkNonMoving
+</span><span style="color:#75715e">          函数。这种情况下无须拷贝from_ref。但它的引用型成员变量所指向的对象可能被拷贝
+</span><span style="color:#75715e">          了，我们需要做对应的处理。读者不妨自行阅读MarkNonMoving函数。  */</span>
+        <span style="color:#66d9ef">return</span> MarkNonMoving(from_ref);
+    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+        UNREACHABLE();
+    }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">inline</span> mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> ConcurrentCopying<span style="color:#f92672">::</span>GetFwdPtr( mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> from_ref) {
+    <span style="color:#75715e">//先拿到from_ref monitor_对应的LockWord对象
+</span><span style="color:#75715e"></span>    LockWord lw <span style="color:#f92672">=</span> from_ref<span style="color:#f92672">-&gt;</span>GetLockWord(false);
+    <span style="color:#75715e">/*如果lw的状态为kForwardingAddress，说明lw包含了一个mirror Object对象的地址
+</span><span style="color:#75715e">      信息。对Copying Collection而言，这个地址就是from_ref对应的拷贝对象的地址，
+</span><span style="color:#75715e">      GC理论称之为Forwarding Address。*/</span>
+    <span style="color:#66d9ef">if</span> (lw.GetState() <span style="color:#f92672">==</span> LockWord<span style="color:#f92672">::</span>kForwardingAddress) {
+        Object<span style="color:#f92672">*</span> fwd_ptr <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">*&gt;</span>(lw.ForwardingAddress());
+        <span style="color:#66d9ef">return</span> fwd_ptr; <span style="color:#75715e">//fwd_ptr就是from_ref的拷贝对象
+</span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+}
+</code></pre></div><h5 id="concurrentcopyingcopy">ConcurrentCopying::Copy</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">//Copy函数拷贝from_ref对象的信息到一个新的对象to_ref中，然后将to_ref的地址存储到from_ref monitor_成员变量中。在GC理论中，这个地址叫Forwading Address。
+</span><span style="color:#75715e"></span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> ConcurrentCopying<span style="color:#f92672">::</span>Copy(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> from_ref) {
+    <span style="color:#75715e">//获取from_ref对象的内存大小
+</span><span style="color:#75715e"></span>    size_t obj_size <span style="color:#f92672">=</span> from_ref<span style="color:#f92672">-&gt;</span>SizeOf<span style="color:#f92672">&lt;</span>...<span style="color:#f92672">&gt;</span>();
+    <span style="color:#75715e">//按Region的要求进行对齐
+</span><span style="color:#75715e"></span>    size_t region_space_alloc_size <span style="color:#f92672">=</span> RoundUp(obj_size, space<span style="color:#f92672">::</span>RegionSpace<span style="color:#f92672">::</span>kAlignment);
+    ......
+    <span style="color:#75715e">//从region_space_中分配一块内存用来存储from_ref的内容。这块内存的起始地址为
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//to_ref
+</span><span style="color:#75715e"></span>    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref <span style="color:#f92672">=</span> region_space_<span style="color:#f92672">-&gt;</span>AllocNonvirtual<span style="color:#f92672">&lt;</span>true<span style="color:#f92672">&gt;</span>(....);
+    ......<span style="color:#75715e">//region_space_分配失败的处理，这部分逻辑比较复杂，读者可先不关注它
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (true) {
+        <span style="color:#75715e">//拷贝：将from_ref的信息拷贝到to_ref
+</span><span style="color:#75715e"></span>        memcpy(to_ref, from_ref, obj_size);
+        <span style="color:#75715e">/*下面这段代码比较复杂，但功能很简单，设置from_ref的monitor_，就是把to_ref的地址
+</span><span style="color:#75715e">          值设置到from_ref monitor_中。*/</span>
+        LockWord old_lock_word <span style="color:#f92672">=</span> to_ref<span style="color:#f92672">-&gt;</span>GetLockWord(false);
+        ......
+        <span style="color:#75715e">//构造新的LockWord对象
+</span><span style="color:#75715e"></span>        LockWord new_lock_word <span style="color:#f92672">=</span> LockWord<span style="color:#f92672">::</span>FromForwardingAddress(
+                                <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span>(to_ref));
+        <span style="color:#75715e">//原子操作，设置到from_ref里去。所以这段逻辑会比较复杂
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">bool</span> success <span style="color:#f92672">=</span> from_ref<span style="color:#f92672">-&gt;</span>CasLockWordWeakSequentiallyConsistent(
+                                old_lock_word, new_lock_word);
+        <span style="color:#66d9ef">if</span> (LIKELY(success)) {
+            ......
+            PushOntoMarkStack(to_ref);<span style="color:#75715e">//保存to_ref
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> to_ref;
+        }
+        .....
+    }
+}
+</code></pre></div><h5 id="concurrentcopyingpushontomarkstac">ConcurrentCopying::PushOntoMarkStac</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>PushOntoMarkStack(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref) {
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    MarkStackMode mark_stack_mode <span style="color:#f92672">=</span> mark_stack_mode_.LoadRelaxed();
+    <span style="color:#75715e">//在FlipCallback中，mark_stack_mode_已经设置为kMarkStackModeThreadLocal了
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (LIKELY(mark_stack_mode <span style="color:#f92672">==</span> kMarkStackModeThreadLocal)) {
+        <span style="color:#66d9ef">if</span> (LIKELY(self <span style="color:#f92672">==</span> thread_running_gc_)) {
+            ......
+        <span style="color:#75715e">//根据上文的介绍可知，PushOntoMarkStack可能由不同的Java线程调用。如果
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//调用者是GC线程自己，则把to_ref加到ConcurrentCopying gc_mark_stack_中
+</span><span style="color:#75715e"></span>        gc_mark_stack_<span style="color:#f92672">-&gt;</span>PushBack(to_ref);
+        } <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">/*如果是非GC线程调用PushOntoMarkStack，则需要使用线程对象tlsPtr_
+</span><span style="color:#75715e">          thread_local_mark_stack。注意，如果线程对象还没有这个容器或者它已经存满的话，下
+</span><span style="color:#75715e">          面的代码将从ConcurrentCopying pooled_mark_stacks_容器中取一个空闲的容器给线程。
+</span><span style="color:#75715e">          pooled_mark_stacks_是一个数组，保存了256个ObjectStack对象，每一个ObjectStack只
+</span><span style="color:#75715e">          能保存最多4096个Object指针。*/</span>
+        accounting<span style="color:#f92672">::</span>AtomicStack<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;*</span> tl_mark_stack <span style="color:#f92672">=</span> self<span style="color:#f92672">-&gt;</span>GetThreadLocalMarkStack();
+        <span style="color:#75715e">//tl_mark_stack不存在或者tl_mark_stack已满的情况
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (UNLIKELY(tl_mark_stack <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">||</span> tl_mark_stack<span style="color:#f92672">-&gt;</span>IsFull())) {
+        MutexLock <span style="color:#a6e22e">mu</span>(self, mark_stack_lock_);
+        accounting<span style="color:#f92672">::</span>AtomicStack<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;*</span> new_tl_mark_stack;
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>pooled_mark_stacks_.empty()) {
+            new_tl_mark_stack <span style="color:#f92672">=</span> pooled_mark_stacks_.back();
+            pooled_mark_stacks_.pop_back();
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#75715e">//如果pooled_mark_stacks_被用完，则新建一个ObjectStack
+</span><span style="color:#75715e"></span>            new_tl_mark_stack <span style="color:#f92672">=</span>
+                accounting<span style="color:#f92672">::</span>AtomicStack<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;::</span>Create(
+                    <span style="color:#e6db74">&#34;thread local mark stack&#34;</span>, <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> KB, <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> KB);
+        }
+        new_tl_mark_stack<span style="color:#f92672">-&gt;</span>PushBack(to_ref);
+        self<span style="color:#f92672">-&gt;</span>SetThreadLocalMarkStack(new_tl_mark_stack);
+        <span style="color:#66d9ef">if</span> (tl_mark_stack <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+            revoked_mark_stacks_.push_back(tl_mark_stack);
+      }
+        } <span style="color:#66d9ef">else</span> {
+          tl_mark_stack<span style="color:#f92672">-&gt;</span>PushBack(to_ref);
+        }
+      }
+    }
+    <span style="color:#75715e">/*mark_stack_mode取值为非kMarkStackModeThreadLocal的处理，也是将对象
+</span><span style="color:#75715e">    存储到ConcurrentCopying gc_mark_stack_中。*/</span>
+    ......
+}
+</code></pre></div><h3 id="markingphase">MarkingPhase</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>MarkingPhase() {
+    <span style="color:#75715e">/*MarkingPhase调用前，我们只对线程根对象进行了Mark（注意，此处使用Mark这个词一方
+</span><span style="color:#75715e">      面代表它是ConcurrentCopying中的一个函数。另一方面，根据上文相关函数的代码分析可
+</span><span style="color:#75715e">      知，ConcurrentCopying中的Mark除了做标记之外，还会根据需要生成拷贝对象）。*/</span>
+    ......
+    {
+    ......
+    <span style="color:#75715e">/*扫描ImageSpace中的根对象。这里我们要多说几句。在MarkSweep中，对ImageSpace的扫描是
+</span><span style="color:#75715e">      基于Write Barrier以及CardTable的。但Write Barrier这种技术却不能用于会移动对象的垃圾
+</span><span style="color:#75715e">      回收算法。比如Copying collection。原因很简单，因为对象被移动后，它在card table中对
+</span><span style="color:#75715e">      应card的位置也会发生变化。所以，对Copying Collection来说，Read Barrier就派上了用
+</span><span style="color:#75715e">      场。Read Barrier有好几种比较经典的实现。ART中有三种，如TableLookup RB、Baker RB以
+</span><span style="color:#75715e">      及Brooks RB。
+</span><span style="color:#75715e">      笔者简单介绍下RB的大致作用：当mutator读取一个对象A的引用型成员变量a时，如果a所指向的对
+</span><span style="color:#75715e">      象B携有forwarding address（B的拷贝对象B&#39;），则转去读取B&#39;。因为B有了拷贝对象B&#39;，我们
+</span><span style="color:#75715e">      自然希望凡是读取B的地方都改成读取B&#39;。*/</span>
+    <span style="color:#66d9ef">for</span> (space<span style="color:#f92672">::</span>ContinuousSpace<span style="color:#f92672">*</span> space : heap_<span style="color:#f92672">-&gt;</span>GetContinuousSpaces()) {
+        <span style="color:#66d9ef">if</span> (space<span style="color:#f92672">-&gt;</span>IsImageSpace()) {
+            gc<span style="color:#f92672">::</span>space<span style="color:#f92672">::</span>ImageSpace<span style="color:#f92672">*</span> image <span style="color:#f92672">=</span> space<span style="color:#f92672">-&gt;</span>AsImageSpace();
+            <span style="color:#66d9ef">if</span> (image <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+                mirror<span style="color:#f92672">::</span>ObjectArray<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">&gt;*</span> image_root <span style="color:#f92672">=</span>
+                        image<span style="color:#f92672">-&gt;</span>GetImageHeader().GetImageRoots();
+                    <span style="color:#75715e">//ImageSpace中的根对象不会被拷贝，所以marked_image_root等于image_root，
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">//这段代码有些类似校验的作用
+</span><span style="color:#75715e"></span>                    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> marked_image_root <span style="color:#f92672">=</span> Mark(image_root);
+                    ......<span style="color:#75715e">//一些校验相关的工作
+</span><span style="color:#75715e"></span>                }
+            }
+        }
+    }
+        {<span style="color:#75715e">//访问其他类型的根对象
+</span><span style="color:#75715e"></span>        ......
+        Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>VisitConcurrentRoots(<span style="color:#66d9ef">this</span>, kVisitRootFlagAllRoots);
+        }
+        {<span style="color:#75715e">//访问其他类型的根对象
+</span><span style="color:#75715e"></span>        ......
+        Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>VisitNonThreadRoots(<span style="color:#66d9ef">this</span>);
+        }
+
+    <span style="color:#75715e">//访问immune_spaces_中的空间
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> space : immune_spaces_.GetSpaces()) {
+        accounting<span style="color:#f92672">::</span>ContinuousSpaceBitmap<span style="color:#f92672">*</span> live_bitmap <span style="color:#f92672">=</span> space<span style="color:#f92672">-&gt;</span>GetLiveBitmap();
+        <span style="color:#75715e">/*ConcurrentCopyingImmuneSpaceObjVisitor内部将在cc_heap_bitmap_中对扫描到
+</span><span style="color:#75715e">          的对象进行标记，同时调用PushOntoMarkStack*/</span>
+        ConcurrentCopyingImmuneSpaceObjVisitor <span style="color:#a6e22e">visitor</span>(<span style="color:#66d9ef">this</span>);
+        live_bitmap<span style="color:#f92672">-&gt;</span>VisitMarkedRange(
+                    <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(space<span style="color:#f92672">-&gt;</span>Begin()),
+                    <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(space<span style="color:#f92672">-&gt;</span>Limit()),
+                    visitor);
+    }
+    <span style="color:#75715e">/*到此，所有根对象（包括immune_space_中的对象）都进行了标记。并且，根对象如果发生了
+</span><span style="color:#75715e">      拷贝，则原始根对象将被替换为新的拷贝对象。接下来的工作就比较简单了，我们要遍历这些根
+</span><span style="color:#75715e">      对象，将它们所引用的对象进行Mark（标记、拷贝）。同时，我们还要更新引用值。*/</span>
+    Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+    {<span style="color:#75715e">/*下面这段代码中包含三次ProcessMarkStack，这和ConcurrentCopying中的mark_stack_
+</span><span style="color:#75715e">      mode_有关，它有四种取值。此次调用ProcessMarkStack时，mark_stack_mode_取值为
+</span><span style="color:#75715e">      kMarkStackModeThreadLocal。*/</span>
+        ProcessMarkStack();
+
+        <span style="color:#75715e">//切换mark_stack_mode_为kMarkStackModeShared
+</span><span style="color:#75715e"></span>
+       SwitchToSharedMarkStackMode();
+        ProcessMarkStack();
+
+        <span style="color:#75715e">//切换mark_stack_mode_为kMarkStackModeGcExclusive
+</span><span style="color:#75715e"></span>        SwitchToGcExclusiveMarkStackMode();
+        <span style="color:#75715e">//对Java Reference对象的处理，各种回收器的处理都一样。我们后续统一介绍
+</span><span style="color:#75715e"></span>        ProcessReferences(self);
+        ......
+        ProcessMarkStack();
+
+        ......;
+        Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetClassLinker()<span style="color:#f92672">-&gt;</span>CleanupClassLoaders();
+        DisableMarking();
+        ......
+    }
+    ......
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">//ProcessMarkStack内部将遍历通过PushOntoMarkStack保存下来的对象（这些对象都是拷贝后得到的对象，代码中用to_ref来表示）。其中最关键函数的是Scan。
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>Scan(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref) {
+    <span style="color:#75715e">//Scan很简单，就是遍历to_ref的引用型成员变量，内部调用ConcurrentCopying的Process函数进行处理。 */
+</span><span style="color:#75715e"></span>    ConcurrentCopyingRefFieldsVisitor <span style="color:#a6e22e">visitor</span>(<span style="color:#66d9ef">this</span>);
+    to_ref<span style="color:#f92672">-&gt;</span>VisitReferences<span style="color:#f92672">&lt;</span>...<span style="color:#f92672">&gt;</span>(visitor, visitor);
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>Process(mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> obj, MemberOffset offset) {
+    <span style="color:#75715e">//obj是上面Scan中的to_ref，而offset是obj的某个引用型成员变量（由下面的ref表示）
+</span><span style="color:#75715e"></span>    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> ref <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>GetFieldObject<span style="color:#f92672">&lt;</span>....<span style="color:#f92672">&gt;</span>(offset);
+    <span style="color:#75715e">//对ref进行Mark，得到ref的to_ref，如果两个一样，则不需要更新obj offset的内容
+</span><span style="color:#75715e"></span>    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> to_ref <span style="color:#f92672">=</span> Mark(ref);
+    <span style="color:#66d9ef">if</span> (to_ref <span style="color:#f92672">==</span> ref) { <span style="color:#66d9ef">return</span>; }
+    <span style="color:#75715e">/*到此，更新obj offset的内容，使得它指向to_ref。由于使用的是原子操作，所以下面的
+</span><span style="color:#75715e">      代码逻辑中会使用循环。*/</span>
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> expected_ref <span style="color:#f92672">=</span> ref;
+    mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> new_ref <span style="color:#f92672">=</span> to_ref;
+    <span style="color:#66d9ef">do</span> {
+        <span style="color:#66d9ef">if</span> (expected_ref <span style="color:#f92672">!=</span> obj<span style="color:#f92672">-&gt;</span>GetFieldObject<span style="color:#f92672">&lt;</span>......<span style="color:#f92672">&gt;</span>(offset)) {
+            <span style="color:#66d9ef">break</span>;
+        }
+    } <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>obj<span style="color:#f92672">-&gt;</span>CasFieldWeakRelaxedObjectWithoutWriteBarrier<span style="color:#f92672">&lt;</span>...<span style="color:#f92672">&gt;</span>(
+                offset, expected_ref, new_ref));
+}
+</code></pre></div><h3 id="reclaimphase">ReclaimPhase</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>ReclaimPhase() {
+    ......
+    {
+        .....
+        ComputeUnevacFromSpaceLiveRatio();<span style="color:#75715e">//详情见下文代码分析
+</span><span style="color:#75715e"></span>    }
+    {
+        .....
+        region_space_<span style="color:#f92672">-&gt;</span>ClearFromSpace();<span style="color:#75715e">//详情见下文代码分析
+</span><span style="color:#75715e"></span>    }
+
+    {
+        WriterMutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>heap_bitmap_lock_);
+        ......
+         <span style="color:#75715e">/*清空除immune_spaces_、region_space_外的空间中其他的垃圾对象。代码逻辑和
+</span><span style="color:#75715e">          MarkSweep Sweep的类似。内部调用ContinuousMemMapAllocSpace的Sweep函数进
+</span><span style="color:#75715e">          行处理。*/</span>
+    Sweep(false);
+    <span style="color:#75715e">//调用GarbageCollector的SwapBitmaps函数，和MarkSweep的处理一样
+</span><span style="color:#75715e"></span>    SwapBitmaps();
+    heap_<span style="color:#f92672">-&gt;</span>UnBindBitmaps();
+    ......
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ConcurrentCopying<span style="color:#f92672">::</span>ComputeUnevacFromSpaceLiveRatio() {
+    ......
+    <span style="color:#75715e">//对RegionSpace中的标记对象进行统计
+</span><span style="color:#75715e"></span>    ConcurrentCopyingComputeUnevacFromSpaceLiveRatioVisitor visitor(<span style="color:#66d9ef">this</span>);
+    region_space_bitmap_<span style="color:#f92672">-&gt;</span>VisitMarkedRange(
+                    <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(region_space_<span style="color:#f92672">-&gt;</span>Begin()),
+                    <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(region_space_<span style="color:#f92672">-&gt;</span>Limit()),
+                                        visitor);
+}
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/" title="GC"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/" title="GC_MarkCompact" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1613805603"></script>
+    <script src="/js/perfect-scrollbar.min.js?1613805603"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1613805603"></script>
+    <script src="/js/jquery.sticky.js?1613805603"></script>
+    <script src="/js/featherlight.min.js?1613805603"></script>
+    <script src="/js/highlight.pack.js?1613805603"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1613805603"></script>
+    <script src="/js/learn.js?1613805603"></script>
+    <script src="/js/hugo-learn.js?1613805603"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1613805603"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

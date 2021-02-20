@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jni on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/</link>
+    <description>Recent content in jni on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C启动Java</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/</guid>
+      <description>AndroidRuntime::start void AndroidRuntime::start(const char* className, const Vector&amp;lt;String8&amp;gt;&amp;amp; options, bool zygote){ ...... JniInvocation jni_invocation; jni_invocation.Init(NULL); JNIEnv* env; //startVm将启动虚拟机  if (startVm(&amp;amp;mJavaVM, &amp;amp;env, zygote) != 0) { return; } onVmCreated(env); ...... jclass stringClass; jobjectArray strArray; jstring classNameStr; ...... char* slashClassName = toSlashClassName(className);//&amp;#34;com.android.internal.os.RuntimeInit&amp;#34;  //找到目标类对应的mirror Class对象  jclass startClass = env-&amp;gt;FindClass(slashClassName);//main  if (startClass == NULL) {} else { //找到该类中的静态main函数对应的ArtMethod对象  jmethodID startMeth = env-&amp;gt;GetStaticMethodID(startClass, &amp;#34;main&amp;#34;,//main  &amp;#34;([Ljava/lang/String;)V&amp;#34;); if (startMeth == NULL) {} else { //调用这个main函数  env-&amp;gt;CallStaticVoidMethod(startClass, startMeth, strArray);//main  .</description>
+    </item>
+    
+    <item>
+      <title>java_jni方法调用原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</guid>
+      <description>Method Execute Flow graph TB PerformCall(PerformCall)--&amp;gt;|Interpreter|ArtInterpreterToInterpreterBridge(interpreter::ArtInterpreterToInterpreterBridge) ArtInterpreterToInterpreterBridge--&amp;gt;ExecuteSwitchImplCpp(interpreter::ExecuteSwitchImplCpp) ExecuteSwitchImplCpp--&amp;gt;DoInvoke(case Instruction::xxx: interpreter::DoInvoke, find called ArtMethod) DoInvoke--&amp;gt;DoCallCommon(interpreter::DoCallCommon, prepare shadow frame) DoCallCommon--&amp;gt;PerformCall ArtMethod::Invoke--&amp;gt;art_quick_invoke_stub(art_quick_invoke_stub: function in quick_entry_point.S) artQuickToInterpreterBridge(artQuickToInterpreterBridge, prepare shadow frame)--&amp;gt;EnterInterpreterFromEntryPoint(interpreter::EnterInterpreterFromEntryPoint) EnterInterpreterFromEntryPoint--&amp;gt;ExecuteSwitchImplCpp PerformCall--&amp;gt;|CompiledCode|ArtInterpreterToCompiledCodeBridge(interpreter::ArtInterpreterToCompiledCodeBridge) ArtInterpreterToCompiledCodeBridge--&amp;gt;ArtMethod::Invoke compiledCode--&amp;gt;|Interpreter|artQuickToInterpreterBridge art_quick_invoke_stub--&amp;gt;|ART_METHOD_QUICK_CODE_OFFSET_32|IsJniMethod{Is JNI method?} IsJniMethod--&amp;gt;|no|entry_point_from_quick_compiled_code_(entry_point_from_quick_compiled_code_ linkCode时设置) IsJniMethod--&amp;gt;|yes|art_quick_generic_jni_trampoline_汇编 art_quick_generic_jni_trampoline_汇编--&amp;gt;artQuickGenericJniTrampoline artQuickGenericJniTrampoline--&amp;gt;data_(data_RegisterNative时设置) data_--&amp;gt;IsJniDlsymLookupStub{IsJniDlsymLookupStub?} IsJniDlsymLookupStub--&amp;gt;|no|nativeCode IsJniDlsymLookupStub--&amp;gt;|yes|artFindNativeMethod entry_point_from_quick_compiled_code_--&amp;gt;IsCompiled{Is Compiled?} IsCompiled--&amp;gt;|yes|compiledCode IsCompiled--&amp;gt;|no|art_quick_to_interpreter_bridge汇编 art_quick_to_interpreter_bridge汇编--&amp;gt;artQuickToInterpreterBridge Trampoline code 所有Trampoline code都是一段汇编代码编写的函数，这段汇编代码函数内部一般会跳转到一个由更高级的编程语言（C++）实现的函数。
+class Thread{ ...... struct PACKED(sizeof(void*)) tls_ptr_sized_values { ...... //针对jni方法的Trampoline code，只包含一个pDlsymLookup函数指针,对应的Trampoline code在jni_entrypoints_x86.S里实现。  //结构体，和JNI调用有关。里边只有一个函数指针成员变量，名为pDlsymLookup。当JNI函数未注册时，这个成员变量将被调用以找到目标JNI函数  JniEntryPoints jni_entrypoints; //针对非jni方法的Trampoline code，一共包含132个函数指针,对应的Trampoline code在quick_entrypoints_x86.S里实现。  //结构体，其成员变量全是个函数指针类型，其定义可参考quick_entrypoints_list.</description>
+    </item>
+    
+    <item>
+      <title>Jni数据转换</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</guid>
+      <description>数据转换总结 graph TB jstring--&amp;gt;|soa.decode|mirror::String* mirror::String*--&amp;gt;|encode/AddLocalReference|jstring mirror::String*--&amp;gt;char* char*--&amp;gt;|mirror::String::AllocFromModifiedUtf8|mirror::String* jmethodid--&amp;gt;|decode|ArtMethod* ArtMethod*--&amp;gt;|encode|jmethodid jobject(&amp;quot;jobject/IndirectRef&amp;quot;)--&amp;gt;|decode|mirrorObject(&amp;quot;art::mirror::Object*&amp;quot;) mirrorObject--&amp;gt;|Assign/Compress|StackReference(&amp;quot;art::StackReference&amp;lt;mirror::Object&amp;gt;*&amp;quot;) StackReference--&amp;gt;|AsMirrorPtr/UnCompress|mirrorObject StackReference--&amp;gt;|OwnedBy|Handle(&amp;quot;art::Handle~T~&amp;quot;) StackHandleScope--&amp;gt;|Provided|Handle StackHandleScope--&amp;gt;|OwnsMulti|StackReference ThreadTlsPtr--&amp;gt;|OwnsLinkedList|StackHandleScope mirrorObject--&amp;gt;|encode|jobject HandleScope的作用 类设计 //8.2.2 ScopedObjectAccess等辅助类
+ScopedObjectAccessAlreadyRunnable DecodeMethod ArtMethod* DecodeMethod(jmethodID mid) const SHARED_REQUIRES(Locks::mutator_lock_) { Locks::mutator_lock_-&amp;gt;AssertSharedHeld(Self()); return reinterpret_cast&amp;lt;ArtMethod*&amp;gt;(mid);//main  } EncodeMethod jmethodID EncodeMethod(ArtMethod* method) const SHARED_REQUIRES(Locks::mutator_lock_) { Locks::mutator_lock_-&amp;gt;AssertSharedHeld(Self()); return reinterpret_cast&amp;lt;jmethodID&amp;gt;(method);//main  } T AddLocalReference(mirror::Object* obj) /* * Add a local reference for an object to the indirect reference table associated with the * current stack frame. When the native function returns, the reference will be discarded.</description>
+    </item>
+    
+    <item>
+      <title>SystemLoadLibrary</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/</guid>
+      <description>Runtime.getRuntime().load /** * Loads the native library specified by the filename argument. The filename * argument must be an absolute path name. * (for example * &amp;lt;code&amp;gt;Runtime.getRuntime().load(&amp;#34;/home/avh/lib/libX11.so&amp;#34;);&amp;lt;/code&amp;gt;). */ public void load(String filename) { load0(VMStack.getStackClass1(), filename); } synchronized void load0(Class&amp;lt;?&amp;gt; fromClass, String filename) { if (!(new File(filename).isAbsolute())) { throw new UnsatisfiedLinkError(&amp;#34;Expecting an absolute path of the library: &amp;#34; + filename); } String error = nativeLoad(filename, fromClass.getClassLoader()); if (error != null) { throw new UnsatisfiedLinkError(error); } } java/lang/System.</description>
+    </item>
+    
+    <item>
+      <title>异常</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/</guid>
+      <description>解释执行异常抛出和处理 被抛出的异常对象赋值给Thread tlsPtr_exception的成员变量，异常投递的工作就算完成；
+接下来就是异常处理的过程。以switch/case方式来解释执行的代码中，下面这个宏用于判断是否有异常发生并处理它。
+Dex_instruction_list.h
+#define DEX_INSTRUCTION_LIST(V) \ V(0x27, THROW, &amp;#34;throw&amp;#34;, k11x, false, kIndexNone, kThrow, kVerifyRegA) \ interpreter_switch_impl.cc
+ExecuteSwitchImpl template&amp;lt;bool do_access_check, bool transaction_active&amp;gt; JValue ExecuteSwitchImpl(......) { ......　//该函数详情见10.2.3.1节  do { dex_pc = inst-&amp;gt;GetDexPc(insns); ...... inst_data = inst-&amp;gt;Fetch16(0); switch (inst-&amp;gt;Opcode(inst_data)) { //switch/case方式执行不同的dex指令  ...... case Instruction::THROW: { //抛异常  PREAMBLE(); Object* exception = shadow_frame.GetVRegReference( inst-&amp;gt;VRegA_11x(inst_data)); if (UNLIKELY(exception == nullptr)) { //Throw抛出的异常对象为空，则重新抛一个空指针异常  ThrowNullPointerException(&amp;#34;throw with null exception&amp;#34;); } else if (.....) {.</description>
+    </item>
+    
+    <item>
+      <title>解释执行7_0</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</guid>
+      <description>quick_entrypoints_x86.S art_quick_invoke_stub /*这段注释来自于源码，它展示了调用art_quick_invoke_stub函数时，相关参数在栈中的布局 * Quick invocation stub (non-static). * On entry: * [sp] = return address 返回值地址，这是由函数调用指令自动压入栈的 * [sp + 4] = method pointer 代表方法C的ArtMethod对象 * [sp + 8] = argument array or null for no argument methods * [sp + 12] = size of argument array in bytes * [sp + 16] = (managed) thread pointer 这是代表调用线程的Thread对象 * [sp + 20] = JValue* result * [sp + 24] = shorty */ DEFINE_FUNCTION art_quick_invoke_stub #定义art_quick_invoke_stub函数  PUSH ebp // save ebp PUSH ebx // save ebx PUSH esi // save esi PUSH edi // save edi .</description>
+    </item>
+    
+  </channel>
+</rss>

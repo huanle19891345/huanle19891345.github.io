@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>协程 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/</link>
+    <description>Recent content in 协程 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kotlin协程</title>
+      <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</guid>
+      <description>协程是通过编译技术实现(不需要虚拟机VM/操作系统OS的支持),通过插入相关代码来生效！ 与之相反,线程/进程是需要虚拟机VM/操作系统OS的支持,通过调度CPU执行生效!
+优秀文章 Kotlin Coroutines(协程) 完全解析（一），协程简介
+Kotlin Coroutines(协程) 完全解析（二），深入理解协程的挂起、恢复与调度
+Kotlin Coroutines(协程) 完全解析（三），封装异步回调、协程间关系及协程的取消
+Kotlin Coroutines(协程) 完全解析（四），协程的异常处理
+Kotlin Coroutines(协程) 完全解析（五），协程的并发
+谷歌开发者 在 android 开发中使用协程 | 背景介绍
+在 View 上使用挂起函数
+协程中的取消和异常 | 异常处理详解
+官网doc 英文:
+https://kotlinlang.org/docs/reference/coroutines/basics.html
+https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/coroutines-guide.md
+https://github.com/Kotlin/KEEP/blob/master/proposals/coroutines.md
+中文:
+https://www.kotlincn.net/docs/reference/coroutines/coroutines-guide.html
+和Android Jetpack结合 https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope
+异步编程模型 异步的含义是被调用的方法执行完之后，无法直接拿到返回值(切换了线程)，需要通过回调接收返回值
+协程相当于提前切换到子线程，然后同步走逻辑，进而改变每一层的异步调用为同步，
+协程将同步方法和线程切换两者相隔离，所有方法都是同步方法，单独控制执行线程，避免异步方法去接收回调参数
+区别：
+ 回调调用时机: 回调接口可以有多个method，并在不同时机调用(对应的也可以在return对象中区分处理) 回调方法参数: 可以封装成method的return参数， 调用方上下文: 需要利用调用方的上下文(提供变量等)  异步回调 fun requestTokenAsync(cb: (Token) -&amp;gt; Unit) { ... } fun createPostAsync(token: Token, item: Item, cb: (Post) -&amp;gt; Unit) { .</description>
+    </item>
+    
+    <item>
+      <title>kotlin协程Source</title>
+      <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</guid>
+      <description>总结 类设计 协程的三层包装  常用的launch和async返回的Job、Deferred，里面封装了协程状态，提供了取消协程接口，而它们的实例都是继承自AbstractCoroutine，它是协程的第一层包装。 第二层包装是编译器生成的SuspendLambda的子类，封装了协程的真正运算逻辑，继承自BaseContinuationImpl，其中completion属性就是协程的第一层包装。 第三层包装是前面分析协程的线程调度时提到的DispatchedContinuation，封装了线程调度逻辑，包含了协程的第二层包装。三层包装都实现了Continuation接口，通过代理模式将协程的各层包装组合在一起，每层负责不同的功能。  resumeWith CoroutineContext graph LR coroutineContext--&amp;gt;Element1[&amp;quot;Element1: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;Element2[&amp;quot;Element2: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;ContinuationInterceptor[&amp;quot;ContinuationInterceptor: DefaultDispatcher.&amp;quot;] coroutineContext--&amp;gt;ElementXxx[&amp;quot;ElementXxx: a singleton context by itself.&amp;quot;] Coroutine构造和启动 CoroutineScope.launch public val coroutineContext: CoroutineContext launch本质上也是将用户配置的协程闭包作为一个suspend函数(()-&amp;gt;Unit),并将该函数在指定的dispatcher上执行，和withContext类似
+public fun CoroutineScope.launch( context: CoroutineContext = EmptyCoroutineContext, start: CoroutineStart = CoroutineStart.DEFAULT, block: suspend CoroutineScope.() -&amp;gt; Unit ): Job { val newContext = newCoroutineContext(context) val coroutine = if (start.isLazy) LazyStandaloneCoroutine(newContext, block) else StandaloneCoroutine(newContext, active = true) coroutine.</description>
+    </item>
+    
+  </channel>
+</rss>

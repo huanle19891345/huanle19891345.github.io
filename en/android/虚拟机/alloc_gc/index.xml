@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>alloc_gc on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/</link>
+    <description>Recent content in alloc_gc on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alloc</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</guid>
+      <description>heap.cc
+Heap::ChangeCollector(CollectorType) void Heap::ChangeCollector(CollectorType collector_type) { /*CollectorType是一个枚举变量，用于定义不同的回收器类型。collector_type_是 Heap类的成员变量，描述当前设定的回收器类型。对笔者所搭建的模拟器而言，虚拟机使用的 回收器类型为kCollectorTypeCMS。CMS是ConcurrentMarkSweep的缩写。它是标记 清除垃圾回收算法的一种。本书后续章节会详细介绍它们。此处，读者仅作简单了解即可。 */ if (collector_type != collector_type_) { collector_type_ = collector_type;//设置垃圾回收器类型  ...... switch (collector_type_) { case kCollectorTypeCC: {//CC是Concurrent Copying的缩写  ..... if (use_tlab_) {//是否使用TLAB。本例中不使用它，所以use_tlab_为false  //ChangeAllocator函数将设置内存分配器的类型  ChangeAllocator(kAllocatorTypeRegionTLAB); } else { ChangeAllocator(kAllocatorTypeRegion); } break; } case kCollectorTypeMC://MC:Mark Compact  case kCollectorTypeSS://SS:Semi-space  //GSS:改进版的SS  case kCollectorTypeGSS:{ ..... if (use_tlab_) { ChangeAllocator(kAllocatorTypeTLAB); } else { ChangeAllocator(kAllocatorTypeBumpPointer); } break; } case kCollectorTypeMS: {//MS：mark-sweep  .</description>
+    </item>
+    
+    <item>
+      <title>AllocRelated</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/</guid>
+      <description>Instruction::NEW_INSTANCE ExecuteSwitchImplCpp template&amp;lt;bool do_access_check, bool transaction_active&amp;gt; void ExecuteSwitchImplCpp(SwitchImplContext* ctx) { switch (inst-&amp;gt;Opcode(inst_data)) { case Instruction::NEW_INSTANCE: { PREAMBLE(); ObjPtr&amp;lt;mirror::Object&amp;gt; obj = nullptr; ObjPtr&amp;lt;mirror::Class&amp;gt; c = ResolveVerifyAndClinit(dex::TypeIndex(inst-&amp;gt;VRegB_21c()), shadow_frame.GetMethod(), self, false, do_access_check); if (LIKELY(c != nullptr)) { if (UNLIKELY(c-&amp;gt;IsStringClass())) { gc::AllocatorType allocator_type = Runtime::Current()-&amp;gt;GetHeap()-&amp;gt;GetCurrentAllocator(); obj = mirror::String::AllocEmptyString&amp;lt;true&amp;gt;(self, allocator_type); } else { obj = AllocObjectFromCode&amp;lt;true&amp;gt;( c.Ptr(), self, Runtime::Current()-&amp;gt;GetHeap()-&amp;gt;GetCurrentAllocator()); } } if (UNLIKELY(obj == nullptr)) { HANDLE_PENDING_EXCEPTION(); } else { obj-&amp;gt;GetClass()-&amp;gt;AssertInitializedOrInitializingInThread(self); // Don&amp;#39;t allow finalizable objects to be allocated during a transaction since these can&amp;#39;t  // be finalized without a started runtime.</description>
+    </item>
+    
+    <item>
+      <title>GC</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/</guid>
+      <description>类设计 runtime.cc
+Runtime::VisitRoots void Runtime::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { /*RootVisitor是一个纯虚类，其定义了几个函数，供root访问时调用。参数flags有一个默认 值，为kVisitRootFlagAllRoots，表示要访问所有的root。*/ VisitNonConcurrentRoots(visitor); VisitConcurrentRoots(visitor, flags); } Runtime::VisitNonConcurrentRoots void Runtime::VisitNonConcurrentRoots(RootVisitor* visitor) { //1：调用所有Thread对象的VisitRoots函数  thread_list_-&amp;gt;VisitRoots(visitor); VisitNonThreadRoots(visitor);//接着看该函数的代码 } Thread::VisitRoots void Thread::VisitRoots(RootVisitor* visitor) { /*GetThreadId返回的是Thread tlsPtr_ thin_lock_thread_id thin_lock_id。 我们在12.2.1节中介绍过它。该id并不是代表操作系统里线程的tid，而是由虚拟机自己维护的用 于线程同步的id。*/ const uint32_t thread_id = GetThreadId(); //tlsPtr_opeer指向一个Java层Thread对象，它是一个mirror Thread对象在Java层  //的对应物。这类根对象的类型为kRootThreadObject  visitor-&amp;gt;VisitRootIfNonNull(&amp;amp;tlsPtr_.opeer, RootInfo(kRootThreadObject, thread_id)); /*tlsPtr_ exception指向一个Java异常对象。注意，GetDeoptimizationException返 回的值非常特殊（为-1）。所以，它并不是一个真正的Java异常对象，只是用-1来表示和 HDeoptimize有关的处理（详情可参考10.4节的内容） */ if (tlsPtr_.exception != nullptr &amp;amp;&amp;amp; tlsPtr_.exception != GetDeoptimizationException()) { //使用kRootNativeStack作为tlsPtr_ exception的root类型  visitor-&amp;gt;VisitRoot(reinterpret_cast&amp;lt;mirror::Object**&amp;gt;( &amp;amp;tlsPtr_.exception), RootInfo(kRootNativeStack, thread_id)); } //tlsPtr_ monitor_enter_object指向用于monitor-enter的那个Java对象。详情可参考  //12.</description>
+    </item>
+    
+    <item>
+      <title>GC_ConcurrentCopying</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/</guid>
+      <description>ConcurrentCopying virtual GcType GetGcType() const OVERRIDE { //ConcurrentCopying仅支持kGcTypePartial，也就是不扫描ImageSpace和  //ZygoteSpace（除了那些有dirty card的对象）  return kGcTypePartial; } virtual CollectorType GetCollectorType() const OVERRIDE { return kCollectorTypeCC;//返回回收器类型 } void SetRegionSpace(space::RegionSpace* region_space) { //region_space_是ConcurrentCopying的成员变量  //ConcurrentCopying要回收的垃圾对象就在这个region_space_中  region_space_ = region_space; } RunPhases void ConcurrentCopying::RunPhases() { is_active_ = true; Thread* self = Thread::Current(); thread_running_gc_ = self; { ReaderMutexLock mu(self, *Locks::mutator_lock_); InitializePhase();//①初始化阶段  } FlipThreadRoots();//②完成半空间Flip工作  { ReaderMutexLock mu(self, *Locks::mutator_lock_); MarkingPhase();//③标记  } ...... { ReaderMutexLock mu(self, *Locks::mutator_lock_); ReclaimPhase();//④回收  } FinishPhase();//收尾工作，非常简单，请读者自行阅读  is_active_ = false; thread_running_gc_ = nullptr; } InitializePhase void ConcurrentCopying::InitializePhase() { .</description>
+    </item>
+    
+    <item>
+      <title>GC_MarkCompact</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/</guid>
+      <description>mark_compact.h/cc virtual GcType GetGcType() const OVERRIDE { return kGcTypePartial;//MarkCompact不处理ImageSpace和ZygoteSpace } virtual CollectorType GetCollectorType() const OVERRIDE { return kCollectorTypeMC; } void MarkCompact::SetSpace(space::BumpPointerSpace* space) { space_ = space;//space_是MarkCompact成员变量 } RunPhases void MarkCompact::RunPhases() { Thread* self = Thread::Current(); /* InitializePhase非常简单，其中需要注意的是MarkCompact下面两个成员变量的设置： (1) mark_stack_ = heap_-&amp;gt;GetMarkStack(); (2) mark_bitmap_ = heap_-&amp;gt;GetMarkBitmap(); */ InitializePhase(); { ScopedPause pause(this);//MarkCompact是stop-the-world类型的回收器  ...... MarkingPhase();//①标记阶段，详情见下文分析  ReclaimPhase();//②回收阶段，详情见下文分析  } ...... FinishPhase();//收尾工作，非常简单，读者可自行阅读 } MarkingPhase void MarkCompact::MarkingPhase() { Thread* self = Thread::Current(); /*MarkCompact基于Mark-Compact回收原理，所以它也需要标记能搜索到的对象。不过，由于 BumpPointerSpace空间对象不包含位图对象，所以下面将为space_（指向一个 BumpPointerSpace空间）创建一个位图对象objects_before_forwarding。它用于记录 搜索到的对象。*/ objects_before_forwarding_.</description>
+    </item>
+    
+    <item>
+      <title>GC_MS_CMS</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/</guid>
+      <description>MarkSweep类家族 表14-1　MarkSweep类家族GetGcType取值情况
+集合Live和集合Mark构成 CMS时Heap space相关成员变量取值情况 CMS时Heap位图相关成员变量取值情况 图14-7　CMS时Heap位图相关成员变量取值情况
+一个HeapBitmap对象可以管理多个ContinuousSpace的某一种位图对象
+CMS时Heap mark_stack_等成员变量的情况 MarkSweep::MarkSweep MarkSweep::MarkSweep(Heap* heap, bool is_concurrent, const std::string&amp;amp; name_prefix) : GarbageCollector(heap, name_prefix + (is_concurrent ? &amp;#34;concurrent mark sweep&amp;#34;: &amp;#34;mark sweep&amp;#34;)), current_space_bitmap_(nullptr), mark_bitmap_(nullptr), mark_stack_(nullptr), ..... is_concurrent_(is_concurrent),...... { /*MarkSweep构造函数并不复杂，此处先介绍下它的几个成员变量（其作用留待后续代码分析时时再详细讲解）： current_space_bitmap_：类型为ContinuousSpaceBitmap*。 mark_bitmap_：类型为HeapBitmap*。 mark_stack_：类型为ObjectStack*。 */ ..... /*下面的代码行将创建一个内存映射对象。ART内部大量使用内存映射对象。下面的 sweep_array_free_buffer_mem_map_的用法需要到介绍StickyMarkSweep时才能见到。总之，读者将它看作一块内存即可。*/ MemMap* mem_map = MemMap::MapAnonymous(......); sweep_array_free_buffer_mem_map_.reset(mem_map); ..... } MarkSweep::RunPhases graph TB IsConcurrent{IsConcurrent}--&amp;gt;|yes|MarkingPhaseC(MarkingPhase) MarkingPhaseC--&amp;gt;pauseC(pause) pauseC--&amp;gt;PausePhaseC(&amp;quot;PausePhase_reMark&amp;quot;) PausePhaseC--&amp;gt;RevokeAllThreadLocalBuffers RevokeAllThreadLocalBuffers--&amp;gt;ReclaimPhase ReclaimPhase--&amp;gt;FinishPhase IsConcurrent--&amp;gt;|no|pause pause--&amp;gt;MarkingPhase MarkingPhase--&amp;gt;PausePhase PausePhase--&amp;gt;RevokeAllThreadLocalBuffers void MarkSweep::RunPhases() { Thread* self = Thread::Current(); //初始化MarkSweep类的几个成员变量。其中，MarkSweep的mark_bitmap_将设置为Heap的成员变量mark_bitmap_（读者可回顾图14-7）  InitializePhase(); if (IsConcurrent()) {//if条件为true，则是CMS的行为  .</description>
+    </item>
+    
+    <item>
+      <title>GC_Semi_Space</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/</guid>
+      <description>semi_space.cc
+RunPhases void SemiSpace::RunPhases() { Thread* self = Thread::Current(); InitializePhase();//①回收器初始化  //if为true，说明mutator线程已被暂停。这种情况的出现和SemiSpace的用法有关，  //我们暂且不用考虑这些  if (Locks::mutator_lock_-&amp;gt;IsExclusiveHeld(self)) { MarkingPhase();//②标记工作  ReclaimPhase();//回收工作，非常简单，留给读者自行研究  } else { //如果mutator未暂停，则SemiSpace只有标记阶段需要暂停mutator  { ScopedPause pause(this);//暂停mutator  MarkingPhase();//标记工作  } {//mutator恢复运行，可同时开展回收工作  ReaderMutexLock mu(self, *Locks::mutator_lock_); ReclaimPhase(); } } FinishPhase(); } </description>
+    </item>
+    
+    <item>
+      <title>Runtime_VisitRoots</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</guid>
+      <description>art/runtime/runtime.cc
+Runtime::VisitRoots void Runtime::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { VisitNonConcurrentRoots(visitor, flags); VisitConcurrentRoots(visitor, flags); } VisitNonConcurrentRoots void Runtime::VisitNonConcurrentRoots(RootVisitor* visitor, VisitRootFlags flags) { VisitThreadRoots(visitor, flags); VisitNonThreadRoots(visitor); } VisitThreadRoots void Runtime::VisitThreadRoots(RootVisitor* visitor, VisitRootFlags flags) { thread_list_-&amp;gt;VisitRoots(visitor, flags); } art/runtime/thread_list.cc
+ThreadList::VisitRoots void ThreadList::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) const { MutexLock mu(Thread::Current(), *Locks::thread_list_lock_); for (const auto&amp;amp; thread : list_) { thread-&amp;gt;VisitRoots(visitor, flags); } } art/runtime/thread.cc
+Thread::VisitRoots void Thread::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { if ((flags &amp;amp; VisitRootFlags::kVisitRootFlagPrecise) != 0) { VisitRoots&amp;lt;/* kPrecise */ true&amp;gt;(visitor); } else { VisitRoots&amp;lt;/* kPrecise */ false&amp;gt;(visitor); } } //define the meaning of enum RootType template &amp;lt;bool kPrecise&amp;gt; void Thread::VisitRoots(RootVisitor* visitor) { const pid_t thread_id = GetThreadId(); visitor-&amp;gt;VisitRootIfNonNull(&amp;amp;tlsPtr_.</description>
+    </item>
+    
+    <item>
+      <title>Space</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/</guid>
+      <description>类设计 ART虚拟机提供了多种内存分配手段，它们分别由LargeObjectSpace、BumpPointerSpace、ZygoteSpace、RegionSpace、DlMallocSpace和RosAllocSpace六个类(叶子节点)来实现。ImageSpace用于.art文件的加载
+classDiagram class Space { +GetNames() +Contains() +IsImageSpace() +IsMallocSpace() +isZygoteSpace() +isBumpPointerSpace() +IsRegionSpace() } class AllocSpace { +GetByteAllocated() +GetObjectsAllocated() +Alloc() +AllocThreadSafe() +Free() +FreeList() } Space &amp;lt;|-- ContinuousSpace ContinuousSpace &amp;lt;|-- MemMapSpace MemMapSpace &amp;lt;|-- ImageSpace MemMapSpace &amp;lt;|-- ContinuousMemMapAllocSpace AllocSpace &amp;lt;|-- ContinuousMemMapAllocSpace AllocSpace &amp;lt;|-- LargeObjectSpace Space &amp;lt;|-- DiscontinuousSpace DiscontinuousSpace &amp;lt;|-- LargeObjectSpace ContinuousMemMapAllocSpace &amp;lt;|-- BumpPointerSpace ContinuousMemMapAllocSpace &amp;lt;|-- RegionSpace ContinuousMemMapAllocSpace &amp;lt;|-- ZygoteSpace ContinuousMemMapAllocSpace &amp;lt;|-- MallocSpace MallocSpace &amp;lt;|-- DlMallocSpace MallocSpace &amp;lt;|-- RosAllocSpace LargeObjectSpace &amp;lt;|-- LargeObjectMapSpace LargeObjectSpace &amp;lt;|-- FreeListSpace SpaceBitmap space_bitmap(-inl).</description>
+    </item>
+    
+  </channel>
+</rss>

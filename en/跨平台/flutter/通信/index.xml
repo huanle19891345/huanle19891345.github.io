@@ -7,18 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Flutter消息机制</title>
-      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</link>
+      <title>MessageLoop</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/flutter%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/</guid>
-      <description>消息机制 深入理解Flutter消息机制
-ThreadHost初始化
-[-&amp;gt; flutter/shell/common/thread_host.cc] ThreadHost::ThreadHost(std::string name_prefix, uint64_t mask) { if (mask &amp;amp; ThreadHost::Type::Platform) { platform_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.platform&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::UI) { //创建线程 [见小节2.2] ui_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.ui&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::GPU) { gpu_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.gpu&amp;quot;); } if (mask &amp;amp; ThreadHost::Type::IO) { io_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;quot;.io&amp;quot;); } } TaskRunner初始化
-[-&amp;gt; flutter/fml/task_runner.cc] TaskRunner::TaskRunner(fml::RefPtr&amp;lt;MessageLoopImpl&amp;gt; loop) : loop_(std::move(loop)) {} Flutter引擎启动过程，会创建UI/GPU/IO这3个线程，并且会为每个线程依次创建MessageLoop对象，启动后处于epoll_wait等待状态。对于Flutter的消息机制跟Android原生的消息机制有很多相似之处，都有消息(或者任务)、消息队列以及Looper，有一点不同的是Android有一个Handler类，用于发送消息以及执行回调方法，相对应Flutter中有着相近功能的便是TaskRunner。
-上图是从源码中提炼而来的任务处理流程，比官方流程图更容易理解一些复杂流程的时序问题，后续会专门讲解个中原由。Flutter的任务队列处理机制跟Android的消息队列处理相通，只不过Flutter分为Task和MicroTask两种类型，引擎和Dart虚拟机的事件以及Future都属于Task，Dart层执行scheduleMicrotask()所产生的属于Microtask。
-每次Flutter引擎在消费任务时调用FlushTasks()方法，遍历整个延迟任务队列delayed_tasks_，将已到期的任务加入task队列，然后开始处理任务。
- Step 1: 检查task，当task队列不为空，先执行一个task； Step 2: 检查microTask，当microTask不为空，则执行microTask；不断循环Step 2 直到microTask队列为空，再回到执行Step 1；  可简单理解为先处理完所有的Microtask，然后再处理Task。因为scheduleMicrotask()方法的调用自身就处于一个Task，执行完当前的task，也就意味着马上执行该Microtask。</description>
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/</guid>
+      <description>TaskRunners::TaskRunners(std::string label, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; platform, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; gpu, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; ui, fml::RefPtr&amp;lt;fml::TaskRunner&amp;gt; io) : label_(std::move(label)), platform_(std::move(platform)), gpu_(std::move(gpu)), ui_(std::move(ui)), io_(std::move(io)) {} ThreadHost::ThreadHost /// The collection of all the threads used by the engine. ThreadHost enum Type { Platform = 1 &amp;lt;&amp;lt; 0, UI = 1 &amp;lt;&amp;lt; 1, GPU = 1 &amp;lt;&amp;lt; 2, IO = 1 &amp;lt;&amp;lt; 3, }; std::unique_ptr&amp;lt;fml::Thread&amp;gt; platform_thread; std::unique_ptr&amp;lt;fml::Thread&amp;gt; ui_thread; std::unique_ptr&amp;lt;fml::Thread&amp;gt; gpu_thread; std::unique_ptr&amp;lt;fml::Thread&amp;gt; io_thread; ThreadHost(std::string name_prefix, uint64_t type_mask); ThreadHost::ThreadHost(std::string name_prefix, uint64_t mask) { if (mask &amp;amp; ThreadHost::Type::Platform) { platform_thread = std::make_unique&amp;lt;fml::Thread&amp;gt;(name_prefix + &amp;#34;.</description>
+    </item>
+    
+    <item>
+      <title>MethodChannel</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/</guid>
+      <description>整体设计 graph TB Dart(DartFramework)--&amp;gt;|await|Engine--&amp;gt;|GetPlatformTaskRunner-&amp;gt;PostTask|PlatformC++--&amp;gt;PlatformJava PlatformJava--&amp;gt;PlatformC++ PlatformC++--&amp;gt;|ui_task_runner_-&amp;gt;PostTask|Engine--&amp;gt;Dart 注册监听MethodChannel().setMethodCallHandler((call, result) -&amp;gt; {}) class MainActivity() : FlutterActivity() { private val CHANNEL = &amp;#34;samples.flutter.dev/battery&amp;#34; override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) GeneratedPluginRegistrant.registerWith(this) MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result -&amp;gt; // Note: this method is invoked on the main thread.  if (call.method == &amp;#34;getBatteryLevel&amp;#34;) { val batteryLevel = getBatteryLevel()//android平台api调用获取  if (batteryLevel != -1) { result.success(batteryLevel) } else { result.error(&amp;#34;UNAVAILABLE&amp;#34;, &amp;#34;Battery level not available.&amp;#34;, null) } } else { result.</description>
     </item>
     
   </channel>

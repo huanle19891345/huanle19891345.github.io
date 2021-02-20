@@ -1,0 +1,6400 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>SystemLoadLibrary :: 郑欢的学习总结</title>
+
+    
+    <link href="/css/nucleus.css?1613805603" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1613805603" rel="stylesheet">
+    <link href="/css/hybrid.css?1613805603" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1613805603" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1613805603" rel="stylesheet">
+    <link href="/css/auto-complete.css?1613805603" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1613805603" rel="stylesheet">
+    <link href="/css/theme.css?1613805603" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1613805603" rel="stylesheet">
+    
+    <link href="/css/theme-mine.css?1613805603" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1613805603"></script>
+
+    <script src="/js/auto_toc_scroll.js?1613805603"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/en'>
+    <img src="/avatar.png" width="60px" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1613805603"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1613805603"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1613805603"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/" title="android" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/">
+          android
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/" title="jetpack" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/">
+          jetpack
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/" title="arch" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/">
+          arch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/databinding/" title="databinding" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/databinding/">
+          databinding
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/databinding/databinding/" title="Databinding" class="dd-item ">
+        <a href="/en/android/jetpack/arch/databinding/databinding/">
+        Databinding
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/lifecycle/" title="lifecycle" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/lifecycle/">
+          lifecycle
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/lifecycle/lifecycle/" title="Lifecycle" class="dd-item ">
+        <a href="/en/android/jetpack/arch/lifecycle/lifecycle/">
+        Lifecycle
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/livedata/" title="livedata" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/livedata/">
+          livedata
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/livedata/" title="LiveData" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/livedata/">
+        LiveData
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/" title="LiveData封装" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/">
+        LiveData封装
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/livedata/mediatorlivedata/" title="MediatorLiveData" class="dd-item ">
+        <a href="/en/android/jetpack/arch/livedata/mediatorlivedata/">
+        MediatorLiveData
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/jetpack/arch/viewmodel/" title="viewmodel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/jetpack/arch/viewmodel/">
+          viewmodel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/viewmodel/" title="ViewModel" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/viewmodel/">
+        ViewModel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/" title="ViewModel封装" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/">
+        ViewModel封装
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/" title="数据保存和恢复" class="dd-item ">
+        <a href="/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/">
+        数据保存和恢复
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/supporttoandroidx/" title="supportToAndroidx" class="dd-item ">
+        <a href="/en/android/jetpack/supporttoandroidx/">
+        supportToAndroidx
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+          性能优化
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/" title="内存优化" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/">
+          内存优化
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/" title="DumpHprof" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/">
+        DumpHprof
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/" title="Hprof_binary_dump_format" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/hprof_binary_dump_format/">
+        Hprof_binary_dump_format
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/" title="LeakCanary2Source" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/">
+        LeakCanary2Source
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/" title="OOM" class="dd-item ">
+        <a href="/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/">
+        OOM
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">
+          系统机制原理
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/" title="ashmem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/">
+          ashmem
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/" title="匿名共享内存Ashmem" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/">
+        匿名共享内存Ashmem
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/" title="bitmap" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/">
+          bitmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/" title="Bitmap" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/">
+        Bitmap
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/" title="BitmapSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/">
+        BitmapSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/">
+          handler
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/">
+        Looper
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/" title="ThreadLocal" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/">
+        ThreadLocal
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/" title="input" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/">
+          input
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/" title="touchEventNative" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/">
+        touchEventNative
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/" title="kernel" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/">
+          kernel
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/" title="kernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/">
+        kernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/" title="layoutinflater" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/">
+          layoutinflater
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/" title="LayoutInflater" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/">
+        LayoutInflater
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/" title="sharedpreferences" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/">
+          sharedpreferences
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/" title="SharedPreferences" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/sharedpreferences/sharedpreferences/">
+        SharedPreferences
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/" title="thread" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/">
+          thread
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/" title="StackTraceElement" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/">
+        StackTraceElement
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/" title="ThreadState" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/">
+        ThreadState
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/" title="zygote" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/">
+          zygote
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/" title="SystemServerSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/">
+        SystemServerSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/" title="ZygoteSource" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/">
+        ZygoteSource
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/" title="Zygote进程" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/">
+        Zygote进程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/" title="后台任务" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/">
+          后台任务
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/" title="后台任务处理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/">
+        后台任务处理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="多进程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+          多进程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/" title="binder" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/">
+          binder
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/" title="BinderClient" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/">
+        BinderClient
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/" title="BinderDeath" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/">
+        BinderDeath
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/" title="BinderKernel" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/">
+        BinderKernel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/" title="BinderServer" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/">
+        BinderServer
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/" title="BinderServiceManager" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/">
+        BinderServiceManager
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/" title="Binder原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/">
+        Binder原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/" title="mmkv" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/">
+          mmkv
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/" title="MMKV" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/">
+        MMKV
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/" title="应用启动退出" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/">
+          应用启动退出
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/" title="应用启动" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/">
+        应用启动
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/" title="源码研究方法" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/">
+          源码研究方法
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/" title="Syscall查找方式" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/">
+        Syscall查找方式
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/" title="系统绘制" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/">
+          系统绘制
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/" title="Graphics" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/">
+        Graphics
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/" title="Vsync" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/">
+        Vsync
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/" title="Vsync_SurfaceFlinger" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/">
+        Vsync_SurfaceFlinger
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/" title="硬件加速绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/">
+        硬件加速绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/" title="绘制原理" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/">
+        绘制原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/" title="软件绘制" class="dd-item ">
+        <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/">
+        软件绘制
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+          虚拟机
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/" title="alloc_gc" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/">
+          alloc_gc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/" title="Alloc" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/">
+        Alloc
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/" title="AllocRelated" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/">
+        AllocRelated
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/" title="GC" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/">
+        GC
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/" title="GC_ConcurrentCopying" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/">
+        GC_ConcurrentCopying
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/" title="GC_MarkCompact" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/">
+        GC_MarkCompact
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/" title="GC_MS_CMS" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/">
+        GC_MS_CMS
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/" title="GC_Semi_Space" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/">
+        GC_Semi_Space
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/" title="Runtime_VisitRoots" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/">
+        Runtime_VisitRoots
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/" title="Space" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/">
+        Space
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/" title="ART_Lock" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/">
+        ART_Lock
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/" title="jni" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/">
+          jni
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/" title="C启动Java" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/">
+        C启动Java
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
+        java_jni方法调用原理
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Jni数据转换" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">
+        Jni数据转换
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/" title="SystemLoadLibrary" class="dd-item active">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/">
+        SystemLoadLibrary
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/">
+        异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="启动流程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+          启动流程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="ART启动流程" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+        ART启动流程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="基础数据结构" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        基础数据结构
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/" title="混合编译_运行" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/">
+          混合编译_运行
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/" title="JVM_JIT" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/">
+        JVM_JIT
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/" title="混合编译_运行" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/">
+        混合编译_运行
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" title="类加载" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+          类加载
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/" title="Android_N混合编译与对热补丁影响解析" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/">
+        Android_N混合编译与对热补丁影响解析
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" title="类加载" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+        类加载
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/" title="类加载虚拟机层" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/">
+        类加载虚拟机层
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/" title="类编译" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/">
+          类编译
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/" title="dex2oat" class="dd-item ">
+        <a href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/">
+        dex2oat
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/kotlin/" title="kotlin" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/kotlin/">
+          kotlin
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/" title="协程" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/">
+          协程
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/" title="kotlin协程" class="dd-item ">
+        <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/">
+        kotlin协程
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/" title="kotlin协程Source" class="dd-item ">
+        <a href="/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/">
+        kotlin协程Source
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="跨平台" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/">
+          跨平台
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/" title="flutter" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/">
+          flutter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/" title="engine" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/">
+          engine
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/" title="Engine" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/engine/">
+        Engine
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/" title="startup" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/">
+          startup
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/" title="startup" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup/">
+        startup
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/" title="startup_dart_framework" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_dart_framework/">
+        startup_dart_framework
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/" title="startup_embedder_framwwork" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/">
+        startup_embedder_framwwork
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/" title="touch" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/">
+          touch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/" title="Touch" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/">
+        Touch
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/" title="动画" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/">
+          动画
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" title="动画" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/">
+        动画
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" title="混合开发" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+          混合开发
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/" title="FlutterBoost" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/">
+        FlutterBoost
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/" title="混合开发" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">
+        混合开发
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/" title="渲染" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/">
+          渲染
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/" title="Widget" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/">
+        Widget
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/" title="渲染" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/">
+        渲染
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/" title="路由" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/">
+          路由
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/" title="路由" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E8%B7%AF%E7%94%B1/%E8%B7%AF%E7%94%B1/">
+        路由
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/" title="通信" class="dd-item
+        
+        
+        
+        ">
+      <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/">
+          通信
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/" title="MessageLoop" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/">
+        MessageLoop
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/" title="MethodChannel" class="dd-item ">
+        <a href="/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/">
+        MethodChannel
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/huanle19891345"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/showcase"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://huanle19891345.github.io/en/credits"><i class='fas fa-fw fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/'>虚拟机</a> > <a href='/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/'>jni</a> > SystemLoadLibrary
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#runtimegetruntimeload">Runtime.getRuntime().load</a></li>
+    <li><a href="#systemloadlibrary">System.loadLibrary</a></li>
+    <li><a href="#basedexclassloaderfindlibrary">BaseDexClassLoader.findLibrary</a>
+      <ul>
+        <li><a href="#dexpathlistfindlibrary">DexPathList.findLibrary</a></li>
+        <li><a href="#nativelibraryelementfindnativelibrary">NativeLibraryElement.findNativeLibrary</a></li>
+      </ul>
+    </li>
+    <li><a href="#nativeload">nativeLoad</a>
+      <ul>
+        <li><a href="#runtime_nativeload">Runtime_nativeLoad</a></li>
+        <li><a href="#jvm_nativeload">JVM_NativeLoad</a></li>
+        <li><a href="#javavmextloadnativelibrary">JavaVMExt::LoadNativeLibrary</a>
+          <ul>
+            <li><a href="#opennativelibrary">OpenNativeLibrary</a>
+              <ul>
+                <li><a href="#android_dlopen_ext">android_dlopen_ext</a></li>
+              </ul>
+            </li>
+            <li><a href="#findsymbol">FindSymbol</a>
+              <ul>
+                <li><a href="#dlsym">dlsym</a></li>
+              </ul>
+            </li>
+            <li><a href="#jni_onload">JNI_OnLoad</a></li>
+            <li><a href="#registernatives">RegisterNatives</a>
+              <ul>
+                <li><a href="#artmethodregisternative">ArtMethod::RegisterNative</a></li>
+                <li><a href="#setentrypointfromjni">SetEntryPointFromJni</a></li>
+                <li><a href="#runtimecallbacksregisternativemethod">RuntimeCallbacks::RegisterNativeMethod</a>
+                  <ul>
+                    <li><a href="#ti_methodccregisternativemethod">ti_method.cc.RegisterNativeMethod</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+    <li><a href="#其他">其他</a>
+      <ul>
+        <li><a href="#linkercpp">linker.cpp</a>
+          <ul>
+            <li><a href="#load_library">load_library</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              SystemLoadLibrary
+            </h1>
+          
+
+        
+
+
+<h2 id="runtimegetruntimeload">Runtime.getRuntime().load</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Loads the native library specified by the filename argument.  The filename
+</span><span style="color:#75715e">     * argument must be an absolute path name.
+</span><span style="color:#75715e">     * (for example
+</span><span style="color:#75715e">     * &lt;code&gt;Runtime.getRuntime().load(&#34;/home/avh/lib/libX11.so&#34;);&lt;/code&gt;).
+</span><span style="color:#75715e">     */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">load</span><span style="color:#f92672">(</span>String filename<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    load0<span style="color:#f92672">(</span>VMStack<span style="color:#f92672">.</span><span style="color:#a6e22e">getStackClass1</span><span style="color:#f92672">(),</span> filename<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">load0</span><span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;?&gt;</span> fromClass<span style="color:#f92672">,</span> String filename<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>filename<span style="color:#f92672">).</span><span style="color:#a6e22e">isAbsolute</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsatisfiedLinkError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Expecting an absolute path of the library: &#34;</span> <span style="color:#f92672">+</span> filename<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+    String error <span style="color:#f92672">=</span> nativeLoad<span style="color:#f92672">(</span>filename<span style="color:#f92672">,</span> fromClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">());</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>error <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsatisfiedLinkError<span style="color:#f92672">(</span>error<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>java/lang/System.java</p>
+<h2 id="systemloadlibrary">System.loadLibrary</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Loads the native library specified by the &lt;code&gt;libname&lt;/code&gt;
+</span><span style="color:#75715e">     * argument.  The &lt;code&gt;libname&lt;/code&gt; argument must not contain any platform
+</span><span style="color:#75715e">     * specific prefix, file extension or path. If a native library
+</span><span style="color:#75715e">     * called &lt;code&gt;libname&lt;/code&gt; is statically linked with the VM, then the
+</span><span style="color:#75715e">     * JNI_OnLoad_&lt;code&gt;libname&lt;/code&gt; function exported by the library is invoked.
+</span><span style="color:#75715e">     * See the JNI Specification for more details.
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * Otherwise, the libname argument is loaded from a system library
+</span><span style="color:#75715e">     * location and mapped to a native library image in an implementation-
+</span><span style="color:#75715e">     * dependent manner.
+</span><span style="color:#75715e">     **/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span>String libname<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">loadLibrary0</span><span style="color:#f92672">(</span>VMStack<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallingClassLoader</span><span style="color:#f92672">(),</span> libname<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>java/lang/Runtime.java</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loadLibrary0</span><span style="color:#f92672">(</span>ClassLoader loader<span style="color:#f92672">,</span> String libname<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        String libraryName <span style="color:#f92672">=</span> libname<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>loader <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            String filename <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span><span style="color:#a6e22e">findLibrary</span><span style="color:#f92672">(</span>libraryName<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>filename <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// It&#39;s not necessarily true that the ClassLoader used
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// System.mapLibraryName, but the default setup does, and it&#39;s
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// misleading to say we didn&#39;t find &#34;libMyLibrary.so&#34; when we
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// actually searched for &#34;liblibMyLibrary.so.so&#34;.
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsatisfiedLinkError<span style="color:#f92672">(</span>loader <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; couldn&#39;t find \&#34;&#34;</span> <span style="color:#f92672">+</span>
+                                               System<span style="color:#f92672">.</span><span style="color:#a6e22e">mapLibraryName</span><span style="color:#f92672">(</span>libraryName<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            String error <span style="color:#f92672">=</span> nativeLoad<span style="color:#f92672">(</span>filename<span style="color:#f92672">,</span> loader<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>error <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsatisfiedLinkError<span style="color:#f92672">(</span>error<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        String filename <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">mapLibraryName</span><span style="color:#f92672">(</span>libraryName<span style="color:#f92672">);</span>
+        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> candidates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;();</span>
+        String lastError <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>String directory <span style="color:#f92672">:</span> getLibPaths<span style="color:#f92672">())</span> <span style="color:#f92672">{</span><span style="color:#75715e">//getLibPaths return /system/lib/
+</span><span style="color:#75715e"></span>            String candidate <span style="color:#f92672">=</span> directory <span style="color:#f92672">+</span> filename<span style="color:#f92672">;</span>
+            candidates<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>candidate<span style="color:#f92672">);</span>
+
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>IoUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">canOpenReadOnly</span><span style="color:#f92672">(</span>candidate<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                String error <span style="color:#f92672">=</span> nativeLoad<span style="color:#f92672">(</span>candidate<span style="color:#f92672">,</span> loader<span style="color:#f92672">);</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>error <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span> <span style="color:#75715e">// We successfully loaded the library. Job done.
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span>
+                lastError <span style="color:#f92672">=</span> error<span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>lastError <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsatisfiedLinkError<span style="color:#f92672">(</span>lastError<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsatisfiedLinkError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Library &#34;</span> <span style="color:#f92672">+</span> libraryName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; not found; tried &#34;</span> <span style="color:#f92672">+</span> candidates<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="basedexclassloaderfindlibrary">BaseDexClassLoader.findLibrary</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
+<span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">findLibrary</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> pathList<span style="color:#f92672">.</span><span style="color:#a6e22e">findLibrary</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="dexpathlistfindlibrary">DexPathList.findLibrary</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Finds the named native code library on any of the library
+</span><span style="color:#75715e"> * directories pointed at by this instance. This will find the
+</span><span style="color:#75715e"> * one in the earliest listed directory, ignoring any that are not
+</span><span style="color:#75715e"> * readable regular files.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * @return the complete path to the library or {@code null} if no
+</span><span style="color:#75715e"> * library was found
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">findLibrary</span><span style="color:#f92672">(</span>String libraryName<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    String fileName <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">mapLibraryName</span><span style="color:#f92672">(</span>libraryName<span style="color:#f92672">);</span><span style="color:#75715e">//xxx--&gt;libxxx.so
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">//[0] --&gt; directory &#34;/data/app/com.example.myapplication-sj3RwTZhmeZrfbRZIori-w==/lib/x86&#34;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//[1] --&gt; zip file &#34;/data/app/com.example.myapplication-sj3RwTZhmeZrfbRZIori-w==/base.apk&#34;, dir &#34;lib/x86&#34;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//[2] --&gt; directory &#34;/system/lib&#34;;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//[3] --&gt; directory &#34;/vendor/lib&#34;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>NativeLibraryElement element <span style="color:#f92672">:</span> nativeLibraryPathElements<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        String path <span style="color:#f92672">=</span> element<span style="color:#f92672">.</span><span style="color:#a6e22e">findNativeLibrary</span><span style="color:#f92672">(</span>fileName<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>path <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> path<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="nativelibraryelementfindnativelibrary">NativeLibraryElement.findNativeLibrary</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Element of the native library path
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">/*package*/</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NativeLibraryElement</span> <span style="color:#f92672">{</span>
+         <span style="color:#75715e">/** A file denoting a directory or zip file. */</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> File path<span style="color:#f92672">;</span>
+
+        <span style="color:#75715e">/** If path denotes a zip file, this denotes a base path inside the zip.*/</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String zipDir<span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">private</span> ClassPathURLStreamHandler urlHandler<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> initialized<span style="color:#f92672">;</span>
+  
+  <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">findNativeLibrary</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    maybeInit<span style="color:#f92672">();</span>
+
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>zipDir <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        String entryPath <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> name<span style="color:#f92672">).</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">();</span><span style="color:#75715e">// /data/app/com.example.myapplication-sj3RwTZhmeZrfbRZIori-w==/lib/x86/libxhcore.so
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>IoUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">canOpenReadOnly</span><span style="color:#f92672">(</span>entryPath<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> entryPath<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>urlHandler <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Having a urlHandler means the element has a zip file.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// In this case Android supports loading the library iff
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// it is stored in the zip uncompressed.
+</span><span style="color:#75715e"></span>        String entryName <span style="color:#f92672">=</span> zipDir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> name<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>urlHandler<span style="color:#f92672">.</span><span style="color:#a6e22e">isEntryStored</span><span style="color:#f92672">(</span>entryName<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">return</span> path<span style="color:#f92672">.</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> zipSeparator <span style="color:#f92672">+</span> entryName<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//IoUtils
+</span><span style="color:#75715e"></span><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Do not use. This is for System.loadLibrary use only.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Checks whether {@code path} can be opened read-only. Similar to File.exists, but doesn&#39;t
+</span><span style="color:#75715e"> * require read permission on the parent, so it&#39;ll work in more cases, and allow you to
+</span><span style="color:#75715e"> * remove read permission from more directories. Everyone else should just open(2) and then
+</span><span style="color:#75715e"> * use the fd, but the loadLibrary API is broken by its need to ask ClassLoaders where to
+</span><span style="color:#75715e"> * find a .so rather than just calling dlopen(3).
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">canOpenReadOnly</span><span style="color:#f92672">(</span>String path<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Use open(2) rather than stat(2) so we require fewer permissions. http://b/6485312.
+</span><span style="color:#75715e"></span>        FileDescriptor fd <span style="color:#f92672">=</span> Libcore<span style="color:#f92672">.</span><span style="color:#a6e22e">os</span><span style="color:#f92672">.</span><span style="color:#a6e22e">open</span><span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> O_RDONLY<span style="color:#f92672">,</span> 0<span style="color:#f92672">);</span>
+        Libcore<span style="color:#f92672">.</span><span style="color:#a6e22e">os</span><span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span>fd<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ErrnoException errnoException<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="nativeload">nativeLoad</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">native</span> String <span style="color:#a6e22e">nativeLoad</span><span style="color:#f92672">(</span>String filename<span style="color:#f92672">,</span> ClassLoader loader<span style="color:#f92672">);</span>
+</code></pre></div><p>libcore/ojluni/src/main/native/Runtime.c</p>
+<h3 id="runtime_nativeload">Runtime_nativeLoad</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">JNIEXPORT jstring JNICALL
+<span style="color:#a6e22e">Runtime_nativeLoad</span>(JNIEnv<span style="color:#f92672">*</span> env, jclass ignored, jstring javaFilename,
+                   jobject javaLoader)
+{
+    <span style="color:#66d9ef">return</span> JVM_NativeLoad(env, javaFilename, javaLoader);
+}
+</code></pre></div><p>art/openjdkjvm/OpenjdkJvm.cc</p>
+<h3 id="jvm_nativeload">JVM_NativeLoad</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">JNIEXPORT jstring <span style="color:#a6e22e">JVM_NativeLoad</span>(JNIEnv<span style="color:#f92672">*</span> env,
+                                 jstring javaFilename,
+                                 jobject javaLoader) {
+  ScopedUtfChars filename(env, javaFilename);
+  <span style="color:#66d9ef">if</span> (filename.c_str() <span style="color:#f92672">==</span> NULL) {
+    <span style="color:#66d9ef">return</span> NULL;
+  }
+
+  std<span style="color:#f92672">::</span>string error_msg;
+  {
+    art<span style="color:#f92672">::</span>JavaVMExt<span style="color:#f92672">*</span> vm <span style="color:#f92672">=</span> art<span style="color:#f92672">::</span>Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetJavaVM();
+    <span style="color:#66d9ef">bool</span> success <span style="color:#f92672">=</span> vm<span style="color:#f92672">-&gt;</span>LoadNativeLibrary(env,
+                                         filename.c_str(),
+                                         javaLoader,
+                                         <span style="color:#f92672">&amp;</span>error_msg);
+    <span style="color:#66d9ef">if</span> (success) {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+  }
+
+  <span style="color:#75715e">// Don&#39;t let a pending exception from JNI_OnLoad cause a CheckJNI issue with NewStringUTF.
+</span><span style="color:#75715e"></span>  env<span style="color:#f92672">-&gt;</span>ExceptionClear();
+  <span style="color:#66d9ef">return</span> env<span style="color:#f92672">-&gt;</span>NewStringUTF(error_msg.c_str());
+}
+</code></pre></div><p>art/runtime/java_vm_ext.cc</p>
+<h3 id="javavmextloadnativelibrary">JavaVMExt::LoadNativeLibrary</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">bool</span> JavaVMExt<span style="color:#f92672">::</span>LoadNativeLibrary(JNIEnv<span style="color:#f92672">*</span> env,
+                                  <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> path,
+                                  jobject class_loader,
+                                  std<span style="color:#f92672">::</span>string<span style="color:#f92672">*</span> error_msg) {
+    
+  <span style="color:#75715e">// See if we&#39;ve already loaded this library.  If we have, and the class loader
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// matches, return successfully without doing anything.
+</span><span style="color:#75715e"></span>  SharedLibrary<span style="color:#f92672">*</span> library;
+  Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> Thread<span style="color:#f92672">::</span>Current();
+  {
+    MutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>jni_libraries_lock_);
+    library <span style="color:#f92672">=</span> libraries_<span style="color:#f92672">-&gt;</span>Get(path);<span style="color:#75715e">//libraries_ 中存储了所有已经加载了libraries的map，其中key是so全路径string，value是SharedLibrary*
+</span><span style="color:#75715e"></span>  }
+  <span style="color:#66d9ef">if</span> (library <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+      <span style="color:#66d9ef">return</span> xxx
+  }
+  <span style="color:#75715e">// Retrieve the library path from the classloader, if necessary.
+</span><span style="color:#75715e"></span>  ScopedLocalRef<span style="color:#f92672">&lt;</span>jstring<span style="color:#f92672">&gt;</span> library_path(env, GetLibrarySearchPath(env, class_loader));
+
+  Locks<span style="color:#f92672">::</span>mutator_lock_<span style="color:#f92672">-&gt;</span>AssertNotHeld(self);
+  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> path_str <span style="color:#f92672">=</span> path.empty() <span style="color:#f92672">?</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">:</span> path.c_str();
+  <span style="color:#66d9ef">bool</span> needs_native_bridge <span style="color:#f92672">=</span> false;
+  <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> handle <span style="color:#f92672">=</span> android<span style="color:#f92672">::</span>OpenNativeLibrary(env,
+                                            runtime_<span style="color:#f92672">-&gt;</span>GetTargetSdkVersion(),
+                                            path_str,
+                                            class_loader,
+                                            library_path.get(),
+                                            <span style="color:#f92672">&amp;</span>needs_native_bridge,
+                                            error_msg);
+    
+  <span style="color:#66d9ef">if</span> (handle <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    VLOG(jni) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;dlopen(</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> path <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">, RTLD_NOW) failed: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>error_msg;
+    <span style="color:#66d9ef">return</span> false;
+  }
+    
+  <span style="color:#66d9ef">bool</span> created_library <span style="color:#f92672">=</span> false;
+  {
+    <span style="color:#75715e">// Create SharedLibrary ahead of taking the libraries lock to maintain lock ordering.
+</span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>SharedLibrary<span style="color:#f92672">&gt;</span> new_library(
+        <span style="color:#66d9ef">new</span> SharedLibrary(env,
+                          self,
+                          path,
+                          handle,
+                          needs_native_bridge,
+                          class_loader,
+                          class_loader_allocator));
+
+    MutexLock <span style="color:#a6e22e">mu</span>(self, <span style="color:#f92672">*</span>Locks<span style="color:#f92672">::</span>jni_libraries_lock_);
+    library <span style="color:#f92672">=</span> libraries_<span style="color:#f92672">-&gt;</span>Get(path);
+    <span style="color:#66d9ef">if</span> (library <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {  <span style="color:#75715e">// We won race to get libraries_lock.
+</span><span style="color:#75715e"></span>      library <span style="color:#f92672">=</span> new_library.release();
+      libraries_<span style="color:#f92672">-&gt;</span>Put(path, library);<span style="color:#75715e">//path为so的全路径名
+</span><span style="color:#75715e"></span>      created_library <span style="color:#f92672">=</span> true;
+    }
+  }
+    
+  <span style="color:#66d9ef">bool</span> was_successful <span style="color:#f92672">=</span> false;
+  <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> sym <span style="color:#f92672">=</span> library<span style="color:#f92672">-&gt;</span>FindSymbol(<span style="color:#e6db74">&#34;JNI_OnLoad&#34;</span>, <span style="color:#66d9ef">nullptr</span>);
+  <span style="color:#66d9ef">if</span> (sym <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    VLOG(jni) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[No JNI_OnLoad found in </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> path <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">]&#34;</span>;
+    was_successful <span style="color:#f92672">=</span> true;
+  } <span style="color:#66d9ef">else</span> {
+    ......
+    VLOG(jni) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[Calling JNI_OnLoad in </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> path <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">]&#34;</span>;
+    <span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span> (<span style="color:#f92672">*</span>JNI_OnLoadFn)(JavaVM<span style="color:#f92672">*</span>, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>);
+    JNI_OnLoadFn jni_on_load <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>JNI_OnLoadFn<span style="color:#f92672">&gt;</span>(sym);
+    <span style="color:#66d9ef">int</span> version <span style="color:#f92672">=</span> (<span style="color:#f92672">*</span>jni_on_load)(<span style="color:#66d9ef">this</span>, <span style="color:#66d9ef">nullptr</span>);<span style="color:#75715e">//调用自定义.cpp的JNI_OnLoad method
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">if</span> (version <span style="color:#f92672">==</span> JNI_ERR) {
+      StringAppendF(error_msg, <span style="color:#e6db74">&#34;JNI_ERR returned from JNI_OnLoad in </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>, path.c_str());
+    } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (JavaVMExt<span style="color:#f92672">::</span>IsBadJniVersion(version)) {
+      StringAppendF(error_msg, <span style="color:#e6db74">&#34;Bad JNI version returned from JNI_OnLoad in </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">: %d&#34;</span>,
+                    path.c_str(), version);
+      <span style="color:#75715e">// It&#39;s unwise to call dlclose() here, but we can mark it
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// as bad and ensure that future load attempts will fail.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// We don&#39;t know how far JNI_OnLoad got, so there could
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// be some partially-initialized stuff accessible through
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// newly-registered native method calls.  We could try to
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// unregister them, but that doesn&#39;t seem worthwhile.
+</span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+      was_successful <span style="color:#f92672">=</span> true;
+    }
+      
+  library<span style="color:#f92672">-&gt;</span>SetResult(was_successful);
+  <span style="color:#66d9ef">return</span> was_successful;
+}
+</code></pre></div><p>system/core/libnativeloader/native_loader.cpp</p>
+<h4 id="opennativelibrary">OpenNativeLibrary</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">OpenNativeLibrary</span>(JNIEnv<span style="color:#f92672">*</span> env,
+                        <span style="color:#66d9ef">int32_t</span> target_sdk_version,
+                        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> path,
+                        jobject class_loader,
+                        jstring library_path,
+                        <span style="color:#66d9ef">bool</span><span style="color:#f92672">*</span> needs_native_bridge,
+                        std<span style="color:#f92672">::</span>string<span style="color:#f92672">*</span> error_msg) {
+<span style="color:#75715e">#if defined(__ANDROID__)
+</span><span style="color:#75715e"></span>  UNUSED(target_sdk_version);
+  <span style="color:#66d9ef">if</span> (class_loader <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    <span style="color:#f92672">*</span>needs_native_bridge <span style="color:#f92672">=</span> false;
+    <span style="color:#66d9ef">return</span> dlopen(path, RTLD_NOW);
+  }
+    
+  std<span style="color:#f92672">::</span>lock_guard<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>mutex<span style="color:#f92672">&gt;</span> guard(g_namespaces_mutex);
+  NativeLoaderNamespace ns;
+
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>g_namespaces<span style="color:#f92672">-&gt;</span>FindNamespaceByClassLoader(env, class_loader, <span style="color:#f92672">&amp;</span>ns)) {
+    <span style="color:#75715e">// This is the case where the classloader was not created by ApplicationLoaders
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// In this case we create an isolated not-shared namespace for it.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>g_namespaces<span style="color:#f92672">-&gt;</span>Create(env,
+                              target_sdk_version,
+                              class_loader,
+                              false <span style="color:#75715e">/* is_shared */</span>,
+                              false <span style="color:#75715e">/* is_for_vendor */</span>,
+                              library_path,
+                              <span style="color:#66d9ef">nullptr</span>,
+                              <span style="color:#f92672">&amp;</span>ns,
+                              error_msg)) {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+  }
+    
+<span style="color:#66d9ef">if</span> (ns.is_android_namespace()) {
+  android_dlextinfo extinfo;
+  extinfo.flags <span style="color:#f92672">=</span> ANDROID_DLEXT_USE_NAMESPACE;
+  extinfo.library_namespace <span style="color:#f92672">=</span> ns.get_android_ns();
+
+  <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> handle <span style="color:#f92672">=</span> android_dlopen_ext(path, RTLD_NOW, <span style="color:#f92672">&amp;</span>extinfo);
+  <span style="color:#66d9ef">if</span> (handle <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    <span style="color:#f92672">*</span>error_msg <span style="color:#f92672">=</span> dlerror();
+  }
+  <span style="color:#f92672">*</span>needs_native_bridge <span style="color:#f92672">=</span> false;
+  <span style="color:#66d9ef">return</span> handle;
+} <span style="color:#66d9ef">else</span> {
+  <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> handle <span style="color:#f92672">=</span> NativeBridgeLoadLibraryExt(path, RTLD_NOW, ns.get_native_bridge_ns());
+  <span style="color:#66d9ef">if</span> (handle <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    <span style="color:#f92672">*</span>error_msg <span style="color:#f92672">=</span> NativeBridgeGetError();
+  }
+  <span style="color:#f92672">*</span>needs_native_bridge <span style="color:#f92672">=</span> true;
+  <span style="color:#66d9ef">return</span> handle;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">FindNamespaceByClassLoader</span>(JNIEnv<span style="color:#f92672">*</span> env, jobject class_loader, NativeLoaderNamespace<span style="color:#f92672">*</span> ns) {
+  <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find_if(namespaces_.begin(), namespaces_.end(),
+              [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>jweak, NativeLoaderNamespace<span style="color:#f92672">&gt;&amp;</span> value) {
+                <span style="color:#66d9ef">return</span> env<span style="color:#f92672">-&gt;</span>IsSameObject(value.first, class_loader);
+              });
+  <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">!=</span> namespaces_.end()) {
+    <span style="color:#66d9ef">if</span> (ns <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+      <span style="color:#f92672">*</span>ns <span style="color:#f92672">=</span> it<span style="color:#f92672">-&gt;</span>second;
+    }
+
+    <span style="color:#66d9ef">return</span> true;
+  }
+  <span style="color:#66d9ef">return</span> false;
+}
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_android_namespace</span>() <span style="color:#66d9ef">const</span> {
+  <span style="color:#66d9ef">return</span> native_bridge_ns_ <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>;
+}
+</code></pre></div><p>external/libcxx/include/algorithm</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// find_if
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_InputIterator</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_Predicate</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">inline</span> _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX17
+_InputIterator
+find_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+{
+    <span style="color:#66d9ef">for</span> (; __first <span style="color:#f92672">!=</span> __last; <span style="color:#f92672">++</span>__first)
+        <span style="color:#66d9ef">if</span> (__pred(<span style="color:#f92672">*</span>__first))
+            <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">return</span> __first;
+}
+</code></pre></div><p>bionic/libdl/libdl.cpp</p>
+<h5 id="android_dlopen_ext">android_dlopen_ext</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">__attribute__((__weak__))
+<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> android_dlopen_ext(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> filename, <span style="color:#66d9ef">int</span> flag, <span style="color:#66d9ef">const</span> android_dlextinfo<span style="color:#f92672">*</span> extinfo) {
+  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> caller_addr <span style="color:#f92672">=</span> __builtin_return_address(<span style="color:#ae81ff">0</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">__loader_android_dlopen_ext</span>(filename, flag, extinfo, caller_addr);
+}
+</code></pre></div><h4 id="findsymbol">FindSymbol</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">// No mutator lock since dlsym may block for a while if another thread is doing dlopen.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">FindSymbol</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> symbol_name, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> shorty <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>)
+    REQUIRES(<span style="color:#f92672">!</span>Locks<span style="color:#f92672">::</span>mutator_lock_) {
+  <span style="color:#66d9ef">return</span> NeedsNativeBridge()
+      <span style="color:#f92672">?</span> FindSymbolWithNativeBridge(symbol_name.c_str(), shorty)
+      <span style="color:#f92672">:</span> FindSymbolWithoutNativeBridge(symbol_name.c_str());
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">// No mutator lock since dlsym may block for a while if another thread is doing dlopen.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">FindSymbolWithoutNativeBridge</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> symbol_name)
+  REQUIRES(<span style="color:#f92672">!</span>Locks<span style="color:#f92672">::</span>mutator_lock_) {
+  CHECK(<span style="color:#f92672">!</span>NeedsNativeBridge());
+
+  <span style="color:#66d9ef">return</span> dlsym(handle_, symbol_name.c_str());
+}
+</code></pre></div><p>bionic/libdl/libdl.cpp</p>
+<h5 id="dlsym">dlsym</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">__attribute__((__weak__))
+<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> dlsym(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> handle, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> symbol) {
+  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> caller_addr <span style="color:#f92672">=</span> __builtin_return_address(<span style="color:#ae81ff">0</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">__loader_dlsym</span>(handle, symbol, caller_addr);
+}
+</code></pre></div><h4 id="jni_onload">JNI_OnLoad</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">JNIEXPORT jint JNICALL <span style="color:#a6e22e">JNI_OnLoad</span>(JavaVM <span style="color:#f92672">*</span>vm, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>reserved) {
+}
+</code></pre></div><p>art/runtime/jni_internal.cc</p>
+<h4 id="registernatives">RegisterNatives</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">  <span style="color:#66d9ef">static</span> jint <span style="color:#a6e22e">RegisterNatives</span>(JNIEnv<span style="color:#f92672">*</span> env,
+                              jclass java_class,
+                              <span style="color:#66d9ef">const</span> JNINativeMethod<span style="color:#f92672">*</span> methods,
+                              jint method_count) {
+    ScopedObjectAccess soa(env);
+    StackHandleScope<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> hs(soa.Self());
+    Handle<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> c <span style="color:#f92672">=</span> hs.NewHandle(soa.Decode<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span>(java_class));
+    <span style="color:#66d9ef">for</span> (jint i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> method_count; <span style="color:#f92672">++</span>i) {
+      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> name <span style="color:#f92672">=</span> methods[i].name;
+      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> sig <span style="color:#f92672">=</span> methods[i].signature;
+      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> fnPtr <span style="color:#f92672">=</span> methods[i].fnPtr;
+      <span style="color:#66d9ef">bool</span> is_fast <span style="color:#f92672">=</span> false;
+      <span style="color:#75715e">// Notes about fast JNI calls:
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// On a normal JNI call, the calling thread usually transitions
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// from the kRunnable state to the kNative state. But if the
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// called native function needs to access any Java object, it
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// will have to transition back to the kRunnable state.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// There is a cost to this double transition. For a JNI call
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// that should be quick, this cost may dominate the call cost.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// On a fast JNI call, the calling thread avoids this double
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// transition by not transitioning from kRunnable to kNative and
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// stays in the kRunnable state.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// There are risks to using a fast JNI call because it can delay
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// a response to a thread suspension request which is typically
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// used for a GC root scanning, etc. If a fast JNI call takes a
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// long time, it could cause longer thread suspension latency
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// and GC pauses.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// Thus, fast JNI should be used with care. It should be used
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// for a JNI call that takes a short amount of time (eg. no
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// long-running loop) and does not block (eg. no locks, I/O,
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// etc.)
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// A &#39;!&#39; prefix in the signature in the JNINativeMethod
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// indicates that it&#39;s a fast JNI call and the runtime omits the
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// thread state transition from kRunnable to kNative at the
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// entry.
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">*</span>sig <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;!&#39;</span>) {
+        is_fast <span style="color:#f92672">=</span> true;
+        <span style="color:#f92672">++</span>sig;
+      }    
+       <span style="color:#75715e">// Note: the right order is to try to find the method locally
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// first, either as a direct or a virtual method. Then move to
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// the parent.
+</span><span style="color:#75715e"></span>      ArtMethod<span style="color:#f92672">*</span> m <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+      <span style="color:#66d9ef">for</span> (ObjPtr<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> current_class <span style="color:#f92672">=</span> c.Get();
+           current_class <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+           current_class <span style="color:#f92672">=</span> current_class<span style="color:#f92672">-&gt;</span>GetSuperClass()) {
+        <span style="color:#75715e">// Search first only comparing methods which are native.
+</span><span style="color:#75715e"></span>        m <span style="color:#f92672">=</span> FindMethod<span style="color:#f92672">&lt;</span>true<span style="color:#f92672">&gt;</span>(current_class.Ptr(), name, sig);
+        <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+          <span style="color:#66d9ef">break</span>;
+        }
+
+        <span style="color:#75715e">// Search again comparing to all methods, to find non-native methods that match.
+</span><span style="color:#75715e"></span>        m <span style="color:#f92672">=</span> FindMethod<span style="color:#f92672">&lt;</span>false<span style="color:#f92672">&gt;</span>(current_class.Ptr(), name, sig);
+        <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+          <span style="color:#66d9ef">break</span>;
+        }
+      }
+      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> final_function_ptr <span style="color:#f92672">=</span> m<span style="color:#f92672">-&gt;</span>RegisterNative(fnPtr);
+    }
+  }
+</code></pre></div><p>art_method.cc</p>
+<h5 id="artmethodregisternative">ArtMethod::RegisterNative</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> ArtMethod<span style="color:#f92672">::</span>RegisterNative(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> native_method) {
+  CHECK(IsNative()) <span style="color:#f92672">&lt;&lt;</span> PrettyMethod();
+  CHECK(native_method <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#f92672">&lt;&lt;</span> PrettyMethod();
+  <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> new_native_method <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+  Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetRuntimeCallbacks()<span style="color:#f92672">-&gt;</span>RegisterNativeMethod(<span style="color:#66d9ef">this</span>,
+                                                                  native_method,
+                                                                  <span style="color:#75715e">/*out*/</span><span style="color:#f92672">&amp;</span>new_native_method);
+  SetEntryPointFromJni(new_native_method);
+  <span style="color:#66d9ef">return</span> new_native_method;
+}
+</code></pre></div><h5 id="setentrypointfromjni">SetEntryPointFromJni</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetEntryPointFromJni</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> entrypoint) {
+  DCHECK(IsNative());
+  SetEntryPointFromJniPtrSize(entrypoint, kRuntimePointerSize);
+}
+
+ALWAYS_INLINE <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetEntryPointFromJniPtrSize</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> entrypoint, PointerSize pointer_size) {
+    SetDataPtrSize(entrypoint, pointer_size);
+}
+
+ALWAYS_INLINE <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetDataPtrSize</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> data, PointerSize pointer_size) {
+    DCHECK(IsImagePointerSize(pointer_size));
+    SetNativePointer(DataOffset(pointer_size), data, pointer_size);<span style="color:#75715e">//DataOffset,对应ArtMethod的data_字段
+</span><span style="color:#75715e"></span>}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">static</span> MemberOffset <span style="color:#a6e22e">EntryPointFromJniOffset</span>(PointerSize pointer_size) {
+    <span style="color:#66d9ef">return</span> DataOffset(pointer_size);
+}
+
+<span style="color:#66d9ef">static</span> MemberOffset <span style="color:#a6e22e">DataOffset</span>(PointerSize pointer_size) {
+    <span style="color:#66d9ef">return</span> MemberOffset(PtrSizedFieldsOffset(pointer_size) <span style="color:#f92672">+</span> OFFSETOF_MEMBER(
+        PtrSizedFields, data_) <span style="color:#f92672">/</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>) <span style="color:#f92672">*</span> static_cast<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span>(pointer_size));
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h">  <span style="color:#66d9ef">static</span> MemberOffset <span style="color:#a6e22e">EntryPointFromQuickCompiledCodeOffset</span>(PointerSize pointer_size) {
+    <span style="color:#66d9ef">return</span> MemberOffset(PtrSizedFieldsOffset(pointer_size) <span style="color:#f92672">+</span> OFFSETOF_MEMBER(
+        PtrSizedFields, entry_point_from_quick_compiled_code_) <span style="color:#f92672">/</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)<span style="color:#75715e">//对应ArtMethod的entry_point_from_quick_compiled_code_字段
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">*</span> static_cast<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span>(pointer_size));
+  }
+</code></pre></div><p>art/runtime/runtime_callbacks.cc</p>
+<h5 id="runtimecallbacksregisternativemethod">RuntimeCallbacks::RegisterNativeMethod</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> RuntimeCallbacks<span style="color:#f92672">::</span>RegisterNativeMethod(ArtMethod<span style="color:#f92672">*</span> method,
+                                            <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> in_cur_method,
+                                            <span style="color:#75715e">/*out*/</span><span style="color:#66d9ef">void</span><span style="color:#f92672">**</span> new_method) {
+  <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> cur_method <span style="color:#f92672">=</span> <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">*&gt;</span>(in_cur_method);
+  <span style="color:#f92672">*</span>new_method <span style="color:#f92672">=</span> cur_method;
+  <span style="color:#66d9ef">for</span> (MethodCallback<span style="color:#f92672">*</span> cb : method_callbacks_) {
+    cb<span style="color:#f92672">-&gt;</span>RegisterNativeMethod(method, cur_method, new_method);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">*</span>new_method <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+      cur_method <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>new_method;
+    }
+  }
+}
+</code></pre></div><p>art/openjdkjvmti/ti_method.cc</p>
+<h6 id="ti_methodccregisternativemethod">ti_method.cc.RegisterNativeMethod</h6>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RegisterNativeMethod</span>(art<span style="color:#f92672">::</span>ArtMethod<span style="color:#f92672">*</span> method,
+                          <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> cur_method,
+                          <span style="color:#75715e">/*out*/</span><span style="color:#66d9ef">void</span><span style="color:#f92672">**</span> new_method)
+    OVERRIDE REQUIRES_SHARED(art<span style="color:#f92672">::</span>Locks<span style="color:#f92672">::</span>mutator_lock_) {
+  <span style="color:#66d9ef">if</span> (event_handler<span style="color:#f92672">-&gt;</span>IsEventEnabledAnywhere(ArtJvmtiEvent<span style="color:#f92672">::</span>kNativeMethodBind)) {
+      ......
+  }
+}
+</code></pre></div><h2 id="参考">参考</h2>
+<p><a href="https://itimetraveler.github.io/2018/07/03/%E3%80%90Android%E3%80%91%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93so%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/">【Android】动态链接库so的加载原理</a></p>
+<p><a href="https://github.com/KeepSafe/ReLinker">https://github.com/KeepSafe/ReLinker</a></p>
+<p><a href="https://github.com/facebook/SoLoader">https://github.com/facebook/SoLoader</a></p>
+<p><a href="https://blog.zzzmode.com/2016/10/22/android-unsatisfiedlinkerror-fix/">java.lang.UnsatisfiedLinkError 的解决办法</a></p>
+<h2 id="其他">其他</h2>
+<p>bionic/linker/linker.cpp</p>
+<h3 id="linkercpp">linker.cpp</h3>
+<h4 id="load_library">load_library</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">load_library</span>(android_namespace_t<span style="color:#f92672">*</span> ns,
+                         LoadTask<span style="color:#f92672">*</span> task,
+                         LoadTaskList<span style="color:#f92672">*</span> load_tasks,
+                         <span style="color:#66d9ef">int</span> rtld_flags,
+                         <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> realpath,
+                         <span style="color:#66d9ef">bool</span> search_linked_namespaces) {
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Jni数据转换"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/" title="异常" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1613805603"></script>
+    <script src="/js/perfect-scrollbar.min.js?1613805603"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1613805603"></script>
+    <script src="/js/jquery.sticky.js?1613805603"></script>
+    <script src="/js/featherlight.min.js?1613805603"></script>
+    <script src="/js/highlight.pack.js?1613805603"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1613805603"></script>
+    <script src="/js/learn.js?1613805603"></script>
+    <script src="/js/hugo-learn.js?1613805603"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1613805603"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

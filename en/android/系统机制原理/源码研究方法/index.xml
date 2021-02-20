@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>源码研究方法 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/</link>
+    <description>Recent content in 源码研究方法 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Syscall查找方式</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</guid>
+      <description>Android9.0采用如下Tips3,4进行定位
+Tips 1： 用户空间的方法xxx，对应系统调用层方法则是sys_xxx； Tips 2： unistd.h文件记录着系统调用中断号的信息。(搜索__SYSCALL找到unistd.d文件位置) /* kernel/signal.c */ __SYSCALL(__NR_kill, sys_kill) Tips 3： 宏定义SYSCALL_DEFINEx(xxx,…)，展开后对应的方法则是sys_xxx； Tips 4： 方法参数的个数x，对应于SYSCALL_DEFINEx。 kill(int pid, int sig)方法共两个参数，则对应方法于SYSCALL_DEFINE2(kill,...)，进入signal.c文件，再次搜索关键字，便能看到方法： include/linux/syscalls.h
+syscalls.h #define SYSCALL_DEFINE1(name, ...) SYSCALL_DEFINEx(1, _##name, __VA_ARGS__) #define SYSCALL_DEFINE2(name, ...) SYSCALL_DEFINEx(2, _##name, __VA_ARGS__) #define SYSCALL_DEFINE3(name, ...) SYSCALL_DEFINEx(3, _##name, __VA_ARGS__) #define SYSCALL_DEFINE4(name, ...) SYSCALL_DEFINEx(4, _##name, __VA_ARGS__) #define SYSCALL_DEFINE5(name, ...) SYSCALL_DEFINEx(5, _##name, __VA_ARGS__) #define SYSCALL_DEFINE6(name, ...) SYSCALL_DEFINEx(6, _##name, __VA_ARGS__)  #define SYSCALL_DEFINEx(x, sname, ...)	\ SYSCALL_METADATA(sname, x, __VA_ARGS__)	\ __SYSCALL_DEFINEx(x, sname, __VA_ARGS__)  #define __SYSCALL_DEFINEx(x, name, .</description>
+    </item>
+    
+  </channel>
+</rss>
