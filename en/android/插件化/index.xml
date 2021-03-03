@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>插件化 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/</link>
+    <description>Recent content in 插件化 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hook</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/hook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/hook/</guid>
+      <description>Hook机制之动态代理 动态代理 传统的静态代理模式需要为每一个需要代理的类写一个代理类，如果需要代理的类有几百个那不是要累死？为了更优雅地实现代理模式，JDK提供了动态代理方式，可以简单理解为JVM可以在运行时帮我们动态生成一系列的代理类，这样我们就不需要手写每一个静态的代理类了。依然以购物为例，用动态代理实现如下：
+public static void main(String[] args) { Shopping women = new ShoppingImpl(); // 正常购物  System.out.println(Arrays.toString(women.doShopping(100))); // 招代理  women = (Shopping) Proxy.newProxyInstance(Shopping.class.getClassLoader(), women.getClass().getInterfaces(), new ShoppingHandler(women)); System.out.println(Arrays.toString(women.doShopping(100))); } 动态代理主要处理InvocationHandler和Proxy类；完整代码可以见github
+代理Hook 我们知道代理有比原始对象更强大的能力，比如飞到国外买东西，比如坑钱坑货；那么很自然，如果我们自己创建代理对象，然后把原始对象替换为我们的代理对象，那么就可以在这个代理对象为所欲为了；修改参数，替换返回值，我们称之为Hook。
+下面我们Hook掉startActivity这个方法，使得每次调用这个方法之前输出一条日志；（当然，这个输入日志有点点弱，只是为了展示原理；只要你想，你想可以替换参数，拦截这个startActivity过程，使得调用它导致启动某个别的Activity，指鹿为马！）
+首先我们得找到被Hook的对象，我称之为Hook点；什么样的对象比较好Hook呢？自然是容易找到的对象。什么样的对象容易找到？静态变量和单例；在一个进程之内，静态变量和单例变量是相对不容易发生变化的，因此非常容易定位，而普通的对象则要么无法标志，要么容易改变。我们根据这个原则找到所谓的Hook点。
+然后我们分析一下startActivity的调用链，找出合适的Hook点。我们知道对于Context.startActivity（Activity.startActivity的调用链与之不同），由于Context的实现实际上是ContextImpl;我们看ConetxtImpl类的startActivity方法：
+@Override public void startActivity(Intent intent, Bundle options) { warnIfCallingFromSystemProcess(); if ((intent.getFlags()&amp;amp;Intent.FLAG_ACTIVITY_NEW_TASK) == 0) { throw new AndroidRuntimeException( &amp;#34;Calling startActivity() from outside of an Activity &amp;#34; \+ &amp;#34; context requires the FLAG_ACTIVITY_NEW_TASK flag.&amp;#34; \+ &amp;#34; Is this really what you want?</description>
+    </item>
+    
+    <item>
+      <title>插件化技术选型</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/</guid>
+      <description>Shadow(腾讯) Qigsaw(爱奇艺) https://developer.android.google.cn/guide/app-bundle
+ VirtualAPK(滴滴) https://github.com/didi/VirtualAPK
+https://blog.csdn.net/u012124438/article/details/74118905
+我们可以先启动一个已经在AndroidManifest.xml里面声明过的替身Activity，让这个Activity进入AMS进程接受检验；最后在换成我们真正需要启动的Activity；这样就成功欺骗了AMS进程
+Atlas(阿里) https://blog.csdn.net/M075097/article/details/79225030
+;//-----2.3.3替换系统原生ClassLoader为DelegateClassLoad AndroidHack.injectClassLoader(packageName, newClassLoaderer) //-----2.3.4 替换系统的Instrumentation为InstrumentationHook，该类是一个系统与用户之间交互的介质层，大部分调用的功能操作都会流过此类之后再进一步调  AndroidHack.injectInstrumentationHook(new InstrumentationHook(AndroidHack.getInstrumentation(), application.getBaseContext() ActivityManagerDelegate activityManagerProxy = new ActivityManagerDelegate(); Object gDefault = null; if(Build.VERSION.SDK_INT&amp;gt;25 || (Build.VERSION.SDK_INT==25&amp;amp;&amp;amp;Build.VERSION.PREVIEW_SDK_INT&amp;gt;0)){ gDefault=AtlasHacks.ActivityManager_IActivityManagerSingleton.get(AtlasHacks.ActivityManager.getmClass()); }else{ gDefault=AtlasHacks.ActivityManagerNative_gDefault.get(AtlasHacks.ActivityManagerNative.getmClass()); } AtlasHacks.Singleton_mInstance.hijack(gDefault, activityManagerProxy); RePlugin(360) Replugin与DroidPlugin框架比较
+虽然唯一Hook点为宿主Application#LoadedApk中的classLoader对象，但源码中依然存在着众多的invoke反射，和google禁止使用非公开api的策略相违背
+Neptune(爱奇艺)  插件的安装与加载  https://github.com/iqiyi/Neptune/blob/master/docs/SDK%E5%8E%9F%E7%90%86/%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8A%A0%E8%BD%BD.md
+ Neptune/docs/SDK原理/插件的代理实现机制.md  https://github.com/iqiyi/Neptune/blob/master/docs/SDK%E5%8E%9F%E7%90%86/%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.md
+Hydra(美团-未开源) </description>
+    </item>
+    
+    <item>
+      <title>插件化面临的问题</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>加载插件类 Shadow的全动态设计原理解析
+加载插件资源 传统方式 https://github.com/singwhatiwanna/dynamic-load-apk/
+我们知道，activity的工作主要是由ContextImpl来完成的， 它在activity中是一个叫做mBase的成员变量。注意到Context中有如下两个抽象方法，看起来是和资源有关的，实际上context就是通过它们来获取资源的，这两个抽象方法的真正实现在ContextImpl中。也即是说，只要我们自己实现这两个方法，就可以解决资源问题了。
+/** Return an AssetManager instance for your application&amp;#39;s package. */ public abstract AssetManager getAssets(); /** Return a Resources instance for your application&amp;#39;s package. */ public abstract Resources getResources(); 下面看一下如何实现这两个方法 首先要加载apk中的资源：
+protected void loadResources() { try { AssetManager assetManager = AssetManager.class.newInstance(); Method addAssetPath = assetManager.getClass().getMethod(&amp;#34;addAssetPath&amp;#34;, String.class); addAssetPath.invoke(assetManager, mDexPath); mAssetManager = assetManager; } catch (Exception e) { e.printStackTrace(); } Resources superRes = super.getResources(); mResources = new Resources(mAssetManager, superRes.</description>
+    </item>
+    
+  </channel>
+</rss>

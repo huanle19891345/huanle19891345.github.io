@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ndk on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/ndk/</link>
+    <description>Recent content in ndk on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/ndk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ELF文件结构</title>
+      <link>https://huanle19891345.github.io/en/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</guid>
+      <description>文件结构 &amp;laquo;深入理解Android：Java虚拟机ART&amp;raquo;&amp;ndash;elf章的内容
+https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md
+https://linuxhint.com/understanding_elf_file_format/
+As you can see from the description above, an ELF file consists of two sections – an ELF header, and file data. The file data section can consist of a program header table describing zero or more segments, a section header table describing zero or more sections, that is followed by data referred to by entries from the program header table, and the section header table. ==Each segment contains information that is necessary for run-time execution of the file, while sections contain important data for linking and relocation==.</description>
+    </item>
+    
+    <item>
+      <title>JNI</title>
+      <link>https://huanle19891345.github.io/en/android/ndk/jni/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ndk/jni/</guid>
+      <description>https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html
+https://developer.android.com/training/articles/perf-jni
+JavaVM and JNIEnv JNI defines two key data structures, &amp;ldquo;JavaVM&amp;rdquo; and &amp;ldquo;JNIEnv&amp;rdquo;. Both of these are essentially pointers to pointers to function tables. (In the C++ version, they&amp;rsquo;re classes with a pointer to a function table and a member function for each JNI function that indirects through the table.) The JavaVM provides the &amp;ldquo;invocation interface&amp;rdquo; functions, which allow you to create and destroy a JavaVM. In theory you can have multiple JavaVMs per process, but Android only allows one.</description>
+    </item>
+    
+    <item>
+      <title>native_hook</title>
+      <link>https://huanle19891345.github.io/en/android/ndk/native_hook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ndk/native_hook/</guid>
+      <description>对于 Native Hook 技术，我们比较熟悉的有 GOT/PLT Hook、Trap Hook 以及 Inline Hook，下面我来逐个讲解这些 Hook 技术的实现原理和优劣比较。
+GOT/PLT Hook xHook https://github.com/iqiyi/xHook
+https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md
+  hook libc.so android_getaddrinfofornet ，貌似没hook成功 https://github.com/iqiyi/xHook/issues/16
+  如何获取到被hook的方法的地址 https://github.com/iqiyi/xHook/issues/15
+  PLT/GOT hook局限性 xhook只支持PLT/GOT方式的hook，就是hook“调用方so中的对外调用点”。android_getaddrinfofornet函数的实现在libc.so中，需要hook android_getaddrinfofornet的调用方，可以： xhook_register(&amp;#34;.*/libwebviewchromium\\.so$&amp;#34;, &amp;#34;android_getaddrinfofornet&amp;#34;, new_android_getaddrinfofornet, NULL); 不能做 ELF 内部函数之间调用的 hook。 inline hook 可以做到 demo执行步骤 1：下载Android NDK r16b，配置环境变量(每次重启PC都要配置一次) 2：./build_libs.sh通过cmd中单个执行编译完成 3：./install_libs.sh通过在cmd中执行: C:\Users\zhenghuan\git\demo\xHook&amp;gt;install_libs.sh 完成 如何引用系统so https://developer.android.com/ndk/guides/stable_apis.html?hl=zh-CN
+https://stackoverflow.com/questions/13115827/how-to-link-to-the-libmedia-so-system-library-in-an-android-ndk-app-using-androi
+参考 Android Native Hook技术路线概述
+android native hook技术你知道多少?
+frida https://www.frida.re/
+https://github.com/frida/frida
+旧项目 https://github.com/crmulliner/adbi</description>
+    </item>
+    
+  </channel>
+</rss>

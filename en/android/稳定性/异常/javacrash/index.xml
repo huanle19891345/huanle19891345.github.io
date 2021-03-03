@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javacrash on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/javacrash/</link>
+    <description>Recent content in javacrash on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/javacrash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaCrashSystemHandle</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/javacrash/javacrashsystemhandle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/javacrash/javacrashsystemhandle/</guid>
+      <description>原理流程 当Binder服务端ApplicationThread所在进程(即Crash进程)挂掉后，则Binder客户端能收到相应的死亡通知，从而进入binderDied流程。
+AMP.handleApplicationCrash AMS.handleApplicationCrash AMS.findAppProcess AMS.handleApplicationCrashInner AMS.addErrorToDropBox AMS.crashApplication AMS.makeAppCrashingLocked AMS.startAppProblemLocked ProcessRecord.stopFreezingAllLocked ActivityRecord.stopFreezingScreenLocked WMS.stopFreezingScreenLocked WMS.stopFreezingDisplayLocked AMS.handleAppCrashLocked mUiHandler.sendMessage(SHOW_ERROR_MSG) Process.killProcess(Process.myPid()); System.exit(10); 其中addErrorToDropBox是将crash的信息输出到目录/data/system/dropbox。例如system_server的dropbox文件名为system_server_crash@xxx.txt (xxx代表的是时间戳)
+AMS.handleAppCrashLocked ASS.handleAppCrashLocked AS.handleAppCrashLocked AS.finishCurrentActivityLocked AMS.removeProcessLocked ProcessRecord.kill AMS.handleAppDiedLocked ASS.handleAppDiedLocked AMS.cleanUpApplicationRecordLocked AS.handleAppDiedLocked AS.removeHistoryRecordsForAppLocked ASS.resumeTopActivitiesLocked AS.resumeTopActivityLocked AS.resumeTopActivityInnerLocked ASS.finishTopRunningActivityLocked AS.finishTopRunningActivityLocked AS.finishActivityLocked 参考 http://gityuan.com/2016/06/24/app-crash/
+吹爆系列：深入探索android稳定性优化</description>
+    </item>
+    
+  </channel>
+</rss>

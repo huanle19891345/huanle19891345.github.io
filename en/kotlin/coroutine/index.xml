@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>coroutine on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/kotlin/coroutine/</link>
+    <description>Recent content in coroutine on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/kotlin/coroutine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kotlin协程</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B/</guid>
+      <description>协程是通过编译技术实现(不需要虚拟机VM/操作系统OS的支持),通过插入相关代码来生效！ 与之相反,线程/进程是需要虚拟机VM/操作系统OS的支持,通过调度CPU执行生效!
+优秀文章 Kotlin Coroutines(协程) 完全解析（一），协程简介
+Kotlin Coroutines(协程) 完全解析（二），深入理解协程的挂起、恢复与调度
+Kotlin Coroutines(协程) 完全解析（三），封装异步回调、协程间关系及协程的取消
+Kotlin Coroutines(协程) 完全解析（四），协程的异常处理
+Kotlin Coroutines(协程) 完全解析（五），协程的并发
+谷歌开发者 在 android 开发中使用协程 | 背景介绍
+协程中的取消和异常 | 异常处理详解
+官网doc 英文:
+https://kotlinlang.org/docs/reference/coroutines/basics.html
+https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/coroutines-guide.md
+https://github.com/Kotlin/KEEP/blob/master/proposals/coroutines.md
+中文:
+https://www.kotlincn.net/docs/reference/coroutines/coroutines-guide.html
+和Android Jetpack结合 https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope
+异步编程模型 异步的含义是被调用的方法执行完之后，无法直接拿到返回值(切换了线程)，需要通过回调接收返回值
+协程相当于提前切换到子线程，然后同步走逻辑，进而改变每一层的异步调用为同步，
+协程将同步方法和线程切换两者相隔离，所有方法都是同步方法，单独控制执行线程，避免异步方法去接收回调参数
+区别：
+ 回调调用时机: 回调接口可以有多个method，并在不同时机调用(对应的也可以在return对象中区分处理) 回调方法参数: 可以封装成method的return参数， 调用方上下文: 需要利用调用方的上下文(提供变量等)  异步回调 fun requestTokenAsync(cb: (Token) -&amp;gt; Unit) { ... } fun createPostAsync(token: Token, item: Item, cb: (Post) -&amp;gt; Unit) { ... } fun processPost(post: Post) { .</description>
+    </item>
+    
+    <item>
+      <title>kotlin协程Source</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8Bsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8Bsource/</guid>
+      <description>总结 类设计 协程的三层包装  常用的launch和async返回的Job、Deferred，里面封装了协程状态，提供了取消协程接口，而它们的实例都是继承自AbstractCoroutine，它是协程的第一层包装。 第二层包装是编译器生成的SuspendLambda的子类，封装了协程的真正运算逻辑，继承自BaseContinuationImpl，其中completion属性就是协程的第一层包装。 第三层包装是前面分析协程的线程调度时提到的DispatchedContinuation，封装了线程调度逻辑，包含了协程的第二层包装。三层包装都实现了Continuation接口，通过代理模式将协程的各层包装组合在一起，每层负责不同的功能。  resumeWith CoroutineContext graph LR coroutineContext--&amp;gt;Element1[&amp;quot;Element1: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;Element2[&amp;quot;Element2: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;ContinuationInterceptor[&amp;quot;ContinuationInterceptor: DefaultDispatcher.&amp;quot;] coroutineContext--&amp;gt;ElementXxx[&amp;quot;ElementXxx: a singleton context by itself.&amp;quot;] 挂起和恢复设计 sequenceDiagram CurrentThreadType-&amp;gt;&amp;gt;DispatchedThreadType: dispatch activate DispatchedThreadType CurrentThreadType-&amp;gt;&amp;gt;CurrentThreadType: suspend coroutine and release thread DispatchedThreadType--&amp;gt;&amp;gt;CurrentThreadType: resume deactivate DispatchedThreadType graph LR subgraph 基础层 suspendCoroutine--&amp;gt;suspendCoroutineUninterceptedOrReturn suspendCancellableCoroutine--&amp;gt;suspendCoroutineUninterceptedOrReturn end subgraph 上层功能 delay--&amp;gt;suspendCancellableCoroutine withContext--&amp;gt;suspendCoroutineUninterceptedOrReturn awaitSuspend--&amp;gt;suspendCoroutineUninterceptedOrReturn yield--&amp;gt;suspendCoroutineUninterceptedOrReturn end Coroutine构造和启动 CoroutineScope.launch public val coroutineContext: CoroutineContext launch本质上也是将用户配置的协程闭包作为一个suspend函数(()-&amp;gt;Unit),并将该函数在指定的dispatcher上执行，和withContext类似
+public fun CoroutineScope.</description>
+    </item>
+    
+    <item>
+      <title>kotlin协程取消</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B%E5%8F%96%E6%B6%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B%E5%8F%96%E6%B6%88/</guid>
+      <description>协程的取消 graph subgraph 协程 subgraph 挂起函数1 开始挂起函数1--&amp;gt;|执行|函数1执行中--&amp;gt;|3:需要函数1内协作判断isAlive,退出计算|函数1执行完成 end subgraph 挂起函数2 开始挂起函数2--&amp;gt;|执行|函数2执行中--&amp;gt;函数2执行完成 end 函数1执行完成--&amp;gt;resume--&amp;gt;开始挂起函数2 cancel--&amp;gt;|1:cpu密集计算类型:在该协程线程中修改协程job状态为canceling|函数1执行中 resume--&amp;gt;|2:DispatchedTask.run判断job状态|异常resume 开始挂起函数1--&amp;gt;|IO类型:cont.invokeOnCancellation|设置cancel时的处理方法 end runtask时对CancellationException的判断
+协程的取消只是在协程的第一层包装中 AbstractCoroutine 中修改协程的状态，并没有影响到第二层包装中 BaseContinuationImpl 中协程的实际运算逻辑。所以协程的取消只是状态的变化，并不会取消协程的实际运算逻辑，看下面的代码示例：
+fun main(args: Array&amp;lt;String&amp;gt;) = runBlocking { val job1 = launch(Dispatchers.Default) { repeat(5) { println(&amp;#34;job1 sleep ${it + 1}times&amp;#34;) delay(500) } } delay(700) job1.cancel() val job2 = launch(Dispatchers.Default) { var nextPrintTime = 0L var i = 1 while (i &amp;lt;= 3) { val currentTime = System.currentTimeMillis() if (currentTime &amp;gt;= nextPrintTime) { println(&amp;#34;job2 sleep ${i++}.</description>
+    </item>
+    
+    <item>
+      <title>使用挂起函数来封装回调</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/%E4%BD%BF%E7%94%A8%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0%E6%9D%A5%E5%B0%81%E8%A3%85%E5%9B%9E%E8%B0%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/%E4%BD%BF%E7%94%A8%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0%E6%9D%A5%E5%B0%81%E8%A3%85%E5%9B%9E%E8%B0%83/</guid>
+      <description>graph LR lifecycleScope--&amp;gt;|destory时通知|协程被取消 subgraph 协程挂起时,也就是异步任务执行时,需要考虑双向通知 协程被取消--&amp;gt;|cont.invokeOnCancellation通知|取消异步任务 异步任务被取消或异常--&amp;gt;|通知|取消协程/通知协程异常 end 参考 在 View 上使用挂起函数</description>
+    </item>
+    
+  </channel>
+</rss>

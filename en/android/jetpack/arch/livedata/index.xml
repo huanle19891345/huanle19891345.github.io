@@ -18,13 +18,12 @@ observe private SafeIterableMap&amp;lt;Observer&amp;lt;? super T&amp;gt;, Observ
     </item>
     
     <item>
-      <title>LiveData封装</title>
-      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</link>
+      <title>LiveDataCoroutine</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedatacoroutine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</guid>
-      <description>https://developer.android.com/kotlin/ktx#livedata
-LiveData协程 @UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit internal class CoroutineLiveData&amp;lt;T&amp;gt;( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, block: Block&amp;lt;T&amp;gt; ) : MediatorLiveData&amp;lt;T&amp;gt;() { private var blockRunner: BlockRunner&amp;lt;T&amp;gt;? private var emittedSource: EmittedSource? = null init { // use an intermediate supervisor job so that if we cancel individual block runs due to losing  // observers, it won&amp;#39;t cancel the given context as we only cancel w/ the intention of possibly  // relaunching using the same parent context.</description>
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedatacoroutine/</guid>
+      <description>@UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit internal class CoroutineLiveData&amp;lt;T&amp;gt;( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, block: Block&amp;lt;T&amp;gt; ) : MediatorLiveData&amp;lt;T&amp;gt;() { private var blockRunner: BlockRunner&amp;lt;T&amp;gt;? init { // use an intermediate supervisor job so that if we cancel individual block runs due to losing  // observers, it won&amp;#39;t cancel the given context as we only cancel w/ the intention of possibly  // relaunching using the same parent context.</description>
     </item>
     
     <item>
@@ -33,7 +32,16 @@ LiveData协程 @UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</guid>
-      <description>MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.postValue(value); } @Override public void setValue(T value) { super.setValue(value); } } MediatorLiveData public class MediatorLiveData&amp;lt;T&amp;gt; extends MutableLiveData&amp;lt;T&amp;gt; { private SafeIterableMap&amp;lt;LiveData&amp;lt;?</description>
+      <description>原理图 graph LR MediatorLiveData--&amp;gt;|addSource|sourceLiveDataN subgraph SourceN,observe when mediatorLiveData acitve sourceLiveDataN--&amp;gt;|onChange|observerN end MediatorLiveData--&amp;gt;|addSource|sourceLiveData2 subgraph Source2,observe when mediatorLiveData acitve sourceLiveData2--&amp;gt;|onChange|observer2 end MediatorLiveData--&amp;gt;|addSource|sourceLiveData1 subgraph Source1,observe when mediatorLiveData acitve sourceLiveData1--&amp;gt;|onChange|observer1 end MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.</description>
+    </item>
+    
+    <item>
+      <title>Transformations</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/transformations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/transformations/</guid>
+      <description>map sequenceDiagram SourceLiveData-&amp;gt;&amp;gt;ResultMediatorLivedata: onChanged ResultMediatorLivedata-&amp;gt;&amp;gt;ResultMediatorLivedata: setValue(mapFunction.apply(x)) inline fun &amp;lt;X, Y&amp;gt; LiveData&amp;lt;X&amp;gt;.map(crossinline transform: (X) -&amp;gt; Y): LiveData&amp;lt;Y&amp;gt; = Transformations.map(this) { transform(it) } public static &amp;lt;X, Y&amp;gt; LiveData&amp;lt;Y&amp;gt; map( @NonNull LiveData&amp;lt;X&amp;gt; source, @NonNull final Function&amp;lt;X, Y&amp;gt; mapFunction) { final MediatorLiveData&amp;lt;Y&amp;gt; result = new MediatorLiveData&amp;lt;&amp;gt;(); result.addSource(source, new Observer&amp;lt;X&amp;gt;() { @Override public void onChanged(@Nullable X x) { result.setValue(mapFunction.apply(x)); } }); return result; } switchMap sequenceDiagram SourceLiveData-&amp;gt;&amp;gt;SwitchedLiveData: switchMapFunction.apply(x) SwitchedLiveData-&amp;gt;&amp;gt;ResultMediatorLivedata: onChanged ResultMediatorLivedata-&amp;gt;&amp;gt;ResultMediatorLivedata: setValue(y) inline fun &amp;lt;X, Y&amp;gt; LiveData&amp;lt;X&amp;gt;.</description>
     </item>
     
   </channel>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shadow on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/</link>
+    <description>Recent content in shadow on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shadow</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadow/</guid>
+      <description>Shadow设计 Activity的生命周期问题，大方向的选择 其实我们早就在用一款也是基于代理组件转调插件组件的插件框架了。只不过这款插件框架用到了大量反射使用私有API，眼看着是不可能再Android 9.0上继续使用了。我们也调研了外界口碑最好的RePlugin。所以大概就这两种方向，一是用代理Activity作为壳子注册在宿主中真正运行起来，然后让它持有插件Activity，想办法在收到系统的生命周期方法调用时转调插件Activity的对应生命周期方法。二是Hack修改宿主PathClassLoader，让它能在收到系统查询AndroidManifest中注册的Activity的类时返回插件的Activity类。
+方法二就是RePlugin的关键技术。它利用了JVM的特性。我也不太肯定这算不算是bug，总之ClassLoader的loadClass方法返回的实际类可以和它被要求加载的类名字不一样。举个例子，宿主的AndroidManifest.xml注册一个Activity名叫A，插件里有一个Activity名叫B。宿主代码或者apk中最终是没有A这个类的，只有在AndroidManifest中注册的一个名字而已。当想要加载插件Activity B时，就发出一个启动Activity A的Intent。系统收到这个Intent后会检查宿主安装的AndroidManifest信息，从中确定A是哪个apk安装的，就会找到宿主的PathClassLoader。然后系统就会试图从PathClassLoader中加载A这个类，然后作为Activity类型的对象使用（这很正常）。所以如果我们把宿主的PathClassLoader给Hack了，控制它的加载逻辑，让它收到这个加载调用时实际返回的是插件Activity B的类。由于B也真的是Activity的子类，所以系统拿回去当作Activity类型使用没有任何问题。这里再扩展一下，如果类C继承自类A，在加载C时也会去加载A，如果这时拿B当A返回的话，C收到B之后是会发现B的名字不是A而出错的。关于RePlugin这段关键技术的实现，当时调研时就发现实现的有些麻烦了。RePlugin选择复制一个PathClassLoader，然后替换系统持有的PathClassLoader。所以复制PathClassLoader需要反射使用PathClassLoader的私有API，拿出来它里面的数据，替换系统持有的PathClassLoader也要反射修改私有API。我们当时已经实现了“全动态插件框架”，其中代理壳子Activity的动态化使用的方法也能解决这个问题，我们的选择是在宿主PathClassLoader上给它加一个parent ClassLoader。因为PathClassLoader也是一个有正常“双亲委派”逻辑的ClassLoader，它加载什么类都会先问自己parent ClassLoader先加载。所以我们加上去的这个parent ClassLoader也能完成RePlugin想要做的事。不过我们用它的目的是不希望壳子Activity打包在宿主占用宿主很多方法数，还不能更新。这一点以后可能再单独讲。关于这个替换实现，最近给RePlugin提了一个PR：github.com/Qihoo360/Re… ，有兴趣的同学可以看一下。
+RePlugin的这种方案还有一点非常不适合我们的业务，就是宿主AndroidManifest中注册的“坑位”Activity，就是上面举例的Activity A，是不能同时供多个插件Activity使用的。就是我不能在宿主AndroidManifest中注册一个Activity A，然后让它同时支持插件Activity B和C。这是因为ClassLoader在loadClass的时候，收到的参数只有一个A的类名，我们没有办法传递更多信息，让ClassLoader能在这个loadClass的调用中区分出应该返回B还是应该返回C。所以这种方案需要在宿主中注册大量Activity，这对于我们的宿主来说是不可接受的。而方法一是用代理Activity持有插件Activity转调的方案，就可以在启动代理Activity时通过Intent传递很多参数，代理Activity通过Intent中的参数就能决定该构造一个B还是一个C。这就使得这种方案下壳子是可复用的。
+还有一点就是我们在旧框架上就已经设计了“全动态插件框架”，所以基于方法一的方向上开发新插件框架，我们可以不修改宿主的任何代码，不跟宿主版本就能更新插件框架。关于这一点，后续文章再解析。
+所以我们探索的方向就这样确定在方法一这个方向上了。
+所有的插件框架中，Activity的加载都是这样的，new一个DexClassLoader加载插件apk。然后从插件ClassLoader中load指定的插件Activity名字，newInstance之后强转为Activity类型使用。实际上Android系统自身在启动Activity时也是这样做的。所以这就是插件机制能动态更新Activity的基本原理。
+所以，所有的插件框架在解决的问题都不是如何动态加载类，而是动态加载的Activity没有在AndroidManifest中注册，该如何能正常运行。如果Android系统没有AndroidManifest的限制，那么所有插件框架都没有存在的必要了。因为Java语言本身就支持动态更新实现的能力。
+Shadow动态化原理 Shadow的全动态设计原理解析
+打包在宿主中的只有core.common和dynamic.host。其余都是动态加载的，或者编译期的。
+源码中的dynamic-host module中的接口pluginManager，dynamic-loader module,都对自己的能力做了接口抽象，用于运行时加载动态实现
+dynamic-host module中的接口pluginManager在dynamic-manager内进行了实现，具体见&amp;quot;Shadow设计.vsdx&amp;quot;
+Container动态化 PluginProcessService在void loadRuntime(String uuid)成功加载runtimeapk之后，判断如果加载了新的runtime，会将InstalledApk信息保存到sp。之后hackParentToRuntime时会new RuntimeClassLoader来设置为当前宿主PathClassLoader的parent，这样就可以实现宿主manifest文件中注册的代理容器Activity的动态加载:public class PluginDefaultProxyActivity extends PluginContainerActivity ,其中的@override方法可以不必一次全部实现，可以在业务需要时再添加
+动态化加载manager 参考代码分析
+loadParameters.dependsOn Shadow对插件包管理的设计
+LoadApkBloc:: /** * 加载插件到ClassLoader中. * * @param installedPlugin 已安装（PluginManager已经下载解包）的插件 * @return 加载了插件的ClassLoader */ @Throws(LoadApkException::class) fun loadPlugin(installedApk: InstalledApk, loadParameters: LoadParameters, pluginPartsMap: MutableMap&amp;lt;String, PluginParts&amp;gt;): PluginClassLoader { val apk = File(installedApk.apkFilePath) val odexDir = if (installedApk.</description>
+    </item>
+    
+    <item>
+      <title>ShadowPlugin</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowplugin/</guid>
+      <description>ShadowTransform类设计 gradle配置 //Sample-plugin-app中build.gradle中对应的配置，动态生成config.json的一些参数  packagePlugin { pluginTypes { debug { loaderApkConfig = new Tuple2(&amp;#39;sample-loader-debug.apk&amp;#39;, &amp;#39;:sample-loader:assembleDebug&amp;#39;) runtimeApkConfig = new Tuple2(&amp;#39;sample-runtime-debug.apk&amp;#39;, &amp;#39;:sample-runtime:assembleDebug&amp;#39;) pluginApks { pluginApk1 { businessName = &amp;#39;sample-plugin-app&amp;#39; partKey = &amp;#39;sample-plugin-app&amp;#39; buildTask = &amp;#39;:sample-plugin-app:assembleDebug&amp;#39; apkName = &amp;#39;sample-plugin-app-debug.apk&amp;#39; apkPath = &amp;#39;projects/sample/sample-plugin/sample-plugin-app/build/outputs/apk/debug/sample-plugin-app-debug.apk&amp;#39; } } } release { loaderApkConfig = new Tuple2(&amp;#39;sample-loader-release.apk&amp;#39;, &amp;#39;:sample-loader:assembleRelease&amp;#39;) runtimeApkConfig = new Tuple2(&amp;#39;sample-runtime-release.apk&amp;#39;, &amp;#39;:sample-runtime:assembleRelease&amp;#39;) pluginApks { pluginApk1 { businessName = &amp;#39;sample-plugin-app&amp;#39; partKey = &amp;#39;sample-plugin-app&amp;#39; buildTask = &amp;#39;:sample-plugin-app:assembleRelease&amp;#39; apkName = &amp;#39;sample-plugin-app-release.apk&amp;#39; apkPath = &amp;#39;projects/sample/sample-plugin/sample-plugin-app/build/outputs/apk/release/sample-plugin-app-release.</description>
+    </item>
+    
+    <item>
+      <title>ShadowSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowsource/</guid>
+      <description>Shadow类设计和原理 Shadow核心功能 core层 = manager + loader, dynamic层用来动态化
+打包在宿主中的只有core.common和dynamic.host。其余都是动态加载的，或者编译期的。
+sequenceDiagram Note over Manager: host(位于主进程) Note over Loader: PluginProcessPPS(plugin进程) Manager-&amp;gt;&amp;gt;Manager: Manager动态化:通过接口PluginManager实现 Manager-&amp;gt;&amp;gt;Manager: 下载插件、安装插件,得到LoadParameters Manager-&amp;gt;&amp;gt;Loader: bindService Loader-&amp;gt;&amp;gt;Loader: Loader动态化:通过双向接口HostActivityDelegate和HostActivityDelegator实现 Loader-&amp;gt;&amp;gt;Loader: 将插件免安装的运行起来,代理壳子ContainerActivity需要和PluginActivity通过Loader相互调用 Manager 1：解压zip包到data目录下的指定路径下
+2：解析config.json到PluginConfig
+3：根据插件配置信息插入一组数据到db，返回InstalledPlugin
+4：对runtime和loader两个apk做odex(更新odex信息到数据库，更新part.oDexDir)
+5：对每个插件apk做extractSo(更新信息到数据库，更新part.libraryDir)和odex(更新odex信息到数据库，更新part.oDexDir)
+6：bindPluginProgressService，加载runtime，加载loader，加载plugin，调用loader的convertActivityIntent转换intent为代理容器Activity
+7：正常启动代理容器Activity
+Loader PpsBinder中Loader本身的Binder先通过PPS跨进程通信到Manager进程，从而使Loader的Binder成了跨进程的Binder
+宿主中的公共代码和资源的更新和修复可行性方案 graph LR subgraph 插件自带动态加载能力,可以更新功能,修复问题 宿主(&amp;quot;宿主(包含公共仓库资源)&amp;quot;)--&amp;gt;插件1,通过配置whiteList访问宿主公共资源 宿主--&amp;gt;插件2 宿主--&amp;gt;插件3 end 1：利用热修复方案如Tinker中的java修复部分替换宿主dex elements(atlas的host更新也使用的类似修复方案)，资源更新也采用相应的热修复方式进行
+2：将公共代码和资源从组件做成插件，动态加载：
+参考DynamicPluginLoader:
+val coreLoaderFactory = mDynamicLoaderClassLoader.getInterface( CoreLoaderFactory::class.java, CORE_LOADER_FACTORY_IMPL_NAME ) mPluginLoader = coreLoaderFactory.build(hostContext) DelegateProviderHolder.setDelegateProvider(mPluginLoader) 通过注入的方式将loader中的接口实现动态注入到runtime模块(loader依赖runtime)，用来动态的实现DelegateProvider接口
+HostUiLayerProvider 也是类似的注入依赖思想，依赖倒置，控制反转
+类似manager的加载方式？Or使用插件间dependOn的方式？
+Manager方式适用于仅仅java代码的动态化，dependOn也可以拓展支持资源
+参考rePlugin的方式：
+//WebViewActivity  // 从WebView插件获取WebrViewPage的代理  WebPageProxy viewProxy = WebPageProxy.</description>
+    </item>
+    
+  </channel>
+</rss>

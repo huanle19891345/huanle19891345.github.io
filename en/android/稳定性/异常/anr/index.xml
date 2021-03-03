@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>anr on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/anr/</link>
+    <description>Recent content in anr on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/anr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Anr分析</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/anr/anr%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/anr/anr%E5%88%86%E6%9E%90/</guid>
+      <description>Anr信息解释 &amp;#34;Signal Catcher&amp;#34; daemon prio=5 tid=6 Runnable | group=&amp;#34;system&amp;#34; sCount=0 dsCount=0 flags=0 obj=0x15b802d8 self=0x756d5cc2e000 | sysTid=7781 nice=0 cgrp=default sched=0/0 handle=0x756d5c9ffd50 | state=R schedstat=( 9996973 11775302 9 ) utm=0 stm=0 core=3 HZ=100 | stack=0x756d5c909000-0x756d5c90b000 stackSize=991KB | held mutexes= &amp;#34;mutator lock&amp;#34;(shared held) native: #00 pc 000000000048df0e /apex/com.android.runtime/lib64/libart.so (art::DumpNativeStack(std::__1::basic_ostream&amp;lt;char, std::__1::char_traits&amp;lt;char&amp;gt;&amp;gt;&amp;amp;, int, BacktraceMap*, char const*, art::ArtMethod*, void*, bool)+126) native: #01 pc 00000000005a77b3 /apex/com.android.runtime/lib64/libart.so (art::Thread::DumpStack(std::__1::basic_ostream&amp;lt;char, std::__1::char_traits&amp;lt;char&amp;gt;&amp;gt;&amp;amp;, bool, BacktraceMap*, bool) const+675) native: #02 pc 00000000005c49bb /apex/com.android.runtime/lib64/libart.so (art::DumpCheckpoint::Run(art::Thread*)+859) native: #03 pc 00000000005bcf18 /apex/com.</description>
+    </item>
+    
+  </channel>
+</rss>

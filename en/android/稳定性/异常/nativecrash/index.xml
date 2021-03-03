@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nativecrash on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/</link>
+    <description>Recent content in nativecrash on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nativeCrash1SystemHandle</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash1systemhandle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash1systemhandle/</guid>
+      <description>从安卓 APP 开发的角度，Java 崩溃捕获相对比较容易，JVM 给 Java 字节码提供了一个受控的运行环境，同时也提供了完善的 Java 崩溃捕获机制。Native 崩溃的捕获和处理相对比较困难，安卓系统的==debuggerd 守护进程会为 native 崩溃自动生成详细的崩溃描述文件（tombstone）。==
+在==开发调试阶段，可以通过系统提供的 bugreport 工具获取 tombstone 文件==（或者将设备 root 后也可以拿到）。但是对于发布到线上的安卓 APP，如何获取 tombstone 文件，安卓操作系统本身并没有提供这样的功能。这个问题一直是安卓 native 崩溃分析和移动端 APM 系统的痛点之一。
+Tombstones https://source.android.com/devices/tech/debug/native-crash
+https://source.android.com/devices/tech/debug/index.html#debuggerd
+Before Android 8.0, crashes were handled by the debuggerd and debuggerd64 daemons. In Android 8.0 and higher, crash_dump32 and crash_dump64 are spawned as needed.</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash2CollectStack</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash2collectstack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash2collectstack/</guid>
+      <description>1 捕捉native crash的发生 所有的信号量都定义在&amp;lt;signal.h&amp;gt;文件中:
+#define SIGHUP 1 // 终端连接结束时发出(不管正常或非正常) #define SIGINT 2 // 程序终止(例如Ctrl-C) #define SIGQUIT 3 // 程序退出(Ctrl-\) #define SIGILL 4 // 执行了非法指令，或者试图执行数据段，堆栈溢出 #define SIGTRAP 5 // 断点时产生，由debugger使用 #define SIGABRT 6 // 调用abort函数生成的信号，表示程序异常 #define SIGIOT 6 // 同上，更全，IO异常也会发出 #define SIGBUS 7 // 非法地址，包括内存地址对齐出错，比如访问一个4字节的整数, 但其地址不是4的倍数 #define SIGFPE 8 // 计算错误，比如除0、溢出 #define SIGKILL 9 // 强制结束程序，具有最高优先级，本信号不能被阻塞、处理和忽略 #define SIGUSR1 10 // 未使用，保留 #define SIGSEGV 11 // 非法内存操作，与SIGBUS不同，他是对合法地址的非法访问，比如访问没有读权限的内存，向没有写权限的地址写数据 #define SIGUSR2 12 // 未使用，保留 #define SIGPIPE 13 // 管道破裂，通常在进程间通信产生 #define SIGALRM 14 // 定时信号, #define SIGTERM 15 // 结束程序，类似温和的SIGKILL，可被阻塞和处理。通常程序如果终止不了，才会尝试SIGKILL #define SIGSTKFLT 16 // 协处理器堆栈错误 #define SIGCHLD 17 // 子进程结束时, 父进程会收到这个信号。 #define SIGCONT 18 // 让一个停止的进程继续执行 #define SIGSTOP 19 // 停止进程,本信号不能被阻塞,处理或忽略 #define SIGTSTP 20 // 停止进程,但该信号可以被处理和忽略 #define SIGTTIN 21 // 当后台作业要从用户终端读数据时, 该作业中的所有进程会收到SIGTTIN信号 #define SIGTTOU 22 // 类似于SIGTTIN, 但在写终端时收到 #define SIGURG 23 // 有紧急数据或out-of-band数据到达socket时产生 #define SIGXCPU 24 // 超过CPU时间资源限制时发出 #define SIGXFSZ 25 // 当进程企图扩大文件以至于超过文件大小资源限制 #define SIGVTALRM 26 // 虚拟时钟信号.</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash3SymbolRecovery</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash3symbolrecovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash3symbolrecovery/</guid>
+      <description>1. 获取crash日志信息  adb logcat 的堆栈轨迹 /data/tombstones/ 中的 tombstone  2. 使用addr2line或ndk-stack工具查看crash文件和行号 addr2line https://stackoverflow.com/questions/5314036/how-to-use-addr2line-in-android
+Native crash异常，能定位到代码哪个地方报错吗 #18
+arm-linux-androideabi-addr2line –e obj/local/armeabi/libhello-jni.so 00004de8 000056c8 00004fb4 00004f58 #这一步就该addr2line出场了。我们从backstrace中拿到了出错时的指令地址，它对应我们程序中某个函数的某行操作。我们需要addr2line将对应文件和对应行数打出来。这个命令的格式是 addr2line -e exefile addr #在NDK中找到对应的addr2line命令，testapp程序文件取出来，执行命令 [root@localhost]# /opt/android_tools/android-ndk-r20/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line -f -e testapp 000a3f10 testGetEntryById /home/***/***/***/test.c:220 real command: $ Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/x86_64-linux-android-addr2line.exe -f -e ~/git/demo/xCrash/src/native/libxcrash/obj/local/x86_64/libxcrash.so 000000000000c2df xc_test_call_4 git/demo/xCrash/src/native/libxcrash/jni/xc_test.c:64 ndk-stack工具 https://developer.android.com/ndk/guides/ndk-stack?hl=zh-cn
+https://help.aliyun.com/knowledge_detail/70180.html
+adb shell logcat | ndk-stack -sym $PROJECT_PATH/obj/local/armeabi ndk-stack -sym ./workspace2/testNdkStack/obj/local/armeabi-v7a/ -dump ./logcat.log &amp;gt; result.log 在result.log中可以分析定位到出现该crash的对应代码文件和具体行数 real command: git\demo\xCrash\src\native\libxcrash\obj\local&amp;gt;ndk-stack -sym .</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash4AnalysisRootCause</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash4analysisrootcause/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash4analysisrootcause/</guid>
+      <description>汇编 ARM汇编指令集汇总
+基本语法 汇编语言的主体是汇编指令。汇编指令和机器指令的差别在于指令的表示方法上。汇编指令是机器指令便于记忆的书写格式。
+#操作：寄存器BX的内容送到AX中 1000100111011000 #机器指令 mov ax,bx #汇编指令 汇编语言语句的语法 汇编语言语句输入每行一个语句。每个语句如下的格式如下：
+[label] mnemonic [operands] [;comment] 方括号中的字段是可选的。基本指令有两部分组成，第一个是要执行的指令（助记符）的名称和所述第二命令的操作数或参数的。
+以下是一些典型的汇编语言语句的例子：
+INC COUNT ; Increment the memory variable COUNT MOV TOTAL, 48 ; Transfer the value 48 in the  ; memory variable TOTAL ADD AH, BH ; Add the content of the  ; BH register into the AH register AND MASK1, 128 ; Perform AND operation on the  ; variable MASK1 and 128 ADD MARKS, 10 ; Add 10 to the variable MARKS MOV AL, 10 ; Transfer the value 10 to the AL register disassembler tool IDAPro is best disassembler tool for many processors and file types.</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash选型和整体流程</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash%E9%80%89%E5%9E%8B%E5%92%8C%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash%E9%80%89%E5%9E%8B%E5%92%8C%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B/</guid>
+      <description>原理流程四个阶段 graph LR nativeCrashHappening--&amp;gt;systemHandle(1:SystemHandle)--&amp;gt;|debug|tombstoneFile(TombstoneFile) tombstoneFile--&amp;gt;symbolrecovery(3:SymbolRecovery)--&amp;gt;analysisRootCause(4:AnalysisRootCause) systemHandle--&amp;gt;|release|collectStack(2:CollectStack)--&amp;gt;|upload|tombstoneFile 处理流程 一个完整的 Native 崩溃从捕获到解析要经历哪些流程。
+  编译端。编译 C/C++ 代码时，需要将带符号信息的文件保留下来。
+  客户端。捕获到崩溃时候，将收集到尽可能多的有用信息写入日志文件，然后选择合适的时机上传到服务器。
+  服务端。读取客户端上报的日志文件，寻找适合的符号文件，生成可读的 C/C++ 调用栈。
+  现有的方案 对于很多中小型公司来说，我并不建议自己去实现一套如此复杂的系统，可以选择一些第三方的服务。目前各种平台也是百花齐放，包括腾讯的Bugly、阿里的啄木鸟平台、网易云捕、Google 的 Firebase 等等。
+当然，在平台的选择方面，我认为，从产品化跟社区维护来说，Bugly 在国内做的最好；从技术深度跟捕获能力来说，阿里 UC 浏览器内核团队打造的啄木鸟平台最佳。
+xCrash BreakPad https://chromium.googlesource.com/breakpad/breakpad/+/master
+https://chromium.googlesource.com/breakpad/breakpad/+/master/docs/
+https://chromium.googlesource.com/breakpad/breakpad/+/master/docs/getting_started_with_breakpad.md
+https://github.com/google/breakpad
+https://github.com/AndroidAdvanceWithGeektime/Chapter01
+Google breakpad是一个跨平台的崩溃转储和分析框架和工具集合。
+Breakpad由三个主要组件：
+ client，以library的形式内置在你的应用中，当崩溃发生时写 minidump文件 symbol dumper, 读取由编译器生成的调试信息（debugging information），并生成 symbol file processor， 读取 minidump文件 和 symbol file ，生成可读的c/c++ Stack trace.  简单来说就是一个生成 minidump，一个生成symbol file，然后将其合并处理成可读的Stack trace。
+bugly nativecrash模块+ setCrashHandleCallback监听上报到公司服务器</description>
+    </item>
+    
+  </channel>
+</rss>

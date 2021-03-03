@@ -27,12 +27,41 @@ WARNING: This format is still considered highly experimental, however, all attem
     </item>
     
     <item>
-      <title>LeakCanary2Source</title>
-      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</link>
+      <title>KOOMSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/koomsource/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</guid>
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/koomsource/</guid>
+      <description>Module Dependencies graph TB demo--&amp;gt;java-oom java-oom--&amp;gt;koom-kwailinker java-oom--&amp;gt;koom-xhook java-oom--&amp;gt;koom-shark LeakDetector Hierarchy graph TB LeakDetector--&amp;gt;ActivityLeakDetector LeakDetector--&amp;gt;NativeAllocationRegistryLeakDetector LeakDetector--&amp;gt;WindowLeakDetector LeakDetector--&amp;gt;BitmapLeakDetector LeakDetector--&amp;gt;FragmentLeakDetector HprofStrip Detail KOOM.init /** * KOOM entry point, make sure be called in the main thread! * * @param application application needed */ public static void init(Application application) { if (koom == null) { koom = new KOOM(application); } koom.start(); } private KOOM(Application application) { internal = new KOOMInternal(application); } public KOOMInternal(Application application) { KUtils.</description>
+    </item>
+    
+    <item>
+      <title>LeakCanary2</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2/</guid>
+      <description>Procedure https://square.github.io/leakcanary/fundamentals-how-leakcanary-works/
+graph TB Procedure--&amp;gt;|useReferenceQueue|Detect(Detecting retained objects.) Procedure--&amp;gt;|Debug.dump|Dump(Dumping the heap.) Procedure--&amp;gt;|Shark|Analyze(Analyzing the heap.) Procedure--&amp;gt;category(Categorizing leaks.) Module依赖 graph TB leakcanary-android-sample--&amp;gt;leakcanary-android leakcanary-android--&amp;gt;leakcanary-android-core </description>
+    </item>
+    
+    <item>
+      <title>LeakCanary2Analyze</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2analyze/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2analyze/</guid>
       <description>Procedure graph TB HeapAnalyzer.analyze--&amp;gt;Hprof.open:HprofFile HeapAnalyzer.analyze--&amp;gt;HprofHeapGraph.indexHprof HeapAnalyzer.analyze--&amp;gt;FindLeakInput.analyzeGraph HprofHeapGraph.indexHprof--&amp;gt;reader.readHprofRecords--&amp;gt;|callback HprofRecord|indexBuilderListener.onHprofRecord--&amp;gt;UnsortedByteEntries(&amp;quot;UnsortedByteEntries,ScatterMap&amp;quot;) HprofHeapGraph.indexHprof--&amp;gt;indexBuilderListener.buildIndex--&amp;gt;|Sort entries by keys|SortedBytesMap--&amp;gt;HprofInMemoryIndex--&amp;gt;HprofHeapGraph FindLeakInput.analyzeGraph--&amp;gt;FindLeakInput.findLeaks FindLeakInput.findLeaks--&amp;gt;State.findPathsFromGcRoots:BFS--&amp;gt;|start by enqueueGcRoots|findObjectById(&amp;quot;graph.findObjectById&amp;quot;)--&amp;gt;readFieldsAndEnqueue Data Flow graph TB HprofFile--&amp;gt;HprofRecord HprofRecord--&amp;gt;UnsortedByteEntries(&amp;quot;UnsortedByteEntries(class,instance,objectArray,primitiveArray)&amp;quot;) UnsortedByteEntries--&amp;gt;|Sort entries by keys|SortedBytesMap(SortedBytesMap: get perform binarySearch) SortedBytesMap--&amp;gt;HprofInMemoryIndex SortedBytesMap--&amp;gt;|get return|ByteSubArray ByteSubArray--&amp;gt;|indexedObjectOrNull|IndexedObject IndexedObject--&amp;gt;|wrapIndexedObject|HeapObject HprofRecord--&amp;gt;ScatterMap(&amp;quot;ScatterMap(hprofStringCache, classNames)&amp;quot;) ScatterMap--&amp;gt;HprofInMemoryIndex HprofInMemoryIndex--&amp;gt;HprofHeapGraph LruCache:objectCache--&amp;gt;|cached when readObjectRecord|HprofHeapGraph //ScatterMap contains: classNames and hprofStringCache  // LRU cache size of 3000 is a sweet spot to balance hits vs memory usage. // This is based on running InstrumentationLeakDetectorTest a bunch of time on a // Pixel 2 XL API 28.</description>
+    </item>
+    
+    <item>
+      <title>manageMemory</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/managememory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/managememory/</guid>
+      <description>Overview of memory management Share memory In order to fit everything it needs in RAM, Android tries to share RAM pages across processes. It can do so in the following ways:
+ Each app process is forked from an existing process called Zygote. The Zygote process starts when the system boots and loads common framework code and resources (such as activity themes). To start a new app process, the system forks the Zygote process then loads and runs the app&amp;rsquo;s code in the new process.</description>
     </item>
     
     <item>

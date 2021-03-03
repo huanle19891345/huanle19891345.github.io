@@ -21,7 +21,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</guid>
-      <description>绘制渲染 三棵树 Widget Tree，Element Tree 以及 RenderObject Tree 。根据它们的功能我将它翻译成模型树，状态树和渲染树，也正是通过这三棵树维护起了整个应用的视图数据。
+      <description>绘制渲染 三棵树 https://flutter.dev/docs/resources/architectural-overview#layout-and-rendering
+Widget Tree，Element Tree 以及 RenderObject Tree 。根据它们的功能我将它翻译成模型树，状态树和渲染树，也正是通过这三棵树维护起了整个应用的视图数据。
 开发者通过Widget配置，Framework通过比对Widget配置来更新Element，最后调度RenderObject Tree完成布局排列和绘制。
  Widget Tree  存放属性的描述信息，更像是一个Model。同一个Widget可以同时描述多个渲染树中的节点，但是它是不可修改的，因此它只会被创建或销毁。
 Widget是为Element描述需要的配置， 负责创建Element，决定Element是否需要更新。Flutter Framework通过差分算法比对Widget树前后的变化，决定Element的State是否改变。当重建Widget树后并未发生改变， 则Element不会触发重绘，则就是Widget树的重建并不一定会触发Element树的重建。

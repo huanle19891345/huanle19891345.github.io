@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>包体积 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E5%8C%85%E4%BD%93%E7%A7%AF/</link>
+    <description>Recent content in 包体积 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E5%8C%85%E4%BD%93%E7%A7%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>包体积压缩</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%8C%85%E4%BD%93%E7%A7%AF/%E5%8C%85%E4%BD%93%E7%A7%AF%E5%8E%8B%E7%BC%A9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%8C%85%E4%BD%93%E7%A7%AF/%E5%8C%85%E4%BD%93%E7%A7%AF%E5%8E%8B%E7%BC%A9/</guid>
+      <description>AndroidBuildProcess Shrink your code To shrink your app’s code, R8 first determines all entry points into your app’s code based on the combined set of configuration files. These entry points include all classes that the Android platform may use to open your app’s Activities or services. Starting from each entry point, R8 inspects your app’s code to build a graph of all methods, member variables, and other classes that your app might access at runtime.</description>
+    </item>
+    
+  </channel>
+</rss>

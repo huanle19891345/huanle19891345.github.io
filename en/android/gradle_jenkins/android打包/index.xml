@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>android打包 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/gradle_jenkins/android%E6%89%93%E5%8C%85/</link>
+    <description>Recent content in android打包 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/gradle_jenkins/android%E6%89%93%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>android打包</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/android%E6%89%93%E5%8C%85/android%E6%89%93%E5%8C%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/android%E6%89%93%E5%8C%85/android%E6%89%93%E5%8C%85/</guid>
+      <description>打包过程 aapt-&amp;gt;aidl -&amp;gt; javac-&amp;gt; dx(dex)-&amp;gt; apkbuilder-&amp;gt; jarsigner-&amp;gt; zipalign
+步骤中提到的工具如下表：
+   名称 功能介绍 在操作系统中的路径     aapt Android资源打包工具 ${ANDROID_SDK_HOME}/platform-tools/appt   aidl Android接口描述语言转化为.java文件的工具 ${ANDROID_SDK_HOME}/platform-tools/aidl   javac Java Compiler ${JDK_HOME}/javac或/usr/bin/javac   dex 转化.class文件为Davik VM能识别的.dex文件 ${ANDROID_SDK_HOME}/platform-tools/dx   apkbuilder 生成apk包 ${ANDROID_SDK_HOME}/tools/opkbuilder   jarsigner .jar文件的签名工具 ${JDK_HOME}/jarsigner或/usr/bin/jarsigner   zipalign 字节码对齐工具 ${ANDROID_SDK_HOME}/tools/zipalign    第一步：打包资源文件，生成R.java文件 编译R.java类需要用到AndroidSDK提供的aapt工具,aapt参数众多,以下是主要参数:
+-d one or more device assets to include, separated by commas</description>
+    </item>
+    
+  </channel>
+</rss>

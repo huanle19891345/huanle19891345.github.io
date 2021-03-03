@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>webview on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/ui/webview/</link>
+    <description>Recent content in webview on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/ui/webview/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebView</title>
+      <link>https://huanle19891345.github.io/en/android/ui/webview/webview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ui/webview/webview/</guid>
+      <description>WebView优化 一般来说，WebView 渲染需要经过下面几个步骤
+ 解析 HTML 文件 加载 JavaScript 和 CSS 文件 解析并执行 JavaScript 构建 DOM 结构 加载图片等资源 页面加载完毕  而 loadFinish 实际上是在页面加载完毕阶段，而 DOM 构建完成时页面结构就已经基本渲染完成，所以从用户真实体验的角度出发，我们以 DOM 结构构建完成（即 domReady）的时间点作为页面加载完成时间点。
+模板优化 模板拆分 原先:
+优化后:
+还能不能更快一点呢？当然能！
+为了提高页面的加载速度，客户端通过一定的策略去预加载新闻数据，这样在理想状态下用户进入页面时看到页面时就可以直接使用缓存的数据，用户在看新闻的时候可以实现完全离线化，避免受到网络的影响。
+模板预热 模板复用 网络优化 CDN 加速 渲染优化 服务端预渲染 客户端渲染 所以在详情页中，我们会将图片和视频等非文字内容通过原生组件的方式放在客户端进行渲染，既可以提高渲染效率，也可以减少不必要的流量消耗。
+原生化渲染还有一个好处，图片越来越成为文章体验的重要部分，对于多图文章，我们在 Feed 页面也可以智能加载详情页需要的图片，增加用户的文章首屏体验。
+白屏优化 而在 Android 中，我们采用的是自研内核 WebView，也会遇到一些奇奇怪怪的坑。
+ 多线程读模板文件问题，WebView 在运行中会读取的文件模板，如果此时另外一个线程同时更新模板文件时，就出现了模板加载问题，所以需要保证模板加载的原子性 Render 卡死问题，内核是一个比较复杂的逻辑，内部渲染极少数情况也会出现 Render 卡死问题，但是在详情页整体用户的量级下，即使只有十万分之一的可能，对用户来说也是一个比较大的问题，此时我们会从业务上做白屏监控进行重试  当然不管是 iOS 和 Android， WebView 加载的逻辑都比较复杂，有时候怎么重试也无法成功，这个时候我们会直接降级到加载线上的详情页，优先保证用户的体验。
+总结 限于篇幅原因，我们还做了很多其他事情，包括请求精简，push 文章预拉取，数据注入的方式优化等等，也做了很多其他的方向的探索，这里不做展开，希望有机会能再分享给大家。
+最后总结一下我们在优化详情页打开速度之后的一些想法
+ 数据很重要，我们在优化加载速度之前做的第一件事情其实是建立了一个详情页的数据看板，只有通过数据我们才能真正了解目前线上用户的现状，从真实用户的体验中找到瓶颈和优化点。 用户体验优先，优化方案有很多，除了加载速度之外，还需要从整体应用体验出发，选择对用户最佳的方案 追求极致，其实最开始的优化是比较简单的，但是越到后面越难，需要一点点抠细节，才能达到极致的用户体验  参考 WebView性能、体验分析与优化</description>
+    </item>
+    
+  </channel>
+</rss>

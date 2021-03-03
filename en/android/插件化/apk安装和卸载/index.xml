@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>apk安装和卸载 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/apk%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/</link>
+    <description>Recent content in apk安装和卸载 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/apk%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>应用安装和卸载过程</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/apk%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/apk%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD%E8%BF%87%E7%A8%8B/</guid>
+      <description>安装过程： 1.程序安装的4大步骤
+（1） 拷贝apk文件到指定目录 在Android系统中，apk安装文件是会被保存起来的，默认情况下，用户安装的apk首先会被拷贝到 /data/app 目录下。
+/data/app目录是用户有权限访问的目录，在安装apk的时候会自动选择该目录存放用户安装的文件，而系统出厂的apk文件则被放到了 /system 分区下,包括 /system/app，/system/vendor/app，以及 /system/priv-app 等等，该分区只有Root权限的用户才能访问，这也就是为什么在没有Root手机之前，我们无法删除系统出厂的app的原因了。
+PackageInstaller所在的app进程先将其apk copy到data/user_de/0/com.android.packageinstaller/no_backup/package859349096673958696.apk中
+复制APK安装包到data/app目录下，首先copy到data/app/vmdl609226785.tmp/base.apk
+（2） 解压apk，拷贝文件，创建应用的数据目录 为了加快app的启动速度，apk在安装的时候，会首先将app的可执行文件（dex）拷贝到 /data/dalvik-cache 目录，缓存起来。
+然后，在/data/data/目录下创建应用程序的数据目录（以应用的包名命名），存放应用的相关数据，如数据库、xml文件、cache、二进制的so动态库等等，
+（3） 解析apk的AndroidManifinest.xml文件 Android系统中，也有一个类似注册表的东西，用来记录当前所有安装的应用的基本信息，每次系统安装或者卸载了任何apk文件，都会更新这个文件。这个文件位于如下目录：
+/data/system/packages.xml
+系统在安装apk的过程中，会解析apk的AndroidManifinest.xml文件，提取出这个apk的重要信息写入到packages.xml文件中，这些信息包括：权限、应用包名、APK的安装位置、版本、userID等等。
+由此，我们就知道了为啥一些应用市场和软件管理类的app能够很清楚地知道当前手机所安装的所有的app，以及这些app的详细信息了。
+另外一件事就是Linux的用户Id和用户组Id，以便他可以获得合适的运行权限。
+以上这些都是由PackageManagerService完成的。
+（4） 显示快捷方式 这些应用程序只是相当于在PackageManagerService服务注册好了，如果我们想要在Android桌面上看到这些应用程序，还需要有一个Home应用程序，负责从PackageManagerService服务中把这些安装好的应用程序取出来，并以友好的方式在桌面上展现出来，例如以快捷图标的形式。在Android系统中，负责把系统中已经安装的应用程序在桌面中展现出来的Home应用程序就是Launcher了
+PackageManagerService的启动过程 Android系统在启动的过程中，会启动一个应用程序管理服务PackageManagerService，这个服务负责扫描系统中特定的目录，找到里面的应用程序文件，即以Apk为后缀的文件，然后对这些文件进解析，得到应用程序的相关信息。应用程序管理服务PackageManagerService安装应用程序的过程，其实就是解析析应用程序配置文件AndroidManifest.xml的过程，并从里面得到得到应用程序的相关信息，例如得到应用程序的组件Activity、Service、Broadcast Receiver和Content Provider等信息，有了这些信息后，通过ActivityManagerService这个服务，我们就可以在系统中正常地使用这些应用程序了。应用程序管理服务PackageManagerService是系统启动的时候由SystemServer组件启动的，启后它就会执行应用程序安装的过程，因此，本文将从SystemServer启动PackageManagerService服务的过程开始分析系统中的应用程序安装的过程。
+卸载过程 删除安装过程中在上述三个目录下创建的文件及目录。
+参考 Android应用安装过程及原理
+Android应用安装流程(基于Android9.0)
+Android应用程序安装过程解析(源码角度)</description>
+    </item>
+    
+  </channel>
+</rss>

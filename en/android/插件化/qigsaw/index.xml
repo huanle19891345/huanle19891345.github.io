@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>qigsaw on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/qigsaw/</link>
+    <description>Recent content in qigsaw on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/qigsaw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qigsaw</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/qigsaw/qigsaw/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/qigsaw/qigsaw/</guid>
+      <description>爱奇艺重磅开源基于Android-App-Bundle动态化方案Qigsaw
+Split APKs 加载
+应用进程所使用到的 ClassLoader 和 Resources 均在LoadedAPK中创建。
+通过 Android 9.0 LoadedAPK源码片段，我们一起了解下 Split APKs 加载过程。
+ClassLoader 创建 通过createOrUpdateClassLoaderLocked方法名，可以知道该方法是用于创建和更新 ClassLoader。该方法有两个核心步骤。
+1：如果mClassLoader为空，则创建 PathClassLoader 实例。
+2：如果addedPaths不为空，则更新 PathClassLoader 实例。
+该方法指明，应用进程是可以动态加载 Split APKs 代码。
+Resources 创建 通过getResources方法代码片段，可知 Split APKs 的资源路径作为mResources创建参数。
+关于更多 Split APKs 加载原理细节，请阅读相关 Android 源码。
+第三方应用利用 PackageInstaller 安装 split APKs 体验极其不友好，且某些国产手机对 split APKs 功能支持不完善，所以我们最终还是按照一般插件化方式安装加载 split APKs。
+依据上图，如果需要动态加载 split APKs，需要解决代码、资源以及四大组件的加载。
+Split APKs 代码加载 针对 splits 代码加载，Qigsaw 采用单类加载器方式，即 base APK 和 split APKs 采用同一 ClassLoader 加载。</description>
+    </item>
+    
+  </channel>
+</rss>

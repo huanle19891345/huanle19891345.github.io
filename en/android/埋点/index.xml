@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>埋点 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/</link>
+    <description>Recent content in 埋点 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>埋点</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E5%9F%8B%E7%82%B9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E5%9F%8B%E7%82%B9/</guid>
+      <description>功能需求：
+我们希望提供以下功能
+ 和业务无关的代码，我们希望能够以无需手动埋点的方式进行监控，包括页面生命周期、JSON耗时，网络耗时、SQL查询耗时、点击事件、页面进入等 对特定方法进行耗时监控，我们希望用户给方法加上注解就可以，称之为半埋点 编译期，需要能够支持配置，包括对哪些页面、哪些操作进行监控 运行期，能够动态下发配置，包括各类耗时监控的上报开关和阈值等  代码埋点 **代码埋点是指在某个事件发生时调用数据发送接口上报数据。**例如开发人员按照产品/运营的需求，在Web页面/App的源码里面添加行为上报的代码，当用户的行为满足某一个条件时，这些代码就会被执行，向服务器上报行为数据。这种方案是最基础的方案，每次增加或者修改数据上报的条件，都需要开发人员的参与，并且只能在下一个版本上线后才能看到效果。基本上所有的数据平台都提供了这类数据上报的SDK，将行为上报的后台服务器接口封装成了简单的客户端SDK接口。开发者可以通过嵌入这类SDK，在埋点的地方调用少量的代码就可以上报行为数据。
+全埋点 全埋点指的是将Web页面/App内产生的所有的、满足某个条件的行为，全部上报到后台服务器。例如把一个App中所有的按钮点击都进行上报，然后由产品/运营去后台筛选所需要的行为数据。这种方案的优点非常明显，就是可以不用在新增/修改行为上报条件时，再找开发人员去修改埋点的代码。然而它的缺点也和优点一样明显，那就是上报的数据量比代码埋点大很多，里面可能很多是没有价值的数据。此外，这种方案更倾向于独立去看待用户的行为，而没有关注行为的上下文，给数据分析带来了一些难度。很多公司也提供了这类功能的SDK，通过静态或者动态的方式，“Hook”了原有的App代码，从而实现了行为的监测，在数据上报时通常是采用累积多条再上报的方案来合并请求。
+可视化埋点 可视化埋点技术揭秘
+▌什么是可视化埋点 **可视化埋点是指通过可视化工具配置采集节点，在App/Web解析配置查找节点，监听节点产生的事件并上报。**例如产品在Web页面/App的界面上进行圈选，配置需要监测界面上哪一个元素，然后保存这个配置，当App启动时会从后台服务器获得产品/运营预先圈选好的配置，然后根据这份配置查找并监测App界面上的元素，当某一个元素满足条件时，就会上报行为数据到后台服务器。有了暴力的全埋点技术方案，很容易联想到按需埋点，可视化埋点就是一种按需配置埋点的方案。现在也有一些公司提供了这类SDK，圈选监测元素时，有的是提供一个Web管理界面，手机在安装并初始化了SDK之后，可以和管理界面了连接，让用户在Web管理界面上配置需要监测的元素，有的是直接让用户在手机上圈选元素进行埋点。
+可视化埋点，通常是指用户通过设备连接用户行为分析工具的数据接入管理界面，对可交互且交互后有效果的页面元素（如：图片、按钮、链接等），直接在界面上进行操作实现数据埋点，下发采集代码生效回数的埋点方式。这种方式所见即所得，跳过代码部署、测试验证和发版过程，极大提升生产力。
+▌可视化埋点的具体流程 首先手机APP嵌入开启可视化功能的SDK，通过WebSocket的方式和服务器、前端进行相互通信，SDK会定时收到服务器下发的页面请求；然后会上报页面快照和界面因子信息到服务器，服务器收到信息后会根据界面因子信息对页面的每个元素进行分析，根据控件的类型来标记哪些页面元素是可以被埋点的；最后将可埋点信息交给前端渲染，此时，前端Web页面上展示就的就是可以埋点的页面。
+埋点人员在渲染出来的前端Web页面上进行框选，标记事件属性等进行埋点。前端Web页面会将对应的埋点信息传递给服务器保存，SDK则会通过策略定时从服务器获取埋点信息。
+以上就是整个埋点的大体工作流程，具体包含WebSocket通信过程以及具体的埋点过程。下面就针对这两个过程分别进行细致的介绍。
+▌WebSocket通信 由于埋点过程中需要设备APP与前端埋点Web页面进行长时间的连接，并且连接期间双方需要进行互相通信，所以就需要一种高效的支持双向通信的协议来支持这种场景。
+WebSocket是用于在Web浏览器和服务器之间进行任意的双向数据传输的一种技术，它基于TCP协议实现，包含初始的握手过程，以及后续的多次数据帧双向传输过程。其目的是在应用和服务器进行频繁双向通信时，可以避免Server端被打开多个HTTP连接进行工作，节约资源、提高了工作效率和资源利用率。WebSocket被广泛用于Web的实时消息通信系统中。它实现了浏览器与服务器全双工通信，将会替代基于HTTP的Ajax长轮询的拉取消息模式。建立了WebSocket连接后，只要客户端和服务器端任意一端不主动断开连接前，通信行为都是在一个持久连接上发起，后续数据与请求都通过帧序列的形式进行传输。
+在具体的连接过程中，其实前端Web页面和SDK与服务器的连接都是基于WebSocket的，并且这两个连接最终会建立一个一对一的对应关系。易观在埋点的过程中规定，同一个版本的APP只允许一台设备进行连接埋点。流程如下图：
+该图描述的是SDK如何与服务器建立WebSocket连接以及如何与前端Web页面进行关联，具体有以下几个步骤：
+1.埋点人员打开埋点Web页面，页面与服务器建立连接。
+2.打开手机APP(已经提前集成了易观可视化埋点功能的SDK)，手机摇一摇建立WebSocket连接。
+3.服务端通过WebSocket连接请求该手机的设备信息。
+4.手机收到服务器的请求后获取对应的设备信息，然后通过WebSocket上报设备信息到服务器。
+5.服务器收到设备的信息后发送到步骤一的Web页面进行显示。
+6.埋点人员在Web页面选择手机进行关联，同时服务器通过WebSocket发送快照请求到手机。
+以上就是具体的设备的连接过程，到此为止，服务器与手机就已经建立了一个可以相互通信的长连接，并且与Web页面进行了关联，如果此时再有同一版本的APP进行连接，页面会提示用户该版本的APP已经进行连接了。
+接下来就是埋点过程中，服务器会定时向手机下发请求信息来获取最新的页面信息：
+1.服务器定时请求手机的快照信息，手机在收到快照请求后发送快照信息到服务器。
+2.WebSocket服务器收到手机的快照信息后，首先把标志置为false，待解析完快照信息后发送至Web界面进行展示。
+3.发送成功后把标志置为true,定时服务根据标志来决定是否继续请求快照。
+4.心跳包为APP以及WEB端定时发送，来保证WebSocket的长连接畅通。
+以上就是埋点过程中，整个WebSocket的工作流程。这里面有几个需要注意的地方：
+1.SDK通过WebSocket上报的页面快照信息大小是根据当前页面的复杂度来决定的。如果当前页面包含的元素比较多，那么上传的快照信息就会比较大，这样上传至服务器就会比较慢。在网络不好的情况下出错的概率就比较大。易观在这方面做了一些优化，会对上传的信息进行一些优化和压缩处理，从而尽可能兼顾效率的同时保证上报数据的连续性和完整性。
+2.SDK上报快照信息是被动的，是通过服务器来控制的。服务器会定时（比如每隔几秒）请求SDK上报信息。这样就会有一个问题，就是SDK在此期间没有发生页面的切换，页面信息没有变化，这时候收到服务器请求就无需上报快照信息，否则既浪费带宽，体验上也不好。所以易观在这方面也做了优化，服务端和SDK通过某些机制来尽量减少比较大的交互过程，尽量减少不必要的请求。
+▌埋点过程 下面介绍一下具体的埋点过程，先看下图：
+埋点过程是通过Http协议来实现的。服务器提供相关的埋点查询/新增/修改/删除的接口。埋点人员通过浏览器在具体的埋点Web页面对埋点元素进行框选，继而填写对应的事件名称，然后点击相应的新增/修改/删除按钮即可。
+用户编辑的所有的埋点信息最终都会保存到MySQL数据库中。用户最新的快照信息会保存在Redis中一段时间，供用户修改埋点的时候调用。用户编辑完所有的埋点后点击部署按钮，所有的埋点就会实时生效，其他设备上的APP就会获取到部署后的埋点信息。
+至此，可视化埋点的流程和技术细节就介绍完了。
+参考 强大！asm插桩实现android端无埋点性能监控！
+Android埋点技术分析</description>
+    </item>
+    
+    <item>
+      <title>易观方舟</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E6%98%93%E8%A7%82%E6%96%B9%E8%88%9F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E6%98%93%E8%A7%82%E6%96%B9%E8%88%9F/</guid>
+      <description>模块设计 graph TB 采集策略--&amp;gt;|控制触发|采集 采集--&amp;gt;自动采集--&amp;gt;全埋点监听touch--&amp;gt;|onGlobalLayout|hookDecorViewClick--&amp;gt;|mOnTouchListener|HookTouchListener--&amp;gt;trackEvent 采集--&amp;gt;手动采集--&amp;gt;trackEvent 上报策略--&amp;gt;|控制触发|上报 /** com/analysys/process/HeatMap.java * 反射给View注册监听 */ private void hookViewClick(View view) throws Exception {  ans-sdk/analysys_core/src/main/java/com/analysys/AutomaticAcquisition.java
+AutomaticAcquisition onActivityCreated @Override public void onActivityCreated(final Activity activity, Bundle savedInstanceState) { AnalysysConfig config = AgentProcess.getInstance().getConfig(); if (config.isAutoTrackClick()) { AnalysysUtil.onActivityCreated(activity); } if (config.isAutoHeatMap()) { initHeatMap(new WeakReference&amp;lt;&amp;gt;(activity)); } } initHeatMap private void initHeatMap(final WeakReference&amp;lt;Activity&amp;gt; wa) { layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { @Override public void onGlobalLayout() { if (wa == null) { return; } final Activity activity = wa.</description>
+    </item>
+    
+  </channel>
+</rss>

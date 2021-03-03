@@ -26,6 +26,32 @@ Heap::ChangeCollector(CollectorType) void Heap::ChangeCollector(CollectorType co
     </item>
     
     <item>
+      <title>AndFix</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/andfix/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/andfix/</guid>
+      <description>Foo.bar()这种直接调用与反射调用Foo.class.getDeclaredMethod(“bar”).invoke(null) 有什么区别吗？这个问题后续再谈
+private native Object invoke(Object receiver, Object[] args, boolean accessible) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException; 这个invoke是一个native方法，它的native实现在 art/runtime/native/java_lang_reflect_Method.cc 里面，这个jni方法最终调用了 art/runtime/reflection.cc 的 InvokeMethod方法：
+object InvokeMethod(const ScopedObjectAccessAlreadyRunnable&amp;amp; soa, jobject javaMethod, jobject javaReceiver, jobject javaArgs, bool accessible) { // 略...  mirror::ArtMethod* m = mirror::ArtMethod::FromReflectedMethod(soa, javaMethod); mirror::Class* declaring_class = m-&amp;gt;GetDeclaringClass(); } AndFix的实现里面，也正是使用这个 FromReflectedMethod 方法拿到Java层Method对应native层的ArtMethod指针，然后执行替换的
+首先简单介绍下ART上的方法调用原理（本文不讨论解释模式，所有entrypoint均指compiled_code_entry_point)。在ART中，每一个Java方法在虚拟机（注：ART与虚拟机虽有细微差别，但本文不作区分，两者含义相同，下同）内部都由一个ArtMethod对象表示（native层，实际上是一个C++对象），这个native 的 ArtMethod对象包含了此Java方法的所有信息，比如名字，参数类型，方法本身代码的入口地址（entrypoint)等；暂时放下trampoline以及interpreter和jit不谈，一个Java方法的执行非常简单：
+ 想办法拿到这个Java方法所代表的ArtMethod对象 取出其entrypoint，然后跳转到此处开始执行  AndFix就是基于这个原理来做热修复的，Sophix 对这个方案做了一些改进，也即整体替换，不过原理上都一样。二者在替换方法之后把原方法直接丢弃，因此无法实现AOP
+ 《深入探索Android热修复技术原理》&amp;ndash;Sophix团队
+两种情况不适用：
+ 引起原有类中发生结构变化的修改 修复了非静态方法会被反射调用  参考 ART深度探索开篇：从Method Hook谈起
+我为Dexposed续一秒——论ART上运行时 Method AOP实现</description>
+    </item>
+    
+    <item>
+      <title>AndFixSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/andfixsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/andfixsource/</guid>
+      <description>AndFixManager.java fix public synchronized void fix(String patchPath) { fix(new File(patchPath), mContext.getClassLoader(), null); } public synchronized void fix(File file, ClassLoader classLoader, List&amp;lt;String&amp;gt; classes) { final DexFile dexFile = DexFile.loadDex(file.getAbsolutePath(), optfile.getAbsolutePath(), Context.MODE_PRIVATE); ClassLoader patchClassLoader = new ClassLoader(classLoader) { @Override protected Class&amp;lt;?&amp;gt; findClass(String className) throws ClassNotFoundException { Class&amp;lt;?&amp;gt; clazz = dexFile.loadClass(className, this); if (clazz == null &amp;amp;&amp;amp; className.startsWith(&amp;#34;com.alipay.euler.andfix&amp;#34;)) { return Class.forName(className);// annotation’s class 	// not found 	} if (clazz == null) { throw new ClassNotFoundException(className); } return clazz; } }; Enumeration&amp;lt;String&amp;gt; entrys = dexFile.</description>
+    </item>
+    
+    <item>
       <title>Android_N混合编译与对热补丁影响解析</title>
       <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -41,6 +67,92 @@ Heap::ChangeCollector(CollectorType) void Heap::ChangeCollector(CollectorType co
 ##Android N上热补丁的出路 假设base.art文件在补丁前已经存在，这里存在三种情况：
  补丁修改的类都不app image中；这种情况是最理想的，此时补丁机制依然有效； 补丁修改的类部分在app image中；这种情况我们只能更新一部分的类，此时是最危险的。一部分类是新的，一部分类是旧的，app可能会出现地址错乱而出现crash。 补丁修改的类全部在app image中；这种情况只是造成补丁不生效，app并不会因此造成crash。  ###运行时替换PathClassLoader方案 事实上，App image中的class是插入到PathClassloader中的ClassTable中。假设我们完全废弃掉PathClassloader，而采用一个新建Classloader来加载后续的所有类，即可达到将cache无用化的效果。
 实际代码对应AndroidNClassLoader中的findClass和findLibrary方法，通过调用super.findClass和super.findLibrary来避开调用原本应用PathClassLoader的find方法，原本的findClass方法会先查找classTable造成修复的class无法加载到</description>
+    </item>
+    
+    <item>
+      <title>AndroidPlugin</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/androidplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/androidplugin/</guid>
+      <description>调试android plugin源码 在buildSrc下的build.gradle中添加如下依赖，用来查看其源码并debug
+dependencies { implementation(&amp;#34;com.android.tools.build:gradle:3.2.1&amp;#34;) } 源码为于External Libraries中:
+Gradle: gradle-3.2.1 其META-INF中定义了多个android plugin的入口Class如com.android.application的入口com.android.build.gradle.AppPlugin
+Gradle: gradle-api-3.2.1 AppExtension定义在这
+Gradle: builder-3.2.1，d8,r8源码都在此处
+调试gradle源码 而gradle源码(gradle/wrapper/gradle-wrapper.properties中定义的gradle版本)
+distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.4-all.zip 位于External Libraries中:
+Gradle: gradle-api-5.6.4</description>
+    </item>
+    
+    <item>
+      <title>android代码自测</title>
+      <link>https://huanle19891345.github.io/en/android/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/android%E4%BB%A3%E7%A0%81%E8%87%AA%E6%B5%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/android%E4%BB%A3%E7%A0%81%E8%87%AA%E6%B5%8B/</guid>
+      <description>TDD https://www.raywenderlich.com/7109-test-driven-development-tutorial-for-android-getting-started
+Android应用功能测试 https://developer.android.com/training/testing/
+编写自测代码的好处 Testing also provides you with the following advantages:
+  Rapid feedback on failures.&amp;ndash;解放双手，提升测试效率
+  Early failure detection in the development cycle. &amp;ndash;开发提前发现错误
+  Safer code refactoring, letting you optimize code without worrying about regressions. &amp;ndash;保证重构不影响功能，很关键
+  Stable development velocity, helping you minimize technical debt. &amp;ndash;提前发现错误漏洞，提前纠正不合理的设计
+   测试驱动开发概念，迭代开发工作流 When developing a feature iteratively, you start by either writing a new test or by adding cases and assertions to an existing unit test.</description>
+    </item>
+    
+    <item>
+      <title>android打包</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/android%E6%89%93%E5%8C%85/android%E6%89%93%E5%8C%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/android%E6%89%93%E5%8C%85/android%E6%89%93%E5%8C%85/</guid>
+      <description>打包过程 aapt-&amp;gt;aidl -&amp;gt; javac-&amp;gt; dx(dex)-&amp;gt; apkbuilder-&amp;gt; jarsigner-&amp;gt; zipalign
+步骤中提到的工具如下表：
+   名称 功能介绍 在操作系统中的路径     aapt Android资源打包工具 ${ANDROID_SDK_HOME}/platform-tools/appt   aidl Android接口描述语言转化为.java文件的工具 ${ANDROID_SDK_HOME}/platform-tools/aidl   javac Java Compiler ${JDK_HOME}/javac或/usr/bin/javac   dex 转化.class文件为Davik VM能识别的.dex文件 ${ANDROID_SDK_HOME}/platform-tools/dx   apkbuilder 生成apk包 ${ANDROID_SDK_HOME}/tools/opkbuilder   jarsigner .jar文件的签名工具 ${JDK_HOME}/jarsigner或/usr/bin/jarsigner   zipalign 字节码对齐工具 ${ANDROID_SDK_HOME}/tools/zipalign    第一步：打包资源文件，生成R.java文件 编译R.java类需要用到AndroidSDK提供的aapt工具,aapt参数众多,以下是主要参数:
+-d one or more device assets to include, separated by commas</description>
+    </item>
+    
+    <item>
+      <title>AnimatorSource</title>
+      <link>https://huanle19891345.github.io/en/android/ui/%E5%8A%A8%E7%94%BB/animatorsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ui/%E5%8A%A8%E7%94%BB/animatorsource/</guid>
+      <description>Animator类设计 插值器和估值器设计 参考doanimationframe
+classDiagram class TimeInterpolator { +getInterpolation(float input) float } class BaseInterpolator { -int mChangingConfiguration } class LinearInterpolator { +getInterpolation(float input) float } class AccelerateDecelerateInterpolator { +getInterpolation(float input) float } TimeInterpolator&amp;lt;|--Interpolator Interpolator &amp;lt;|-- BaseInterpolator BaseInterpolator &amp;lt;|-- LinearInterpolator BaseInterpolator&amp;lt;|-- AccelerateDecelerateInterpolator class Keyframes{ setEvaluator(TypeEvaluator evaluator) } class FloatKeyframes{ getFloatValue(float fraction) float } class KeyframeSet { TypeEvaluator mEvaluator } class FloatKeyframeSet { getFloatValue(float fraction) float } class TypeEvaluator~T~{ +evaluate(float fraction, T startValue, T endValue) T } Keyframes&amp;lt;|--FloatKeyframes Keyframes&amp;lt;|--KeyframeSet KeyframeSet&amp;lt;|--FloatKeyframeSet KeyframeSet--*TypeEvaluator~T~ AnimatorSet.</description>
+    </item>
+    
+    <item>
+      <title>Anr分析</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/anr/anr%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/anr/anr%E5%88%86%E6%9E%90/</guid>
+      <description>Anr信息解释 &amp;#34;Signal Catcher&amp;#34; daemon prio=5 tid=6 Runnable | group=&amp;#34;system&amp;#34; sCount=0 dsCount=0 flags=0 obj=0x15b802d8 self=0x756d5cc2e000 | sysTid=7781 nice=0 cgrp=default sched=0/0 handle=0x756d5c9ffd50 | state=R schedstat=( 9996973 11775302 9 ) utm=0 stm=0 core=3 HZ=100 | stack=0x756d5c909000-0x756d5c90b000 stackSize=991KB | held mutexes= &amp;#34;mutator lock&amp;#34;(shared held) native: #00 pc 000000000048df0e /apex/com.android.runtime/lib64/libart.so (art::DumpNativeStack(std::__1::basic_ostream&amp;lt;char, std::__1::char_traits&amp;lt;char&amp;gt;&amp;gt;&amp;amp;, int, BacktraceMap*, char const*, art::ArtMethod*, void*, bool)+126) native: #01 pc 00000000005a77b3 /apex/com.android.runtime/lib64/libart.so (art::Thread::DumpStack(std::__1::basic_ostream&amp;lt;char, std::__1::char_traits&amp;lt;char&amp;gt;&amp;gt;&amp;amp;, bool, BacktraceMap*, bool) const+675) native: #02 pc 00000000005c49bb /apex/com.android.runtime/lib64/libart.so (art::DumpCheckpoint::Run(art::Thread*)+859) native: #03 pc 00000000005bcf18 /apex/com.</description>
+    </item>
+    
+    <item>
+      <title>app签名</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%AE%89%E5%85%A8/app%E7%AD%BE%E5%90%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%AE%89%E5%85%A8/app%E7%AD%BE%E5%90%8D/</guid>
+      <description>ECDSA数字签名算法
+Android N Signature Scheme v2 渠道打包
+如果您使用 APK Signature Scheme v2 签署您的应用，并对应用进行了进一步更改，则应用的签名将无效。出于这个原因，请在使用 APK Signature Scheme v2 签署您的应用之前、而非之后使用 zipalign 等工具。 如需了解详细信息，请阅读相关的 Android Studio 文档，这些文档介绍了如何在 Android Studio 中签署应用以及如何使用 Android Plugin for Gradle 为签署应用配置构建文件。
+APK文件格式 apk 本身是个 zip 格式, 格式可以参考http://blog.sina.com.cn/s/blog_4c3591bd0100zzm6.html.
+apksigner https://www.jianshu.com/p/4a07d902066f
+apksigner.bat sign &amp;ndash;ks 签名文件 &amp;ndash;ks-pass 密码 &amp;ndash;ks-key-alias 别名
+Sdk\build-tools\28.0.3&amp;gt;apksigner.bat sign &amp;ndash;help
+Sdk\build-tools\28.0.3\lib\apksigner.jar
+–ks 你的jks路径 //jks签名证书路径
+–ks-key-alias 你的alias //生成jks时指定的alias
+–ks-pass pass:你的密码 //KeyStore密码
+–key-pass pass:你的密码 //签署者的密码，即生成jks时指定alias对应的密码
+–out output.apk //输出路径
+input.apk //被签名的apk
+示例：</description>
     </item>
     
     <item>
@@ -63,6 +175,17 @@ monitor.cc MonitorEnter mirror::Object* Monitor::MonitorEnter(Thread* self, mirr
       <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</guid>
       <description>graph TB Init(&amp;quot;init进程通过解析配置脚本&amp;quot;)--&amp;gt;|fork子进程运行Zygote服务|AppProcess(&amp;quot;/system/bin/app_process: frameworks\base\cmds\app_process\app_main.cc&amp;quot;) frameworks\base\cmds\app_process\app_main.cpp
 int main(int argc, char* const argv[]) { if (zygote) { runtime.start(&amp;#34;com.android.internal.os.ZygoteInit&amp;#34;, args, zygote); } else if (className) { runtime.start(&amp;#34;com.android.internal.os.RuntimeInit&amp;#34;, args, zygote); } else { fprintf(stderr, &amp;#34;Error: no class name or --zygote supplied.\n&amp;#34;); app_usage(); LOG_ALWAYS_FATAL(&amp;#34;app_process: no class name or --zygote supplied.&amp;#34;); return 10; } void AndroidRuntime::start(const char* className, const Vector&amp;lt;String8&amp;gt;&amp;amp; options, bool zygote) { ...... JniInvocation jni_invocation; jni_invocation.Init(NULL); //它将加载ART虚拟机的核心动态库。  JNIEnv* env; startVm(&amp;amp;mJavaVM, &amp;amp;env, zygote) != 0) { .</description>
+    </item>
+    
+    <item>
+      <title>ASM访客者模式</title>
+      <link>https://huanle19891345.github.io/en/android/aop/asm%E8%AE%BF%E5%AE%A2%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/aop/asm%E8%AE%BF%E5%AE%A2%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
+      <description>ASM访客者 is = new FileInputStream(classFile); ClassReader classReader = new ClassReader(is); ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS); ClassVisitor classVisitor = new TraceClassAdapter(Opcodes.ASM5, classWriter); classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES); is.close(); if (output.isDirectory()) { os = new FileOutputStream(changedFileOutput); } else { os = new FileOutputStream(output); } os.write(classWriter.toByteArray()); os.close(); classReader用来读取来自inputstream的class字节码，并在遍历到类和方法时分别调用到visit和visitMethod方法，参数为解析出的信息
+graph LR FileInputStream--&amp;gt;classReader classReader--&amp;gt;ClassVisitor ClassVisitor--&amp;gt;ClassWriter ClassWriter--&amp;gt;FileOutputStream @Override public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) { 在方法开始处插桩AppMethodBeat.i(methodId)方法
+@Override protected void onMethodEnter() { TraceMethod traceMethod = collectedMethodMap.</description>
     </item>
     
     <item>
@@ -188,6 +311,17 @@ The benefit is that the code is mapped as clean memory (compared to the JIT dirt
     </item>
     
     <item>
+      <title>Dex文件格式</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/dex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/dex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/</guid>
+      <description>Dex文件格式 https://source.android.com/devices/tech/dalvik/dex-format
+File layout
+   名称 格式 说明     header header_item 标头   string_ids string_id_item[] 字符串标识符列表。这些是此文件使用的所有字符串的标识符，用于内部命名（例如类型描述符）或用作代码引用的常量对象。此列表必须使用 UTF-16 代码点值按字符串内容进行排序（不采用语言区域敏感方式），且不得包含任何重复条目。   type_ids type_id_item[] 类型标识符列表。这些是此文件引用的所有类型（类、数组或原始类型）的标识符（无论文件中是否已定义）。此列表必须按 string_id 索引进行排序，且不得包含任何重复条目。   proto_ids proto_id_item[] 方法原型标识符列表。这些是此文件引用的所有原型的标识符。此列表必须按返回类型（按 type_id 索引排序）主要顺序进行排序，然后按参数列表（按 type_id 索引排序的各个参数，采用字典排序方法）进行排序。该列表不得包含任何重复条目。   field_ids field_id_item[] 字段标识符列表。这些是此文件引用的所有字段的标识符（无论文件中是否已定义）。此列表必须进行排序，其中定义类型（按 type_id 索引排序）是主要顺序，字段名称（按 string_id 索引排序）是中间顺序，而类型（按 type_id 索引排序）是次要顺序。该列表不得包含任何重复条目。   method_ids method_id_item[] 方法标识符列表。这些是此文件引用的所有方法的标识符（无论文件中是否已定义）。此列表必须进行排序，其中定义类型（按 type_id 索引排序）是主要顺序，方法名称（按 string_id 索引排序）是中间顺序，而方法原型（按 proto_id 索引排序）是次要顺序。该列表不得包含任何重复条目。   class_defs class_def_item[] 类定义列表。这些类必须进行排序，以便所指定类的超类和已实现的接口比引用类更早出现在该列表中。此外，对于在该列表中多次出现的同名类，其定义是无效的。   call_site_ids call_site_id_item[] 调用站点标识符列表。这些是此文件引用的所有调用站点的标识符（无论文件中是否已定义）。此列表必须按 call_site_off 以升序进行排序。   method_handles method_handle_item[] 方法句柄列表。此文件引用的所有方法句柄的列表（无论文件中是否已定义）。此列表未进行排序，而且可能包含将在逻辑上对应于不同方法句柄实例的重复项。   data ubyte[] 数据区，包含上面所列表格的所有支持数据。不同的项有不同的对齐要求；如有必要，则在每个项之前插入填充字节，以实现所需的对齐效果。   link_data ubyte[] 静态链接文件中使用的数据。本文档尚未指定本区段中数据的格式。此区段在未链接文件中为空，而运行时实现可能会在适当的情况下使用这些数据。    Dalvik-Bytecode https://source.</description>
+    </item>
+    
+    <item>
       <title>DumpHprof</title>
       <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -195,6 +329,18 @@ The benefit is that the code is mapped as clean memory (compared to the JIT dirt
       <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/dumphprof/</guid>
       <description>art/runtime/native/dalvik_system_VMDebug.cc
 VMDebug_dumpHprofData /* * static void dumpHprofData(String fileName, FileDescriptor fd) * * Cause &amp;#34;hprof&amp;#34; data to be dumped. We can throw an IOException if an * error occurs during file handling. */ static void VMDebug_dumpHprofData(JNIEnv* env, jclass, jstring javaFilename, jint javaFd) { std::string filename; if (javaFilename != nullptr) { ScopedUtfChars chars(env, javaFilename); if (env-&amp;gt;ExceptionCheck()) { return; } filename = chars.c_str(); } else { filename = &amp;#34;[fd]&amp;#34;; } int fd = javaFd; hprof::DumpHeap(filename.</description>
+    </item>
+    
+    <item>
+      <title>ELF文件结构</title>
+      <link>https://huanle19891345.github.io/en/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</guid>
+      <description>文件结构 &amp;laquo;深入理解Android：Java虚拟机ART&amp;raquo;&amp;ndash;elf章的内容
+https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md
+https://linuxhint.com/understanding_elf_file_format/
+As you can see from the description above, an ELF file consists of two sections – an ELF header, and file data. The file data section can consist of a program header table describing zero or more segments, a section header table describing zero or more sections, that is followed by data referred to by entries from the program header table, and the section header table. ==Each segment contains information that is necessary for run-time execution of the file, while sections contain important data for linking and relocation==.</description>
     </item>
     
     <item>
@@ -268,6 +414,49 @@ RunPhases void SemiSpace::RunPhases() { Thread* self = Thread::Current(); Initia
     </item>
     
     <item>
+      <title>gradleDebug</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/gradledebug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/gradledebug/</guid>
+      <description>Gradle构建源码断点调试配置 (本方式也支持build.gradle中设置的断点调试)
+1 buildSrc配置 项目根目录下添加文件夹buildSrc,内部添加文件build.gradle:
+repositories { mavenLocal() jcenter() google() } dependencies { //配置任意插件地址  implementation &amp;#39;com.android.tools.build:gradle:3.2.1&amp;#39; implementation &amp;#34;com.tencent.matrix:matrix-gradle-plugin:0.6.5.1&amp;#34; } 这样配置之后，在android studio的project视图下就能够在External Liberaries中看到Android Build Tool的源码，之后可以通过搜索需要调试的类和方法进行断点调试，目的是让IDE链接到gradle build tool 或各种自定义插件的源代码。(有时无法debug是因为该次build没有走断点处流程，先clean确保会走流程)
+2 gradlew command gradlew :app:compileDebugAidl -Dorg.gradle.daemon=false -Dorg.gradle.debug=true 也就是在需要debug的gradle语句后添加-Dorg.gradle.daemon=false -Dorg.gradle.debug=true。
+之后可以看到Terminal中执行被阻塞，并输出如下：
+To honour the JVM settings for this build a new JVM will be forked. Please consider using the daemon: https://docs.gradle.org/4.6/userguide/gradle_daemon.html. \&amp;gt; Starting Daemon 这里如果想每次执行命令，即使不设置后面的-Dorg.gradle.daemon=false -Dorg.gradle.debug=true信息，也默认执行断点调试，可以配置环境变量，方法如下:
+在系统环境变量里面添加：
+GRADLE_OPTS 值为:
+-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+3 配置remote debug Android Studio中按照如下步骤操作：</description>
+    </item>
+    
+    <item>
+      <title>GradlePlugin</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/gradleplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/gradleplugin/</guid>
+      <description>gradle plugin的两种方式  脚本插件模式：apply from: &amp;lsquo;xx.gradle&amp;rsquo; 标准插件模式：apply plugin: &amp;lsquo;xxx&amp;rsquo;  脚本插件模式转换为标准插件模式 直接在apply(Project project)回调时将之前的脚本插件代码copy过来即可，这里的上下文会缺少project，因此需要用project.with{}包裹原本的脚本代码
+gradle plugin执行流程 两种gradle plugin的都是相当于动态替换插件代码在apply的地地方，也就apply plugin时直接调用到apply(Project project)
+针对build.gradle从上到下执行的过程就是evaluate过程
+使用标准插件时拓展参数的执行流程
+ 接入的gradle，apply plugin时，在插件内部回调方法apply(Project project)中进行拓展的定义：  mProject.extensions.create(&amp;#39;tinkerPatch&amp;#39;, TinkerPatchExtension) 接入的gradle文件，配置拓展参数信息 插件代码中before/afterEvaluate在闭包中获取用户配置信息  mProject.afterEvaluate { def configuration = mProject.tinkerPatch } /** * 由于一般方式配置拓展的方式，应用端配置的参数只能在afterEvaluate方法中获取配置的参数值，而此时已经无法在进行buildConfig配置tinkerEnable * 因此使用ext的拓展方式替代本拓展方式:*/ ext { tinkerPatchEnable = true appKey = &amp;#39;xxx&amp;#39; } apply plugin: &amp;#39;com.xh.xhcore.plugin&amp;#39; apply plugin方式插件编写流程  项目new android library module 只留下src/main和build.gradle，其他的文件全部删除 注册插件信息，在src/main/resources/META-INF/gradle-plugins/${pluginName}.properties moudule 进行 apply plugin: &amp;ldquo;${pluginName}&amp;rdquo;  插件内部包裹嵌套其他插件 root project的blueScript中配置的classPath的被嵌套的插件仅仅参与本项目的编译，并不会打包在发布的插件里，因此需要在插件build.</description>
+    </item>
+    
+    <item>
+      <title>gradle打包过程</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/gradle%E6%89%93%E5%8C%85%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/gradle%E6%89%93%E5%8C%85%E8%BF%87%E7%A8%8B/</guid>
+      <description>gradle时序 graph LR init --&amp;gt;configure--&amp;gt;executeTasks executeTasks graph LR transform --&amp;gt; packageDebug(packageDebug: 将intermediates中的产物打包成apk) --&amp;gt; assembleDebug 自定义task http://blog.csdn.net/liuhongwei123888/article/details/50542104
+assets的注入 packageApplication之后assemble之前可以进行assets的注入
+removeUnusedResourcesTask.dependsOn variant.packageApplication variant.assemble.dependsOn removeUnusedResourcesTask assets位于build下的如下目录:
+build\intermediates\merged_assets\debug\mergeDebugAssets\out</description>
+    </item>
+    
+    <item>
       <title>Graphics</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -276,6 +465,34 @@ RunPhases void SemiSpace::RunPhases() { Thread* self = Thread::Current(); Initia
       <description>https://source.android.com/devices/graphics/index.html
 Android graphics components No matter what rendering API developers use, everything is rendered onto a &amp;ldquo;surface.&amp;rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. A==ll of the visible surfaces rendered are composited onto the display by SurfaceFlinger.==
 The following diagram shows how the key components work together:</description>
+    </item>
+    
+    <item>
+      <title>Hook</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/hook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/hook/</guid>
+      <description>Hook机制之动态代理 动态代理 传统的静态代理模式需要为每一个需要代理的类写一个代理类，如果需要代理的类有几百个那不是要累死？为了更优雅地实现代理模式，JDK提供了动态代理方式，可以简单理解为JVM可以在运行时帮我们动态生成一系列的代理类，这样我们就不需要手写每一个静态的代理类了。依然以购物为例，用动态代理实现如下：
+public static void main(String[] args) { Shopping women = new ShoppingImpl(); // 正常购物  System.out.println(Arrays.toString(women.doShopping(100))); // 招代理  women = (Shopping) Proxy.newProxyInstance(Shopping.class.getClassLoader(), women.getClass().getInterfaces(), new ShoppingHandler(women)); System.out.println(Arrays.toString(women.doShopping(100))); } 动态代理主要处理InvocationHandler和Proxy类；完整代码可以见github
+代理Hook 我们知道代理有比原始对象更强大的能力，比如飞到国外买东西，比如坑钱坑货；那么很自然，如果我们自己创建代理对象，然后把原始对象替换为我们的代理对象，那么就可以在这个代理对象为所欲为了；修改参数，替换返回值，我们称之为Hook。
+下面我们Hook掉startActivity这个方法，使得每次调用这个方法之前输出一条日志；（当然，这个输入日志有点点弱，只是为了展示原理；只要你想，你想可以替换参数，拦截这个startActivity过程，使得调用它导致启动某个别的Activity，指鹿为马！）
+首先我们得找到被Hook的对象，我称之为Hook点；什么样的对象比较好Hook呢？自然是容易找到的对象。什么样的对象容易找到？静态变量和单例；在一个进程之内，静态变量和单例变量是相对不容易发生变化的，因此非常容易定位，而普通的对象则要么无法标志，要么容易改变。我们根据这个原则找到所谓的Hook点。
+然后我们分析一下startActivity的调用链，找出合适的Hook点。我们知道对于Context.startActivity（Activity.startActivity的调用链与之不同），由于Context的实现实际上是ContextImpl;我们看ConetxtImpl类的startActivity方法：
+@Override public void startActivity(Intent intent, Bundle options) { warnIfCallingFromSystemProcess(); if ((intent.getFlags()&amp;amp;Intent.FLAG_ACTIVITY_NEW_TASK) == 0) { throw new AndroidRuntimeException( &amp;#34;Calling startActivity() from outside of an Activity &amp;#34; \+ &amp;#34; context requires the FLAG_ACTIVITY_NEW_TASK flag.&amp;#34; \+ &amp;#34; Is this really what you want?</description>
+    </item>
+    
+    <item>
+      <title>hotfixResearch</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/hotfixresearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/hotfixresearch/</guid>
+      <description>价值 热修复的作用   可快速修复，避免线上Bug带来的业务损失，把损失降到最低。
+  保证客户端的更新率，无须用户进行版本升级安装
+  良好的用户体验，无感知修复异常。节省用户下载安装成本。
+  分类 各技术能力范围 https://github.com/Tencent/tinker/wiki
+    Tinker QZone AndFix Robust     类替换 yes yes no no   So替换 yes no no no   资源替换 yes yes no no   全平台支持 yes yes yes yes   即时生效 no no yes yes   性能损耗 较小 较大 较小 较小   补丁包大小 较小 较大 一般 一般   开发透明 yes yes no no   复杂度 较低 较低 复杂 复杂   gradle支持 yes no no no   Rom体积 较大 较小 较小 较小   成功率 较高 较高 一般 最高    代码修复 代码插桩和替换/Java Hook Instant Run 原理 在第一次完整编译的时候给所有的类插桩（字节码操作），使它们的方法能被代理</description>
     </item>
     
     <item>
@@ -289,6 +506,16 @@ WARNING: This format is still considered highly experimental, however, all attem
     </item>
     
     <item>
+      <title>IOC</title>
+      <link>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/ioc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/ioc/</guid>
+      <description>graph TB 依赖者--&amp;gt;|依赖|被依赖者 变为
+graph TB 被依赖者--&amp;gt;|提前注入接口实现|接口注入管理模块 依赖者--&amp;gt;|使用已经注入好了的接口实现|接口注入管理模块 </description>
+    </item>
+    
+    <item>
       <title>java_jni方法调用原理</title>
       <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -296,6 +523,65 @@ WARNING: This format is still considered highly experimental, however, all attem
       <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</guid>
       <description>Method Execute Flow graph TB PerformCall(PerformCall)--&amp;gt;|Interpreter|ArtInterpreterToInterpreterBridge(interpreter::ArtInterpreterToInterpreterBridge) ArtInterpreterToInterpreterBridge--&amp;gt;ExecuteSwitchImplCpp(interpreter::ExecuteSwitchImplCpp) ExecuteSwitchImplCpp--&amp;gt;DoInvoke(case Instruction::xxx: interpreter::DoInvoke, find called ArtMethod) DoInvoke--&amp;gt;DoCallCommon(interpreter::DoCallCommon, prepare shadow frame) DoCallCommon--&amp;gt;PerformCall ArtMethod::Invoke--&amp;gt;art_quick_invoke_stub(art_quick_invoke_stub: function in quick_entry_point.S) artQuickToInterpreterBridge(artQuickToInterpreterBridge, prepare shadow frame)--&amp;gt;EnterInterpreterFromEntryPoint(interpreter::EnterInterpreterFromEntryPoint) EnterInterpreterFromEntryPoint--&amp;gt;ExecuteSwitchImplCpp PerformCall--&amp;gt;|CompiledCode|ArtInterpreterToCompiledCodeBridge(interpreter::ArtInterpreterToCompiledCodeBridge) ArtInterpreterToCompiledCodeBridge--&amp;gt;ArtMethod::Invoke compiledCode--&amp;gt;|Interpreter|artQuickToInterpreterBridge art_quick_invoke_stub--&amp;gt;|ART_METHOD_QUICK_CODE_OFFSET_32|IsJniMethod{Is JNI method?} IsJniMethod--&amp;gt;|no|entry_point_from_quick_compiled_code_(entry_point_from_quick_compiled_code_ linkCode时设置) IsJniMethod--&amp;gt;|yes|art_quick_generic_jni_trampoline_汇编 art_quick_generic_jni_trampoline_汇编--&amp;gt;artQuickGenericJniTrampoline artQuickGenericJniTrampoline--&amp;gt;data_(data_RegisterNative时设置) data_--&amp;gt;IsJniDlsymLookupStub{IsJniDlsymLookupStub?} IsJniDlsymLookupStub--&amp;gt;|no|nativeCode IsJniDlsymLookupStub--&amp;gt;|yes|artFindNativeMethod entry_point_from_quick_compiled_code_--&amp;gt;IsCompiled{Is Compiled?} IsCompiled--&amp;gt;|yes|compiledCode IsCompiled--&amp;gt;|no|art_quick_to_interpreter_bridge汇编 art_quick_to_interpreter_bridge汇编--&amp;gt;artQuickToInterpreterBridge Trampoline code 所有Trampoline code都是一段汇编代码编写的函数，这段汇编代码函数内部一般会跳转到一个由更高级的编程语言（C++）实现的函数。
 class Thread{ ...... struct PACKED(sizeof(void*)) tls_ptr_sized_values { ...... //针对jni方法的Trampoline code，只包含一个pDlsymLookup函数指针,对应的Trampoline code在jni_entrypoints_x86.S里实现。  //结构体，和JNI调用有关。里边只有一个函数指针成员变量，名为pDlsymLookup。当JNI函数未注册时，这个成员变量将被调用以找到目标JNI函数  JniEntryPoints jni_entrypoints; //针对非jni方法的Trampoline code，一共包含132个函数指针,对应的Trampoline code在quick_entrypoints_x86.S里实现。  //结构体，其成员变量全是个函数指针类型，其定义可参考quick_entrypoints_list.</description>
+    </item>
+    
+    <item>
+      <title>JavaCrashSystemHandle</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/javacrash/javacrashsystemhandle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/javacrash/javacrashsystemhandle/</guid>
+      <description>原理流程 当Binder服务端ApplicationThread所在进程(即Crash进程)挂掉后，则Binder客户端能收到相应的死亡通知，从而进入binderDied流程。
+AMP.handleApplicationCrash AMS.handleApplicationCrash AMS.findAppProcess AMS.handleApplicationCrashInner AMS.addErrorToDropBox AMS.crashApplication AMS.makeAppCrashingLocked AMS.startAppProblemLocked ProcessRecord.stopFreezingAllLocked ActivityRecord.stopFreezingScreenLocked WMS.stopFreezingScreenLocked WMS.stopFreezingDisplayLocked AMS.handleAppCrashLocked mUiHandler.sendMessage(SHOW_ERROR_MSG) Process.killProcess(Process.myPid()); System.exit(10); 其中addErrorToDropBox是将crash的信息输出到目录/data/system/dropbox。例如system_server的dropbox文件名为system_server_crash@xxx.txt (xxx代表的是时间戳)
+AMS.handleAppCrashLocked ASS.handleAppCrashLocked AS.handleAppCrashLocked AS.finishCurrentActivityLocked AMS.removeProcessLocked ProcessRecord.kill AMS.handleAppDiedLocked ASS.handleAppDiedLocked AMS.cleanUpApplicationRecordLocked AS.handleAppDiedLocked AS.removeHistoryRecordsForAppLocked ASS.resumeTopActivitiesLocked AS.resumeTopActivityLocked AS.resumeTopActivityInnerLocked ASS.finishTopRunningActivityLocked AS.finishTopRunningActivityLocked AS.finishActivityLocked 参考 http://gityuan.com/2016/06/24/app-crash/
+吹爆系列：深入探索android稳定性优化</description>
+    </item>
+    
+    <item>
+      <title>java并发</title>
+      <link>https://huanle19891345.github.io/en/java/java%E5%B9%B6%E5%8F%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/java/java%E5%B9%B6%E5%8F%91/</guid>
+      <description>Java主流锁 悲观锁和乐观锁 乐观锁与悲观锁是一种广义上的概念，体现了看待线程同步的不同角度。在Java和数据库中都有此概念对应的实际应用。
+先说概念。对于同一个数据的并发操作，悲观锁认为自己在使用数据的时候一定有别的线程来修改数据，因此在获取数据的时候会先加锁，确保数据不会被别的线程修改。Java中，synchronized关键字和Lock的实现类都是悲观锁。
+而乐观锁认为自己在使用数据时不会有别的线程修改数据，所以不会添加锁，只是在更新数据的时候去判断之前有没有别的线程更新了这个数据。如果这个数据没有被更新，当前线程将自己修改的数据成功写入。如果数据已经被其他线程更新，则根据不同的实现方式执行不同的操作（例如报错或者自动重试）。
+乐观锁在Java中是通过使用无锁编程来实现，最常采用的是CAS算法，Java原子类中的递增操作就通过CAS自旋实现的。
+根据从上面的概念描述我们可以发现：
+ 悲观锁适合写操作多的场景，先加锁可以保证写操作时数据正确。 乐观锁适合读操作多的场景，不加锁的特点能够使其读操作的性能大幅提升。  光说概念有些抽象，我们来看下乐观锁和悲观锁的调用方式示例：
+通过调用方式示例，我们可以发现悲观锁基本都是在显式的锁定之后再操作同步资源，而乐观锁则直接去操作同步资源。那么，为何乐观锁能够做到不锁定同步资源也可以正确的实现线程同步呢？我们通过介绍乐观锁的主要实现方式 “CAS” 的技术原理来为大家解惑。
+CAS全称 Compare And Swap（比较与交换），是一种无锁算法。在不使用锁（没有线程被阻塞）的情况下实现多线程之间的变量同步。java.util.concurrent包中的原子类就是通过CAS来实现了乐观锁。
+CAS算法涉及到三个操作数：
+ 需要读写的内存值 V。 进行比较的值 A。 要写入的新值 B。  当且仅当 V 的值等于 A 时，CAS通过原子方式用新值B来更新V的值（“比较+更新”整体是一个原子操作），否则不会执行任何操作。一般情况下，“更新”是一个不断重试的操作。
+之前提到java.util.concurrent包中的原子类，就是通过CAS来实现了乐观锁，那么我们进入原子类AtomicInteger的源码，看一下AtomicInteger的定义：
+根据定义我们可以看出各属性的作用：
+ unsafe： 获取并操作内存的数据。 valueOffset： 存储value在AtomicInteger中的偏移量。 value： 存储AtomicInteger的int值，该属性需要借助volatile关键字保证其在线程间是可见的。  接下来，我们查看AtomicInteger的自增函数incrementAndGet()的源码时，发现自增函数底层调用的是unsafe.getAndAddInt()。但是由于JDK本身只有Unsafe.class，只通过class文件中的参数名，并不能很好的了解方法的作用，所以我们通过OpenJDK 8 来查看Unsafe的源码：
+根据OpenJDK 8的源码我们可以看出，getAndAddInt()循环获取给定对象o中的偏移量处的值v，然后判断内存值是否等于v。如果相等则将内存值设置为 v + delta，否则返回false，继续循环进行重试，直到设置成功才能退出循环，并且将旧值返回。整个“比较+更新”操作封装在compareAndSwapInt()中，在JNI里是借助于一个CPU指令完成的，属于原子操作，可以保证多个线程都能够看到同一个变量的修改值。
+后续JDK通过CPU的cmpxchg指令，去比较寄存器中的 A 和 内存中的值 V。如果相等，就把要写入的新值 B 存入内存中。如果不相等，就将内存值 V 赋值给寄存器中的值 A。然后通过Java代码中的while循环再次调用cmpxchg指令进行重试，直到设置成功为止。
+CAS虽然很高效，但是它也存在三大问题，这里也简单说一下：
+ ABA问题。CAS需要在操作值的时候检查内存值是否发生变化，没有发生变化才会更新内存值。但是如果内存值原来是A，后来变成了B，然后又变成了A，那么CAS进行检查时会发现值没有发生变化，但是实际上是有变化的。ABA问题的解决思路就是在变量前面添加版本号，每次变量更新的时候都把版本号加一，这样变化过程就从“A－B－A”变成了“1A－2B－3A”。  JDK从1.5开始提供了AtomicStampedReference类来解决ABA问题，具体操作封装在compareAndSet()中。compareAndSet()首先检查当前引用和当前标志与预期引用和预期标志是否相等，如果都相等，则以原子方式将引用值和标志的值设置为给定的更新值。
+ 循环时间长开销大。CAS操作如果长时间不成功，会导致其一直自旋，给CPU带来非常大的开销。
+  只能保证一个共享变量的原子操作。对一个共享变量执行操作时，CAS能够保证原子操作，但是对多个共享变量操作时，CAS是无法保证操作的原子性的。</description>
+    </item>
+    
+    <item>
+      <title>JDK动态代理</title>
+      <link>https://huanle19891345.github.io/en/android/aop/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/aop/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>Proxy /** parameter types of a proxy class constructor */ private static final Class&amp;lt;?&amp;gt;[] constructorParams = { InvocationHandler.class }; /** \* a cache of proxy classes */ private static final WeakCache&amp;lt;ClassLoader, Class&amp;lt;?&amp;gt;[], Class&amp;lt;?&amp;gt;&amp;gt; proxyClassCache = new WeakCache&amp;lt;&amp;gt;(new KeyFactory(), new ProxyClassFactory()); newProxyInstance public static Object newProxyInstance(ClassLoader loader, Class&amp;lt;?&amp;gt;[] interfaces, InvocationHandler h) throws IllegalArgumentException { final Class&amp;lt;?&amp;gt;[] intfs = interfaces.clone(); /* \* Look up or generate the designated proxy class. */ Class&amp;lt;?&amp;gt; cl = getProxyClass0(loader, intfs);//main  final Constructor&amp;lt;?</description>
+    </item>
+    
+    <item>
+      <title>JNI</title>
+      <link>https://huanle19891345.github.io/en/android/ndk/jni/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ndk/jni/</guid>
+      <description>https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html
+https://developer.android.com/training/articles/perf-jni
+JavaVM and JNIEnv JNI defines two key data structures, &amp;ldquo;JavaVM&amp;rdquo; and &amp;ldquo;JNIEnv&amp;rdquo;. Both of these are essentially pointers to pointers to function tables. (In the C++ version, they&amp;rsquo;re classes with a pointer to a function table and a member function for each JNI function that indirects through the table.) The JavaVM provides the &amp;ldquo;invocation interface&amp;rdquo; functions, which allow you to create and destroy a JavaVM. In theory you can have multiple JavaVMs per process, but Android only allows one.</description>
     </item>
     
     <item>
@@ -343,6 +629,18 @@ JIT编译器是JRE的一部分。原本的Java程序都是要经过解释执行�
     </item>
     
     <item>
+      <title>KaptGenerateViewModel</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/kaptgenerateviewmodel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/kaptgenerateviewmodel/</guid>
+      <description>Kapt编译时生成Viewmodel Android架构组件拥有生命周期的自动管理和数据解耦等优秀的功能，能够将传统MVP架构进行替换。在使用架构组件的过程中，我采用的方式是首先完成基础类
+T 表示对应的retrofit service类型
+abstract class BaseViewModel&amp;lt;T&amp;gt;(application: Application) : AndroidViewModel(application) { 之后针对Retrofit中的不同Service interface，继承并实现具体的viewmodel类，并针对每个service接口，需要编写一个liveData字段和对应的get或post方法提供给app层调用，同时对应的方法可能会存在三种类型:
+1:直接调用service进行网络获取 package com.xxx.xxx.architecture.xxx import android.app.Application import android.arch.lifecycle.MediatorLiveData import com.baseproject.architecture.BaseViewModel import com.xxx.xxx.appbase.BaseAppLiveDataObserver /** * This file is generated by kapt, please do not edit this file */ open class BaseAnchorServiceViewModel(application: Application) : BaseViewModel&amp;lt;AnchorService&amp;gt;(application) { val getHotAnchorListLiveData: MediatorLiveData&amp;lt;kotlin.collections.List&amp;lt;SearchHotAnchorModel&amp;gt;&amp;gt; by lazy { MediatorLiveData&amp;lt;kotlin.collections.List&amp;lt;SearchHotAnchorModel&amp;gt;&amp;gt;() } fun getHotAnchorList() { mService.getHotAnchorList().subscribe(BaseAppLiveDataObserver(getHotAnchorListLiveData)) } } 2：使用本地缓存展示之后进行网络获取更新 val getUserAssetsLiveData: MediatorLiveData&amp;lt;UserAssetsModel&amp;gt; by lazy { MediatorLiveData&amp;lt;UserAssetsModel&amp;gt;() } fun getUserAssets() { object : BaseAppNetworkBoundResource&amp;lt;UserAssetsModel&amp;gt;(getUserAssetsLiveData) { override fun doApiCall(): Observable&amp;lt;UserAssetsModel&amp;gt; { return mService.</description>
+    </item>
+    
+    <item>
       <title>kernel</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -357,11 +655,20 @@ cd goldfish git branch -r git checkout origin/android-goldfish-4.4-dev -b androi
     </item>
     
     <item>
-      <title>kotlin协程</title>
-      <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</link>
+      <title>KOOMSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/koomsource/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8B/</guid>
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/koomsource/</guid>
+      <description>Module Dependencies graph TB demo--&amp;gt;java-oom java-oom--&amp;gt;koom-kwailinker java-oom--&amp;gt;koom-xhook java-oom--&amp;gt;koom-shark LeakDetector Hierarchy graph TB LeakDetector--&amp;gt;ActivityLeakDetector LeakDetector--&amp;gt;NativeAllocationRegistryLeakDetector LeakDetector--&amp;gt;WindowLeakDetector LeakDetector--&amp;gt;BitmapLeakDetector LeakDetector--&amp;gt;FragmentLeakDetector HprofStrip Detail KOOM.init /** * KOOM entry point, make sure be called in the main thread! * * @param application application needed */ public static void init(Application application) { if (koom == null) { koom = new KOOM(application); } koom.start(); } private KOOM(Application application) { internal = new KOOMInternal(application); } public KOOMInternal(Application application) { KUtils.</description>
+    </item>
+    
+    <item>
+      <title>kotlin协程</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B/</guid>
       <description>协程是通过编译技术实现(不需要虚拟机VM/操作系统OS的支持),通过插入相关代码来生效！ 与之相反,线程/进程是需要虚拟机VM/操作系统OS的支持,通过调度CPU执行生效!
 优秀文章 Kotlin Coroutines(协程) 完全解析（一），协程简介
 Kotlin Coroutines(协程) 完全解析（二），深入理解协程的挂起、恢复与调度
@@ -369,7 +676,6 @@ Kotlin Coroutines(协程) 完全解析（三），封装异步回调、协程间
 Kotlin Coroutines(协程) 完全解析（四），协程的异常处理
 Kotlin Coroutines(协程) 完全解析（五），协程的并发
 谷歌开发者 在 android 开发中使用协程 | 背景介绍
-在 View 上使用挂起函数
 协程中的取消和异常 | 异常处理详解
 官网doc 英文:
 https://kotlinlang.org/docs/reference/coroutines/basics.html
@@ -382,17 +688,28 @@ https://www.kotlincn.net/docs/reference/coroutines/coroutines-guide.html
 协程相当于提前切换到子线程，然后同步走逻辑，进而改变每一层的异步调用为同步，
 协程将同步方法和线程切换两者相隔离，所有方法都是同步方法，单独控制执行线程，避免异步方法去接收回调参数
 区别：
- 回调调用时机: 回调接口可以有多个method，并在不同时机调用(对应的也可以在return对象中区分处理) 回调方法参数: 可以封装成method的return参数， 调用方上下文: 需要利用调用方的上下文(提供变量等)  异步回调 fun requestTokenAsync(cb: (Token) -&amp;gt; Unit) { ... } fun createPostAsync(token: Token, item: Item, cb: (Post) -&amp;gt; Unit) { .</description>
+ 回调调用时机: 回调接口可以有多个method，并在不同时机调用(对应的也可以在return对象中区分处理) 回调方法参数: 可以封装成method的return参数， 调用方上下文: 需要利用调用方的上下文(提供变量等)  异步回调 fun requestTokenAsync(cb: (Token) -&amp;gt; Unit) { ... } fun createPostAsync(token: Token, item: Item, cb: (Post) -&amp;gt; Unit) { ... } fun processPost(post: Post) { .</description>
     </item>
     
     <item>
       <title>kotlin协程Source</title>
-      <link>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</link>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8Bsource/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/kotlin/%E5%8D%8F%E7%A8%8B/kotlin%E5%8D%8F%E7%A8%8Bsource/</guid>
-      <description>总结 类设计 协程的三层包装  常用的launch和async返回的Job、Deferred，里面封装了协程状态，提供了取消协程接口，而它们的实例都是继承自AbstractCoroutine，它是协程的第一层包装。 第二层包装是编译器生成的SuspendLambda的子类，封装了协程的真正运算逻辑，继承自BaseContinuationImpl，其中completion属性就是协程的第一层包装。 第三层包装是前面分析协程的线程调度时提到的DispatchedContinuation，封装了线程调度逻辑，包含了协程的第二层包装。三层包装都实现了Continuation接口，通过代理模式将协程的各层包装组合在一起，每层负责不同的功能。  resumeWith CoroutineContext graph LR coroutineContext--&amp;gt;Element1[&amp;quot;Element1: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;Element2[&amp;quot;Element2: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;ContinuationInterceptor[&amp;quot;ContinuationInterceptor: DefaultDispatcher.&amp;quot;] coroutineContext--&amp;gt;ElementXxx[&amp;quot;ElementXxx: a singleton context by itself.&amp;quot;] Coroutine构造和启动 CoroutineScope.launch public val coroutineContext: CoroutineContext launch本质上也是将用户配置的协程闭包作为一个suspend函数(()-&amp;gt;Unit),并将该函数在指定的dispatcher上执行，和withContext类似
-public fun CoroutineScope.launch( context: CoroutineContext = EmptyCoroutineContext, start: CoroutineStart = CoroutineStart.DEFAULT, block: suspend CoroutineScope.() -&amp;gt; Unit ): Job { val newContext = newCoroutineContext(context) val coroutine = if (start.isLazy) LazyStandaloneCoroutine(newContext, block) else StandaloneCoroutine(newContext, active = true) coroutine.</description>
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8Bsource/</guid>
+      <description>总结 类设计 协程的三层包装  常用的launch和async返回的Job、Deferred，里面封装了协程状态，提供了取消协程接口，而它们的实例都是继承自AbstractCoroutine，它是协程的第一层包装。 第二层包装是编译器生成的SuspendLambda的子类，封装了协程的真正运算逻辑，继承自BaseContinuationImpl，其中completion属性就是协程的第一层包装。 第三层包装是前面分析协程的线程调度时提到的DispatchedContinuation，封装了线程调度逻辑，包含了协程的第二层包装。三层包装都实现了Continuation接口，通过代理模式将协程的各层包装组合在一起，每层负责不同的功能。  resumeWith CoroutineContext graph LR coroutineContext--&amp;gt;Element1[&amp;quot;Element1: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;Element2[&amp;quot;Element2: a singleton context by itself.&amp;quot;] coroutineContext--&amp;gt;ContinuationInterceptor[&amp;quot;ContinuationInterceptor: DefaultDispatcher.&amp;quot;] coroutineContext--&amp;gt;ElementXxx[&amp;quot;ElementXxx: a singleton context by itself.&amp;quot;] 挂起和恢复设计 sequenceDiagram CurrentThreadType-&amp;gt;&amp;gt;DispatchedThreadType: dispatch activate DispatchedThreadType CurrentThreadType-&amp;gt;&amp;gt;CurrentThreadType: suspend coroutine and release thread DispatchedThreadType--&amp;gt;&amp;gt;CurrentThreadType: resume deactivate DispatchedThreadType graph LR subgraph 基础层 suspendCoroutine--&amp;gt;suspendCoroutineUninterceptedOrReturn suspendCancellableCoroutine--&amp;gt;suspendCoroutineUninterceptedOrReturn end subgraph 上层功能 delay--&amp;gt;suspendCancellableCoroutine withContext--&amp;gt;suspendCoroutineUninterceptedOrReturn awaitSuspend--&amp;gt;suspendCoroutineUninterceptedOrReturn yield--&amp;gt;suspendCoroutineUninterceptedOrReturn end Coroutine构造和启动 CoroutineScope.launch public val coroutineContext: CoroutineContext launch本质上也是将用户配置的协程闭包作为一个suspend函数(()-&amp;gt;Unit),并将该函数在指定的dispatcher上执行，和withContext类似
+public fun CoroutineScope.</description>
+    </item>
+    
+    <item>
+      <title>kotlin协程取消</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B%E5%8F%96%E6%B6%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/kotlin%E5%8D%8F%E7%A8%8B%E5%8F%96%E6%B6%88/</guid>
+      <description>协程的取消 graph subgraph 协程 subgraph 挂起函数1 开始挂起函数1--&amp;gt;|执行|函数1执行中--&amp;gt;|3:需要函数1内协作判断isAlive,退出计算|函数1执行完成 end subgraph 挂起函数2 开始挂起函数2--&amp;gt;|执行|函数2执行中--&amp;gt;函数2执行完成 end 函数1执行完成--&amp;gt;resume--&amp;gt;开始挂起函数2 cancel--&amp;gt;|1:cpu密集计算类型:在该协程线程中修改协程job状态为canceling|函数1执行中 resume--&amp;gt;|2:DispatchedTask.run判断job状态|异常resume 开始挂起函数1--&amp;gt;|IO类型:cont.invokeOnCancellation|设置cancel时的处理方法 end runtask时对CancellationException的判断
+协程的取消只是在协程的第一层包装中 AbstractCoroutine 中修改协程的状态，并没有影响到第二层包装中 BaseContinuationImpl 中协程的实际运算逻辑。所以协程的取消只是状态的变化，并不会取消协程的实际运算逻辑，看下面的代码示例：
+fun main(args: Array&amp;lt;String&amp;gt;) = runBlocking { val job1 = launch(Dispatchers.Default) { repeat(5) { println(&amp;#34;job1 sleep ${it + 1}times&amp;#34;) delay(500) } } delay(700) job1.cancel() val job2 = launch(Dispatchers.Default) { var nextPrintTime = 0L var i = 1 while (i &amp;lt;= 3) { val currentTime = System.currentTimeMillis() if (currentTime &amp;gt;= nextPrintTime) { println(&amp;#34;job2 sleep ${i++}.</description>
     </item>
     
     <item>
@@ -406,11 +723,21 @@ public fun CoroutineScope.launch( context: CoroutineContext = EmptyCoroutineCont
     </item>
     
     <item>
-      <title>LeakCanary2Source</title>
-      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</link>
+      <title>LeakCanary2</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2source/</guid>
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2/</guid>
+      <description>Procedure https://square.github.io/leakcanary/fundamentals-how-leakcanary-works/
+graph TB Procedure--&amp;gt;|useReferenceQueue|Detect(Detecting retained objects.) Procedure--&amp;gt;|Debug.dump|Dump(Dumping the heap.) Procedure--&amp;gt;|Shark|Analyze(Analyzing the heap.) Procedure--&amp;gt;category(Categorizing leaks.) Module依赖 graph TB leakcanary-android-sample--&amp;gt;leakcanary-android leakcanary-android--&amp;gt;leakcanary-android-core </description>
+    </item>
+    
+    <item>
+      <title>LeakCanary2Analyze</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2analyze/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/leakcanary2analyze/</guid>
       <description>Procedure graph TB HeapAnalyzer.analyze--&amp;gt;Hprof.open:HprofFile HeapAnalyzer.analyze--&amp;gt;HprofHeapGraph.indexHprof HeapAnalyzer.analyze--&amp;gt;FindLeakInput.analyzeGraph HprofHeapGraph.indexHprof--&amp;gt;reader.readHprofRecords--&amp;gt;|callback HprofRecord|indexBuilderListener.onHprofRecord--&amp;gt;UnsortedByteEntries(&amp;quot;UnsortedByteEntries,ScatterMap&amp;quot;) HprofHeapGraph.indexHprof--&amp;gt;indexBuilderListener.buildIndex--&amp;gt;|Sort entries by keys|SortedBytesMap--&amp;gt;HprofInMemoryIndex--&amp;gt;HprofHeapGraph FindLeakInput.analyzeGraph--&amp;gt;FindLeakInput.findLeaks FindLeakInput.findLeaks--&amp;gt;State.findPathsFromGcRoots:BFS--&amp;gt;|start by enqueueGcRoots|findObjectById(&amp;quot;graph.findObjectById&amp;quot;)--&amp;gt;readFieldsAndEnqueue Data Flow graph TB HprofFile--&amp;gt;HprofRecord HprofRecord--&amp;gt;UnsortedByteEntries(&amp;quot;UnsortedByteEntries(class,instance,objectArray,primitiveArray)&amp;quot;) UnsortedByteEntries--&amp;gt;|Sort entries by keys|SortedBytesMap(SortedBytesMap: get perform binarySearch) SortedBytesMap--&amp;gt;HprofInMemoryIndex SortedBytesMap--&amp;gt;|get return|ByteSubArray ByteSubArray--&amp;gt;|indexedObjectOrNull|IndexedObject IndexedObject--&amp;gt;|wrapIndexedObject|HeapObject HprofRecord--&amp;gt;ScatterMap(&amp;quot;ScatterMap(hprofStringCache, classNames)&amp;quot;) ScatterMap--&amp;gt;HprofInMemoryIndex HprofInMemoryIndex--&amp;gt;HprofHeapGraph LruCache:objectCache--&amp;gt;|cached when readObjectRecord|HprofHeapGraph //ScatterMap contains: classNames and hprofStringCache  // LRU cache size of 3000 is a sweet spot to balance hits vs memory usage. // This is based on running InstrumentationLeakDetectorTest a bunch of time on a // Pixel 2 XL API 28.</description>
     </item>
     
@@ -425,6 +752,27 @@ public fun CoroutineScope.launch( context: CoroutineContext = EmptyCoroutineCont
     </item>
     
     <item>
+      <title>LifecycleCoroutine</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/lifecycle/lifecyclecoroutine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/lifecycle/lifecyclecoroutine/</guid>
+      <description>Lifecycle协程 LifecycleCoroutineScopeImpl /** * [CoroutineScope] tied to this [LifecycleOwner]&amp;#39;s [Lifecycle]. * * This scope will be cancelled when the [Lifecycle] is destroyed. * * This scope is bound to * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate]. */ val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope get() = lifecycle.coroutineScope val Lifecycle.coroutineScope: LifecycleCoroutineScope get() { while (true) { val existing = mInternalScopeRef.get() as LifecycleCoroutineScopeImpl? if (existing != null) { return existing } val newScope = LifecycleCoroutineScopeImpl( this, SupervisorJob() + Dispatchers.Main.immediate ) if (mInternalScopeRef.</description>
+    </item>
+    
+    <item>
+      <title>linuxApi</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/linuxapi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/linuxapi/</guid>
+      <description>dlsym https://linux.die.net/man/3/dlsym
+void *dlsym(void *handle, const char *symbol); The function dlsym() takes a &amp;ldquo;handle&amp;rdquo; of a dynamic library returned by dlopen() and the null-terminated symbol name, returning the address where that symbol is loaded into memory.
+pthread_create http://man7.org/linux/man-pages/man3/pthread_create.3.html
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg);  The pthread_create() function starts a new thread in the calling process. The new thread starts execution by invoking start_routine(); arg is passed as the sole argument of start_routine().</description>
+    </item>
+    
+    <item>
       <title>LiveData</title>
       <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -436,13 +784,12 @@ observe private SafeIterableMap&amp;lt;Observer&amp;lt;? super T&amp;gt;, Observ
     </item>
     
     <item>
-      <title>LiveData封装</title>
-      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</link>
+      <title>LiveDataCoroutine</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedatacoroutine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedata%E5%B0%81%E8%A3%85/</guid>
-      <description>https://developer.android.com/kotlin/ktx#livedata
-LiveData协程 @UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit internal class CoroutineLiveData&amp;lt;T&amp;gt;( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, block: Block&amp;lt;T&amp;gt; ) : MediatorLiveData&amp;lt;T&amp;gt;() { private var blockRunner: BlockRunner&amp;lt;T&amp;gt;? private var emittedSource: EmittedSource? = null init { // use an intermediate supervisor job so that if we cancel individual block runs due to losing  // observers, it won&amp;#39;t cancel the given context as we only cancel w/ the intention of possibly  // relaunching using the same parent context.</description>
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/livedatacoroutine/</guid>
+      <description>@UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit internal class CoroutineLiveData&amp;lt;T&amp;gt;( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, block: Block&amp;lt;T&amp;gt; ) : MediatorLiveData&amp;lt;T&amp;gt;() { private var blockRunner: BlockRunner&amp;lt;T&amp;gt;? init { // use an intermediate supervisor job so that if we cancel individual block runs due to losing  // observers, it won&amp;#39;t cancel the given context as we only cancel w/ the intention of possibly  // relaunching using the same parent context.</description>
     </item>
     
     <item>
@@ -456,12 +803,83 @@ Looper addFd int Looper::addFd(int fd, int ident, int events, Looper_callbackFun
     </item>
     
     <item>
+      <title>manageMemory</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/managememory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/managememory/</guid>
+      <description>Overview of memory management Share memory In order to fit everything it needs in RAM, Android tries to share RAM pages across processes. It can do so in the following ways:
+ Each app process is forked from an existing process called Zygote. The Zygote process starts when the system boots and loads common framework code and resources (such as activity themes). To start a new app process, the system forks the Zygote process then loads and runs the app&amp;rsquo;s code in the new process.</description>
+    </item>
+    
+    <item>
+      <title>MatrixGradlePlugin</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixgradleplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixgradleplugin/</guid>
+      <description>MatrixPlugin.apply @Override void apply(Project project) { project.extensions.create(&amp;#34;matrix&amp;#34;, MatrixExtension) project.matrix.extensions.create(&amp;#34;trace&amp;#34;, MatrixTraceExtension) project.matrix.extensions.create(&amp;#34;removeUnusedResources&amp;#34;, MatrixDelUnusedResConfiguration) if (!project.plugins.hasPlugin(&amp;#39;com.android.application&amp;#39;)) { throw new GradleException(&amp;#39;Matrix Plugin, Android Application plugin required&amp;#39;) } project.afterEvaluate { def android = project.extensions.android def configuration = project.matrix android.applicationVariants.all { variant -&amp;gt; if (configuration.trace.enable) { com.tencent.matrix.trace.transform.MatrixTraceTransform.inject(project, configuration.trace, variant.getVariantData().getScope())//main  } if (configuration.removeUnusedResources.enable) { if (Util.isNullOrNil(configuration.removeUnusedResources.variant) || variant.name.equalsIgnoreCase(configuration.removeUnusedResources.variant)) { Log.i(TAG, &amp;#34;removeUnusedResources %s&amp;#34;, configuration.removeUnusedResources) RemoveUnusedResourcesTask removeUnusedResourcesTask = project.tasks.create(&amp;#34;remove&amp;#34; + variant.name.capitalize() + &amp;#34;UnusedResources&amp;#34;, RemoveUnusedResourcesTask) removeUnusedResourcesTask.inputs.property(RemoveUnusedResourcesTask.BUILD_VARIANT, variant.name) project.tasks.add(removeUnusedResourcesTask) removeUnusedResourcesTask.</description>
+    </item>
+    
+    <item>
+      <title>MatrixResourcePlugin</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/resource/matrixresourceplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/resource/matrixresourceplugin/</guid>
+      <description>ResourcePlugin.init private final ResourceConfig mConfig; private ActivityRefWatcher mWatcher = null; @Override public void init(Application app, PluginListener listener) { super.init(app, listener); if (Build.VERSION.SDK_INT &amp;lt; Build.VERSION_CODES.ICE_CREAM_SANDWICH) { MatrixLog.e(TAG, &amp;#34;API is low Build.VERSION_CODES.ICE_CREAM_SANDWICH(14), ResourcePlugin is not supported&amp;#34;); unSupportPlugin(); return; } mWatcher = new ActivityRefWatcher(app, this); } ResourcePlugin.start @Override public void start() { super.start(); mWatcher.start(); } @Override public void stop() { super.stop(); mWatcher.stop(); } @Override public void destroy() { super.destroy(); mWatcher.destroy(); } ActivityRefWatcher public ActivityRefWatcher(Application app, final ResourcePlugin resourcePlugin) { this(app, resourcePlugin, new ComponentFactory()); } private ActivityRefWatcher(Application app, ResourcePlugin resourcePlugin, ComponentFactory componentFactory) { super(app, FILE_CONFIG_EXPIRED_TIME, resourcePlugin.</description>
+    </item>
+    
+    <item>
+      <title>MatrixSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixsource/</guid>
+      <description>MatrixApplication.onCreate @Override public void onCreate() { super.onCreate(); Matrix.Builder builder = new Matrix.Builder(this); builder.patchListener(new TestPluginListener(this)); //trace  TraceConfig traceConfig = new TraceConfig.Builder() .dynamicConfig(dynamicConfig) .enableFPS(fpsEnable) .enableEvilMethodTrace(traceEnable) .enableAnrTrace(traceEnable) .enableStartup(traceEnable) .splashActivities(&amp;#34;sample.tencent.matrix.SplashActivity;&amp;#34;) .isDebug(true) .isDevEnv(false) .build(); TracePlugin tracePlugin = (new TracePlugin(traceConfig)); builder.plugin(tracePlugin); //resource  builder.plugin(new ResourcePlugin(new ResourceConfig.Builder() .dynamicConfig(dynamicConfig) .setDumpHprof(false) .setDetectDebuger(true) //only set true when in sample, not in your app  .build())); ResourcePlugin.activityLeakFixer(this); //io  IOCanaryPlugin ioCanaryPlugin = new IOCanaryPlugin(new IOConfig.Builder() .dynamicConfig(dynamicConfig) .build()); builder.plugin(ioCanaryPlugin); // prevent api 19 UnsatisfiedLinkError  //sqlite  SQLiteLintConfig config = initSQLiteLintConfig(); SQLiteLintPlugin sqLiteLintPlugin = new SQLiteLintPlugin(config); builder.</description>
+    </item>
+    
+    <item>
+      <title>Matrix研究</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E7%A0%94%E7%A9%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E7%A0%94%E7%A9%B6/</guid>
+      <description>线上:
+https://github.com/Tencent/matrix/wiki/Matrix-Android-TraceCanary
+https://github.com/Tencent/matrix/wiki/Matrix-Android-IOCanary
+线下:
+https://github.com/Tencent/matrix/wiki/Matrix-Android-ResourceCanary
+https://github.com/Tencent/matrix/wiki/Matrix-Android-SQLiteLint
+https://github.com/Tencent/matrix/wiki/Matrix-Android-
+ https://developer.android.com/topic/performance/vitals/launch-time
+极客时间-Android开发高手课
+07 | 启动优化（上）：从启动过程看启动速度优化
+methodMapping.txt文件走向 transform中内存计算出methodMapping,
+写入&amp;quot;${buildDir}/outputs/mapping/${currentVariantName}/methodMapping.txt&amp;quot;，之后拷贝到getAssembleOutputBakFile里,用于tinker，构建new apk时的baseMethodMapping
+debug时写入buildDirPath + &amp;ldquo;/intermediates/merged_assets/debug/methodMapping.txt&amp;rdquo;,用于开发模式下自动转换堆栈信息
+启动优化 https://developer.android.google.cn/topic/performance/vitals/launch-time
+我以微信为例，用户从桌面点击图标开始，会经过 4 个关键阶段。
+  T1 预览窗口显示。系统在拉起微信进程之前，会先根据微信的 Theme 属性创建预览窗口。当然如果我们禁用预览窗口或者将预览窗口指定为透明，用户在这段时间依然看到的是桌面。
+  T2 闪屏显示。在微信进程和闪屏窗口页面创建完毕，并且完成一系列 inflate view、onmeasure、onlayout 等准备工作后，用户终于可以看到熟悉的“小地球”。
+  T3 主页显示。在完成主窗口创建和页面显示的准备工作后，用户可以看到微信的主界面。
+  T4 界面可操作。在启动完成后，微信会有比较多的工作需要继续执行，例如聊天和朋友圈界面的预加载、小程序框架和进程的准备等。在这些工作完成后，用户才可以真正开始愉快地聊天。
+  问题 1：点击图标很久都不响应
+如果我们禁用了预览窗口或者指定了透明的皮肤，那用户点击了图标之后，需要 T2 时间才能真正看到应用闪屏。对于用户体验来说，点击了图标，过了几秒还是停留在桌面，看起来就像没有点击成功，这在中低端机中更加明显。
+问题 2：首页显示太慢
+现在应用启动流程越来越复杂，闪屏广告、热修复框架、插件化框架、大前端框架，所有准备工作都需要集中在启动阶段完成。上面说的 T3 首页显示时间对于中低端机来说简直就是噩梦，经常会达到十几秒的时间。
+问题 3：首页显示后无法操作。
+既然首页显示那么慢，那我能不能把尽量多的工作都通过异步化延后执行呢？很多应用的确就是这么做的，但这会造成两种后果：要么首页会出现白屏，要么首页出来后用户根本无法操作。
+启动优化方法  闪屏优化 业务梳理 业务优化 线程优化 从具体的做法来看，线程的优化一方面是控制线程数量，线程数量太多会相互竞争 CPU 资源，因此要有统一的线程池，并且根据机器性能来控制数量。 GC 优化 系统调用优化  启动进阶方法  I/O 优化 数据重排 2.</description>
+    </item>
+    
+    <item>
       <title>MediatorLiveData</title>
       <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/mediatorlivedata/</guid>
-      <description>MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.postValue(value); } @Override public void setValue(T value) { super.setValue(value); } } MediatorLiveData public class MediatorLiveData&amp;lt;T&amp;gt; extends MutableLiveData&amp;lt;T&amp;gt; { private SafeIterableMap&amp;lt;LiveData&amp;lt;?</description>
+      <description>原理图 graph LR MediatorLiveData--&amp;gt;|addSource|sourceLiveDataN subgraph SourceN,observe when mediatorLiveData acitve sourceLiveDataN--&amp;gt;|onChange|observerN end MediatorLiveData--&amp;gt;|addSource|sourceLiveData2 subgraph Source2,observe when mediatorLiveData acitve sourceLiveData2--&amp;gt;|onChange|observer2 end MediatorLiveData--&amp;gt;|addSource|sourceLiveData1 subgraph Source1,observe when mediatorLiveData acitve sourceLiveData1--&amp;gt;|onChange|observer1 end MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.</description>
     </item>
     
     <item>
@@ -502,6 +920,116 @@ https://github.com/Tencent/MMKV/wiki/design
     </item>
     
     <item>
+      <title>MultiDex</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/multidex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/multidex/</guid>
+      <description>原理 Android5.0以下MultiDex下启动丝般柔滑 Android5.0及以上的设备在安装apk的时候就优化好了Multidex,所以在首次打开的时候执行,Multidex.install(this);并不会占用多少时间
+当Android系统安装一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。 但是在早期的Android系统中，DexOpt有一个问题，DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对低版本的Android系统做兼容。 比如:微信app经过分包后,我们解压其apk文件:
+从中我们可以看到微信经过分包处理之后有3个dex文件
+使用 (1)在App所属的build.gradle里面
+android { ...... defaultConfig { multiDexEnabled true ...... } } (2)在你自定义的Application(这个一般项目里面都有) MultiDex.install(this);//初始化
+ 参考 美团Android DEX自动拆包及动态加载简介
+http://allenfeng.com/2016/11/17/principle-analysis-on-multidex/
+https://blog.csdn.net/dbs1215/article/details/79214565
+https://developer.android.com/studio/build/multidex#multidexkeepfile-property</description>
+    </item>
+    
+    <item>
+      <title>native_hook</title>
+      <link>https://huanle19891345.github.io/en/android/ndk/native_hook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ndk/native_hook/</guid>
+      <description>对于 Native Hook 技术，我们比较熟悉的有 GOT/PLT Hook、Trap Hook 以及 Inline Hook，下面我来逐个讲解这些 Hook 技术的实现原理和优劣比较。
+GOT/PLT Hook xHook https://github.com/iqiyi/xHook
+https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md
+  hook libc.so android_getaddrinfofornet ，貌似没hook成功 https://github.com/iqiyi/xHook/issues/16
+  如何获取到被hook的方法的地址 https://github.com/iqiyi/xHook/issues/15
+  PLT/GOT hook局限性 xhook只支持PLT/GOT方式的hook，就是hook“调用方so中的对外调用点”。android_getaddrinfofornet函数的实现在libc.so中，需要hook android_getaddrinfofornet的调用方，可以： xhook_register(&amp;#34;.*/libwebviewchromium\\.so$&amp;#34;, &amp;#34;android_getaddrinfofornet&amp;#34;, new_android_getaddrinfofornet, NULL); 不能做 ELF 内部函数之间调用的 hook。 inline hook 可以做到 demo执行步骤 1：下载Android NDK r16b，配置环境变量(每次重启PC都要配置一次) 2：./build_libs.sh通过cmd中单个执行编译完成 3：./install_libs.sh通过在cmd中执行: C:\Users\zhenghuan\git\demo\xHook&amp;gt;install_libs.sh 完成 如何引用系统so https://developer.android.com/ndk/guides/stable_apis.html?hl=zh-CN
+https://stackoverflow.com/questions/13115827/how-to-link-to-the-libmedia-so-system-library-in-an-android-ndk-app-using-androi
+参考 Android Native Hook技术路线概述
+android native hook技术你知道多少?
+frida https://www.frida.re/
+https://github.com/frida/frida
+旧项目 https://github.com/crmulliner/adbi</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash1SystemHandle</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash1systemhandle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash1systemhandle/</guid>
+      <description>从安卓 APP 开发的角度，Java 崩溃捕获相对比较容易，JVM 给 Java 字节码提供了一个受控的运行环境，同时也提供了完善的 Java 崩溃捕获机制。Native 崩溃的捕获和处理相对比较困难，安卓系统的==debuggerd 守护进程会为 native 崩溃自动生成详细的崩溃描述文件（tombstone）。==
+在==开发调试阶段，可以通过系统提供的 bugreport 工具获取 tombstone 文件==（或者将设备 root 后也可以拿到）。但是对于发布到线上的安卓 APP，如何获取 tombstone 文件，安卓操作系统本身并没有提供这样的功能。这个问题一直是安卓 native 崩溃分析和移动端 APM 系统的痛点之一。
+Tombstones https://source.android.com/devices/tech/debug/native-crash
+https://source.android.com/devices/tech/debug/index.html#debuggerd
+Before Android 8.0, crashes were handled by the debuggerd and debuggerd64 daemons. In Android 8.0 and higher, crash_dump32 and crash_dump64 are spawned as needed.</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash2CollectStack</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash2collectstack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash2collectstack/</guid>
+      <description>1 捕捉native crash的发生 所有的信号量都定义在&amp;lt;signal.h&amp;gt;文件中:
+#define SIGHUP 1 // 终端连接结束时发出(不管正常或非正常) #define SIGINT 2 // 程序终止(例如Ctrl-C) #define SIGQUIT 3 // 程序退出(Ctrl-\) #define SIGILL 4 // 执行了非法指令，或者试图执行数据段，堆栈溢出 #define SIGTRAP 5 // 断点时产生，由debugger使用 #define SIGABRT 6 // 调用abort函数生成的信号，表示程序异常 #define SIGIOT 6 // 同上，更全，IO异常也会发出 #define SIGBUS 7 // 非法地址，包括内存地址对齐出错，比如访问一个4字节的整数, 但其地址不是4的倍数 #define SIGFPE 8 // 计算错误，比如除0、溢出 #define SIGKILL 9 // 强制结束程序，具有最高优先级，本信号不能被阻塞、处理和忽略 #define SIGUSR1 10 // 未使用，保留 #define SIGSEGV 11 // 非法内存操作，与SIGBUS不同，他是对合法地址的非法访问，比如访问没有读权限的内存，向没有写权限的地址写数据 #define SIGUSR2 12 // 未使用，保留 #define SIGPIPE 13 // 管道破裂，通常在进程间通信产生 #define SIGALRM 14 // 定时信号, #define SIGTERM 15 // 结束程序，类似温和的SIGKILL，可被阻塞和处理。通常程序如果终止不了，才会尝试SIGKILL #define SIGSTKFLT 16 // 协处理器堆栈错误 #define SIGCHLD 17 // 子进程结束时, 父进程会收到这个信号。 #define SIGCONT 18 // 让一个停止的进程继续执行 #define SIGSTOP 19 // 停止进程,本信号不能被阻塞,处理或忽略 #define SIGTSTP 20 // 停止进程,但该信号可以被处理和忽略 #define SIGTTIN 21 // 当后台作业要从用户终端读数据时, 该作业中的所有进程会收到SIGTTIN信号 #define SIGTTOU 22 // 类似于SIGTTIN, 但在写终端时收到 #define SIGURG 23 // 有紧急数据或out-of-band数据到达socket时产生 #define SIGXCPU 24 // 超过CPU时间资源限制时发出 #define SIGXFSZ 25 // 当进程企图扩大文件以至于超过文件大小资源限制 #define SIGVTALRM 26 // 虚拟时钟信号.</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash3SymbolRecovery</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash3symbolrecovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash3symbolrecovery/</guid>
+      <description>1. 获取crash日志信息  adb logcat 的堆栈轨迹 /data/tombstones/ 中的 tombstone  2. 使用addr2line或ndk-stack工具查看crash文件和行号 addr2line https://stackoverflow.com/questions/5314036/how-to-use-addr2line-in-android
+Native crash异常，能定位到代码哪个地方报错吗 #18
+arm-linux-androideabi-addr2line –e obj/local/armeabi/libhello-jni.so 00004de8 000056c8 00004fb4 00004f58 #这一步就该addr2line出场了。我们从backstrace中拿到了出错时的指令地址，它对应我们程序中某个函数的某行操作。我们需要addr2line将对应文件和对应行数打出来。这个命令的格式是 addr2line -e exefile addr #在NDK中找到对应的addr2line命令，testapp程序文件取出来，执行命令 [root@localhost]# /opt/android_tools/android-ndk-r20/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line -f -e testapp 000a3f10 testGetEntryById /home/***/***/***/test.c:220 real command: $ Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/x86_64-linux-android-addr2line.exe -f -e ~/git/demo/xCrash/src/native/libxcrash/obj/local/x86_64/libxcrash.so 000000000000c2df xc_test_call_4 git/demo/xCrash/src/native/libxcrash/jni/xc_test.c:64 ndk-stack工具 https://developer.android.com/ndk/guides/ndk-stack?hl=zh-cn
+https://help.aliyun.com/knowledge_detail/70180.html
+adb shell logcat | ndk-stack -sym $PROJECT_PATH/obj/local/armeabi ndk-stack -sym ./workspace2/testNdkStack/obj/local/armeabi-v7a/ -dump ./logcat.log &amp;gt; result.log 在result.log中可以分析定位到出现该crash的对应代码文件和具体行数 real command: git\demo\xCrash\src\native\libxcrash\obj\local&amp;gt;ndk-stack -sym .</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash4AnalysisRootCause</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash4analysisrootcause/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash4analysisrootcause/</guid>
+      <description>汇编 ARM汇编指令集汇总
+基本语法 汇编语言的主体是汇编指令。汇编指令和机器指令的差别在于指令的表示方法上。汇编指令是机器指令便于记忆的书写格式。
+#操作：寄存器BX的内容送到AX中 1000100111011000 #机器指令 mov ax,bx #汇编指令 汇编语言语句的语法 汇编语言语句输入每行一个语句。每个语句如下的格式如下：
+[label] mnemonic [operands] [;comment] 方括号中的字段是可选的。基本指令有两部分组成，第一个是要执行的指令（助记符）的名称和所述第二命令的操作数或参数的。
+以下是一些典型的汇编语言语句的例子：
+INC COUNT ; Increment the memory variable COUNT MOV TOTAL, 48 ; Transfer the value 48 in the  ; memory variable TOTAL ADD AH, BH ; Add the content of the  ; BH register into the AH register AND MASK1, 128 ; Perform AND operation on the  ; variable MASK1 and 128 ADD MARKS, 10 ; Add 10 to the variable MARKS MOV AL, 10 ; Transfer the value 10 to the AL register disassembler tool IDAPro is best disassembler tool for many processors and file types.</description>
+    </item>
+    
+    <item>
+      <title>nativeCrash选型和整体流程</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash%E9%80%89%E5%9E%8B%E5%92%8C%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/nativecrash/nativecrash%E9%80%89%E5%9E%8B%E5%92%8C%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B/</guid>
+      <description>原理流程四个阶段 graph LR nativeCrashHappening--&amp;gt;systemHandle(1:SystemHandle)--&amp;gt;|debug|tombstoneFile(TombstoneFile) tombstoneFile--&amp;gt;symbolrecovery(3:SymbolRecovery)--&amp;gt;analysisRootCause(4:AnalysisRootCause) systemHandle--&amp;gt;|release|collectStack(2:CollectStack)--&amp;gt;|upload|tombstoneFile 处理流程 一个完整的 Native 崩溃从捕获到解析要经历哪些流程。
+  编译端。编译 C/C++ 代码时，需要将带符号信息的文件保留下来。
+  客户端。捕获到崩溃时候，将收集到尽可能多的有用信息写入日志文件，然后选择合适的时机上传到服务器。
+  服务端。读取客户端上报的日志文件，寻找适合的符号文件，生成可读的 C/C++ 调用栈。
+  现有的方案 对于很多中小型公司来说，我并不建议自己去实现一套如此复杂的系统，可以选择一些第三方的服务。目前各种平台也是百花齐放，包括腾讯的Bugly、阿里的啄木鸟平台、网易云捕、Google 的 Firebase 等等。
+当然，在平台的选择方面，我认为，从产品化跟社区维护来说，Bugly 在国内做的最好；从技术深度跟捕获能力来说，阿里 UC 浏览器内核团队打造的啄木鸟平台最佳。
+xCrash BreakPad https://chromium.googlesource.com/breakpad/breakpad/+/master
+https://chromium.googlesource.com/breakpad/breakpad/+/master/docs/
+https://chromium.googlesource.com/breakpad/breakpad/+/master/docs/getting_started_with_breakpad.md
+https://github.com/google/breakpad
+https://github.com/AndroidAdvanceWithGeektime/Chapter01
+Google breakpad是一个跨平台的崩溃转储和分析框架和工具集合。
+Breakpad由三个主要组件：
+ client，以library的形式内置在你的应用中，当崩溃发生时写 minidump文件 symbol dumper, 读取由编译器生成的调试信息（debugging information），并生成 symbol file processor， 读取 minidump文件 和 symbol file ，生成可读的c/c++ Stack trace.  简单来说就是一个生成 minidump，一个生成symbol file，然后将其合并处理成可读的Stack trace。
+bugly nativecrash模块+ setCrashHandleCallback监听上报到公司服务器</description>
+    </item>
+    
+    <item>
       <title>OOM</title>
       <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/oom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -516,6 +1044,47 @@ void Heap::ThrowOutOfMemoryError(Thread* self, size_t byte_count, AllocatorType 
     </item>
     
     <item>
+      <title>Provider</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/provider/</guid>
+      <description>总结 监听者_DefaultInheritedProviderScopeElement监听到回调通知后通过markNeedsBuild()进行rebuild,而Consumer会通过Provider.of获取到最新的model值
+graph LR ChangeNotifierProvider(&amp;quot;ChangeNotifierProvider_T extends ChangeNotifier_&amp;quot;)--&amp;gt;|1:ListensTo|ChangeNotifier ChangeNotifier--&amp;gt;|2:notifyListeners|ChangeNotifierProvider--&amp;gt;|3:rebuildsAndNotifyDependentsDescendants|Consumer 类设计 ChangeNotifier Usage class Counter with ChangeNotifier { int value = 0; void increment() { value += 1; notifyListeners(); } } /// A class that can be extended or mixed in that provides a change notification /// API using [VoidCallback] for notifications. /// /// See also: /// /// * [ValueNotifier], which is a [ChangeNotifier] that wraps a single value. class ChangeNotifier implements Listenable { LinkedList&amp;lt;_ListenerEntry&amp;gt;?</description>
+    </item>
+    
+    <item>
+      <title>Qigsaw</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/qigsaw/qigsaw/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/qigsaw/qigsaw/</guid>
+      <description>爱奇艺重磅开源基于Android-App-Bundle动态化方案Qigsaw
+Split APKs 加载
+应用进程所使用到的 ClassLoader 和 Resources 均在LoadedAPK中创建。
+通过 Android 9.0 LoadedAPK源码片段，我们一起了解下 Split APKs 加载过程。
+ClassLoader 创建 通过createOrUpdateClassLoaderLocked方法名，可以知道该方法是用于创建和更新 ClassLoader。该方法有两个核心步骤。
+1：如果mClassLoader为空，则创建 PathClassLoader 实例。
+2：如果addedPaths不为空，则更新 PathClassLoader 实例。
+该方法指明，应用进程是可以动态加载 Split APKs 代码。
+Resources 创建 通过getResources方法代码片段，可知 Split APKs 的资源路径作为mResources创建参数。
+关于更多 Split APKs 加载原理细节，请阅读相关 Android 源码。
+第三方应用利用 PackageInstaller 安装 split APKs 体验极其不友好，且某些国产手机对 split APKs 功能支持不完善，所以我们最终还是按照一般插件化方式安装加载 split APKs。
+依据上图，如果需要动态加载 split APKs，需要解决代码、资源以及四大组件的加载。
+Split APKs 代码加载 针对 splits 代码加载，Qigsaw 采用单类加载器方式，即 base APK 和 split APKs 采用同一 ClassLoader 加载。</description>
+    </item>
+    
+    <item>
+      <title>Resource.arsc生成和结构</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/resource.arsc%E7%94%9F%E6%88%90%E5%92%8C%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/resource.arsc%E7%94%9F%E6%88%90%E5%92%8C%E7%BB%93%E6%9E%84/</guid>
+      <description>从资源ID获取字符串资源 String appName = getResources().getString(R.string.app_name); 从资源ID获取drawable资源的过程 Drawable drawable = getResources().getDrawable(R.drawable.background, getTheme()); 研究源码来源 tinker gradle plugin中的resourceParser ResDiffDecoder&amp;ndash;AbstractApkParser&amp;ndash;ResourceTableParser
+AbstractApkParser.parseResourceTable private DexClass[] dexClasses; private ResourceTable resourceTable; private String manifestXml; private ApkMeta apkMeta; private Set&amp;lt;Locale&amp;gt; locales; private List&amp;lt;CertificateMeta&amp;gt; certificateMetaList; private static final Locale DEFAULT_LOCALE; private Locale preferredLocale; public void parseResourceTable() throws IOException { byte[] data = this.getFileData(&amp;#34;resources.arsc&amp;#34;); if (data == null) { this.resourceTable = new ResourceTable(); this.locales = Collections.emptySet(); } else { this.resourceTable = new ResourceTable(); this.</description>
+    </item>
+    
+    <item>
       <title>Runtime_VisitRoots</title>
       <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -525,6 +1094,93 @@ void Heap::ThrowOutOfMemoryError(Thread* self, size_t byte_count, AllocatorType 
 Runtime::VisitRoots void Runtime::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { VisitNonConcurrentRoots(visitor, flags); VisitConcurrentRoots(visitor, flags); } VisitNonConcurrentRoots void Runtime::VisitNonConcurrentRoots(RootVisitor* visitor, VisitRootFlags flags) { VisitThreadRoots(visitor, flags); VisitNonThreadRoots(visitor); } VisitThreadRoots void Runtime::VisitThreadRoots(RootVisitor* visitor, VisitRootFlags flags) { thread_list_-&amp;gt;VisitRoots(visitor, flags); } art/runtime/thread_list.cc
 ThreadList::VisitRoots void ThreadList::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) const { MutexLock mu(Thread::Current(), *Locks::thread_list_lock_); for (const auto&amp;amp; thread : list_) { thread-&amp;gt;VisitRoots(visitor, flags); } } art/runtime/thread.cc
 Thread::VisitRoots void Thread::VisitRoots(RootVisitor* visitor, VisitRootFlags flags) { if ((flags &amp;amp; VisitRootFlags::kVisitRootFlagPrecise) != 0) { VisitRoots&amp;lt;/* kPrecise */ true&amp;gt;(visitor); } else { VisitRoots&amp;lt;/* kPrecise */ false&amp;gt;(visitor); } } //define the meaning of enum RootType template &amp;lt;bool kPrecise&amp;gt; void Thread::VisitRoots(RootVisitor* visitor) { const pid_t thread_id = GetThreadId(); visitor-&amp;gt;VisitRootIfNonNull(&amp;amp;tlsPtr_.</description>
+    </item>
+    
+    <item>
+      <title>SaveAndRestoreInstanceState</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/saveandrestoreinstancestate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/saveandrestoreinstancestate/</guid>
+      <description>转屏场景 数据保存 android/app/servertransaction/ActivityRelaunchItem.java
+@Override public void execute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) { client.handleRelaunchActivity(mActivityClientRecord, pendingActions); } ActivityThread.handleRelaunchActivity @Override public void handleRelaunchActivity(ActivityClientRecord tmp, PendingTransactionActions pendingActions) { handleRelaunchActivityInner(r, configChanges, tmp.pendingResults, tmp.pendingIntents, pendingActions, tmp.startsNotResumed, tmp.overrideConfig, &amp;#34;handleRelaunchActivity&amp;#34;); } private void handleRelaunchActivityInner(ActivityClientRecord r, int configChanges, List&amp;lt;ResultInfo&amp;gt; pendingResults, List&amp;lt;ReferrerIntent&amp;gt; pendingIntents, PendingTransactionActions pendingActions, boolean startsNotResumed, Configuration overrideConfig, String reason) { // Preserve last used intent, it may be set from Activity#setIntent().  final Intent customIntent = r.activity.mIntent; // Need to ensure state is saved.</description>
+    </item>
+    
+    <item>
+      <title>SavedStateHandle</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savedstatehandle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savedstatehandle/</guid>
+      <description>原理图 sequenceDiagram ComponentActivity-&amp;gt;&amp;gt;ComponentActivity: onSaveInstanceState activate ComponentActivity ComponentActivity-&amp;gt;&amp;gt;SavedStateRegistryController: performSave activate SavedStateRegistryController SavedStateRegistryController-&amp;gt;&amp;gt;SavedStateRegistry: performSave deactivate SavedStateRegistryController deactivate ComponentActivity ComponentActivity-&amp;gt;&amp;gt;ComponentActivity: onCreate activate ComponentActivity ComponentActivity-&amp;gt;&amp;gt;SavedStateRegistryController: performRestore activate SavedStateRegistryController SavedStateRegistryController-&amp;gt;&amp;gt;SavedStateRegistry: performRestore deactivate SavedStateRegistryController deactivate ComponentActivity SavedStateViewModelFactory-&amp;gt;&amp;gt;SavedStateViewModelFactory: create activate SavedStateViewModelFactory SavedStateViewModelFactory-&amp;gt;&amp;gt;SavedStateHandleController: create SavedStateHandleController-&amp;gt;&amp;gt;SavedStateRegistry: consumeRestoredStateForKey SavedStateRegistry-&amp;gt;&amp;gt;SavedStateHandle: createHandle deactivate SavedStateViewModelFactory Demo // UserProfileViewModel class UserProfileViewModel( savedStateHandle: SavedStateHandle ) : ViewModel() { val userId : String = savedStateHandle[&amp;#34;uid&amp;#34;] ?: throw IllegalArgumentException(&amp;#34;missing user id&amp;#34;) val user : User = TODO() } // UserProfileFragment private val viewModel: UserProfileViewModel by viewModels( factoryProducer = { SavedStateViewModelFactory(this) } //新版这已经是by viewModels的默认factory  .</description>
+    </item>
+    
+    <item>
+      <title>SavingStates</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savingstates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savingstates/</guid>
+      <description>SavingStatesScope sequenceDiagram LocalPersistence-&amp;gt;&amp;gt;AMS: user open activity activate AMS AMS-&amp;gt;&amp;gt;ActivityViewModelScope: start activate AMS activate ActivityViewModelScope ActivityViewModelScope-&amp;gt;&amp;gt;Activity: start activate Activity AMS-&amp;gt;&amp;gt;ActivityViewModelScope: rotation/relaunch rect rgb(199, 237, 204) ActivityViewModelScope-&amp;gt;&amp;gt;Activity: rotation/relaunch Activity-&amp;gt;&amp;gt;Activity: destory,retainNonConfigurationInstance deactivate Activity Activity-&amp;gt;&amp;gt;Activity: launch,attach恢复lastNonConfigurationInstances activate Activity deactivate Activity end rect rgb(253, 245, 230) AMS-&amp;gt;&amp;gt;ActivityViewModelScope: killApplicatonOrActivity by system ActivityViewModelScope-&amp;gt;&amp;gt;AMS: onStop,saveInstanceState deactivate ActivityViewModelScope activate AMS deactivate AMS AMS-&amp;gt;&amp;gt;ActivityViewModelScope: restart activate ActivityViewModelScope AMS-&amp;gt;&amp;gt;ActivityViewModelScope: onstart,restoreInstanceState deactivate ActivityViewModelScope end deactivate AMS rect rgb(151,255,255) AMS-&amp;gt;&amp;gt;LocalPersistence: save data to local persistence LocalPersistence-&amp;gt;&amp;gt;AMS: user leave activity deactivate AMS LocalPersistence-&amp;gt;&amp;gt;AMS: next time user open activity activate AMS AMS-&amp;gt;&amp;gt;LocalPersistence: user restore data from local persistence deactivate AMS end options https://developer.</description>
+    </item>
+    
+    <item>
+      <title>Shadow</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadow/</guid>
+      <description>Shadow设计 Activity的生命周期问题，大方向的选择 其实我们早就在用一款也是基于代理组件转调插件组件的插件框架了。只不过这款插件框架用到了大量反射使用私有API，眼看着是不可能再Android 9.0上继续使用了。我们也调研了外界口碑最好的RePlugin。所以大概就这两种方向，一是用代理Activity作为壳子注册在宿主中真正运行起来，然后让它持有插件Activity，想办法在收到系统的生命周期方法调用时转调插件Activity的对应生命周期方法。二是Hack修改宿主PathClassLoader，让它能在收到系统查询AndroidManifest中注册的Activity的类时返回插件的Activity类。
+方法二就是RePlugin的关键技术。它利用了JVM的特性。我也不太肯定这算不算是bug，总之ClassLoader的loadClass方法返回的实际类可以和它被要求加载的类名字不一样。举个例子，宿主的AndroidManifest.xml注册一个Activity名叫A，插件里有一个Activity名叫B。宿主代码或者apk中最终是没有A这个类的，只有在AndroidManifest中注册的一个名字而已。当想要加载插件Activity B时，就发出一个启动Activity A的Intent。系统收到这个Intent后会检查宿主安装的AndroidManifest信息，从中确定A是哪个apk安装的，就会找到宿主的PathClassLoader。然后系统就会试图从PathClassLoader中加载A这个类，然后作为Activity类型的对象使用（这很正常）。所以如果我们把宿主的PathClassLoader给Hack了，控制它的加载逻辑，让它收到这个加载调用时实际返回的是插件Activity B的类。由于B也真的是Activity的子类，所以系统拿回去当作Activity类型使用没有任何问题。这里再扩展一下，如果类C继承自类A，在加载C时也会去加载A，如果这时拿B当A返回的话，C收到B之后是会发现B的名字不是A而出错的。关于RePlugin这段关键技术的实现，当时调研时就发现实现的有些麻烦了。RePlugin选择复制一个PathClassLoader，然后替换系统持有的PathClassLoader。所以复制PathClassLoader需要反射使用PathClassLoader的私有API，拿出来它里面的数据，替换系统持有的PathClassLoader也要反射修改私有API。我们当时已经实现了“全动态插件框架”，其中代理壳子Activity的动态化使用的方法也能解决这个问题，我们的选择是在宿主PathClassLoader上给它加一个parent ClassLoader。因为PathClassLoader也是一个有正常“双亲委派”逻辑的ClassLoader，它加载什么类都会先问自己parent ClassLoader先加载。所以我们加上去的这个parent ClassLoader也能完成RePlugin想要做的事。不过我们用它的目的是不希望壳子Activity打包在宿主占用宿主很多方法数，还不能更新。这一点以后可能再单独讲。关于这个替换实现，最近给RePlugin提了一个PR：github.com/Qihoo360/Re… ，有兴趣的同学可以看一下。
+RePlugin的这种方案还有一点非常不适合我们的业务，就是宿主AndroidManifest中注册的“坑位”Activity，就是上面举例的Activity A，是不能同时供多个插件Activity使用的。就是我不能在宿主AndroidManifest中注册一个Activity A，然后让它同时支持插件Activity B和C。这是因为ClassLoader在loadClass的时候，收到的参数只有一个A的类名，我们没有办法传递更多信息，让ClassLoader能在这个loadClass的调用中区分出应该返回B还是应该返回C。所以这种方案需要在宿主中注册大量Activity，这对于我们的宿主来说是不可接受的。而方法一是用代理Activity持有插件Activity转调的方案，就可以在启动代理Activity时通过Intent传递很多参数，代理Activity通过Intent中的参数就能决定该构造一个B还是一个C。这就使得这种方案下壳子是可复用的。
+还有一点就是我们在旧框架上就已经设计了“全动态插件框架”，所以基于方法一的方向上开发新插件框架，我们可以不修改宿主的任何代码，不跟宿主版本就能更新插件框架。关于这一点，后续文章再解析。
+所以我们探索的方向就这样确定在方法一这个方向上了。
+所有的插件框架中，Activity的加载都是这样的，new一个DexClassLoader加载插件apk。然后从插件ClassLoader中load指定的插件Activity名字，newInstance之后强转为Activity类型使用。实际上Android系统自身在启动Activity时也是这样做的。所以这就是插件机制能动态更新Activity的基本原理。
+所以，所有的插件框架在解决的问题都不是如何动态加载类，而是动态加载的Activity没有在AndroidManifest中注册，该如何能正常运行。如果Android系统没有AndroidManifest的限制，那么所有插件框架都没有存在的必要了。因为Java语言本身就支持动态更新实现的能力。
+Shadow动态化原理 Shadow的全动态设计原理解析
+打包在宿主中的只有core.common和dynamic.host。其余都是动态加载的，或者编译期的。
+源码中的dynamic-host module中的接口pluginManager，dynamic-loader module,都对自己的能力做了接口抽象，用于运行时加载动态实现
+dynamic-host module中的接口pluginManager在dynamic-manager内进行了实现，具体见&amp;quot;Shadow设计.vsdx&amp;quot;
+Container动态化 PluginProcessService在void loadRuntime(String uuid)成功加载runtimeapk之后，判断如果加载了新的runtime，会将InstalledApk信息保存到sp。之后hackParentToRuntime时会new RuntimeClassLoader来设置为当前宿主PathClassLoader的parent，这样就可以实现宿主manifest文件中注册的代理容器Activity的动态加载:public class PluginDefaultProxyActivity extends PluginContainerActivity ,其中的@override方法可以不必一次全部实现，可以在业务需要时再添加
+动态化加载manager 参考代码分析
+loadParameters.dependsOn Shadow对插件包管理的设计
+LoadApkBloc:: /** * 加载插件到ClassLoader中. * * @param installedPlugin 已安装（PluginManager已经下载解包）的插件 * @return 加载了插件的ClassLoader */ @Throws(LoadApkException::class) fun loadPlugin(installedApk: InstalledApk, loadParameters: LoadParameters, pluginPartsMap: MutableMap&amp;lt;String, PluginParts&amp;gt;): PluginClassLoader { val apk = File(installedApk.apkFilePath) val odexDir = if (installedApk.</description>
+    </item>
+    
+    <item>
+      <title>ShadowPlugin</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowplugin/</guid>
+      <description>ShadowTransform类设计 gradle配置 //Sample-plugin-app中build.gradle中对应的配置，动态生成config.json的一些参数  packagePlugin { pluginTypes { debug { loaderApkConfig = new Tuple2(&amp;#39;sample-loader-debug.apk&amp;#39;, &amp;#39;:sample-loader:assembleDebug&amp;#39;) runtimeApkConfig = new Tuple2(&amp;#39;sample-runtime-debug.apk&amp;#39;, &amp;#39;:sample-runtime:assembleDebug&amp;#39;) pluginApks { pluginApk1 { businessName = &amp;#39;sample-plugin-app&amp;#39; partKey = &amp;#39;sample-plugin-app&amp;#39; buildTask = &amp;#39;:sample-plugin-app:assembleDebug&amp;#39; apkName = &amp;#39;sample-plugin-app-debug.apk&amp;#39; apkPath = &amp;#39;projects/sample/sample-plugin/sample-plugin-app/build/outputs/apk/debug/sample-plugin-app-debug.apk&amp;#39; } } } release { loaderApkConfig = new Tuple2(&amp;#39;sample-loader-release.apk&amp;#39;, &amp;#39;:sample-loader:assembleRelease&amp;#39;) runtimeApkConfig = new Tuple2(&amp;#39;sample-runtime-release.apk&amp;#39;, &amp;#39;:sample-runtime:assembleRelease&amp;#39;) pluginApks { pluginApk1 { businessName = &amp;#39;sample-plugin-app&amp;#39; partKey = &amp;#39;sample-plugin-app&amp;#39; buildTask = &amp;#39;:sample-plugin-app:assembleRelease&amp;#39; apkName = &amp;#39;sample-plugin-app-release.apk&amp;#39; apkPath = &amp;#39;projects/sample/sample-plugin/sample-plugin-app/build/outputs/apk/release/sample-plugin-app-release.</description>
+    </item>
+    
+    <item>
+      <title>ShadowSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/shadow/shadowsource/</guid>
+      <description>Shadow类设计和原理 Shadow核心功能 core层 = manager + loader, dynamic层用来动态化
+打包在宿主中的只有core.common和dynamic.host。其余都是动态加载的，或者编译期的。
+sequenceDiagram Note over Manager: host(位于主进程) Note over Loader: PluginProcessPPS(plugin进程) Manager-&amp;gt;&amp;gt;Manager: Manager动态化:通过接口PluginManager实现 Manager-&amp;gt;&amp;gt;Manager: 下载插件、安装插件,得到LoadParameters Manager-&amp;gt;&amp;gt;Loader: bindService Loader-&amp;gt;&amp;gt;Loader: Loader动态化:通过双向接口HostActivityDelegate和HostActivityDelegator实现 Loader-&amp;gt;&amp;gt;Loader: 将插件免安装的运行起来,代理壳子ContainerActivity需要和PluginActivity通过Loader相互调用 Manager 1：解压zip包到data目录下的指定路径下
+2：解析config.json到PluginConfig
+3：根据插件配置信息插入一组数据到db，返回InstalledPlugin
+4：对runtime和loader两个apk做odex(更新odex信息到数据库，更新part.oDexDir)
+5：对每个插件apk做extractSo(更新信息到数据库，更新part.libraryDir)和odex(更新odex信息到数据库，更新part.oDexDir)
+6：bindPluginProgressService，加载runtime，加载loader，加载plugin，调用loader的convertActivityIntent转换intent为代理容器Activity
+7：正常启动代理容器Activity
+Loader PpsBinder中Loader本身的Binder先通过PPS跨进程通信到Manager进程，从而使Loader的Binder成了跨进程的Binder
+宿主中的公共代码和资源的更新和修复可行性方案 graph LR subgraph 插件自带动态加载能力,可以更新功能,修复问题 宿主(&amp;quot;宿主(包含公共仓库资源)&amp;quot;)--&amp;gt;插件1,通过配置whiteList访问宿主公共资源 宿主--&amp;gt;插件2 宿主--&amp;gt;插件3 end 1：利用热修复方案如Tinker中的java修复部分替换宿主dex elements(atlas的host更新也使用的类似修复方案)，资源更新也采用相应的热修复方式进行
+2：将公共代码和资源从组件做成插件，动态加载：
+参考DynamicPluginLoader:
+val coreLoaderFactory = mDynamicLoaderClassLoader.getInterface( CoreLoaderFactory::class.java, CORE_LOADER_FACTORY_IMPL_NAME ) mPluginLoader = coreLoaderFactory.build(hostContext) DelegateProviderHolder.setDelegateProvider(mPluginLoader) 通过注入的方式将loader中的接口实现动态注入到runtime模块(loader依赖runtime)，用来动态的实现DelegateProvider接口
+HostUiLayerProvider 也是类似的注入依赖思想，依赖倒置，控制反转
+类似manager的加载方式？Or使用插件间dependOn的方式？
+Manager方式适用于仅仅java代码的动态化，dependOn也可以拓展支持资源
+参考rePlugin的方式：
+//WebViewActivity  // 从WebView插件获取WebrViewPage的代理  WebPageProxy viewProxy = WebPageProxy.</description>
     </item>
     
     <item>
@@ -660,6 +1316,27 @@ https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html
     </item>
     
     <item>
+      <title>TinkerGradlePluginSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkergradlepluginsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkergradlepluginsource/</guid>
+      <description>build.gradle层 1：构建基准apk(仅仅发版时需要打开tinkerEnabled，开发自己debug时不需要打开)
+1.1: Copy apk,map,R文件到bakApk目录下
+1.2: 创建tinkerPatchDebug和tinkerPatchRelease的task执行的必要参数
+//tinker/tinker-sample-android/app/build.gradle def bakPath = file(&amp;#34;${buildDir}/bakApk/&amp;#34;) /** \* you can use assembleRelease to build you base apk \* use tinkerPatchRelease -POLD_APK= -PAPPLY_MAPPING= -PAPPLY_RESOURCE= to build patch \* add apk from the build/bakApk */ ext { //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?  tinkerEnabled = true //for normal build  //old apk file to build patch apk  tinkerOldApkPath = &amp;#34;${bakPath}/app-debug-0917-16-24-41.</description>
+    </item>
+    
+    <item>
+      <title>TinkerSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkersource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkersource/</guid>
+      <description>TinkerApplication.attachBaseContext /** \* tinkerFlags, which types is supported \* dex only, library only, all support \* default: TINKER_ENABLE_ALL */ private final int tinkerFlags; private final boolean tinkerLoadVerifyFlag; private final String delegateClassName; private final String loaderClassName; private ITinkerInlineFenceBridge mBridge = null; private static final String TINKER_LOADER_METHOD = &amp;#34;tryLoad&amp;#34;; @Override protected void attachBaseContext(Context base) { super.attachBaseContext(base); Thread.setDefaultUncaughtExceptionHandler(new TinkerUncaughtHandler(this)); onBaseContextAttached(base);//main  } private void onBaseContextAttached(Context base) { try { final long applicationStartElapsedTime = SystemClock.</description>
+    </item>
+    
+    <item>
       <title>Touch</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/touch/touch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -678,6 +1355,24 @@ https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html
     </item>
     
     <item>
+      <title>Transform</title>
+      <link>https://huanle19891345.github.io/en/android/gradle_jenkins/transform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradle_jenkins/transform/</guid>
+      <description>注册Transform 1. //com.android.build.gradle.internal.dsl.BaseAppModuleExtension_Decorated实例 def android = project.extensions.getByType(AppExtension) 或 AppPlugin appPlugin = getProject().getPlugins().getPlugin(AppPlugin.class) //com.android.build.gradle.internal.dsl.BaseAppModuleExtension_Decorated实例 def android = appPlugin.getExtension() 2. android.registerTransform(new MyClassTransform(project));  Transform执行时机 public abstract class TaskManager { public void createPostCompilationTasks( @NonNull final VariantScope variantScope) { // ----- External Transforms -----  // apply all the external transforms.  List&amp;lt;Transform&amp;gt; customTransforms = extension.getTransforms(); List&amp;lt;List&amp;lt;Object&amp;gt;&amp;gt; customTransformsDependencies = extension.getTransformsDependencies(); for (int i = 0, count = customTransforms.size(); i &amp;lt; count; i++) { Transform transform = customTransforms.</description>
+    </item>
+    
+    <item>
+      <title>Transformations</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/transformations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/livedata/transformations/</guid>
+      <description>map sequenceDiagram SourceLiveData-&amp;gt;&amp;gt;ResultMediatorLivedata: onChanged ResultMediatorLivedata-&amp;gt;&amp;gt;ResultMediatorLivedata: setValue(mapFunction.apply(x)) inline fun &amp;lt;X, Y&amp;gt; LiveData&amp;lt;X&amp;gt;.map(crossinline transform: (X) -&amp;gt; Y): LiveData&amp;lt;Y&amp;gt; = Transformations.map(this) { transform(it) } public static &amp;lt;X, Y&amp;gt; LiveData&amp;lt;Y&amp;gt; map( @NonNull LiveData&amp;lt;X&amp;gt; source, @NonNull final Function&amp;lt;X, Y&amp;gt; mapFunction) { final MediatorLiveData&amp;lt;Y&amp;gt; result = new MediatorLiveData&amp;lt;&amp;gt;(); result.addSource(source, new Observer&amp;lt;X&amp;gt;() { @Override public void onChanged(@Nullable X x) { result.setValue(mapFunction.apply(x)); } }); return result; } switchMap sequenceDiagram SourceLiveData-&amp;gt;&amp;gt;SwitchedLiveData: switchMapFunction.apply(x) SwitchedLiveData-&amp;gt;&amp;gt;ResultMediatorLivedata: onChanged ResultMediatorLivedata-&amp;gt;&amp;gt;ResultMediatorLivedata: setValue(y) inline fun &amp;lt;X, Y&amp;gt; LiveData&amp;lt;X&amp;gt;.</description>
+    </item>
+    
+    <item>
       <title>ViewModel</title>
       <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -690,12 +1385,12 @@ https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html
     </item>
     
     <item>
-      <title>ViewModel封装</title>
-      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</link>
+      <title>ViewModelScope_Delegate</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodelscope_delegate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</guid>
-      <description>ViewModel初始化精简 https://stackoverflow.com/questions/58106707/how-does-kotlin-use-this-by-delegate-to-instantiate-the-viewmodel
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodelscope_delegate/</guid>
+      <description>ViewModel初始化委托 https://stackoverflow.com/questions/58106707/how-does-kotlin-use-this-by-delegate-to-instantiate-the-viewmodel
 by viewModels(...) is part of fragment-ktx library, it&amp;rsquo;s a convienience short hand for creating a lazy delegate obtaining ViewModels.
 // creates lazy delegate for obtaining zero-argument MyViewModel private val viewModel : MyViewModel by viewModels() // it&amp;#39;s functionally equal to: private val viewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) } // with factory: private val viewModel : MyViewModel by viewModels { getViewModelFactory() } // is equal to: private val viewModel by lazy { ViewModelProvider(this, getViewModelFactory()).</description>
     </item>
@@ -725,12 +1420,76 @@ surfaceflinger.rc service surfaceflinger /system/bin/surfaceflinger class core a
     </item>
     
     <item>
+      <title>WebView</title>
+      <link>https://huanle19891345.github.io/en/android/ui/webview/webview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/ui/webview/webview/</guid>
+      <description>WebView优化 一般来说，WebView 渲染需要经过下面几个步骤
+ 解析 HTML 文件 加载 JavaScript 和 CSS 文件 解析并执行 JavaScript 构建 DOM 结构 加载图片等资源 页面加载完毕  而 loadFinish 实际上是在页面加载完毕阶段，而 DOM 构建完成时页面结构就已经基本渲染完成，所以从用户真实体验的角度出发，我们以 DOM 结构构建完成（即 domReady）的时间点作为页面加载完成时间点。
+模板优化 模板拆分 原先:
+优化后:
+还能不能更快一点呢？当然能！
+为了提高页面的加载速度，客户端通过一定的策略去预加载新闻数据，这样在理想状态下用户进入页面时看到页面时就可以直接使用缓存的数据，用户在看新闻的时候可以实现完全离线化，避免受到网络的影响。
+模板预热 模板复用 网络优化 CDN 加速 渲染优化 服务端预渲染 客户端渲染 所以在详情页中，我们会将图片和视频等非文字内容通过原生组件的方式放在客户端进行渲染，既可以提高渲染效率，也可以减少不必要的流量消耗。
+原生化渲染还有一个好处，图片越来越成为文章体验的重要部分，对于多图文章，我们在 Feed 页面也可以智能加载详情页需要的图片，增加用户的文章首屏体验。
+白屏优化 而在 Android 中，我们采用的是自研内核 WebView，也会遇到一些奇奇怪怪的坑。
+ 多线程读模板文件问题，WebView 在运行中会读取的文件模板，如果此时另外一个线程同时更新模板文件时，就出现了模板加载问题，所以需要保证模板加载的原子性 Render 卡死问题，内核是一个比较复杂的逻辑，内部渲染极少数情况也会出现 Render 卡死问题，但是在详情页整体用户的量级下，即使只有十万分之一的可能，对用户来说也是一个比较大的问题，此时我们会从业务上做白屏监控进行重试  当然不管是 iOS 和 Android， WebView 加载的逻辑都比较复杂，有时候怎么重试也无法成功，这个时候我们会直接降级到加载线上的详情页，优先保证用户的体验。
+总结 限于篇幅原因，我们还做了很多其他事情，包括请求精简，push 文章预拉取，数据注入的方式优化等等，也做了很多其他的方向的探索，这里不做展开，希望有机会能再分享给大家。
+最后总结一下我们在优化详情页打开速度之后的一些想法
+ 数据很重要，我们在优化加载速度之前做的第一件事情其实是建立了一个详情页的数据看板，只有通过数据我们才能真正了解目前线上用户的现状，从真实用户的体验中找到瓶颈和优化点。 用户体验优先，优化方案有很多，除了加载速度之外，还需要从整体应用体验出发，选择对用户最佳的方案 追求极致，其实最开始的优化是比较简单的，但是越到后面越难，需要一点点抠细节，才能达到极致的用户体验  参考 WebView性能、体验分析与优化</description>
+    </item>
+    
+    <item>
       <title>Widget</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/widget/</guid>
       <description>graph LR State--&amp;gt;|持有|Widget Element--&amp;gt;|持有|State Element--&amp;gt;|持有|Widget Build 触发State.build时机 graph LR after_initState--&amp;gt;State.build after_didUpdateWidget--&amp;gt;State.build after_setState--&amp;gt;State.build after_dependencyChange--&amp;gt;State.build after_deactiveAndReinsertIntoTree--&amp;gt;State.build 挂载树核心方法调用 graph LR mount--&amp;gt;_firstBuild--&amp;gt;reBuild--&amp;gt;performRebuild--&amp;gt;|1|build--&amp;gt;|stateless|StatelessWidget.build build--&amp;gt;|stateful|State.build buildOwner.buildScope--&amp;gt;reBuild performRebuild--&amp;gt;|2|updateChild updateChild--&amp;gt;|优先更新而非重新创建child|canUpdate{&amp;quot;canUpdate?&amp;quot;}--&amp;gt;|yes|child.updateWithNewWidget; canUpdate--&amp;gt;|no|inflateWidgetForNewChildElement--&amp;gt;mount 挂载树挂载过程 graph TB parentElement--&amp;gt;|2:performRebuild|currentElement currentElement--&amp;gt;|1:mount|parentElement currentElement--&amp;gt;|3:buildMyWidget|currentElement currentElement--&amp;gt;|4:newWidget.createElement|childElement childElement--&amp;gt;|5:mount|currentElement 类设计 State.setState //State&amp;lt;T extends StatefulWidget&amp;gt; /** setState方法标记对应的element需要build 如果当前位于一帧内例如点击(input处理+动画+drawFrame)，在调用setState方法之后会触发drawFrame进而触发reBuild 如果当前不位于一帧内，则会策划一次frame*/ @protected void setState(VoidCallback fn) { final dynamic result = fn() as dynamic; _element.markNeedsBuild(); } Element.markNeedsBuild /// Marks the element as dirty and adds it to the global list of widgets to  /// rebuild in the next frame.</description>
+    </item>
+    
+    <item>
+      <title>xCrashAnr</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashanr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashanr/</guid>
+      <description>总结 API level &amp;lt; 21 new FileObserver(&amp;quot;/data/anr/&amp;quot;, CLOSE_WRITE)
+API level &amp;gt;= 21 SIGQUIT
+ELFFormat xc_trace_init //xc_trace.c int xc_trace_init(JNIEnv *env, int rethrow, unsigned int logcat_system_lines, unsigned int logcat_events_lines, unsigned int logcat_main_lines, int dump_fds, int dump_network_info) { //capture SIGQUIT only for ART  if(xc_common_api_level &amp;lt; 21) return 0; //is Android Lollipop (5.x)?  xc_trace_is_lollipop = ((21 == xc_common_api_level || 22 == xc_common_api_level) ? 1 : 0); //init for JNI callback  xc_trace_init_callback(env); //create event FD  if(0 &amp;gt; (xc_trace_notifier = eventfd(0, EFD_CLOEXEC))) return XCC_ERRNO_SYS; //register signal handler  if(0 !</description>
+    </item>
+    
+    <item>
+      <title>xCrashNativeCrash</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashnativecrash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashnativecrash/</guid>
+      <description>XCrash.init public static synchronized int init(Context ctx, InitParameters params) { //save log dir  if (TextUtils.isEmpty(params.logDir)) { params.logDir = ctx.getFilesDir() + &amp;#34;/tombstones&amp;#34;; } XCrash.logDir = params.logDir; //init file manager  FileManager.getInstance().initialize( params.logDir, params.javaLogCountMax, params.nativeLogCountMax, params.anrLogCountMax, params.placeholderCountMax, params.placeholderSizeKb, params.logFileMaintainDelayMs); //init java crash handler  if (params.enableJavaCrashHandler) { JavaCrashHandler.getInstance().initialize( pid, processName, appId, params.appVersion, params.logDir, params.javaRethrow, params.javaLogcatSystemLines, params.javaLogcatEventsLines, params.javaLogcatMainLines, params.javaDumpFds, params.javaDumpNetworkInfo, params.javaDumpAllThreads, params.javaDumpAllThreadsCountMax, params.javaDumpAllThreadsWhiteList, params.javaCallback); } //init ANR handler (API level &amp;lt; 21)  if (params.</description>
+    </item>
+    
+    <item>
+      <title>xCrash原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrash%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrash%E5%8E%9F%E7%90%86/</guid>
+      <description>Native 崩溃介绍 信号 致命的信号分为 2 类：
+1、kernel 发出的：
+SIGFPE: 除数为零。
+SIGILL: 无法识别的 CPU 指令。
+SIGSYS: 无法识别的系统调用（system call）。
+SIGSEGV: 错误的虚拟内存地址访问。
+SIGBUS: 错误的物理设备地址访问。
+2、用户态进程发出的：
+SIGABRT: 调用 abort() / kill() / tkill() / tgkill() 自杀，或被其他进程通过 kill() / tkill() / tgkill() 他杀。
+Naive 崩溃捕获需要注册这些信号的处理函数（signal handler），然后在信号处理函数中收集数据。
+因为信号是以“中断”的方式出现的，可能中断任何 CPU 指令序列的执行，所以在信号处理函数中，只能调用“异步信号安全（async-signal-safe）”的函数。例如malloc()、calloc()、free()、snprintf()、gettimeofday() 等等都是不能使用的，C++ STL / boost 也是不能使用的。
+所以，在信号处理函数中我们只能不分配堆内存，需要使用堆内存只能在初始化时预分配。如果要使用不在异步信号安全白名单中的 libc / bionic 函数，只能直接调用 system call 或者自己实现
+进程崩溃前的极端情况 当崩溃捕获逻辑开始运行时，会面对很多糟糕的情况，比如：栈溢出、堆内存不可用、虚拟内存地址耗尽、FD 耗尽、Flash 空间耗尽等。有时，这些极端情况的出现，本身就是导致进程崩溃的间接原因。
+1、栈溢出
+我们需要预先用 sigaltstack() 为 signal handler 分配专门的栈内存空间，否则当遇到栈溢出时，signal handler 将无法正常运行。</description>
     </item>
     
     <item>
@@ -755,12 +1514,30 @@ If one of those process writes new data into such a page the page is automatical
     </item>
     
     <item>
+      <title>使用挂起函数来封装回调</title>
+      <link>https://huanle19891345.github.io/en/kotlin/coroutine/%E4%BD%BF%E7%94%A8%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0%E6%9D%A5%E5%B0%81%E8%A3%85%E5%9B%9E%E8%B0%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/kotlin/coroutine/%E4%BD%BF%E7%94%A8%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0%E6%9D%A5%E5%B0%81%E8%A3%85%E5%9B%9E%E8%B0%83/</guid>
+      <description>graph LR lifecycleScope--&amp;gt;|destory时通知|协程被取消 subgraph 协程挂起时,也就是异步任务执行时,需要考虑双向通知 协程被取消--&amp;gt;|cont.invokeOnCancellation通知|取消异步任务 异步任务被取消或异常--&amp;gt;|通知|取消协程/通知协程异常 end 参考 在 View 上使用挂起函数</description>
+    </item>
+    
+    <item>
       <title>动画</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/</guid>
       <description>类设计 原理图 AnimationController() /// An [AnimationController] needs a [TickerProvider], which is configured using  /// the `vsync` argument on the constructor.  ///  /// The [TickerProvider] interface describes a factory for [Ticker] objects. A  /// [Ticker] is an object that knows how to register itself with the  /// [SchedulerBinding] and fires a callback every frame. The  /// [AnimationController] class uses a [Ticker] to step through the animation  /// that it controls.</description>
+    </item>
+    
+    <item>
+      <title>包体积压缩</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%8C%85%E4%BD%93%E7%A7%AF/%E5%8C%85%E4%BD%93%E7%A7%AF%E5%8E%8B%E7%BC%A9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%8C%85%E4%BD%93%E7%A7%AF/%E5%8C%85%E4%BD%93%E7%A7%AF%E5%8E%8B%E7%BC%A9/</guid>
+      <description>AndroidBuildProcess Shrink your code To shrink your app’s code, R8 first determines all entry points into your app’s code based on the combined set of configuration files. These entry points include all classes that the Android platform may use to open your app’s Activities or services. Starting from each entry point, R8 inspects your app’s code to build a graph of all methods, member variables, and other classes that your app might access at runtime.</description>
     </item>
     
     <item>
@@ -792,6 +1569,49 @@ If one of those process writes new data into such a page the page is automatical
     </item>
     
     <item>
+      <title>埋点</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E5%9F%8B%E7%82%B9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E5%9F%8B%E7%82%B9/</guid>
+      <description>功能需求：
+我们希望提供以下功能
+ 和业务无关的代码，我们希望能够以无需手动埋点的方式进行监控，包括页面生命周期、JSON耗时，网络耗时、SQL查询耗时、点击事件、页面进入等 对特定方法进行耗时监控，我们希望用户给方法加上注解就可以，称之为半埋点 编译期，需要能够支持配置，包括对哪些页面、哪些操作进行监控 运行期，能够动态下发配置，包括各类耗时监控的上报开关和阈值等  代码埋点 **代码埋点是指在某个事件发生时调用数据发送接口上报数据。**例如开发人员按照产品/运营的需求，在Web页面/App的源码里面添加行为上报的代码，当用户的行为满足某一个条件时，这些代码就会被执行，向服务器上报行为数据。这种方案是最基础的方案，每次增加或者修改数据上报的条件，都需要开发人员的参与，并且只能在下一个版本上线后才能看到效果。基本上所有的数据平台都提供了这类数据上报的SDK，将行为上报的后台服务器接口封装成了简单的客户端SDK接口。开发者可以通过嵌入这类SDK，在埋点的地方调用少量的代码就可以上报行为数据。
+全埋点 全埋点指的是将Web页面/App内产生的所有的、满足某个条件的行为，全部上报到后台服务器。例如把一个App中所有的按钮点击都进行上报，然后由产品/运营去后台筛选所需要的行为数据。这种方案的优点非常明显，就是可以不用在新增/修改行为上报条件时，再找开发人员去修改埋点的代码。然而它的缺点也和优点一样明显，那就是上报的数据量比代码埋点大很多，里面可能很多是没有价值的数据。此外，这种方案更倾向于独立去看待用户的行为，而没有关注行为的上下文，给数据分析带来了一些难度。很多公司也提供了这类功能的SDK，通过静态或者动态的方式，“Hook”了原有的App代码，从而实现了行为的监测，在数据上报时通常是采用累积多条再上报的方案来合并请求。
+可视化埋点 可视化埋点技术揭秘
+▌什么是可视化埋点 **可视化埋点是指通过可视化工具配置采集节点，在App/Web解析配置查找节点，监听节点产生的事件并上报。**例如产品在Web页面/App的界面上进行圈选，配置需要监测界面上哪一个元素，然后保存这个配置，当App启动时会从后台服务器获得产品/运营预先圈选好的配置，然后根据这份配置查找并监测App界面上的元素，当某一个元素满足条件时，就会上报行为数据到后台服务器。有了暴力的全埋点技术方案，很容易联想到按需埋点，可视化埋点就是一种按需配置埋点的方案。现在也有一些公司提供了这类SDK，圈选监测元素时，有的是提供一个Web管理界面，手机在安装并初始化了SDK之后，可以和管理界面了连接，让用户在Web管理界面上配置需要监测的元素，有的是直接让用户在手机上圈选元素进行埋点。
+可视化埋点，通常是指用户通过设备连接用户行为分析工具的数据接入管理界面，对可交互且交互后有效果的页面元素（如：图片、按钮、链接等），直接在界面上进行操作实现数据埋点，下发采集代码生效回数的埋点方式。这种方式所见即所得，跳过代码部署、测试验证和发版过程，极大提升生产力。
+▌可视化埋点的具体流程 首先手机APP嵌入开启可视化功能的SDK，通过WebSocket的方式和服务器、前端进行相互通信，SDK会定时收到服务器下发的页面请求；然后会上报页面快照和界面因子信息到服务器，服务器收到信息后会根据界面因子信息对页面的每个元素进行分析，根据控件的类型来标记哪些页面元素是可以被埋点的；最后将可埋点信息交给前端渲染，此时，前端Web页面上展示就的就是可以埋点的页面。
+埋点人员在渲染出来的前端Web页面上进行框选，标记事件属性等进行埋点。前端Web页面会将对应的埋点信息传递给服务器保存，SDK则会通过策略定时从服务器获取埋点信息。
+以上就是整个埋点的大体工作流程，具体包含WebSocket通信过程以及具体的埋点过程。下面就针对这两个过程分别进行细致的介绍。
+▌WebSocket通信 由于埋点过程中需要设备APP与前端埋点Web页面进行长时间的连接，并且连接期间双方需要进行互相通信，所以就需要一种高效的支持双向通信的协议来支持这种场景。
+WebSocket是用于在Web浏览器和服务器之间进行任意的双向数据传输的一种技术，它基于TCP协议实现，包含初始的握手过程，以及后续的多次数据帧双向传输过程。其目的是在应用和服务器进行频繁双向通信时，可以避免Server端被打开多个HTTP连接进行工作，节约资源、提高了工作效率和资源利用率。WebSocket被广泛用于Web的实时消息通信系统中。它实现了浏览器与服务器全双工通信，将会替代基于HTTP的Ajax长轮询的拉取消息模式。建立了WebSocket连接后，只要客户端和服务器端任意一端不主动断开连接前，通信行为都是在一个持久连接上发起，后续数据与请求都通过帧序列的形式进行传输。
+在具体的连接过程中，其实前端Web页面和SDK与服务器的连接都是基于WebSocket的，并且这两个连接最终会建立一个一对一的对应关系。易观在埋点的过程中规定，同一个版本的APP只允许一台设备进行连接埋点。流程如下图：
+该图描述的是SDK如何与服务器建立WebSocket连接以及如何与前端Web页面进行关联，具体有以下几个步骤：
+1.埋点人员打开埋点Web页面，页面与服务器建立连接。
+2.打开手机APP(已经提前集成了易观可视化埋点功能的SDK)，手机摇一摇建立WebSocket连接。
+3.服务端通过WebSocket连接请求该手机的设备信息。
+4.手机收到服务器的请求后获取对应的设备信息，然后通过WebSocket上报设备信息到服务器。
+5.服务器收到设备的信息后发送到步骤一的Web页面进行显示。
+6.埋点人员在Web页面选择手机进行关联，同时服务器通过WebSocket发送快照请求到手机。
+以上就是具体的设备的连接过程，到此为止，服务器与手机就已经建立了一个可以相互通信的长连接，并且与Web页面进行了关联，如果此时再有同一版本的APP进行连接，页面会提示用户该版本的APP已经进行连接了。
+接下来就是埋点过程中，服务器会定时向手机下发请求信息来获取最新的页面信息：
+1.服务器定时请求手机的快照信息，手机在收到快照请求后发送快照信息到服务器。
+2.WebSocket服务器收到手机的快照信息后，首先把标志置为false，待解析完快照信息后发送至Web界面进行展示。
+3.发送成功后把标志置为true,定时服务根据标志来决定是否继续请求快照。
+4.心跳包为APP以及WEB端定时发送，来保证WebSocket的长连接畅通。
+以上就是埋点过程中，整个WebSocket的工作流程。这里面有几个需要注意的地方：
+1.SDK通过WebSocket上报的页面快照信息大小是根据当前页面的复杂度来决定的。如果当前页面包含的元素比较多，那么上传的快照信息就会比较大，这样上传至服务器就会比较慢。在网络不好的情况下出错的概率就比较大。易观在这方面做了一些优化，会对上传的信息进行一些优化和压缩处理，从而尽可能兼顾效率的同时保证上报数据的连续性和完整性。
+2.SDK上报快照信息是被动的，是通过服务器来控制的。服务器会定时（比如每隔几秒）请求SDK上报信息。这样就会有一个问题，就是SDK在此期间没有发生页面的切换，页面信息没有变化，这时候收到服务器请求就无需上报快照信息，否则既浪费带宽，体验上也不好。所以易观在这方面也做了优化，服务端和SDK通过某些机制来尽量减少比较大的交互过程，尽量减少不必要的请求。
+▌埋点过程 下面介绍一下具体的埋点过程，先看下图：
+埋点过程是通过Http协议来实现的。服务器提供相关的埋点查询/新增/修改/删除的接口。埋点人员通过浏览器在具体的埋点Web页面对埋点元素进行框选，继而填写对应的事件名称，然后点击相应的新增/修改/删除按钮即可。
+用户编辑的所有的埋点信息最终都会保存到MySQL数据库中。用户最新的快照信息会保存在Redis中一段时间，供用户修改埋点的时候调用。用户编辑完所有的埋点后点击部署按钮，所有的埋点就会实时生效，其他设备上的APP就会获取到部署后的埋点信息。
+至此，可视化埋点的流程和技术细节就介绍完了。
+参考 强大！asm插桩实现android端无埋点性能监控！
+Android埋点技术分析</description>
+    </item>
+    
+    <item>
       <title>基础数据结构</title>
       <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -803,6 +1623,19 @@ If one of those process writes new data into such a page the page is automatical
     </item>
     
     <item>
+      <title>布局优化</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</guid>
+      <description>布局加载优化 graph LR 正面解决(正面解决)--&amp;gt;去IO 正面解决--&amp;gt;去解析 正面解决--&amp;gt;去反射 侧面解决--&amp;gt;异步加载 参考 //编译生成xml&amp;ndash;&amp;gt;javaView
+https://github.com/iReaderAndroid/X2C
+//仅仅优化反射
+android &amp;ldquo;退一步&amp;quot;的布局加载优化
+Android布局优化（三）使用AsyncLayoutInflater异步加载布局</description>
+    </item>
+    
+    <item>
       <title>应用启动</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -810,6 +1643,52 @@ If one of those process writes new data into such a page the page is automatical
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</guid>
       <description>原理图 上述流程4——5之间还有一个过程，即当ActivityManagerService调用attachApplicationLocked时会跨进程调用thread.bindApplication通知应用进程发消息并调用handleBindApplication，内部会第一次初始化应用进程的mResources和mClassLoader给LoadedApk
 Activity.startActivity public void startActivityForResult(@RequiresPermission Intent intent, int requestCode, @Nullable Bundle options) { if (mParent == null) { options = transferSpringboardActivityOptions(options); Instrumentation.ActivityResult ar = mInstrumentation.execStartActivity( this, mMainThread.getApplicationThread(), mToken, this, intent, requestCode, options); } } Instrumentation.execStartActivity public ActivityResult execStartActivity( Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options) { IApplicationThread whoThread = (IApplicationThread) contextThread; int result = ActivityManager.getService() .startActivity(whoThread, who.getBasePackageName(), intent, intent.resolveTypeIfNeeded(who.getContentResolver()), token, target != null ?</description>
+    </item>
+    
+    <item>
+      <title>应用安全</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%AE%89%E5%85%A8/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%AE%89%E5%85%A8/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/</guid>
+      <description>防Hook 第一、Xposed框架将Hook信息存储在字段fieldCache，methodCache，constructorCache 中， 利用java 反射机制获取这些信息，检测Hook信息中是否含有App中敏感的方法，字段，构造方法
+第二、检测进程中使用so名中包含关键”hack|inject|hook|call” 的信息，这个主要是防止有的人不用这个Xposed框架，而是直接自己写一个注入功能
+第三、root检测原理是：是否含有su程序和ro.secure是否为1
+第四、防止被Hook的方式就是可以查看XposedBridge这个类，有一个全局的hook开关，所有有的应用在启动的时候就用反射把这个值设置成true，这样Xposed的hook功能就是失效了
+第五、如果应用被Xposed进行hook操作之后，抛出的异常堆栈信息中就会包含Xposed字样，所以可以通过应用自身内部抛出异常来检测是否包含Xposed字段来进行防护
+Log 泄露app中的信息
+线上仅仅写入文件，不打印log
+完整性校验(防篡改)，签名 &amp;lt;应用安全防护和逆向分析&amp;gt;&amp;ndash;第12章
+ MANIFEST.MF文件  包含了apk文件中所有文件的数据摘要内容SHA1+Base64,属性名为&amp;quot;SHA1-Digest&amp;quot;(安全散列算法) 另外还有一个&amp;quot;Name&amp;quot;属性，值为该文件在apk包中的路径, 例子:
+Manifest-Version: 1.0 Name: AUTHORS SHA1-Digest: tNG7y16mMckMxD5PMWbMbm15YuM= Name: AndroidManifest.xml SHA1-Digest: DpoXWRs62IFQkzew0PZZ1IhBr4E= Name: META-INF/android.arch.lifecycle_livedata.version SHA1-Digest: OxxKFJcpzAROGjnfMbNijNv1+JU=  CERT.SF文件 计算MANIFEST.MF文件整体的SHA1值，再经过BASE64编码后记录在主属性(文件头)上的&amp;quot;SHA1-Digest-Mainifest&amp;quot;属性下 MANIFEST.MF文件的每个条目做一个SHA1+Base64之后记录在同名块中，属性名为&amp;quot;SHA1-Digest&amp;quot;, 例子:  Signature-Version: 1.0 Created-By: 1.0 (Android) SHA1-Digest-Manifest: lCe0n/umuXx2pJRbNdAPxSJQGyU= X-Android-APK-Signed: 2 Name: AUTHORS SHA1-Digest: NJvhMmfYrxh85l+E46t/lOXoRmk= Name: AndroidManifest.xml SHA1-Digest: N/26hYDkRfJLe6NEN7232YcVe1M= Name: META-INF/android.arch.lifecycle_livedata.version SHA1-Digest: MlMwWIwNpuS2rz/AzXm5Hqaliu4=  CERT.RSA文件 对CERT.SF文件用私钥加密出签名，再将签名以及包含公钥信息的数字证书一同写入CERT.RSA  二进制文件，因为RSA文件加密了，所以需要用openssl命令查看内容
+openssl pkcs7 -inform DER -in CERT.</description>
+    </item>
+    
+    <item>
+      <title>应用安装和卸载过程</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/apk%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/apk%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD%E8%BF%87%E7%A8%8B/</guid>
+      <description>安装过程： 1.程序安装的4大步骤
+（1） 拷贝apk文件到指定目录 在Android系统中，apk安装文件是会被保存起来的，默认情况下，用户安装的apk首先会被拷贝到 /data/app 目录下。
+/data/app目录是用户有权限访问的目录，在安装apk的时候会自动选择该目录存放用户安装的文件，而系统出厂的apk文件则被放到了 /system 分区下,包括 /system/app，/system/vendor/app，以及 /system/priv-app 等等，该分区只有Root权限的用户才能访问，这也就是为什么在没有Root手机之前，我们无法删除系统出厂的app的原因了。
+PackageInstaller所在的app进程先将其apk copy到data/user_de/0/com.android.packageinstaller/no_backup/package859349096673958696.apk中
+复制APK安装包到data/app目录下，首先copy到data/app/vmdl609226785.tmp/base.apk
+（2） 解压apk，拷贝文件，创建应用的数据目录 为了加快app的启动速度，apk在安装的时候，会首先将app的可执行文件（dex）拷贝到 /data/dalvik-cache 目录，缓存起来。
+然后，在/data/data/目录下创建应用程序的数据目录（以应用的包名命名），存放应用的相关数据，如数据库、xml文件、cache、二进制的so动态库等等，
+（3） 解析apk的AndroidManifinest.xml文件 Android系统中，也有一个类似注册表的东西，用来记录当前所有安装的应用的基本信息，每次系统安装或者卸载了任何apk文件，都会更新这个文件。这个文件位于如下目录：
+/data/system/packages.xml
+系统在安装apk的过程中，会解析apk的AndroidManifinest.xml文件，提取出这个apk的重要信息写入到packages.xml文件中，这些信息包括：权限、应用包名、APK的安装位置、版本、userID等等。
+由此，我们就知道了为啥一些应用市场和软件管理类的app能够很清楚地知道当前手机所安装的所有的app，以及这些app的详细信息了。
+另外一件事就是Linux的用户Id和用户组Id，以便他可以获得合适的运行权限。
+以上这些都是由PackageManagerService完成的。
+（4） 显示快捷方式 这些应用程序只是相当于在PackageManagerService服务注册好了，如果我们想要在Android桌面上看到这些应用程序，还需要有一个Home应用程序，负责从PackageManagerService服务中把这些安装好的应用程序取出来，并以友好的方式在桌面上展现出来，例如以快捷图标的形式。在Android系统中，负责把系统中已经安装的应用程序在桌面中展现出来的Home应用程序就是Launcher了
+PackageManagerService的启动过程 Android系统在启动的过程中，会启动一个应用程序管理服务PackageManagerService，这个服务负责扫描系统中特定的目录，找到里面的应用程序文件，即以Apk为后缀的文件，然后对这些文件进解析，得到应用程序的相关信息。应用程序管理服务PackageManagerService安装应用程序的过程，其实就是解析析应用程序配置文件AndroidManifest.xml的过程，并从里面得到得到应用程序的相关信息，例如得到应用程序的组件Activity、Service、Broadcast Receiver和Content Provider等信息，有了这些信息后，通过ActivityManagerService这个服务，我们就可以在系统中正常地使用这些应用程序了。应用程序管理服务PackageManagerService是系统启动的时候由SystemServer组件启动的，启后它就会执行应用程序安装的过程，因此，本文将从SystemServer启动PackageManagerService服务的过程开始分析系统中的应用程序安装的过程。
+卸载过程 删除安装过程中在上述三个目录下创建的文件及目录。
+参考 Android应用安装过程及原理
+Android应用安装流程(基于Android9.0)
+Android应用程序安装过程解析(源码角度)</description>
     </item>
     
     <item>
@@ -826,14 +1705,44 @@ ExecuteSwitchImpl template&amp;lt;bool do_access_check, bool transaction_active&
     </item>
     
     <item>
-      <title>数据保存和恢复</title>
-      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</link>
+      <title>插件化技术选型</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</guid>
-      <description>转屏场景 数据保存 android/app/servertransaction/ActivityRelaunchItem.java
-@Override public void execute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) { client.handleRelaunchActivity(mActivityClientRecord, pendingActions); } ActivityThread.java
-@Override public void handleRelaunchActivity(ActivityClientRecord tmp, PendingTransactionActions pendingActions) { handleRelaunchActivityInner(r, configChanges, tmp.pendingResults, tmp.pendingIntents, pendingActions, tmp.startsNotResumed, tmp.overrideConfig, &amp;#34;handleRelaunchActivity&amp;#34;); } private void handleRelaunchActivityInner(ActivityClientRecord r, int configChanges, List&amp;lt;ResultInfo&amp;gt; pendingResults, List&amp;lt;ReferrerIntent&amp;gt; pendingIntents, PendingTransactionActions pendingActions, boolean startsNotResumed, Configuration overrideConfig, String reason) { // Preserve last used intent, it may be set from Activity#setIntent().  final Intent customIntent = r.activity.mIntent; // Need to ensure state is saved.</description>
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/</guid>
+      <description>Shadow(腾讯) Qigsaw(爱奇艺) https://developer.android.google.cn/guide/app-bundle
+ VirtualAPK(滴滴) https://github.com/didi/VirtualAPK
+https://blog.csdn.net/u012124438/article/details/74118905
+我们可以先启动一个已经在AndroidManifest.xml里面声明过的替身Activity，让这个Activity进入AMS进程接受检验；最后在换成我们真正需要启动的Activity；这样就成功欺骗了AMS进程
+Atlas(阿里) https://blog.csdn.net/M075097/article/details/79225030
+;//-----2.3.3替换系统原生ClassLoader为DelegateClassLoad AndroidHack.injectClassLoader(packageName, newClassLoaderer) //-----2.3.4 替换系统的Instrumentation为InstrumentationHook，该类是一个系统与用户之间交互的介质层，大部分调用的功能操作都会流过此类之后再进一步调  AndroidHack.injectInstrumentationHook(new InstrumentationHook(AndroidHack.getInstrumentation(), application.getBaseContext() ActivityManagerDelegate activityManagerProxy = new ActivityManagerDelegate(); Object gDefault = null; if(Build.VERSION.SDK_INT&amp;gt;25 || (Build.VERSION.SDK_INT==25&amp;amp;&amp;amp;Build.VERSION.PREVIEW_SDK_INT&amp;gt;0)){ gDefault=AtlasHacks.ActivityManager_IActivityManagerSingleton.get(AtlasHacks.ActivityManager.getmClass()); }else{ gDefault=AtlasHacks.ActivityManagerNative_gDefault.get(AtlasHacks.ActivityManagerNative.getmClass()); } AtlasHacks.Singleton_mInstance.hijack(gDefault, activityManagerProxy); RePlugin(360) Replugin与DroidPlugin框架比较
+虽然唯一Hook点为宿主Application#LoadedApk中的classLoader对象，但源码中依然存在着众多的invoke反射，和google禁止使用非公开api的策略相违背
+Neptune(爱奇艺)  插件的安装与加载  https://github.com/iqiyi/Neptune/blob/master/docs/SDK%E5%8E%9F%E7%90%86/%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8A%A0%E8%BD%BD.md
+ Neptune/docs/SDK原理/插件的代理实现机制.md  https://github.com/iqiyi/Neptune/blob/master/docs/SDK%E5%8E%9F%E7%90%86/%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.md
+Hydra(美团-未开源) </description>
+    </item>
+    
+    <item>
+      <title>插件化面临的问题</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>加载插件类 Shadow的全动态设计原理解析
+加载插件资源 传统方式 https://github.com/singwhatiwanna/dynamic-load-apk/
+我们知道，activity的工作主要是由ContextImpl来完成的， 它在activity中是一个叫做mBase的成员变量。注意到Context中有如下两个抽象方法，看起来是和资源有关的，实际上context就是通过它们来获取资源的，这两个抽象方法的真正实现在ContextImpl中。也即是说，只要我们自己实现这两个方法，就可以解决资源问题了。
+/** Return an AssetManager instance for your application&amp;#39;s package. */ public abstract AssetManager getAssets(); /** Return a Resources instance for your application&amp;#39;s package. */ public abstract Resources getResources(); 下面看一下如何实现这两个方法 首先要加载apk中的资源：
+protected void loadResources() { try { AssetManager assetManager = AssetManager.class.newInstance(); Method addAssetPath = assetManager.getClass().getMethod(&amp;#34;addAssetPath&amp;#34;, String.class); addAssetPath.invoke(assetManager, mDexPath); mAssetManager = assetManager; } catch (Exception e) { e.printStackTrace(); } Resources superRes = super.getResources(); mResources = new Resources(mAssetManager, superRes.</description>
+    </item>
+    
+    <item>
+      <title>易观方舟</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E6%98%93%E8%A7%82%E6%96%B9%E8%88%9F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%9F%8B%E7%82%B9/%E6%98%93%E8%A7%82%E6%96%B9%E8%88%9F/</guid>
+      <description>模块设计 graph TB 采集策略--&amp;gt;|控制触发|采集 采集--&amp;gt;自动采集--&amp;gt;全埋点监听touch--&amp;gt;|onGlobalLayout|hookDecorViewClick--&amp;gt;|mOnTouchListener|HookTouchListener--&amp;gt;trackEvent 采集--&amp;gt;手动采集--&amp;gt;trackEvent 上报策略--&amp;gt;|控制触发|上报 /** com/analysys/process/HeatMap.java * 反射给View注册监听 */ private void hookViewClick(View view) throws Exception {  ans-sdk/analysys_core/src/main/java/com/analysys/AutomaticAcquisition.java
+AutomaticAcquisition onActivityCreated @Override public void onActivityCreated(final Activity activity, Bundle savedInstanceState) { AnalysysConfig config = AgentProcess.getInstance().getConfig(); if (config.isAutoTrackClick()) { AnalysysUtil.onActivityCreated(activity); } if (config.isAutoHeatMap()) { initHeatMap(new WeakReference&amp;lt;&amp;gt;(activity)); } } initHeatMap private void initHeatMap(final WeakReference&amp;lt;Activity&amp;gt; wa) { layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { @Override public void onGlobalLayout() { if (wa == null) { return; } final Activity activity = wa.</description>
     </item>
     
     <item>
@@ -864,7 +1773,8 @@ Flutter’s platform-specific API support does not rely on code generation, but 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B8%B2%E6%9F%93/%E6%B8%B2%E6%9F%93/</guid>
-      <description>绘制渲染 三棵树 Widget Tree，Element Tree 以及 RenderObject Tree 。根据它们的功能我将它翻译成模型树，状态树和渲染树，也正是通过这三棵树维护起了整个应用的视图数据。
+      <description>绘制渲染 三棵树 https://flutter.dev/docs/resources/architectural-overview#layout-and-rendering
+Widget Tree，Element Tree 以及 RenderObject Tree 。根据它们的功能我将它翻译成模型树，状态树和渲染树，也正是通过这三棵树维护起了整个应用的视图数据。
 开发者通过Widget配置，Framework通过比对Widget配置来更新Element，最后调度RenderObject Tree完成布局排列和绘制。
  Widget Tree  存放属性的描述信息，更像是一个Model。同一个Widget可以同时描述多个渲染树中的节点，但是它是不可修改的，因此它只会被创建或销毁。
 Widget是为Element描述需要的配置， 负责创建Element，决定Element是否需要更新。Flutter Framework通过差分算法比对Widget树前后的变化，决定Element的State是否改变。当重建Widget树后并未发生改变， 则Element不会触发重绘，则就是Widget树的重建并不一定会触发Element树的重建。
@@ -929,12 +1839,86 @@ graph LR ResolveMethod--&amp;gt;ResolveType ResolveField--&amp;gt;ResolveType Re
     </item>
     
     <item>
+      <title>继承和组合</title>
+      <link>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/%E7%BB%A7%E6%89%BF%E5%92%8C%E7%BB%84%E5%90%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/%E7%BB%A7%E6%89%BF%E5%92%8C%E7%BB%84%E5%90%88/</guid>
+      <description>组织结构形态 继承和组合对应着客观事物的组织结构形态，具体的说：
+ 继承: 子类是父类，是有相同行为(方法)签名但实现不同的父类能力延伸和拓展，拥有父类的public访问和protect override能力 组合: 包裹类组合多个被包裹类，拥有多个被包裹类的public访问能力  访问权限可以由不同语言的访问限定符进行不同粒度的控制，而继承和组合最大的区别在于继承体系中子类对父类protect 方法的override能力(在子类实现中可能会调用super的相同方法)
+一般优化方式 继承 对于继承和组合对代码结构的优化，首先开始的是由客观事物形态决定的继承关系，在子类继承父类的同时，自身有很多功能的定制
+组合 将子类对每个功能的定义进行依赖关系梳理，每个功能以高内聚低耦合的组合方式在子类中使用，可以考虑使用android lifecycle这种观察者模式将每个功能类的对关键事件(生命周期)的监听进行分发，降低其在子类中的耦合，一行代码完成一个功能
+这种优化方式已经可以使得项目代码逻辑清晰，对于需要某个高内聚功能时，可以选择直接继承(有合适的父类时)或者组合各个功能类进行实现，从而解决无法多继承但同时需要两个不同的父类功能时的问题
+函数式优化，组合代替继承 很多设计模式和设计思想都是为了组合代替继承，又如语言层面对委托的支持(kotlin delegate, dart mixin)。通过上面对组织结构形态的分析，继承和组合最大的区别在于继承体系中子类对父类protect 方法的override能力，因此函数式编程思想(kotlin, dart中的函数变量传递，java中则对应着lambda表达式或者单方法interface)解决这个问题，在flutter中更是推荐组合代理继承，所有widget只要继承StatefulWidget或者StatelessWidget并进行功能组合即可
+graph LR subgraph 被别人组合获取能力: 要求两者对外具有相同的接口能力抽象,通过代理转发 MyViewWantsToBeCenter--&amp;gt;|继承|View MyViewWantsToBeCenter--&amp;gt;|组合|Center(&amp;quot;wrap it in a Center widget&amp;quot;) end subgraph 组合别人获取能力 子类--&amp;gt;|继承|父类 包裹者--&amp;gt;|包裹|被包裹者 end 具体做法 通过传递方法fun实现给被包裹类，在被包裹类中进行fun的调用，达到类似子类override父类的能力。如果要实现类似子类调用super同签名方法实现的功能，
+方法1(较难理解，要修改方法签名，不推荐) 从被包裹类到包裹类层层包裹方法实现:
+可以将被包裹类中的同签名fun作为额外的(原方法签名参数列表后新增一个)参数，让外部传递新的参数列表给被包裹类，被包裹类通过调用fun1时传递自身实现让包裹类拥有类似子类调用super同签名方法实现的能力，如果包裹类没有传递fun1，可以直接调用fun
+class BeWrapperedA(Fun1 funA) otherFun() { funA(param1, param2, fun) } fun(param1, param2) { } Fun1(param1 a, param2 b, fun(param1, param2) c) ------------------------------------------------ class BeWrapperedB(Fun1 funB) BeWrapperedA((a, b, c) -&amp;gt; {funB(a, b, (a, b) -&amp;gt; (Fun1(a, b, c))))}) Fun1(param1 a, param2 b, fun(param1, param2) c) { c(a , b) //相当于调用super(a, b)  a + b;//自定义逻辑 } 方法2，便于理解，不用修改方法签名 正向思维，从包裹类到被包裹类，按需调用方法，类似代理等设计思想，都实现接口，按需调用，类似flutter的StatefulWidget的一级子类，通过build方法约定从包裹类最外层开始向内调用被包裹类的方法实现</description>
+    </item>
+    
+    <item>
+      <title>编译插桩和动态代理</title>
+      <link>https://huanle19891345.github.io/en/android/aop/%E7%BC%96%E8%AF%91%E6%8F%92%E6%A1%A9%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/aop/%E7%BC%96%E8%AF%91%E6%8F%92%E6%A1%A9%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>编译插桩技术 ByteX https://github.com/bytedance/ByteX
+ASM https://asm.ow2.io/
+【Android】函数插桩（Gradle + ASM）
+ ASM代码生成 在Android Studio中安装ASM Bytecode Viewer插件； 2、安装后，在编译器中，点击右键，选择Show Bytecode Viewer；  查看java字节码:
+jclasslib插件，View-&amp;gt;Show ByteCode with jclasslib
+极客时间&amp;ndash;android开发高手课07-sample项目
+compile group: &amp;#39;org.ow2.asm&amp;#39;, name: &amp;#39;asm&amp;#39;, version: &amp;#39;5.1&amp;#39; compile group: &amp;#39;org.ow2.asm&amp;#39;, name: &amp;#39;asm-commons&amp;#39;, version: &amp;#39;5.1&amp;#39; 通过反射注入transform
+project.getGradle().getTaskGraph().addTaskExecutionGraphListener(new TaskExecutionGraphListener() { @Override public void graphPopulated(TaskExecutionGraph taskGraph) { for (Task task : taskGraph.getAllTasks()) { if ((task.name.equalsIgnoreCase(hackTransformTaskName) || task.name.equalsIgnoreCase(hackTransformTaskNameForWrapper)) &amp;amp;&amp;amp; !(((TransformTask) task).getTransform() instanceof SystemTraceTransform)) { project.logger.warn(&amp;#34;find dex transform. transform class: &amp;#34; + task.</description>
+    </item>
+    
+    <item>
+      <title>网络请求安全</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%AE%89%E5%85%A8/</guid>
+      <description>https://httpcanary.com/zh-hans/install.html
+安装根证书（必须） 安装证书要求设备必须设置锁屏密码或者图案，请按照系统提示进行设置（此乃系统限制与HttpCanary无关）
+HttpCanary使用Man-in-the-Middle(MITM)技术抓取和解析TLS/SSL协议数据包，比如常见的HTTPS、WSS等加密请求，所以使用之前必须先安装HttpCanary根证书。安装时，默认点击确定即可，请勿修改配置。
+SSL/TLS安全之——中间人攻击（MITM）浅析
+httpcanary是通过VPN抓取数据包，因此通过禁用代理无法关闭抓包
+手机上的httpcanary或PC上的ss打开都会导致正常通过代理进行抓包抓不到
+https加密时，通过代理进行charles抓包时看到的数据时密文，但httpcanary看到的是明文，因为httpcanary是在应用层看到的未加密的数据和已解密的数据，加密解密发生在应用层和传输层之间。因此只能在业务上对网络参数进行加解密
+Android Okhttp/Retrofit网络请求加解密实现方案
+Android平台HTTPS抓包解决方案及问题分析 Android平台HTTPS抓包解决方案及问题分析
+1. 抓包原理 几乎所有网络数据的抓包都是采用中间人的方式（MITM），包括大家常用的Fiddler、Charles等知名抓包工具，HttpCanary同样是使用中间人的方式进行抓包。
+从上面这个原理图，可以看出抓包的核心问题主要是两个：
+ MITM Server如何伪装成真正的Server； MITM Client如何伪装成真正的Client。  第一个问题，MITM Server要成为真正的Server，必须能够给指定域名签发公钥证书，且公钥证书能够通过系统的安全校验。比如Client发送了一条https://www.baidu.com/的网络请求，MITM Server要伪装成百度的Server，必须持有www.baidu.com域名的公钥证书并发给Client，同时还要有与公钥相匹配的私钥。
+MITM Server的处理方式是从第一个SSL/TLS握手包Client Hello中提取出域名www.baidu.com，利用应用内置的CA证书创建www.baidu.com域名的公钥证书和私钥。创建的公钥证书在SSL/TLS握手的过程中发给Client，Client收到公钥证书后会由系统会对此证书进行校验，判断是否是百度公司持有的证书，但很明显这个证书是抓包工具伪造的。为了能够让系统校验公钥证书时认为证书是真实有效的，我们需要将抓包应用内置的CA证书手动安装到系统中，作为真正的证书发行商（CA），即洗白。这就是为什么，HTTPS抓包一定要先安装CA证书。
+第二个问题，MITM Client伪装成Client。由于服务器并不会校验Client（绝大部分情况），所以这个问题一般不会存在。比如Server一般不会关心Client到底是Chrome浏览器还是IE浏览器，是Android App还是iOS App。当然，Server也是可以校验Client的，这个后面分析。
+2. 安装CA证书 抓包应用内置的CA证书要洗白，必须安装到系统中。而Android系统将CA证书又分为两种：用户CA证书和系统CA证书。顾明思议，用户CA证书是由用户自行安装的，系统CA证书是由系统内置的，很明显后者更加真实有效。
+系统CA证书存放在/etc/security/cacerts/目录下，名称是CA证书subjectDN的Md5值前四位移位取或，后缀名是.0，比如00673b5b.0。考虑到安全原因，系统CA证书需要有Root权限才能进行添加和删除。
+对于非Root的Android设备，用户只能安装用户CA证书。
+无论是系统CA证书还是用户CA证书，都可以在设置-&amp;gt;系统安全-&amp;gt;加密与凭据-&amp;gt;信任的凭据中查看
+3. Android 7.0的用户CA证书限制 Android从7.0开始系统不再信任用户CA证书（应用targetSdkVersion &amp;gt;= 24时生效，如果targetSdkVersion &amp;lt; 24即使系统是7.0+依然会信任）。也就是说即使安装了用户CA证书，在Android 7.0+的机器上，targetSdkVersion &amp;gt;= 24的应用的HTTPS包就抓不到了。
+比如上面的例子，抓包工具用内置的CA证书，创建了www.baidu.com域名的公钥证书发给Client，系统校验此证书时发现是用户CA证书签发的，sorry。。。
+那么，我们如果绕过这种限制呢？已知有以下四种方式（低于7.0的系统请忽略）：
+3.1 AndroidManifest中配置networkSecurityConfig
+&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;network-security-config&amp;gt; &amp;lt;base-config cleartextTrafficPermitted=&amp;#34;true&amp;#34;&amp;gt; &amp;lt;trust-anchors&amp;gt; &amp;lt;certificates src=&amp;#34;system&amp;#34; /&amp;gt; &amp;lt;certificates src=&amp;#34;user&amp;#34; /&amp;gt; &amp;lt;/trust-anchors&amp;gt; &amp;lt;/base-config&amp;gt; &amp;lt;/network-security-config&amp;gt; 这样即表示，App信任用户CA证书，让系统对用户CA证书的校验给予通过。更多相关信息，详见Network security configuration。</description>
+    </item>
+    
+    <item>
       <title>解释执行7_0</title>
       <link>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</guid>
       <description>quick_entrypoints_x86.S art_quick_invoke_stub /*这段注释来自于源码，它展示了调用art_quick_invoke_stub函数时，相关参数在栈中的布局 * Quick invocation stub (non-static). * On entry: * [sp] = return address 返回值地址，这是由函数调用指令自动压入栈的 * [sp + 4] = method pointer 代表方法C的ArtMethod对象 * [sp + 8] = argument array or null for no argument methods * [sp + 12] = size of argument array in bytes * [sp + 16] = (managed) thread pointer 这是代表调用线程的Thread对象 * [sp + 20] = JValue* result * [sp + 24] = shorty */ DEFINE_FUNCTION art_quick_invoke_stub #定义art_quick_invoke_stub函数  PUSH ebp // save ebp PUSH ebx // save ebx PUSH esi // save esi PUSH edi // save edi .</description>
+    </item>
+    
+    <item>
+      <title>跨组件传递数据</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</guid>
+      <description>总览 InheritedWidget graph TB parent(&amp;quot;parentInheritedWidget&amp;quot;)--&amp;gt;|_dependents:依赖我,的组件,也就是我的改变需要通知到的组件|child(&amp;quot;child.inheritFromWidgetOfExactType&amp;quot;) child--&amp;gt;|getParentInheritedWidget|parent child--&amp;gt;|useParentInheritedWidget|child 类设计 Element.mount @mustCallSuper void mount(Element parent, dynamic newSlot) { _updateInheritance();//main  } InheritedElement._updateInheritance @override void _updateInheritance() { assert(_active); final Map&amp;lt;Type, InheritedElement&amp;gt; incomingWidgets = _parent?._inheritedWidgets; if (incomingWidgets != null) _inheritedWidgets = HashMap&amp;lt;Type, InheritedElement&amp;gt;.from(incomingWidgets); else _inheritedWidgets = HashMap&amp;lt;Type, InheritedElement&amp;gt;(); _inheritedWidgets[widget.runtimeType] = this; } Element.inheritFromWidgetOfExactType /// Obtains the nearest widget of the given type, which must be the type of a  /// concrete [InheritedWidget] subclass, and registers this build context with  /// that widget such that when that widget changes (or a new widget of that  /// type is introduced, or the widget goes away), this build context is  /// rebuilt so that it can obtain new values from that widget.</description>
     </item>
     
     <item>

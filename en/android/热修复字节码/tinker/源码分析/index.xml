@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>源码分析 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+    <description>Recent content in 源码分析 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resource.arsc生成和结构</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/resource.arsc%E7%94%9F%E6%88%90%E5%92%8C%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/resource.arsc%E7%94%9F%E6%88%90%E5%92%8C%E7%BB%93%E6%9E%84/</guid>
+      <description>从资源ID获取字符串资源 String appName = getResources().getString(R.string.app_name); 从资源ID获取drawable资源的过程 Drawable drawable = getResources().getDrawable(R.drawable.background, getTheme()); 研究源码来源 tinker gradle plugin中的resourceParser ResDiffDecoder&amp;ndash;AbstractApkParser&amp;ndash;ResourceTableParser
+AbstractApkParser.parseResourceTable private DexClass[] dexClasses; private ResourceTable resourceTable; private String manifestXml; private ApkMeta apkMeta; private Set&amp;lt;Locale&amp;gt; locales; private List&amp;lt;CertificateMeta&amp;gt; certificateMetaList; private static final Locale DEFAULT_LOCALE; private Locale preferredLocale; public void parseResourceTable() throws IOException { byte[] data = this.getFileData(&amp;#34;resources.arsc&amp;#34;); if (data == null) { this.resourceTable = new ResourceTable(); this.locales = Collections.emptySet(); } else { this.resourceTable = new ResourceTable(); this.</description>
+    </item>
+    
+    <item>
+      <title>TinkerGradlePluginSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkergradlepluginsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkergradlepluginsource/</guid>
+      <description>build.gradle层 1：构建基准apk(仅仅发版时需要打开tinkerEnabled，开发自己debug时不需要打开)
+1.1: Copy apk,map,R文件到bakApk目录下
+1.2: 创建tinkerPatchDebug和tinkerPatchRelease的task执行的必要参数
+//tinker/tinker-sample-android/app/build.gradle def bakPath = file(&amp;#34;${buildDir}/bakApk/&amp;#34;) /** \* you can use assembleRelease to build you base apk \* use tinkerPatchRelease -POLD_APK= -PAPPLY_MAPPING= -PAPPLY_RESOURCE= to build patch \* add apk from the build/bakApk */ ext { //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?  tinkerEnabled = true //for normal build  //old apk file to build patch apk  tinkerOldApkPath = &amp;#34;${bakPath}/app-debug-0917-16-24-41.</description>
+    </item>
+    
+    <item>
+      <title>TinkerSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkersource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkersource/</guid>
+      <description>TinkerApplication.attachBaseContext /** \* tinkerFlags, which types is supported \* dex only, library only, all support \* default: TINKER_ENABLE_ALL */ private final int tinkerFlags; private final boolean tinkerLoadVerifyFlag; private final String delegateClassName; private final String loaderClassName; private ITinkerInlineFenceBridge mBridge = null; private static final String TINKER_LOADER_METHOD = &amp;#34;tryLoad&amp;#34;; @Override protected void attachBaseContext(Context base) { super.attachBaseContext(base); Thread.setDefaultUncaughtExceptionHandler(new TinkerUncaughtHandler(this)); onBaseContextAttached(base);//main  } private void onBaseContextAttached(Context base) { try { final long applicationStartElapsedTime = SystemClock.</description>
+    </item>
+    
+  </channel>
+</rss>

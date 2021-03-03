@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>apm on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/</link>
+    <description>Recent content in apm on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MatrixGradlePlugin</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixgradleplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixgradleplugin/</guid>
+      <description>MatrixPlugin.apply @Override void apply(Project project) { project.extensions.create(&amp;#34;matrix&amp;#34;, MatrixExtension) project.matrix.extensions.create(&amp;#34;trace&amp;#34;, MatrixTraceExtension) project.matrix.extensions.create(&amp;#34;removeUnusedResources&amp;#34;, MatrixDelUnusedResConfiguration) if (!project.plugins.hasPlugin(&amp;#39;com.android.application&amp;#39;)) { throw new GradleException(&amp;#39;Matrix Plugin, Android Application plugin required&amp;#39;) } project.afterEvaluate { def android = project.extensions.android def configuration = project.matrix android.applicationVariants.all { variant -&amp;gt; if (configuration.trace.enable) { com.tencent.matrix.trace.transform.MatrixTraceTransform.inject(project, configuration.trace, variant.getVariantData().getScope())//main  } if (configuration.removeUnusedResources.enable) { if (Util.isNullOrNil(configuration.removeUnusedResources.variant) || variant.name.equalsIgnoreCase(configuration.removeUnusedResources.variant)) { Log.i(TAG, &amp;#34;removeUnusedResources %s&amp;#34;, configuration.removeUnusedResources) RemoveUnusedResourcesTask removeUnusedResourcesTask = project.tasks.create(&amp;#34;remove&amp;#34; + variant.name.capitalize() + &amp;#34;UnusedResources&amp;#34;, RemoveUnusedResourcesTask) removeUnusedResourcesTask.inputs.property(RemoveUnusedResourcesTask.BUILD_VARIANT, variant.name) project.tasks.add(removeUnusedResourcesTask) removeUnusedResourcesTask.</description>
+    </item>
+    
+    <item>
+      <title>MatrixSource</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrixsource/</guid>
+      <description>MatrixApplication.onCreate @Override public void onCreate() { super.onCreate(); Matrix.Builder builder = new Matrix.Builder(this); builder.patchListener(new TestPluginListener(this)); //trace  TraceConfig traceConfig = new TraceConfig.Builder() .dynamicConfig(dynamicConfig) .enableFPS(fpsEnable) .enableEvilMethodTrace(traceEnable) .enableAnrTrace(traceEnable) .enableStartup(traceEnable) .splashActivities(&amp;#34;sample.tencent.matrix.SplashActivity;&amp;#34;) .isDebug(true) .isDevEnv(false) .build(); TracePlugin tracePlugin = (new TracePlugin(traceConfig)); builder.plugin(tracePlugin); //resource  builder.plugin(new ResourcePlugin(new ResourceConfig.Builder() .dynamicConfig(dynamicConfig) .setDumpHprof(false) .setDetectDebuger(true) //only set true when in sample, not in your app  .build())); ResourcePlugin.activityLeakFixer(this); //io  IOCanaryPlugin ioCanaryPlugin = new IOCanaryPlugin(new IOConfig.Builder() .dynamicConfig(dynamicConfig) .build()); builder.plugin(ioCanaryPlugin); // prevent api 19 UnsatisfiedLinkError  //sqlite  SQLiteLintConfig config = initSQLiteLintConfig(); SQLiteLintPlugin sqLiteLintPlugin = new SQLiteLintPlugin(config); builder.</description>
+    </item>
+    
+    <item>
+      <title>Matrix研究</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E7%A0%94%E7%A9%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E7%A0%94%E7%A9%B6/</guid>
+      <description>线上:
+https://github.com/Tencent/matrix/wiki/Matrix-Android-TraceCanary
+https://github.com/Tencent/matrix/wiki/Matrix-Android-IOCanary
+线下:
+https://github.com/Tencent/matrix/wiki/Matrix-Android-ResourceCanary
+https://github.com/Tencent/matrix/wiki/Matrix-Android-SQLiteLint
+https://github.com/Tencent/matrix/wiki/Matrix-Android-
+ https://developer.android.com/topic/performance/vitals/launch-time
+极客时间-Android开发高手课
+07 | 启动优化（上）：从启动过程看启动速度优化
+methodMapping.txt文件走向 transform中内存计算出methodMapping,
+写入&amp;quot;${buildDir}/outputs/mapping/${currentVariantName}/methodMapping.txt&amp;quot;，之后拷贝到getAssembleOutputBakFile里,用于tinker，构建new apk时的baseMethodMapping
+debug时写入buildDirPath + &amp;ldquo;/intermediates/merged_assets/debug/methodMapping.txt&amp;rdquo;,用于开发模式下自动转换堆栈信息
+启动优化 https://developer.android.google.cn/topic/performance/vitals/launch-time
+我以微信为例，用户从桌面点击图标开始，会经过 4 个关键阶段。
+  T1 预览窗口显示。系统在拉起微信进程之前，会先根据微信的 Theme 属性创建预览窗口。当然如果我们禁用预览窗口或者将预览窗口指定为透明，用户在这段时间依然看到的是桌面。
+  T2 闪屏显示。在微信进程和闪屏窗口页面创建完毕，并且完成一系列 inflate view、onmeasure、onlayout 等准备工作后，用户终于可以看到熟悉的“小地球”。
+  T3 主页显示。在完成主窗口创建和页面显示的准备工作后，用户可以看到微信的主界面。
+  T4 界面可操作。在启动完成后，微信会有比较多的工作需要继续执行，例如聊天和朋友圈界面的预加载、小程序框架和进程的准备等。在这些工作完成后，用户才可以真正开始愉快地聊天。
+  问题 1：点击图标很久都不响应
+如果我们禁用了预览窗口或者指定了透明的皮肤，那用户点击了图标之后，需要 T2 时间才能真正看到应用闪屏。对于用户体验来说，点击了图标，过了几秒还是停留在桌面，看起来就像没有点击成功，这在中低端机中更加明显。
+问题 2：首页显示太慢
+现在应用启动流程越来越复杂，闪屏广告、热修复框架、插件化框架、大前端框架，所有准备工作都需要集中在启动阶段完成。上面说的 T3 首页显示时间对于中低端机来说简直就是噩梦，经常会达到十几秒的时间。
+问题 3：首页显示后无法操作。
+既然首页显示那么慢，那我能不能把尽量多的工作都通过异步化延后执行呢？很多应用的确就是这么做的，但这会造成两种后果：要么首页会出现白屏，要么首页出来后用户根本无法操作。
+启动优化方法  闪屏优化 业务梳理 业务优化 线程优化 从具体的做法来看，线程的优化一方面是控制线程数量，线程数量太多会相互竞争 CPU 资源，因此要有统一的线程池，并且根据机器性能来控制数量。 GC 优化 系统调用优化  启动进阶方法  I/O 优化 数据重排 2.</description>
+    </item>
+    
+  </channel>
+</rss>

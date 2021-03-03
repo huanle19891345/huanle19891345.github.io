@@ -7,6 +7,34 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>SaveAndRestoreInstanceState</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/saveandrestoreinstancestate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/saveandrestoreinstancestate/</guid>
+      <description>转屏场景 数据保存 android/app/servertransaction/ActivityRelaunchItem.java
+@Override public void execute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) { client.handleRelaunchActivity(mActivityClientRecord, pendingActions); } ActivityThread.handleRelaunchActivity @Override public void handleRelaunchActivity(ActivityClientRecord tmp, PendingTransactionActions pendingActions) { handleRelaunchActivityInner(r, configChanges, tmp.pendingResults, tmp.pendingIntents, pendingActions, tmp.startsNotResumed, tmp.overrideConfig, &amp;#34;handleRelaunchActivity&amp;#34;); } private void handleRelaunchActivityInner(ActivityClientRecord r, int configChanges, List&amp;lt;ResultInfo&amp;gt; pendingResults, List&amp;lt;ReferrerIntent&amp;gt; pendingIntents, PendingTransactionActions pendingActions, boolean startsNotResumed, Configuration overrideConfig, String reason) { // Preserve last used intent, it may be set from Activity#setIntent().  final Intent customIntent = r.activity.mIntent; // Need to ensure state is saved.</description>
+    </item>
+    
+    <item>
+      <title>SavedStateHandle</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savedstatehandle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savedstatehandle/</guid>
+      <description>原理图 sequenceDiagram ComponentActivity-&amp;gt;&amp;gt;ComponentActivity: onSaveInstanceState activate ComponentActivity ComponentActivity-&amp;gt;&amp;gt;SavedStateRegistryController: performSave activate SavedStateRegistryController SavedStateRegistryController-&amp;gt;&amp;gt;SavedStateRegistry: performSave deactivate SavedStateRegistryController deactivate ComponentActivity ComponentActivity-&amp;gt;&amp;gt;ComponentActivity: onCreate activate ComponentActivity ComponentActivity-&amp;gt;&amp;gt;SavedStateRegistryController: performRestore activate SavedStateRegistryController SavedStateRegistryController-&amp;gt;&amp;gt;SavedStateRegistry: performRestore deactivate SavedStateRegistryController deactivate ComponentActivity SavedStateViewModelFactory-&amp;gt;&amp;gt;SavedStateViewModelFactory: create activate SavedStateViewModelFactory SavedStateViewModelFactory-&amp;gt;&amp;gt;SavedStateHandleController: create SavedStateHandleController-&amp;gt;&amp;gt;SavedStateRegistry: consumeRestoredStateForKey SavedStateRegistry-&amp;gt;&amp;gt;SavedStateHandle: createHandle deactivate SavedStateViewModelFactory Demo // UserProfileViewModel class UserProfileViewModel( savedStateHandle: SavedStateHandle ) : ViewModel() { val userId : String = savedStateHandle[&amp;#34;uid&amp;#34;] ?: throw IllegalArgumentException(&amp;#34;missing user id&amp;#34;) val user : User = TODO() } // UserProfileFragment private val viewModel: UserProfileViewModel by viewModels( factoryProducer = { SavedStateViewModelFactory(this) } //新版这已经是by viewModels的默认factory  .</description>
+    </item>
+    
+    <item>
+      <title>SavingStates</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savingstates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/savingstates/</guid>
+      <description>SavingStatesScope sequenceDiagram LocalPersistence-&amp;gt;&amp;gt;AMS: user open activity activate AMS AMS-&amp;gt;&amp;gt;ActivityViewModelScope: start activate AMS activate ActivityViewModelScope ActivityViewModelScope-&amp;gt;&amp;gt;Activity: start activate Activity AMS-&amp;gt;&amp;gt;ActivityViewModelScope: rotation/relaunch rect rgb(199, 237, 204) ActivityViewModelScope-&amp;gt;&amp;gt;Activity: rotation/relaunch Activity-&amp;gt;&amp;gt;Activity: destory,retainNonConfigurationInstance deactivate Activity Activity-&amp;gt;&amp;gt;Activity: launch,attach恢复lastNonConfigurationInstances activate Activity deactivate Activity end rect rgb(253, 245, 230) AMS-&amp;gt;&amp;gt;ActivityViewModelScope: killApplicatonOrActivity by system ActivityViewModelScope-&amp;gt;&amp;gt;AMS: onStop,saveInstanceState deactivate ActivityViewModelScope activate AMS deactivate AMS AMS-&amp;gt;&amp;gt;ActivityViewModelScope: restart activate ActivityViewModelScope AMS-&amp;gt;&amp;gt;ActivityViewModelScope: onstart,restoreInstanceState deactivate ActivityViewModelScope end deactivate AMS rect rgb(151,255,255) AMS-&amp;gt;&amp;gt;LocalPersistence: save data to local persistence LocalPersistence-&amp;gt;&amp;gt;AMS: user leave activity deactivate AMS LocalPersistence-&amp;gt;&amp;gt;AMS: next time user open activity activate AMS AMS-&amp;gt;&amp;gt;LocalPersistence: user restore data from local persistence deactivate AMS end options https://developer.</description>
+    </item>
+    
+    <item>
       <title>ViewModel</title>
       <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -19,25 +47,14 @@
     </item>
     
     <item>
-      <title>ViewModel封装</title>
-      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</link>
+      <title>ViewModelScope_Delegate</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodelscope_delegate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodel%E5%B0%81%E8%A3%85/</guid>
-      <description>ViewModel初始化精简 https://stackoverflow.com/questions/58106707/how-does-kotlin-use-this-by-delegate-to-instantiate-the-viewmodel
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/viewmodelscope_delegate/</guid>
+      <description>ViewModel初始化委托 https://stackoverflow.com/questions/58106707/how-does-kotlin-use-this-by-delegate-to-instantiate-the-viewmodel
 by viewModels(...) is part of fragment-ktx library, it&amp;rsquo;s a convienience short hand for creating a lazy delegate obtaining ViewModels.
 // creates lazy delegate for obtaining zero-argument MyViewModel private val viewModel : MyViewModel by viewModels() // it&amp;#39;s functionally equal to: private val viewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) } // with factory: private val viewModel : MyViewModel by viewModels { getViewModelFactory() } // is equal to: private val viewModel by lazy { ViewModelProvider(this, getViewModelFactory()).</description>
-    </item>
-    
-    <item>
-      <title>数据保存和恢复</title>
-      <link>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/viewmodel/%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D/</guid>
-      <description>转屏场景 数据保存 android/app/servertransaction/ActivityRelaunchItem.java
-@Override public void execute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) { client.handleRelaunchActivity(mActivityClientRecord, pendingActions); } ActivityThread.java
-@Override public void handleRelaunchActivity(ActivityClientRecord tmp, PendingTransactionActions pendingActions) { handleRelaunchActivityInner(r, configChanges, tmp.pendingResults, tmp.pendingIntents, pendingActions, tmp.startsNotResumed, tmp.overrideConfig, &amp;#34;handleRelaunchActivity&amp;#34;); } private void handleRelaunchActivityInner(ActivityClientRecord r, int configChanges, List&amp;lt;ResultInfo&amp;gt; pendingResults, List&amp;lt;ReferrerIntent&amp;gt; pendingIntents, PendingTransactionActions pendingActions, boolean startsNotResumed, Configuration overrideConfig, String reason) { // Preserve last used intent, it may be set from Activity#setIntent().  final Intent customIntent = r.activity.mIntent; // Need to ensure state is saved.</description>
     </item>
     
   </channel>

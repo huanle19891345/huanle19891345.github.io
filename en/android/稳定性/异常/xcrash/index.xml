@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xcrash on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/</link>
+    <description>Recent content in xcrash on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linuxApi</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/linuxapi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/linuxapi/</guid>
+      <description>dlsym https://linux.die.net/man/3/dlsym
+void *dlsym(void *handle, const char *symbol); The function dlsym() takes a &amp;ldquo;handle&amp;rdquo; of a dynamic library returned by dlopen() and the null-terminated symbol name, returning the address where that symbol is loaded into memory.
+pthread_create http://man7.org/linux/man-pages/man3/pthread_create.3.html
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg);  The pthread_create() function starts a new thread in the calling process. The new thread starts execution by invoking start_routine(); arg is passed as the sole argument of start_routine().</description>
+    </item>
+    
+    <item>
+      <title>xCrashAnr</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashanr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashanr/</guid>
+      <description>总结 API level &amp;lt; 21 new FileObserver(&amp;quot;/data/anr/&amp;quot;, CLOSE_WRITE)
+API level &amp;gt;= 21 SIGQUIT
+ELFFormat xc_trace_init //xc_trace.c int xc_trace_init(JNIEnv *env, int rethrow, unsigned int logcat_system_lines, unsigned int logcat_events_lines, unsigned int logcat_main_lines, int dump_fds, int dump_network_info) { //capture SIGQUIT only for ART  if(xc_common_api_level &amp;lt; 21) return 0; //is Android Lollipop (5.x)?  xc_trace_is_lollipop = ((21 == xc_common_api_level || 22 == xc_common_api_level) ? 1 : 0); //init for JNI callback  xc_trace_init_callback(env); //create event FD  if(0 &amp;gt; (xc_trace_notifier = eventfd(0, EFD_CLOEXEC))) return XCC_ERRNO_SYS; //register signal handler  if(0 !</description>
+    </item>
+    
+    <item>
+      <title>xCrashNativeCrash</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashnativecrash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashnativecrash/</guid>
+      <description>XCrash.init public static synchronized int init(Context ctx, InitParameters params) { //save log dir  if (TextUtils.isEmpty(params.logDir)) { params.logDir = ctx.getFilesDir() + &amp;#34;/tombstones&amp;#34;; } XCrash.logDir = params.logDir; //init file manager  FileManager.getInstance().initialize( params.logDir, params.javaLogCountMax, params.nativeLogCountMax, params.anrLogCountMax, params.placeholderCountMax, params.placeholderSizeKb, params.logFileMaintainDelayMs); //init java crash handler  if (params.enableJavaCrashHandler) { JavaCrashHandler.getInstance().initialize( pid, processName, appId, params.appVersion, params.logDir, params.javaRethrow, params.javaLogcatSystemLines, params.javaLogcatEventsLines, params.javaLogcatMainLines, params.javaDumpFds, params.javaDumpNetworkInfo, params.javaDumpAllThreads, params.javaDumpAllThreadsCountMax, params.javaDumpAllThreadsWhiteList, params.javaCallback); } //init ANR handler (API level &amp;lt; 21)  if (params.</description>
+    </item>
+    
+    <item>
+      <title>xCrash原理</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrash%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrash%E5%8E%9F%E7%90%86/</guid>
+      <description>Native 崩溃介绍 信号 致命的信号分为 2 类：
+1、kernel 发出的：
+SIGFPE: 除数为零。
+SIGILL: 无法识别的 CPU 指令。
+SIGSYS: 无法识别的系统调用（system call）。
+SIGSEGV: 错误的虚拟内存地址访问。
+SIGBUS: 错误的物理设备地址访问。
+2、用户态进程发出的：
+SIGABRT: 调用 abort() / kill() / tkill() / tgkill() 自杀，或被其他进程通过 kill() / tkill() / tgkill() 他杀。
+Naive 崩溃捕获需要注册这些信号的处理函数（signal handler），然后在信号处理函数中收集数据。
+因为信号是以“中断”的方式出现的，可能中断任何 CPU 指令序列的执行，所以在信号处理函数中，只能调用“异步信号安全（async-signal-safe）”的函数。例如malloc()、calloc()、free()、snprintf()、gettimeofday() 等等都是不能使用的，C++ STL / boost 也是不能使用的。
+所以，在信号处理函数中我们只能不分配堆内存，需要使用堆内存只能在初始化时预分配。如果要使用不在异步信号安全白名单中的 libc / bionic 函数，只能直接调用 system call 或者自己实现
+进程崩溃前的极端情况 当崩溃捕获逻辑开始运行时，会面对很多糟糕的情况，比如：栈溢出、堆内存不可用、虚拟内存地址耗尽、FD 耗尽、Flash 空间耗尽等。有时，这些极端情况的出现，本身就是导致进程崩溃的间接原因。
+1、栈溢出
+我们需要预先用 sigaltstack() 为 signal handler 分配专门的栈内存空间，否则当遇到栈溢出时，signal handler 将无法正常运行。</description>
+    </item>
+    
+  </channel>
+</rss>

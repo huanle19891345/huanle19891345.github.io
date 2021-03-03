@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>布局优化 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</link>
+    <description>Recent content in 布局优化 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>布局优化</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</guid>
+      <description>布局加载优化 graph LR 正面解决(正面解决)--&amp;gt;去IO 正面解决--&amp;gt;去解析 正面解决--&amp;gt;去反射 侧面解决--&amp;gt;异步加载 参考 //编译生成xml&amp;ndash;&amp;gt;javaView
+https://github.com/iReaderAndroid/X2C
+//仅仅优化反射
+android &amp;ldquo;退一步&amp;quot;的布局加载优化
+Android布局优化（三）使用AsyncLayoutInflater异步加载布局</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>思想 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/</link>
+    <description>Recent content in 思想 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IOC</title>
+      <link>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/ioc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/ioc/</guid>
+      <description>graph TB 依赖者--&amp;gt;|依赖|被依赖者 变为
+graph TB 被依赖者--&amp;gt;|提前注入接口实现|接口注入管理模块 依赖者--&amp;gt;|使用已经注入好了的接口实现|接口注入管理模块 </description>
+    </item>
+    
+    <item>
+      <title>继承和组合</title>
+      <link>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/%E7%BB%A7%E6%89%BF%E5%92%8C%E7%BB%84%E5%90%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%80%9D%E6%83%B3/%E7%BB%A7%E6%89%BF%E5%92%8C%E7%BB%84%E5%90%88/</guid>
+      <description>组织结构形态 继承和组合对应着客观事物的组织结构形态，具体的说：
+ 继承: 子类是父类，是有相同行为(方法)签名但实现不同的父类能力延伸和拓展，拥有父类的public访问和protect override能力 组合: 包裹类组合多个被包裹类，拥有多个被包裹类的public访问能力  访问权限可以由不同语言的访问限定符进行不同粒度的控制，而继承和组合最大的区别在于继承体系中子类对父类protect 方法的override能力(在子类实现中可能会调用super的相同方法)
+一般优化方式 继承 对于继承和组合对代码结构的优化，首先开始的是由客观事物形态决定的继承关系，在子类继承父类的同时，自身有很多功能的定制
+组合 将子类对每个功能的定义进行依赖关系梳理，每个功能以高内聚低耦合的组合方式在子类中使用，可以考虑使用android lifecycle这种观察者模式将每个功能类的对关键事件(生命周期)的监听进行分发，降低其在子类中的耦合，一行代码完成一个功能
+这种优化方式已经可以使得项目代码逻辑清晰，对于需要某个高内聚功能时，可以选择直接继承(有合适的父类时)或者组合各个功能类进行实现，从而解决无法多继承但同时需要两个不同的父类功能时的问题
+函数式优化，组合代替继承 很多设计模式和设计思想都是为了组合代替继承，又如语言层面对委托的支持(kotlin delegate, dart mixin)。通过上面对组织结构形态的分析，继承和组合最大的区别在于继承体系中子类对父类protect 方法的override能力，因此函数式编程思想(kotlin, dart中的函数变量传递，java中则对应着lambda表达式或者单方法interface)解决这个问题，在flutter中更是推荐组合代理继承，所有widget只要继承StatefulWidget或者StatelessWidget并进行功能组合即可
+graph LR subgraph 被别人组合获取能力: 要求两者对外具有相同的接口能力抽象,通过代理转发 MyViewWantsToBeCenter--&amp;gt;|继承|View MyViewWantsToBeCenter--&amp;gt;|组合|Center(&amp;quot;wrap it in a Center widget&amp;quot;) end subgraph 组合别人获取能力 子类--&amp;gt;|继承|父类 包裹者--&amp;gt;|包裹|被包裹者 end 具体做法 通过传递方法fun实现给被包裹类，在被包裹类中进行fun的调用，达到类似子类override父类的能力。如果要实现类似子类调用super同签名方法实现的功能，
+方法1(较难理解，要修改方法签名，不推荐) 从被包裹类到包裹类层层包裹方法实现:
+可以将被包裹类中的同签名fun作为额外的(原方法签名参数列表后新增一个)参数，让外部传递新的参数列表给被包裹类，被包裹类通过调用fun1时传递自身实现让包裹类拥有类似子类调用super同签名方法实现的能力，如果包裹类没有传递fun1，可以直接调用fun
+class BeWrapperedA(Fun1 funA) otherFun() { funA(param1, param2, fun) } fun(param1, param2) { } Fun1(param1 a, param2 b, fun(param1, param2) c) ------------------------------------------------ class BeWrapperedB(Fun1 funB) BeWrapperedA((a, b, c) -&amp;gt; {funB(a, b, (a, b) -&amp;gt; (Fun1(a, b, c))))}) Fun1(param1 a, param2 b, fun(param1, param2) c) { c(a , b) //相当于调用super(a, b)  a + b;//自定义逻辑 } 方法2，便于理解，不用修改方法签名 正向思维，从包裹类到被包裹类，按需调用方法，类似代理等设计思想，都实现接口，按需调用，类似flutter的StatefulWidget的一级子类，通过build方法约定从包裹类最外层开始向内调用被包裹类的方法实现</description>
+    </item>
+    
+  </channel>
+</rss>
