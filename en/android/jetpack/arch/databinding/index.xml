@@ -16,5 +16,16 @@
 DataBindingUtil private static DataBinderMapper sMapper = new DataBinderMapperImpl(); private static DataBindingComponent sDefaultComponent = null; setContentView public static &amp;lt;T extends ViewDataBinding&amp;gt; T setContentView(@NonNull Activity activity, int layoutId) { return setContentView(activity, layoutId, sDefaultComponent); } public static &amp;lt;T extends ViewDataBinding&amp;gt; T setContentView(@NonNull Activity activity, int layoutId, @Nullable DataBindingComponent bindingComponent) { activity.setContentView(layoutId); View decorView = activity.getWindow().getDecorView(); ViewGroup contentView = (ViewGroup) decorView.findViewById(android.R.id.content); return bindToAddedViews(bindingComponent, contentView, 0, layoutId); } bindToAddedViews private static &amp;lt;T extends ViewDataBinding&amp;gt; T bindToAddedViews(DataBindingComponent component, ViewGroup parent, int startChildren, int layoutId) { final int endChildren = parent.</description>
     </item>
     
+    <item>
+      <title>TwoWayDataBinding</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/twowaydatabinding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/twowaydatabinding/</guid>
+      <description>https://developer.android.com/topic/libraries/data-binding/two-way
+Infinite loops using two-way data binding Be careful not to introduce infinite loops when using two-way data binding. When the user changes an attribute, the method annotated using @InverseBindingAdapter is called, and the value is assigned to the backing property. This, in turn, would call the method annotated using @BindingAdapter, which would trigger another call to the method annotated using @InverseBindingAdapter, and so on.
+For this reason, it&amp;rsquo;s important to break possible infinite loops by comparing new and old values in the methods annotated using @BindingAdapter.</description>
+    </item>
+    
   </channel>
 </rss>

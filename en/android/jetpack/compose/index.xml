@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>compose on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/compose/</link>
+    <description>Recent content in compose on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/compose/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Compose</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/compose/compose/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/compose/compose/</guid>
+      <description>Jetpack Compose Beta 版现已发布！
+https://developer.android.google.cn/jetpack/compose/documentation
+https://github.com/android/compose-samples
+深入详解 Jetpack Compose | 实现原理
+jetpack compse原理解析
+State In Compose @Composable fun HelloScreen() { var name by rememberSaveable { mutableStateOf(&amp;#34;&amp;#34;) } HelloContent(name = name, onNameChange = { name = it }) } @Composable fun HelloContent(name: String, onNameChange: (String) -&amp;gt; Unit) { Column(modifier = Modifier.padding(16.dp)) { Text( text = &amp;#34;Hello, $name&amp;#34;, modifier = Modifier.padding(bottom = 8.dp), style = MaterialTheme.typography.h5 ) OutlinedTextField( value = name, onValueChange = { onNameChange(it) }, label = { Text(&amp;#34;Name&amp;#34;) } ) } } Compose和DataBinding State对应 graph TB subgraph DataBinding ViewAttribute--&amp;gt;|event|BackData BackData--&amp;gt;|state|ViewAttribute end subgraph Compose HelloContent--&amp;gt;|event|HelloScreen HelloScreen(&amp;quot;HelloScreen(stateful)&amp;quot;)--&amp;gt;|state|HelloContent(&amp;quot;HelloContent(stateless)&amp;quot;) end Key Point: When hoisting state, there are three rules to help you figure out where state should go:</description>
+    </item>
+    
+    <item>
+      <title>ComposeSource</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/compose/composesource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/compose/composesource/</guid>
+      <description>View层次结构 graph TB contentFrameLayout--&amp;gt;ComposeView--&amp;gt;AndroidComposeView--&amp;gt;ViewLayerContainer ViewLayerContainer--&amp;gt;ViewLayer1 ViewLayerContainer--&amp;gt;ViewLayer2 ViewLayerContainer--&amp;gt;ViewLayer3 ViewLayerContainer--&amp;gt;ViewLayer... classDiagram class ComposeView { -val content } class AndroidComposeView { +onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) } class OwnedLayer { &amp;lt;&amp;lt;interface&amp;gt;&amp;gt; +resize(size: IntSize) +drawLayer(canvas: Canvas) +updateDisplayList() +invalidate() } class GraphicLayerInfo { &amp;lt;&amp;lt;interface&amp;gt; +layerId: Long } View&amp;lt;|--ViewGroup ViewGroup&amp;lt;|--AbstractComposeView AbstractComposeView&amp;lt;|--ComposeView ViewGroup&amp;lt;|--AndroidComposeView ViewGroup&amp;lt;|--ViewLayerContainer View&amp;lt;|--ViewLayer OwnedLayer&amp;lt;|--ViewLayer OwnedLayer&amp;lt;|--RenderNodeLayer GraphicLayerInfo&amp;lt;|--OwnedLayer setContent class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) val appContainer = (application as JetnewsApplication).container setContent {//main  JetnewsApp(appContainer, navigationViewModel) } } } public fun ComponentActivity.</description>
+    </item>
+    
+    <item>
+      <title>LayoutNode</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/compose/layoutnode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/compose/layoutnode/</guid>
+      <description>Measure原理图 graph TB XxModifier--&amp;gt;MeasureScope.measure(&amp;quot;MeasureScope.measure&amp;quot;)--&amp;gt;|1|measurable(&amp;quot;measurable.measure(constraints)&amp;quot;) measurable--&amp;gt;|1|performMeasure performMeasure--&amp;gt;|1|MeasureScope.measure MeasureScope.measure--&amp;gt;|2|MeasureScope.layout Draw原理图 graph TB InnerPlaceable.performDraw--&amp;gt;|forEach|drawChild(&amp;quot;child.draw(canvas)&amp;quot;)--&amp;gt;ViewLayer.drawLayer --&amp;gt;ViewLayer.dispatchDraw--&amp;gt;|drawBlock|LayoutNodeWrapper.invoke--&amp;gt;performDraw(&amp;quot;performDraw(canvas)&amp;quot;) --&amp;gt;|leafNode?|DrawModifier.ContentDrawScope.draw performDraw--&amp;gt;|parentNode?|InnerPlaceable.performDraw LayoutNode类设计图 classDiagram class IntrinsicMeasurable{ &amp;lt;&amp;lt;interface&amp;gt;&amp;gt; +parentData: Any? } class Measurable { &amp;lt;&amp;lt;interface&amp;gt;&amp;gt; +measure(constraints: Constraints): Placeable } IntrinsicMeasurable&amp;lt;|--Measurable Measurable&amp;lt;|--LayoutNode Measurable&amp;lt;|--OuterMeasurablePlaceable Measurable&amp;lt;|--LayoutNodeWrapper class Measured { &amp;lt;&amp;lt;interface&amp;gt;&amp;gt; +measuredWidth: Int +measuredHeight: Int } class Placeable { +place(x: Int, y: Int, zIndex: Float = 0f) } class LayoutNodeWrapper{ +layoutNode: LayoutNode +layer: OwnedLayer +performMeasure(constraints: Constraints)Placeable +draw(canvas: Canvas) } class OuterMeasurablePlaceable { +layoutNode: LayoutNode +outerWrapper: LayoutNodeWrapper } class LayoutNode { +innerLayoutNodeWrapper: LayoutNodeWrapper = InnerPlaceable(this) +outerMeasurablePlaceable = OuterMeasurablePlaceable(this, innerLayoutNodeWrapper) +outerLayoutNodeWrapper: LayoutNodeWrapper +mDrawScope: LayoutNodeDrawScope = sharedDrawScope } class ModifiedDrawNode{ +modifier: DrawModifier } class DelegatingLayoutNodeWrapper~T : Modifier.</description>
+    </item>
+    
+    <item>
+      <title>ReComposition</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/compose/recomposition/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/compose/recomposition/</guid>
+      <description>类设计 GeneratedClass JetnewsApp传递ComposableLambdaImpl:AppContent{}给JetnewsTheme @Composable fun JetnewsApp( appContainer: AppContainer, navigationViewModel: NavigationViewModel ) { //调用方法JetnewsTheme,并将AppContent闭包作为composableLambda传递给JetnewsTheme  JetnewsTheme { //每个调用位置都有一个特殊的key，这里是-819895379  AppContent( navigationViewModel = navigationViewModel, interestsRepository = appContainer.interestsRepository, postsRepository = appContainer.postsRepository ) } } @Composable fun JetnewsTheme( darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&amp;gt; Unit ) {......} public final class JetnewsAppKt { public static final void JetnewsApp(AppContainer appContainer, NavigationViewModel navigationViewModel, Composer $composer, int $changed) { int i;...... Composer $composer2 = $composer.startRestartGroup(1936574869, &amp;#34;C(JetnewsApp)35@1302L232:JetnewsApp.kt#x6nqmx&amp;#34;); if (($changed &amp;amp; 14) == 0) { i = ($composer2.</description>
+    </item>
+    
+  </channel>
+</rss>

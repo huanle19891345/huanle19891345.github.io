@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gradlejenkins on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/gradlejenkins/</link>
+    <description>Recent content in gradlejenkins on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/gradlejenkins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AndroidPlugin</title>
+      <link>https://huanle19891345.github.io/en/android/gradlejenkins/androidplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradlejenkins/androidplugin/</guid>
+      <description>调试android plugin源码 在buildSrc下的build.gradle中添加如下依赖，用来查看其源码并debug
+dependencies { implementation(&amp;#34;com.android.tools.build:gradle:3.2.1&amp;#34;) } 源码为于External Libraries中:
+Gradle: gradle-3.2.1 其META-INF中定义了多个android plugin的入口Class如com.android.application的入口com.android.build.gradle.AppPlugin
+Gradle: gradle-api-3.2.1 AppExtension定义在这
+Gradle: builder-3.2.1，d8,r8源码都在此处
+调试gradle源码 而gradle源码(gradle/wrapper/gradle-wrapper.properties中定义的gradle版本)
+distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.4-all.zip 位于External Libraries中:
+Gradle: gradle-api-5.6.4</description>
+    </item>
+    
+    <item>
+      <title>GradleDebug</title>
+      <link>https://huanle19891345.github.io/en/android/gradlejenkins/gradledebug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradlejenkins/gradledebug/</guid>
+      <description>Gradle构建源码断点调试配置 (本方式也支持build.gradle中设置的断点调试)
+1 buildSrc配置 项目根目录下添加文件夹buildSrc,内部添加文件build.gradle:
+repositories { mavenLocal() jcenter() google() } dependencies { //配置任意插件地址  implementation &amp;#39;com.android.tools.build:gradle:3.2.1&amp;#39; implementation &amp;#34;com.tencent.matrix:matrix-gradle-plugin:0.6.5.1&amp;#34; } 这样配置之后，在android studio的project视图下就能够在External Liberaries中看到Android Build Tool的源码，之后可以通过搜索需要调试的类和方法进行断点调试，目的是让IDE链接到gradle build tool 或各种自定义插件的源代码。(有时无法debug是因为该次build没有走断点处流程，先clean确保会走流程)
+2 gradlew command gradlew :app:compileDebugAidl -Dorg.gradle.daemon=false -Dorg.gradle.debug=true 也就是在需要debug的gradle语句后添加-Dorg.gradle.daemon=false -Dorg.gradle.debug=true。
+之后可以看到Terminal中执行被阻塞，并输出如下：
+To honour the JVM settings for this build a new JVM will be forked. Please consider using the daemon: https://docs.gradle.org/4.6/userguide/gradle_daemon.html. \&amp;gt; Starting Daemon 这里如果想每次执行命令，即使不设置后面的-Dorg.gradle.daemon=false -Dorg.gradle.debug=true信息，也默认执行断点调试，可以配置环境变量，方法如下:
+在系统环境变量里面添加：
+GRADLE_OPTS 值为:
+-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+3 配置remote debug Android Studio中按照如下步骤操作：</description>
+    </item>
+    
+    <item>
+      <title>GradlePlugin</title>
+      <link>https://huanle19891345.github.io/en/android/gradlejenkins/gradleplugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradlejenkins/gradleplugin/</guid>
+      <description>gradle plugin的两种方式  脚本插件模式：apply from: &amp;lsquo;xx.gradle&amp;rsquo; 标准插件模式：apply plugin: &amp;lsquo;xxx&amp;rsquo;  脚本插件模式转换为标准插件模式 直接在apply(Project project)回调时将之前的脚本插件代码copy过来即可，这里的上下文会缺少project，因此需要用project.with{}包裹原本的脚本代码
+gradle plugin执行流程 两种gradle plugin的都是相当于动态替换插件代码在apply的地地方，也就apply plugin时直接调用到apply(Project project)
+针对build.gradle从上到下执行的过程就是evaluate过程
+使用标准插件时拓展参数的执行流程
+ 接入的gradle，apply plugin时，在插件内部回调方法apply(Project project)中进行拓展的定义：  mProject.extensions.create(&amp;#39;tinkerPatch&amp;#39;, TinkerPatchExtension) 接入的gradle文件，配置拓展参数信息 插件代码中before/afterEvaluate在闭包中获取用户配置信息  mProject.afterEvaluate { def configuration = mProject.tinkerPatch } /** * 由于一般方式配置拓展的方式，应用端配置的参数只能在afterEvaluate方法中获取配置的参数值，而此时已经无法在进行buildConfig配置tinkerEnable * 因此使用ext的拓展方式替代本拓展方式:*/ ext { tinkerPatchEnable = true appKey = &amp;#39;xxx&amp;#39; } apply plugin: &amp;#39;com.xh.xhcore.plugin&amp;#39; apply plugin方式插件编写流程  项目new android library module 只留下src/main和build.gradle，其他的文件全部删除 注册插件信息，在src/main/resources/META-INF/gradle-plugins/${pluginName}.properties moudule 进行 apply plugin: &amp;ldquo;${pluginName}&amp;rdquo;  插件内部包裹嵌套其他插件 root project的blueScript中配置的classPath的被嵌套的插件仅仅参与本项目的编译，并不会打包在发布的插件里，因此需要在插件build.</description>
+    </item>
+    
+    <item>
+      <title>Gradle打包过程</title>
+      <link>https://huanle19891345.github.io/en/android/gradlejenkins/gradle%E6%89%93%E5%8C%85%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradlejenkins/gradle%E6%89%93%E5%8C%85%E8%BF%87%E7%A8%8B/</guid>
+      <description>gradle时序 graph LR init --&amp;gt;configure--&amp;gt;executeTasks executeTasks graph LR transform --&amp;gt; packageDebug(packageDebug: 将intermediates中的产物打包成apk) --&amp;gt; assembleDebug 自定义task http://blog.csdn.net/liuhongwei123888/article/details/50542104
+assets的注入 packageApplication之后assemble之前可以进行assets的注入
+removeUnusedResourcesTask.dependsOn variant.packageApplication variant.assemble.dependsOn removeUnusedResourcesTask assets位于build下的如下目录:
+build\intermediates\merged_assets\debug\mergeDebugAssets\out</description>
+    </item>
+    
+    <item>
+      <title>Transform</title>
+      <link>https://huanle19891345.github.io/en/android/gradlejenkins/transform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/gradlejenkins/transform/</guid>
+      <description>注册Transform 1. //com.android.build.gradle.internal.dsl.BaseAppModuleExtension_Decorated实例 def android = project.extensions.getByType(AppExtension) 或 AppPlugin appPlugin = getProject().getPlugins().getPlugin(AppPlugin.class) //com.android.build.gradle.internal.dsl.BaseAppModuleExtension_Decorated实例 def android = appPlugin.getExtension() 2. android.registerTransform(new MyClassTransform(project));  Transform执行时机 public abstract class TaskManager { public void createPostCompilationTasks( @NonNull final VariantScope variantScope) { // ----- External Transforms -----  // apply all the external transforms.  List&amp;lt;Transform&amp;gt; customTransforms = extension.getTransforms(); List&amp;lt;List&amp;lt;Object&amp;gt;&amp;gt; customTransformsDependencies = extension.getTransformsDependencies(); for (int i = 0, count = customTransforms.size(); i &amp;lt; count; i++) { Transform transform = customTransforms.</description>
+    </item>
+    
+  </channel>
+</rss>

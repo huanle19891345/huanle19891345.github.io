@@ -25,6 +25,33 @@
     </item>
     
     <item>
+      <title>Matrix接入后遇到的问题</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E6%8E%A5%E5%85%A5%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E6%8E%A5%E5%85%A5%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>1：methodId差异 描述:
+和热修复同时使用的问题，methodId差异导致dexdiff差异多大且main dex上每次都有diff
+解决方案: 通过配置baseMethodMap给matrix，将基准包的methodMapping信息提供给在构建差分包的前期构建new apk时使用，是的new apk的方法映射和old apk一致
+2: methodid映射为具体的方法签名 debug环境下需要自动将methodid映射为具体的方法签名，增强堆栈可读性
+解决方案: 在debug环境下将methodMapping文件在packageDebug task执行前放入assets目录进而打包进apk，展示前将assets信息读取并用来解析methodId
+3：上报过滤 统计堆栈信息有时除了Handler.dispatchMessage(Message message)占据大量时间(700ms以上)但其他methodItem占用时间都很少(700多项方法调用，每项占据的时间都不大，但总时间较长)，这种场景可以理解为在一次dispatchMessage中进行了过多任务的处理，每个任务都耗时不明显大，也是需要处理的。但还是要看清时间占用是在app中的方法还是系统方法里
+比如dispatchMessage-&amp;gt;分发onCreate时间处理逻辑方法任务数量过多
+4: androidPlugin版本过低2.1.0&amp;ndash;&amp;gt;3.2.1 matrix-gradle-plugin中android plugin版本过低2.1.0&amp;ndash;&amp;gt;3.2.1
+普通java仓库先在构建过程确定依赖仓库的最新版本，但gradle plugin的构建过程在未确定依赖仓库的最新版本之前，只能使用自身配置的版本进行构建
+2.1.0的android plugin版本再构建初期限制了构建者的android plugin版本也是2.1.0，因此需要升级
+5: androidPlugin版本过低3.2.1&amp;ndash;&amp;gt;3.6.1 matrix-gradle-plugin中android plugin版本过低3.2.1&amp;ndash;&amp;gt;3.6.1
+5.1 反射transformClassesWithDexBuilderForDebug/Release新版不存在 compile &amp;#39;com.android.tools.build:gradle:3.2.1&amp;#39; 此时如果exclude，会导致在新的gradle插件版本如3.6.1上，matrix plugin完全失效但没有报错信息
+implementation(Libs.lib_matrxi_gradle_plugin) { exclude group: &amp;#39;com.android.tools.build&amp;#39; } 原因1:
+从gradle3.2.1&amp;ndash;&amp;gt;3.6.1期间project.getTasks()发生了变化，原本
+transformClassesWithDexBuilderFordebug和transformClassesWithDexFordebug两个任务不存在，
+实际生效log:
+[INFO][MatrixTraceTransform]successfully inject task:transformClassesWithDexBuilderForDebug [INFO][MatrixTraceTransform]successfully inject task:transformClassesWithDexBuilderForRelease
+导致matrix插件反射修改的逻辑没有机会进入&amp;quot;successfully inject task&amp;quot;:
+try { String[] hardTask = getTransformTaskName(extension.getCustomDexTransformName(), variant.getName()); for (Task task : project.getTasks()) { for (String str : hardTask) { if (task.</description>
+    </item>
+    
+    <item>
       <title>Matrix研究</title>
       <link>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/apm/matrix%E7%A0%94%E7%A9%B6/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

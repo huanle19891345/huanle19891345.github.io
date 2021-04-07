@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>di on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/arch/di/</link>
+    <description>Recent content in di on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/di/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DI</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/di/di/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/di/di/</guid>
+      <description>依赖注入进化过程 graph LR HardCode(HardCodeDependency)--&amp;gt;|进化|ServiceLocator HardCode--&amp;gt;|进化|ManualDI--&amp;gt;|进化|Dagger subgraph AutomatedDI Dagger--&amp;gt;Hilt end Dependency injection in Android Dependency injection (DI) is a technique widely used in programming and well suited to Android development. By following the principles of DI, you lay the groundwork for good app architecture.
+Implementing dependency injection provides you with the following advantages:
+ Reusability of classes and decoupling of dependencies: It&amp;rsquo;s easier to swap out implementations of a dependency. Code reuse is improved because of inversion of control, and classes no longer control how their dependencies are created, but instead work with any configuration.</description>
+    </item>
+    
+    <item>
+      <title>HiltSource</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/di/hiltsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/di/hiltsource/</guid>
+      <description>Hilt Usage  Annotate the Application class with @HiltAndroidApp Annotate the Activity class with @AndroidEntryPoint Annotate the ViewModel class with @HiltViewModel and @Inject constructor Annotate the Repository class with @Singleton and @Inject constructor  ViewModel注入过程 以LoginActivity为例
+@HiltViewModel class LoginViewModel @Inject constructor( application: Application, private val savedStateHandle: SavedStateHandle, private val userRepository: UserRepository ) : LoginViewModel by viewModels() @MainThread inline fun &amp;lt;reified VM : ViewModel&amp;gt; ComponentActivity.viewModels( noinline factoryProducer: (() -&amp;gt; Factory)? = null ): Lazy&amp;lt;VM&amp;gt; { val factoryPromise = factoryProducer ?</description>
+    </item>
+    
+  </channel>
+</rss>

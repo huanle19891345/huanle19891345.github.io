@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sharedpreferences on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/%E5%AD%98%E5%82%A8/sharedpreferences/</link>
+    <description>Recent content in sharedpreferences on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E5%AD%98%E5%82%A8/sharedpreferences/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SharedPreferences</title>
+      <link>https://huanle19891345.github.io/en/android/%E5%AD%98%E5%82%A8/sharedpreferences/sharedpreferences/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E5%AD%98%E5%82%A8/sharedpreferences/sharedpreferences/</guid>
+      <description>1、加载/初始化 维护spName&amp;ndash;&amp;gt;file,file&amp;ndash;&amp;gt;sharedPreferencesImpl两个ArrayMap内存缓存 ContextImpl.java
+@Override public SharedPreferences getSharedPreferences(String name, int mode) { File file; synchronized (ContextImpl.class) { if (mSharedPrefsPaths == null) { mSharedPrefsPaths = new ArrayMap&amp;lt;&amp;gt;(); } file = mSharedPrefsPaths.get(name); if (file == null) { file = getSharedPreferencesPath(name); mSharedPrefsPaths.put(name, file); } } return getSharedPreferences(file, mode); } @Override public SharedPreferences getSharedPreferences(File file, int mode) { SharedPreferencesImpl sp; synchronized (ContextImpl.class) { final ArrayMap&amp;lt;File, SharedPreferencesImpl&amp;gt; cache = getSharedPreferencesCacheLocked(); sp = cache.get(file); if (sp == null) { checkMode(mode); sp = new SharedPreferencesImpl(file, mode); cache.</description>
+    </item>
+    
+  </channel>
+</rss>

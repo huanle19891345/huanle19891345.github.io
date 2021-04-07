@@ -6,5 +6,24 @@
     <description>Recent content in arch on 郑欢的学习总结</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coroutines</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/coroutines/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/coroutines/</guid>
+      <description>https://developer.android.com/topic/libraries/architecture/coroutines
+理解协程、livedata 和 flow
+协程 flow 最佳实践 | 基于 android 开发者峰会应用
+架构思考 graph LR archetecture--&amp;gt;|Async|Scope subgraph AutoCancel Scope--&amp;gt;StructuredConcurrency end archetecture--&amp;gt;|LiveData|UnMutableLiveDataExposeToView archetecture--&amp;gt;|EmitMultiData|Flow lifecycle 从 API 1 开始，处理 Activity 的生命周期 (lifecycle) 就是个老大难的问题，基本上开发者们都看过这两张生命周期流程图:
+△ Activity 生命周期流程图
+随着 Fragment 的加入，这个问题也变得更加复杂:
+△ Fragment 生命周期流程图
+而开发者们面对这个挑战，给出了非常稳健的解决方案: 分层架构。
+分层架构 △ 表现层 (Presentation Layer)、域层 (Domain Layer) 和数据层 (Data Layer)
+如上图所示，通过将应用分为三层，现在只有最上面的 Presentation 层 (以前叫 UI 层) 才知道生命周期的细节，而应用的其他部分则可以安全地忽略掉它。
+ViewModel 而在 Presentation 层内部也有进一步的解决方案: 让一个对象可以在 Activity 和 Fragment 被销毁、重新创建时依然留存，这个对象就是架构组件的 ViewModel 类。下面让我们详细看看 ViewModel 工作的细节。</description>
+    </item>
+    
   </channel>
 </rss>

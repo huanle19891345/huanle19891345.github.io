@@ -32,14 +32,15 @@ graph LR FileInputStream--&amp;gt;classReader classReader--&amp;gt;ClassVisitor 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/aop/%E7%BC%96%E8%AF%91%E6%8F%92%E6%A1%A9%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
-      <description>编译插桩技术 ByteX https://github.com/bytedance/ByteX
+      <description>编译插桩技术 Kotlin Symbol Processing (KSP) Alpha 版现已发布
+ByteX https://github.com/bytedance/ByteX
 ASM https://asm.ow2.io/
 【Android】函数插桩（Gradle + ASM）
  ASM代码生成 在Android Studio中安装ASM Bytecode Viewer插件； 2、安装后，在编译器中，点击右键，选择Show Bytecode Viewer；  查看java字节码:
 jclasslib插件，View-&amp;gt;Show ByteCode with jclasslib
 极客时间&amp;ndash;android开发高手课07-sample项目
 compile group: &amp;#39;org.ow2.asm&amp;#39;, name: &amp;#39;asm&amp;#39;, version: &amp;#39;5.1&amp;#39; compile group: &amp;#39;org.ow2.asm&amp;#39;, name: &amp;#39;asm-commons&amp;#39;, version: &amp;#39;5.1&amp;#39; 通过反射注入transform
-project.getGradle().getTaskGraph().addTaskExecutionGraphListener(new TaskExecutionGraphListener() { @Override public void graphPopulated(TaskExecutionGraph taskGraph) { for (Task task : taskGraph.getAllTasks()) { if ((task.name.equalsIgnoreCase(hackTransformTaskName) || task.name.equalsIgnoreCase(hackTransformTaskNameForWrapper)) &amp;amp;&amp;amp; !(((TransformTask) task).getTransform() instanceof SystemTraceTransform)) { project.logger.warn(&amp;#34;find dex transform. transform class: &amp;#34; + task.</description>
+project.getGradle().getTaskGraph().addTaskExecutionGraphListener(new TaskExecutionGraphListener() { @Override public void graphPopulated(TaskExecutionGraph taskGraph) { for (Task task : taskGraph.getAllTasks()) { if ((task.name.equalsIgnoreCase(hackTransformTaskName) || task.name.equalsIgnoreCase(hackTransformTaskNameForWrapper)) &amp;amp;&amp;amp; !(((TransformTask) task).getTransform() instanceof SystemTraceTransform)) { project.</description>
     </item>
     
   </channel>
