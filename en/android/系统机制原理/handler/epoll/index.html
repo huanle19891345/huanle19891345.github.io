@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>java并发 :: 郑欢的学习总结</title>
+    <title>Epoll :: 郑欢的学习总结</title>
 
     
     <link href="/css/nucleus.css?1617797149" rel="stylesheet">
@@ -39,7 +39,7 @@
     
 
   </head>
-  <body class="" data-url="/en/java/java%E5%B9%B6%E5%8F%91/">
+  <body class="" data-url="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -85,7 +85,7 @@
   
     
     <li data-nav-id="/en/android/" title="android" class="dd-item
-        
+        parent
         
         
         ">
@@ -3386,7 +3386,7 @@
   
     
     <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="系统机制原理" class="dd-item
-        
+        parent
         
         
         ">
@@ -3556,7 +3556,7 @@
   
     
     <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler" class="dd-item
-        
+        parent
         
         
         ">
@@ -3584,7 +3584,7 @@
  
   
     
-      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/" title="Epoll" class="dd-item ">
+      <li data-nav-id="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/" title="Epoll" class="dd-item active">
         <a href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/">
         Epoll
         <i class="fas fa-check read-icon"></i>
@@ -5527,7 +5527,7 @@
   
     
     <li data-nav-id="/en/java/" title="java" class="dd-item
-        parent
+        
         
         
         ">
@@ -5576,7 +5576,7 @@
  
   
     
-      <li data-nav-id="/en/java/java%E5%B9%B6%E5%8F%91/" title="java并发" class="dd-item active">
+      <li data-nav-id="/en/java/java%E5%B9%B6%E5%8F%91/" title="java并发" class="dd-item ">
         <a href="/en/java/java%E5%B9%B6%E5%8F%91/">
         java并发
         <i class="fas fa-check read-icon"></i>
@@ -6771,7 +6771,19 @@
             
           
           
-            <a href='/en/'>技术探索总结</a> > <a href='/en/java/'>java</a> > java并发
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/'>系统机制原理</a> > <a href='/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/'>handler</a> > Epoll
+          
+        
+          
+        
           
         
           
@@ -6786,75 +6798,23 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#java主流锁">Java主流锁</a></li>
-    <li><a href="#悲观锁和乐观锁">悲观锁和乐观锁</a></li>
-    <li><a href="#自旋锁-vs-适应性自旋锁">自旋锁 VS 适应性自旋锁</a></li>
-    <li><a href="#无锁-vs-偏向锁-vs-轻量级锁-vs-重量级锁">无锁 VS 偏向锁 VS 轻量级锁 VS 重量级锁</a>
+    <li><a href="#epoll_create">epoll_create</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#java对象头">Java对象头</a></li>
-            <li><a href="#monitor">Monitor</a>
-              <ul>
-                <li><a href="#monitorenter">monitorenter</a></li>
-                <li><a href="#monitorexit">monitorexit</a></li>
-                <li><a href="#acc_synchronized">ACC_SYNCHRONIZED</a></li>
-              </ul>
-            </li>
-            <li><a href="#objectmonitor">ObjectMonitor</a>
-              <ul>
-                <li><a href="#objectmonitor数据结构">ObjectMonitor数据结构</a></li>
-                <li><a href="#objectmonitor关键字">ObjectMonitor关键字</a></li>
-                <li><a href="#工作机理">工作机理</a></li>
-                <li><a href="#对象与monitor关联">对象与monitor关联</a></li>
-              </ul>
-            </li>
-            <li><a href="#锁优化">锁优化</a></li>
-            <li><a href="#总结">总结</a></li>
-          </ul>
-        </li>
+        <li><a href="#epoll_create1">epoll_create1</a></li>
       </ul>
     </li>
-    <li><a href="#公平锁-vs-非公平锁">公平锁 VS 非公平锁</a></li>
-    <li><a href="#可重入锁-vs-非可重入锁">可重入锁 VS 非可重入锁</a></li>
-    <li><a href="#独享锁-vs-共享锁">独享锁 VS 共享锁</a></li>
-    <li><a href="#aqs">AQS</a>
+    <li><a href="#epoll_ctl">epoll_ctl</a>
       <ul>
-        <li><a href="#21-原理概览">2.1 原理概览</a>
-          <ul>
-            <li><a href="#211-aqs数据结构">2.1.1 AQS数据结构</a></li>
-            <li><a href="#212-同步状态state">2.1.2 同步状态State</a></li>
-          </ul>
-        </li>
-        <li><a href="#22-aqs重要方法与reentrantlock的关联">2.2 AQS重要方法与ReentrantLock的关联</a></li>
-        <li><a href="#23-通过reentrantlock理解aqs">2.3 通过ReentrantLock理解AQS</a>
-          <ul>
-            <li><a href="#231-线程加入等待队列">2.3.1 线程加入等待队列</a>
-              <ul>
-                <li><a href="#2311-加入队列的时机">2.3.1.1 加入队列的时机</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <li><a href="#ep_op_has_event">ep_op_has_event</a></li>
       </ul>
     </li>
-    <li><a href="#synchronized">synchronized</a></li>
-    <li><a href="#volatile">volatile</a></li>
-    <li><a href="#lock">Lock</a>
-      <ul>
-        <li><a href="#reentrantlock">ReentrantLock</a></li>
-      </ul>
-    </li>
-    <li><a href="#concurrentatomic">concurrent.atomic</a></li>
-    <li><a href="#cas">CAS</a></li>
-    <li><a href="#aqs-1">AQS</a></li>
-    <li><a href="#list并发访问">List并发访问</a>
-      <ul>
-        <li><a href="#阻塞锁">阻塞(锁)</a></li>
-        <li><a href="#非阻塞cas">非阻塞(CAS)</a></li>
-      </ul>
-    </li>
-    <li><a href="#concurrentmodificationexception">ConcurrentModificationException</a></li>
+    <li><a href="#epoll_wait">epoll_wait</a></li>
+    <li><a href="#其他">其他</a></li>
+    <li><a href="#struct-eventpoll">struct eventpoll</a></li>
+    <li><a href="#struct-epoll_event">struct epoll_event</a></li>
+    <li><a href="#epoll_data_t">epoll_data(_t)</a></li>
+    <li><a href="#eventpoll_fops">eventpoll_fops</a></li>
+    <li><a href="#原理总结">原理总结</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -6873,448 +6833,228 @@
           
             <h1>
               
-              java并发
+              Epoll
             </h1>
           
 
         
 
 
-<h2 id="java主流锁">Java主流锁</h2>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201115102102431.jpeg" alt=""></p>
-<h2 id="悲观锁和乐观锁">悲观锁和乐观锁</h2>
-<p>乐观锁与悲观锁是一种广义上的概念，体现了看待线程同步的不同角度。在Java和数据库中都有此概念对应的实际应用。</p>
-<p>先说概念。对于同一个数据的并发操作，悲观锁认为自己在使用数据的时候一定有别的线程来修改数据，因此在获取数据的时候会先加锁，确保数据不会被别的线程修改。Java中，synchronized关键字和Lock的实现类都是悲观锁。</p>
-<p>而乐观锁认为自己在使用数据时不会有别的线程修改数据，所以不会添加锁，只是在更新数据的时候去判断之前有没有别的线程更新了这个数据。如果这个数据没有被更新，当前线程将自己修改的数据成功写入。如果数据已经被其他线程更新，则根据不同的实现方式执行不同的操作（例如报错或者自动重试）。</p>
-<p>乐观锁在Java中是通过使用无锁编程来实现，最常采用的是CAS算法，Java原子类中的递增操作就通过CAS自旋实现的。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201115104723946.jpeg" alt=""></p>
-<p>根据从上面的概念描述我们可以发现：</p>
-<ul>
-<li>悲观锁适合写操作多的场景，先加锁可以保证写操作时数据正确。</li>
-<li>乐观锁适合读操作多的场景，不加锁的特点能够使其读操作的性能大幅提升。</li>
-</ul>
-<p>光说概念有些抽象，我们来看下乐观锁和悲观锁的调用方式示例：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116131213962.jpeg" alt=""></p>
-<p>通过调用方式示例，我们可以发现悲观锁基本都是在显式的锁定之后再操作同步资源，而乐观锁则直接去操作同步资源。那么，为何乐观锁能够做到不锁定同步资源也可以正确的实现线程同步呢？我们通过介绍乐观锁的主要实现方式 “CAS” 的技术原理来为大家解惑。</p>
-<p>CAS全称 Compare And Swap（比较与交换），是一种无锁算法。在不使用锁（没有线程被阻塞）的情况下实现多线程之间的变量同步。java.util.concurrent包中的原子类就是通过CAS来实现了乐观锁。</p>
-<p>CAS算法涉及到三个操作数：</p>
-<ul>
-<li>需要读写的内存值 V。</li>
-<li>进行比较的值 A。</li>
-<li>要写入的新值 B。</li>
-</ul>
-<p>当且仅当 V 的值等于 A 时，CAS通过原子方式用新值B来更新V的值（“比较+更新”整体是一个原子操作），否则不会执行任何操作。一般情况下，“更新”是一个不断重试的操作。</p>
-<p>之前提到java.util.concurrent包中的原子类，就是通过CAS来实现了乐观锁，那么我们进入原子类AtomicInteger的源码，看一下AtomicInteger的定义：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116131303252.jpeg" alt=""></p>
-<p>根据定义我们可以看出各属性的作用：</p>
-<ul>
-<li>unsafe： 获取并操作内存的数据。</li>
-<li>valueOffset： 存储value在AtomicInteger中的偏移量。</li>
-<li>value： 存储AtomicInteger的int值，该属性需要借助volatile关键字保证其在线程间是可见的。</li>
-</ul>
-<p>接下来，我们查看AtomicInteger的自增函数incrementAndGet()的源码时，发现自增函数底层调用的是unsafe.getAndAddInt()。但是由于JDK本身只有Unsafe.class，只通过class文件中的参数名，并不能很好的了解方法的作用，所以我们通过OpenJDK 8 来查看Unsafe的源码：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116132004154.jpeg" alt=""></p>
-<p>根据OpenJDK 8的源码我们可以看出，getAndAddInt()循环获取给定对象o中的偏移量处的值v，然后判断内存值是否等于v。如果相等则将内存值设置为 v + delta，否则返回false，继续循环进行重试，直到设置成功才能退出循环，并且将旧值返回。整个“比较+更新”操作封装在compareAndSwapInt()中，在JNI里是借助于一个CPU指令完成的，属于原子操作，可以保证多个线程都能够看到同一个变量的修改值。</p>
-<p>后续JDK通过CPU的cmpxchg指令，去比较寄存器中的 A 和 内存中的值 V。如果相等，就把要写入的新值 B 存入内存中。如果不相等，就将内存值 V 赋值给寄存器中的值 A。然后通过Java代码中的while循环再次调用cmpxchg指令进行重试，直到设置成功为止。</p>
-<p>CAS虽然很高效，但是它也存在三大问题，这里也简单说一下：</p>
-<ol>
-<li><strong>ABA问题</strong>。CAS需要在操作值的时候检查内存值是否发生变化，没有发生变化才会更新内存值。但是如果内存值原来是A，后来变成了B，然后又变成了A，那么CAS进行检查时会发现值没有发生变化，但是实际上是有变化的。ABA问题的解决思路就是在变量前面添加版本号，每次变量更新的时候都把版本号加一，这样变化过程就从“A－B－A”变成了“1A－2B－3A”。</li>
-</ol>
-<p>JDK从1.5开始提供了AtomicStampedReference类来解决ABA问题，具体操作封装在compareAndSet()中。compareAndSet()首先检查当前引用和当前标志与预期引用和预期标志是否相等，如果都相等，则以原子方式将引用值和标志的值设置为给定的更新值。</p>
-<ol start="2">
-<li>
-<p><strong>循环时间长开销大</strong>。CAS操作如果长时间不成功，会导致其一直自旋，给CPU带来非常大的开销。</p>
-</li>
-<li>
-<p><strong>只能保证一个共享变量的原子操作</strong>。对一个共享变量执行操作时，CAS能够保证原子操作，但是对多个共享变量操作时，CAS是无法保证操作的原子性的。</p>
-</li>
-</ol>
-<p>Java从1.5开始JDK提供了AtomicReference类来保证引用对象之间的原子性，可以把多个变量放在一个对象里来进行CAS操作。</p>
-<h2 id="自旋锁-vs-适应性自旋锁">自旋锁 VS 适应性自旋锁</h2>
-<p>在介绍自旋锁前，我们需要介绍一些前提知识来帮助大家明白自旋锁的概念。</p>
-<p>阻塞或唤醒一个Java线程需要操作系统切换CPU状态来完成，这种状态转换需要耗费处理器时间。如果同步代码块中的内容过于简单，状态转换消耗的时间有可能比用户代码执行的时间还要长。</p>
-<p>在许多场景中，同步资源的锁定时间很短，为了这一小段时间去切换线程，线程挂起和恢复现场的花费可能会让系统得不偿失。如果物理机器有多个处理器，能够让两个或以上的线程同时并行执行，我们就可以让后面那个请求锁的线程不放弃CPU的执行时间，看看持有锁的线程是否很快就会释放锁。</p>
-<p>而为了让当前线程“稍等一下”，我们需让当前线程进行自旋，如果在自旋完成后前面锁定同步资源的线程已经释放了锁，那么当前线程就可以不必阻塞而是直接获取同步资源，从而避免切换线程的开销。这就是自旋锁。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201115155115454.jpeg" alt=""></p>
-<p>自旋锁本身是有缺点的，它不能代替阻塞。自旋等待虽然避免了线程切换的开销，但它要占用处理器时间。如果锁被占用的时间很短，自旋等待的效果就会非常好。反之，如果锁被占用的时间很长，那么自旋的线程只会白浪费处理器资源。所以，自旋等待的时间必须要有一定的限度，如果自旋超过了限定次数（默认是10次，可以使用-XX:PreBlockSpin来更改）没有成功获得锁，就应当挂起线程。</p>
-<p>自旋锁的实现原理同样也是CAS，AtomicInteger中调用unsafe进行自增操作的源码中的do-while循环就是一个自旋操作，如果修改数值失败则通过循环来执行自旋，直至修改成功。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201115155541735.jpeg" alt="img"></p>
-<p>自旋锁在JDK1.4.2中引入，使用-XX:+UseSpinning来开启。JDK 6中变为默认开启，并且引入了自适应的自旋锁（适应性自旋锁）。</p>
-<p>自适应意味着自旋的时间（次数）不再固定，而是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定。如果在同一个锁对象上，自旋等待刚刚成功获得过锁，并且持有锁的线程正在运行中，那么虚拟机就会认为这次自旋也是很有可能再次成功，进而它将允许自旋等待持续相对更长的时间。如果对于某个锁，自旋很少成功获得过，那在以后尝试获取这个锁时将可能省略掉自旋过程，直接阻塞线程，避免浪费处理器资源。</p>
-<p>在自旋锁中 另有三种常见的锁形式:TicketLock、CLHlock和MCSlock，本文中仅做名词介绍，不做深入讲解，感兴趣的同学可以自行查阅相关资料。</p>
-<h2 id="无锁-vs-偏向锁-vs-轻量级锁-vs-重量级锁">无锁 VS 偏向锁 VS 轻量级锁 VS 重量级锁</h2>
-<p>这四种锁是指锁的状态，专门针对synchronized的。在介绍这四种锁状态之前还需要介绍一些额外的知识。</p>
-<p>首先为什么Synchronized能实现线程同步？</p>
-<p>在回答这个问题之前我们需要了解两个重要的概念：“Java对象头”、“Monitor”。</p>
-<h4 id="java对象头">Java对象头</h4>
-<p>synchronized是悲观锁，在操作同步资源之前需要给同步资源先加锁，这把锁就是存在Java对象头里的，而Java对象头又是什么呢？</p>
-<p>我们以Hotspot虚拟机为例，Hotspot的对象头主要包括两部分数据：Mark Word（标记字段）、Klass Pointer（类型指针）。</p>
-<p><strong>Mark Word</strong>：默认存储对象的HashCode，分代年龄和锁标志位信息。这些信息都是与对象自身定义无关的数据，所以Mark Word被设计成一个非固定的数据结构以便在极小的空间内存存储尽量多的数据。它会根据对象的状态复用自己的存储空间，也就是说在运行期间Mark Word里存储的数据会随着锁标志位的变化而变化。</p>
-<p><strong>Klass Point</strong>：对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
-<h4 id="monitor">Monitor</h4>
-<p>Monitor可以理解为一个同步工具或一种同步机制，通常被描述为一个对象。每一个Java对象就有一把看不见的锁，称为内部锁或者Monitor锁。</p>
-<p>Monitor是线程私有的数据结构，每一个线程都有一个可用monitor record列表，同时还有一个全局的可用列表。==每一个被锁住的对象都会和一个monitor关联，同时monitor中有一个Owner字段存放拥有该锁的线程的唯一标识，表示该锁被这个线程占用。==</p>
-<p><a href="../https://mp.weixin.qq.com/s?__biz=mziwote2mzu4na==&amp;mid=2247483711&amp;idx=1&amp;sn=884f5c0f3e286226e35341509a0db546&amp;chksm=97794510a00ecc06a5e3a77ea60b9476e51d1b6025cc1e86e0a9ab22ff36aa76666e3e400039&amp;scene=132#wechat_redirect">synchronized解析——如果你愿意一层一层剥开我的心</a></p>
-<h5 id="monitorenter">monitorenter</h5>
-<p>monitorenter指令介绍</p>
-<blockquote>
-<p>Each object is associated with a monitor. A monitor is locked if and only if it has an owner. The thread that executes monitorenter attempts to gain ownership of the monitor associated with objectref, as follows:</p>
-<blockquote>
-<p>If the entry count of the monitor associated with objectref is zero, the thread enters the monitor and sets its entry count to one. The thread is then the owner of the monitor.</p>
-<p>If the thread already owns the monitor associated with objectref, it reenters the monitor, incrementing its entry count.</p>
-<p>If another thread already owns the monitor associated with objectref, the thread blocks until the monitor&rsquo;s entry count is zero, then tries again to gain ownership.</p>
-</blockquote>
-</blockquote>
-<h5 id="monitorexit">monitorexit</h5>
-<p>monitorexit指令介绍</p>
-<blockquote>
-<p>The thread that executes monitorexit must be the owner of the monitor associated with the instance referenced by objectref.</p>
-<p>The thread decrements the entry count of the monitor associated with objectref. If as a result the value of the entry count is zero, the thread exits the monitor and is no longer its owner. Other threads that are blocking to enter the monitor are allowed to attempt to do so.</p>
-</blockquote>
-<h5 id="acc_synchronized">ACC_SYNCHRONIZED</h5>
-<p>ACC_SYNCHRONIZED介绍</p>
-<blockquote>
-<p>Method-level synchronization is performed implicitly, as part of method invocation and return. A synchronized method is distinguished in the run-time constant pool’s methodinfo structure by the ACCSYNCHRONIZED flag, which is checked by the method invocation instructions. When invoking a method for which ACC_SYNCHRONIZED is set, the executing thread enters a monitor, invokes the method itself, and exits the monitor whether the method invocation completes normally or abruptly. During the time the executing thread owns the monitor, no other thread may enter it. If an exception is thrown during invocation of the synchronized method and the synchronized method does not handle the exception, the monitor for the method is automatically exited before the exception is rethrown out of the synchronized method.</p>
-</blockquote>
-<h4 id="objectmonitor">ObjectMonitor</h4>
-<h5 id="objectmonitor数据结构">ObjectMonitor数据结构</h5>
-<p>在Java虚拟机（HotSpot）中，Monitor（管程）是由ObjectMonitor实现的</p>
-<h5 id="objectmonitor关键字">ObjectMonitor关键字</h5>
-<p>ObjectMonitor中几个关键字段的含义如图所示：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-6703926.jpeg" alt=""></p>
-<h5 id="工作机理">工作机理</h5>
-<p>Java Monitor 的工作机理如图所示：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201130104137815.jpeg" alt=""></p>
-<ul>
-<li>想要获取monitor的线程,首先会进入_EntryList队列。</li>
-<li>当某个线程获取到对象的monitor后,进入Owner区域，设置为当前线程,同时计数器count加1。</li>
-<li>如果线程调用了wait()方法，则会进入WaitSet队列。它会释放monitor锁，即将owner赋值为null,count自减1,进入WaitSet队列阻塞等待。</li>
-<li>如果其他线程调用 notify() / notifyAll() ，会唤醒WaitSet中的某个线程，该线程再次尝试获取monitor锁，成功即进入Owner区域。</li>
-<li>同步方法执行完毕了，线程退出临界区，会将monitor的owner设为null，并释放监视锁。</li>
-</ul>
-<h5 id="对象与monitor关联">对象与monitor关联</h5>
-<p>对象是如何跟monitor关联的呢？直接先看图：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201130104320705.jpeg" alt=""></p>
-<h4 id="锁优化">锁优化</h4>
-<p>事实上，只有在JDK1.6之前，synchronized的实现才会直接调用ObjectMonitor的enter和exit，这种锁被称之为重量级锁。</p>
-<h4 id="总结">总结</h4>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201130105104411.jpeg" alt=""></p>
-<p>现在话题回到synchronized，synchronized通过Monitor来实现线程同步，Monitor是依赖于底层的操作系统的Mutex Lock（互斥锁）来实现的线程同步。</p>
-<p>如同我们在自旋锁中提到的“阻塞或唤醒一个Java线程需要操作系统切换CPU状态来完成，这种状态转换需要耗费处理器时间。如果同步代码块中的内容过于简单，状态转换消耗的时间有可能比用户代码执行的时间还要长”。这种方式就是synchronized最初实现同步的方式，这就是JDK 6之前synchronized效率低的原因。这种依赖于操作系统Mutex Lock所实现的锁我们称之为“重量级锁”，JDK 6中为了减少获得锁和释放锁带来的性能消耗，引入了“偏向锁”和“轻量级锁”。</p>
-<p>所以目前锁一共有4种状态，级别从低到高依次是：无锁、偏向锁、轻量级锁和重量级锁。锁状态只能升级不能降级。</p>
-<p>通过上面的介绍，我们对synchronized的加锁机制以及相关知识有了一个了解，那么下面我们给出四种锁状态对应的的Mark Word内容，然后再分别讲解四种锁状态的思路以及特点：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640.jpeg" alt="img"></p>
-<p><strong>无锁</strong></p>
-<p>无锁没有对资源进行锁定，所有的线程都能访问并修改同一个资源，但同时只有一个线程能修改成功。</p>
-<p>无锁的特点就是修改操作在循环内进行，线程会不断的尝试修改共享资源。如果没有冲突就修改成功并退出，否则就会继续循环尝试。如果有多个线程修改同一个值，必定会有一个线程能修改成功，而其他修改失败的线程会不断重试直到修改成功。上面我们介绍的CAS原理及应用即是无锁的实现。无锁无法全面代替有锁，但无锁在某些场合下的性能是非常高的。</p>
-<p><strong>偏向锁</strong></p>
-<p>偏向锁是指一段同步代码一直被一个线程所访问，那么该线程会自动获取锁，降低获取锁的代价。</p>
-<p>在大多数情况下，锁总是由同一线程多次获得，不存在多线程竞争，所以出现了偏向锁。其目标就是在只有一个线程执行同步代码块时能够提高性能。</p>
-<p>当一个线程访问同步代码块并获取锁时，会在Mark Word里存储锁偏向的线程ID。在线程进入和退出同步块时不再通过CAS操作来加锁和解锁，而是检测Mark Word里是否存储着指向当前线程的偏向锁。引入偏向锁是为了在无多线程竞争的情况下尽量减少不必要的轻量级锁执行路径，因为轻量级锁的获取及释放依赖多次CAS原子指令，而偏向锁只需要在置换ThreadID的时候依赖一次CAS原子指令即可。</p>
-<p>偏向锁只有遇到其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁，线程不会主动释放偏向锁。偏向锁的撤销，需要等待全局安全点（在这个时间点上没有字节码正在执行），它会首先暂停拥有偏向锁的线程，判断锁对象是否处于被锁定状态。撤销偏向锁后恢复到无锁（标志位为“01”）或轻量级锁（标志位为“00”）的状态。</p>
-<p>偏向锁在JDK 6及以后的JVM里是默认启用的。可以通过JVM参数关闭偏向锁：-XX:-UseBiasedLocking=false，关闭之后程序默认会进入轻量级锁状态。</p>
-<p><strong>轻量级锁</strong></p>
-<p>是指当锁是偏向锁的时候，被另外的线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，从而提高性能。</p>
-<p>在代码进入同步块的时候，如果同步对象锁状态为无锁状态（锁标志位为“01”状态，是否为偏向锁为“0”），虚拟机首先将在当前线程的栈帧中建立一个名为锁记录（Lock Record）的空间，用于存储锁对象目前的Mark Word的拷贝，然后拷贝对象头中的Mark Word复制到锁记录中。</p>
-<p>拷贝成功后，虚拟机将使用CAS操作尝试将对象的Mark Word更新为指向Lock Record的指针，并将Lock Record里的owner指针指向对象的Mark Word。</p>
-<p>如果这个更新动作成功了，那么这个线程就拥有了该对象的锁，并且对象Mark Word的锁标志位设置为“00”，表示此对象处于轻量级锁定状态。</p>
-<p>如果轻量级锁的更新操作失败了，虚拟机首先会检查对象的Mark Word是否指向当前线程的栈帧，如果是就说明当前线程已经拥有了这个对象的锁，那就可以直接进入同步块继续执行，否则说明多个线程竞争锁。</p>
-<p>若当前只有一个等待线程，则该线程通过自旋进行等待。但是当自旋超过一定的次数，或者一个线程在持有锁，一个在自旋，又有第三个来访时，轻量级锁升级为重量级锁。</p>
-<p><strong>重量级锁</strong></p>
-<p>升级为重量级锁时，锁标志的状态值变为“10”，此时Mark Word中存储的是指向重量级锁的指针，此时等待锁的线程都会进入阻塞状态。</p>
-<p>整体的锁状态升级流程如下：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116101222267.jpeg" alt=""></p>
-<p>综上，偏向锁通过对比Mark Word解决加锁问题，避免执行CAS操作。而轻量级锁是通过用CAS操作和自旋来解决加锁问题，避免线程阻塞和唤醒而影响性能。重量级锁是将除了拥有锁的线程以外的线程都阻塞</p>
-<h2 id="公平锁-vs-非公平锁">公平锁 VS 非公平锁</h2>
-<p>公平锁是指多个线程按照申请锁的顺序来获取锁，线程直接进入队列中排队，队列中的第一个线程才能获得锁。公平锁的优点是等待锁的线程不会饿死。缺点是整体吞吐效率相对非公平锁要低，等待队列中除第一个线程以外的所有线程都会阻塞，CPU唤醒阻塞线程的开销比非公平锁大。</p>
-<p>非公平锁是多个线程加锁时直接尝试获取锁，获取不到才会到等待队列的队尾等待。但如果此时锁刚好可用，那么这个线程可以无需阻塞直接获取到锁，所以非公平锁有可能出现后申请锁的线程先获取锁的场景。非公平锁的优点是可以减少唤起线程的开销，整体的吞吐效率高，因为线程有几率不阻塞直接获得锁，CPU不必唤醒所有线程。缺点是处于等待队列中的线程可能会饿死，或者等很久才会获得锁。</p>
-<p>直接用语言描述可能有点抽象，这里作者用从别处看到的一个例子来讲述一下公平锁和非公平锁。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116102536317.jpeg" alt=""></p>
-<p>如上图所示，假设有一口水井，有管理员看守，管理员有一把锁，只有拿到锁的人才能够打水，打完水要把锁还给管理员。每个过来打水的人都要管理员的允许并拿到锁之后才能去打水，如果前面有人正在打水，那么这个想要打水的人就必须排队。管理员会查看下一个要去打水的人是不是队伍里排最前面的人，如果是的话，才会给你锁让你去打水；如果你不是排第一的人，就必须去队尾排队，这就是公平锁。</p>
-<p>但是对于非公平锁，管理员对打水的人没有要求。即使等待队伍里有排队等待的人，但如果在上一个人刚打完水把锁还给管理员而且管理员还没有允许等待队伍里下一个人去打水时，刚好来了一个插队的人，这个插队的人是可以直接从管理员那里拿到锁去打水，不需要排队，原本排队等待的人只能继续等待。如下图所示：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116102812736.jpeg" alt=""></p>
-<p>接下来我们通过ReentrantLock的源码来讲解公平锁和非公平锁。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116134304736.jpeg" alt=""></p>
-<p>根据代码可知，ReentrantLock里面有一个内部类Sync，Sync继承AQS（AbstractQueuedSynchronizer），添加锁和释放锁的大部分操作实际上都是在Sync中实现的。它有公平锁FairSync和非公平锁NonfairSync两个子类。ReentrantLock默认使用非公平锁，也可以通过构造器来显示的指定使用公平锁。</p>
-<p>下面我们来看一下公平锁与非公平锁的加锁方法的源码:</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116134348921.jpeg" alt=""></p>
-<p>综上，公平锁就是通过同步队列来实现多个线程按照申请锁的顺序来获取锁，从而实现公平的特性。非公平锁加锁时不考虑排队等待问题，直接尝试获取锁，所以存在后申请却先获得锁的情况。</p>
-<h2 id="可重入锁-vs-非可重入锁">可重入锁 VS 非可重入锁</h2>
-<p>可重入锁又名递归锁，是指在同一个线程在外层方法获取锁的时候，再进入该线程的内层方法会自动获取锁（前提锁对象得是同一个对象或者class），不会因为之前已经获取过还没释放而阻塞。Java中ReentrantLock和synchronized都是可重入锁，可重入锁的一个优点是可一定程度避免死锁</p>
-<p>而为什么可重入锁就可以在嵌套调用时可以自动获得锁呢？我们通过图示和源码来分别解析一下。</p>
-<p>还是打水的例子，有多个人在排队打水，此时管理员允许锁和同一个人的多个水桶绑定。这个人用多个水桶打水时，第一个水桶和锁绑定并打完水之后，第二个水桶也可以直接和锁绑定并开始打水，所有的水桶都打完水之后打水人才会将锁还给管理员。这个人的所有打水流程都能够成功执行，后续等待的人也能够打到水。这就是可重入锁。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116110910602.jpeg" alt=""></p>
-<p>之前我们说过ReentrantLock和synchronized都是重入锁，那么我们通过重入锁ReentrantLock以及非可重入锁NonReentrantLock的源码来对比分析一下为什么非可重入锁在重复调用同步资源时会出现死锁。</p>
-<p>首先ReentrantLock和NonReentrantLock都继承父类AQS，其父类AQS中维护了一个同步状态status来计数重入次数，status初始值为0。</p>
-<p>当线程尝试获取锁时，可重入锁先尝试获取并更新status值，如果status == 0表示没有其他线程在执行同步代码，则把status置为1，当前线程开始执行。如果status != 0，则判断当前线程是否是获取到这个锁的线程，如果是的话执行status+1，且当前线程可以再次获取锁。而非可重入锁是直接去获取并尝试更新当前status的值，如果status != 0的话会导致其获取锁失败，当前线程阻塞。</p>
-<p>释放锁时，可重入锁同样先获取当前status的值，在当前线程是持有锁的线程的前提下。如果status-1 == 0，则表示当前线程所有重复获取锁的操作都已经执行完毕，然后该线程才会真正释放锁。而非可重入锁则是在确定当前线程是持有锁的线程之后，直接将status置为0，将锁释放。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116111238508.jpeg" alt=""></p>
-<h2 id="独享锁-vs-共享锁">独享锁 VS 共享锁</h2>
-<p>独享锁和共享锁同样是一种概念。我们先介绍一下具体的概念，然后通过ReentrantLock和ReentrantReadWriteLock的源码来介绍独享锁和共享锁。</p>
-<p>独享锁也叫排他锁，是指该锁一次只能被一个线程所持有。如果线程T对数据A加上排它锁后，则其他线程不能再对A加任何类型的锁。获得排它锁的线程即能读数据又能修改数据。JDK中的synchronized和JUC中Lock的实现类就是互斥锁。</p>
-<p>共享锁是指该锁可被多个线程所持有。如果线程T对数据A加上共享锁后，则其他线程只能对A再加共享锁，不能加排它锁。获得共享锁的线程只能读数据，不能修改数据。</p>
-<p>独享锁与共享锁也是通过AQS来实现的，通过实现不同的方法，来实现独享或者共享。</p>
-<p>下图为ReentrantReadWriteLock的部分源码：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116111500885.jpeg" alt=""></p>
-<p>我们看到ReentrantReadWriteLock有两把锁：ReadLock和WriteLock，由词知意，一个读锁一个写锁，合称“读写锁”。再进一步观察可以发现ReadLock和WriteLock是靠内部类Sync实现的锁。Sync是AQS的一个子类，这种结构在CountDownLatch、ReentrantLock、Semaphore里面也都存在。</p>
-<p>在ReentrantReadWriteLock里面，读锁和写锁的锁主体都是Sync，但读锁和写锁的加锁方式不一样。读锁是共享锁，写锁是独享锁。读锁的共享锁可保证并发读非常高效，而读写、写读、写写的过程互斥，因为读锁和写锁是分离的。所以ReentrantReadWriteLock的并发性相比一般的互斥锁有了很大提升。</p>
-<p>那读锁和写锁的具体加锁方式有什么区别呢？在了解源码之前我们需要回顾一下其他知识。</p>
-<p>在最开始提及AQS的时候我们也提到了state字段（int类型，32位），该字段用来描述有多少线程获持有锁。</p>
-<p>在独享锁中这个值通常是0或者1（如果是重入锁的话state值就是重入的次数），在共享锁中state就是持有锁的数量。但是在ReentrantReadWriteLock中有读、写两把锁，所以需要在一个整型变量state上分别描述读锁和写锁的数量（或者也可以叫状态）。于是将state变量“按位切割”切分成了两个部分，高16位表示读锁状态（读锁个数），低16位表示写锁状态（写锁个数）。如下图所示：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640.png" alt=""></p>
-<p>了解了概念之后我们再来看代码，先看写锁的加锁源码：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116111919814.jpeg" alt=""></p>
-<p>tryAcquire()除了重入条件（当前线程为获取了写锁的线程）之外，增加了一个读锁是否存在的判断。如果存在读锁，则写锁不能被获取，原因在于：必须确保写锁的操作对读锁可见，如果允许读锁在已被获取的情况下对写锁的获取，那么正在运行的其他读线程就无法感知到当前写线程的操作。</p>
-<p>因此，只有等待其他读线程都释放了读锁，写锁才能被当前线程获取，而写锁一旦被获取，则其他读写线程的后续访问均被阻塞。写锁的释放与ReentrantLock的释放过程基本类似，每次释放均减少写状态，当写状态为0时表示写锁已被释放，然后等待的读写线程才能够继续访问读写锁，同时前次写线程的修改对后续的读写线程可见。</p>
-<p>接着是读锁的代码：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116112311507.jpeg" alt=""></p>
-<p>可以看到在tryAcquireShared(int unused)方法中，如果其他线程已经获取了写锁，则当前线程获取读锁失败，进入等待状态。如果当前线程获取了写锁或者写锁未被获取，则当前线程（线程安全，依靠CAS保证）增加读状态，成功获取读锁。读锁的每次释放（线程安全的，可能有多个读线程同时释放读锁）均减少读状态，减少的值是“1&laquo;16”。所以读写锁才能实现读读的过程共享，而读写、写读、写写的过程互斥。</p>
-<p>此时，我们再回头看一下互斥锁ReentrantLock中公平锁和非公平锁的加锁源码：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/640-20201116112511432.jpeg" alt=""></p>
-<p>我们发现在ReentrantLock虽然有公平锁和非公平锁两种，但是它们添加的都是独享锁。根据源码所示，当某一个线程调用lock方法获取锁时，如果同步资源没有被其他线程锁住，那么当前线程在使用CAS更新state成功后就会成功抢占该资源。而如果公共资源被占用且不是被当前线程占用，那么就会加锁失败。所以可以确定ReentrantLock无论读操作还是写操作，添加的锁都是都是独享锁。</p>
-<hr>
-<h2 id="aqs">AQS</h2>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/82077ccf14127a87b77cefd1ccf562d3253591.png" alt=""></p>
-<ul>
-<li>上图中有颜色的为Method，无颜色的为Attribution。</li>
-<li>总的来说，AQS框架共分为五层，自上而下由浅入深，从AQS对外暴露的API到底层基础数据。</li>
-<li>当有自定义同步器接入时，只需重写第一层所需要的部分方法即可，不需要关注底层具体的实现流程。当自定义同步器进行加锁或者解锁操作时，先经过第一层的API进入AQS内部方法，然后经过第二层进行锁的获取，接着对于获取锁失败的流程，进入第三层和第四层的等待队列处理，而这些处理方式均依赖于第五层的基础数据提供层。</li>
-</ul>
-<p>下面我们会从整体到细节，从流程到方法逐一剖析AQS框架，主要分析过程如下：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/d2f7f7fffdc30d85d17b44266c3ab05323338.png" alt="img"></p>
-<h3 id="21-原理概览">2.1 原理概览</h3>
-<p>AQS核心思想是，如果被请求的共享资源空闲，那么就将当前请求资源的线程设置为有效的工作线程，将共享资源设置为锁定状态；如果共享资源被占用，就需要一定的阻塞等待唤醒机制来保证锁分配。这个机制主要用的是CLH队列的变体实现的，将暂时获取不到锁的线程加入到队列中。</p>
-<p>CLH：Craig、Landin and Hagersten队列，是单向链表，AQS中的队列是CLH变体的虚拟双向队列（FIFO），AQS是通过将每条请求共享资源的线程封装成一个节点来实现锁的分配。</p>
-<p>主要原理图如下：</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/7132e4cef44c26f62835b197b239147b18062.png" alt="img"></p>
-<p>AQS使用一个Volatile的int类型的成员变量来表示同步状态，通过内置的FIFO队列来完成资源获取的排队工作，通过CAS完成对State值的修改。</p>
-<h4 id="211-aqs数据结构">2.1.1 AQS数据结构</h4>
-<p>先来看下AQS中最基本的数据结构——Node，Node即为上面CLH变体队列中的节点。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/960271cf2b5c8a185eed23e98b72c75538637.png" alt="img"></p>
-<p>解释一下几个方法和属性值的含义：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">方法和属性值</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">waitStatus</td>
-<td style="text-align:left">当前节点在队列中的状态</td>
-</tr>
-<tr>
-<td style="text-align:left">thread</td>
-<td style="text-align:left">表示处于该节点的线程</td>
-</tr>
-<tr>
-<td style="text-align:left">prev</td>
-<td style="text-align:left">前驱指针</td>
-</tr>
-<tr>
-<td style="text-align:left">predecessor</td>
-<td style="text-align:left">返回前驱节点，没有的话抛出npe</td>
-</tr>
-<tr>
-<td style="text-align:left">nextWaiter</td>
-<td style="text-align:left">指向下一个处于CONDITION状态的节点（由于本篇文章不讲述Condition Queue队列，这个指针不多介绍）</td>
-</tr>
-<tr>
-<td style="text-align:left">next</td>
-<td style="text-align:left">后继指针</td>
-</tr>
-</tbody>
-</table>
-<p>线程两种锁的模式：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">模式</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">SHARED</td>
-<td style="text-align:left">表示线程以共享的模式等待锁</td>
-</tr>
-<tr>
-<td style="text-align:left">EXCLUSIVE</td>
-<td style="text-align:left">表示线程正在以独占的方式等待锁</td>
-</tr>
-</tbody>
-</table>
-<p>waitStatus有下面几个枚举值：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">枚举</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">0</td>
-<td style="text-align:left">当一个Node被初始化的时候的默认值</td>
-</tr>
-<tr>
-<td style="text-align:left">CANCELLED</td>
-<td style="text-align:left">为1，表示线程获取锁的请求已经取消了</td>
-</tr>
-<tr>
-<td style="text-align:left">CONDITION</td>
-<td style="text-align:left">为-2，表示节点在等待队列中，节点线程等待唤醒</td>
-</tr>
-<tr>
-<td style="text-align:left">PROPAGATE</td>
-<td style="text-align:left">为-3，当前线程处在SHARED情况下，该字段才会使用</td>
-</tr>
-<tr>
-<td style="text-align:left">SIGNAL</td>
-<td style="text-align:left">为-1，表示线程已经准备好了，就等资源释放了</td>
-</tr>
-</tbody>
-</table>
-<h4 id="212-同步状态state">2.1.2 同步状态State</h4>
-<p>在了解数据结构后，接下来了解一下AQS的同步状态——State。AQS中维护了一个名为state的字段，意为同步状态，是由Volatile修饰的，用于展示当前临界资源的获锁情况。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// java.util.concurrent.locks.AbstractQueuedSynchronizer
+<p>fs/eventpoll.c</p>
+<h2 id="epoll_create">epoll_create</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#75715e">// /usr/include/x86_64-linux-gnu/sys/epoll.h
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> state<span style="color:#f92672">;</span>
-</code></pre></div><p>下面提供了几个访问这个字段的方法：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">方法名</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">protected final int getState()</td>
-<td style="text-align:left">获取State的值</td>
-</tr>
-<tr>
-<td style="text-align:left">protected final void setState(int newState)</td>
-<td style="text-align:left">设置State的值</td>
-</tr>
-<tr>
-<td style="text-align:left">protected final boolean compareAndSetState(int expect, int update)</td>
-<td style="text-align:left">使用CAS方式更新State</td>
-</tr>
-</tbody>
-</table>
-<p>这几个方法都是Final修饰的，说明子类中无法重写它们。我们可以通过修改State字段表示的同步状态来实现多线程的独占模式和共享模式（加锁过程）。</p>
-<p>&hellip;&hellip;</p>
-<h3 id="22-aqs重要方法与reentrantlock的关联">2.2 AQS重要方法与ReentrantLock的关联</h3>
-<p>从架构图中可以得知，AQS提供了大量用于自定义同步器实现的Protected方法。自定义同步器实现的相关方法也只是为了通过修改State字段来实现多线程的独占模式或者共享模式。自定义同步器需要实现以下方法（ReentrantLock需要实现的方法如下，并不是全部）：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">方法名</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">protected boolean isHeldExclusively()</td>
-<td style="text-align:left">该线程是否正在独占资源。只有用到Condition才需要去实现它。</td>
-</tr>
-<tr>
-<td style="text-align:left">protected boolean tryAcquire(int arg)</td>
-<td style="text-align:left">独占方式。arg为获取锁的次数，尝试获取资源，成功则返回True，失败则返回False。</td>
-</tr>
-<tr>
-<td style="text-align:left">protected boolean tryRelease(int arg)</td>
-<td style="text-align:left">独占方式。arg为释放锁的次数，尝试释放资源，成功则返回True，失败则返回False。</td>
-</tr>
-<tr>
-<td style="text-align:left">protected int tryAcquireShared(int arg)</td>
-<td style="text-align:left">共享方式。arg为获取锁的次数，尝试获取资源。负数表示失败；0表示成功，但没有剩余可用资源；正数表示成功，且有剩余资源。</td>
-</tr>
-<tr>
-<td style="text-align:left">protected boolean tryReleaseShared(int arg)</td>
-<td style="text-align:left">共享方式。arg为释放锁的次数，尝试释放资源，如果释放后允许唤醒后续等待结点返回True，否则返回False。</td>
-</tr>
-</tbody>
-</table>
-<p>一般来说，自定义同步器要么是独占方式，要么是共享方式，它们也只需实现tryAcquire-tryRelease、tryAcquireShared-tryReleaseShared中的一种即可。AQS也支持自定义同步器同时实现独占和共享两种方式，如ReentrantReadWriteLock。ReentrantLock是独占锁，所以实现了tryAcquire-tryRelease。</p>
-<p>以非公平锁为例，这里主要阐述一下非公平锁与AQS之间方法的关联之处，具体每一处核心方法的作用会在文章后面详细进行阐述。</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/b8b53a70984668bc68653efe9531573e78636.png" alt=""></p>
-<h3 id="23-通过reentrantlock理解aqs">2.3 通过ReentrantLock理解AQS</h3>
-<h4 id="231-线程加入等待队列">2.3.1 线程加入等待队列</h4>
-<h5 id="2311-加入队列的时机">2.3.1.1 加入队列的时机</h5>
-<p>当执行Acquire(1)时，会通过tryAcquire获取锁。在这种情况下，如果获取锁失败，就会调用addWaiter加入到等待队列中去。</p>
-<p>&hellip;&hellip;剩下的直接看文章吧</p>
-<p><img src="/img/java/java%E5%B9%B6%E5%8F%91.assets/e9e385c3c68f62c67c8d62ab0adb613921117.png" alt=""></p>
-<h2 id="synchronized">synchronized</h2>
-<p><a href="https://blog.csdn.net/qq_43179428/article/details/106793975">synchronized能不能保证有序性？？</a></p>
-<p>synchronized能够保证原子性和可见性，无法保证有序性，线程1在执行instance=new Singleton();内部的四步指令被重排序，导致先发生赋值后发生对象初始化，从而此时线程2直接在第一个空判断就因为非空而推出，进而得到了一个没有初始化的对象，进行对象访问会有问题</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">volatile</span> Singleton instance<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">private</span>  <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">(){}</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">(){</span>
-        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>instance<span style="color:#f92672">==</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
-            <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>Singleton<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">){</span>
-                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>instance<span style="color:#f92672">==</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span> 
-                    instance<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
-                <span style="color:#f92672">}</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span>
-        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><h2 id="volatile">volatile</h2>
-<p><a href="https://www.jianshu.com/p/2643c9ea1b82">深度解析volatile—底层实现</a></p>
-<p>加入volatile关键字和没有加入volatile关键字时所生成的汇编代码发现，加入volatile关键字时，会多出一个lock前缀指令。我们发现，volatile变量在字节码级别没有任何区别，在汇编级别使用了lock指令前缀。</p>
-<p>lock是一个指令前缀，Intel的手册上对其的解释是：</p>
-<p>Causes the processor&rsquo;s LOCK# signal to be asserted during execution of the accompanying instruction (turns the instruction into an atomic instruction). In a multiprocessor environment, the LOCK# signal insures that the processor has exclusive use of any shared memory while the signal is asserted.</p>
-<h2 id="lock">Lock</h2>
-<h3 id="reentrantlock">ReentrantLock</h3>
-<h2 id="concurrentatomic">concurrent.atomic</h2>
-<p>包下的类大多是使用CAS操作来实现的</p>
-<h2 id="cas">CAS</h2>
-<p><a href="https://www.jianshu.com/p/465417fbba45">Android 并发之CAS（原子操作）简单介绍（五）</a></p>
-<p>那些地方使用CAS？</p>
-<p>比如JDK中的Atomic以及Lock的底层实现也是用CAS机制。</p>
-<p>CAS的缺点：</p>
+<span style="color:#75715e">/* Creates an epoll instance.  Returns an fd for the new instance.
+</span><span style="color:#75715e">   The &#34;size&#34; parameter is a hint specifying the number of file
+</span><span style="color:#75715e">   descriptors to be associated with the new instance.  The fd
+</span><span style="color:#75715e">   returned by epoll_create() should be closed with close().  */</span>
+<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">epoll_create</span> (<span style="color:#66d9ef">int</span> __size) __THROW;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">SYSCALL_DEFINE1(epoll_create, <span style="color:#66d9ef">int</span>, size)
+{
+	<span style="color:#66d9ef">if</span> (size <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>EINVAL;
+
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sys_epoll_create1</span>(<span style="color:#ae81ff">0</span>);
+}
+</code></pre></div><h3 id="epoll_create1">epoll_create1</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * Open an eventpoll file descriptor.
+</span><span style="color:#75715e"> */</span>
+SYSCALL_DEFINE1(epoll_create1, <span style="color:#66d9ef">int</span>, flags)
+{
+    <span style="color:#66d9ef">int</span> error, fd;
+	<span style="color:#66d9ef">struct</span> eventpoll <span style="color:#f92672">*</span>ep <span style="color:#f92672">=</span> NULL;
+	<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>file;
+ 
+     <span style="color:#75715e">/*
+</span><span style="color:#75715e">	 * Create the internal data structure (&#34;struct eventpoll&#34;).
+</span><span style="color:#75715e">	 */</span>
+	error <span style="color:#f92672">=</span> ep_alloc(<span style="color:#f92672">&amp;</span>ep);
+    
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">	 * Creates all the items needed to setup an eventpoll file. That is,
+</span><span style="color:#75715e">	 * a file structure and a free file descriptor.
+</span><span style="color:#75715e">	 */</span>
+	fd <span style="color:#f92672">=</span> get_unused_fd_flags(O_RDWR <span style="color:#f92672">|</span> (flags <span style="color:#f92672">&amp;</span> O_CLOEXEC));
+    
+	file <span style="color:#f92672">=</span> anon_inode_getfile(<span style="color:#e6db74">&#34;[eventpoll]&#34;</span>, <span style="color:#f92672">&amp;</span>eventpoll_fops, ep,
+				 O_RDWR <span style="color:#f92672">|</span> (flags <span style="color:#f92672">&amp;</span> O_CLOEXEC));
+    
+	ep<span style="color:#f92672">-&gt;</span>file <span style="color:#f92672">=</span> file;
+	fd_install(fd, file);
+	<span style="color:#66d9ef">return</span> fd;
+}
+</code></pre></div><h2 id="epoll_ctl">epoll_ctl</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#75715e">// /usr/include/x86_64-linux-gnu/sys/epoll.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">/* Valid opcodes ( &#34;op&#34; parameter ) to issue to epoll_ctl().  */</span>
+<span style="color:#75715e">#define EPOLL_CTL_ADD 1	</span><span style="color:#75715e">/* Add a file descriptor to the interface.  */</span><span style="color:#75715e">
+</span><span style="color:#75715e">#define EPOLL_CTL_DEL 2	</span><span style="color:#75715e">/* Remove a file descriptor from the interface.  */</span><span style="color:#75715e">
+</span><span style="color:#75715e">#define EPOLL_CTL_MOD 3	</span><span style="color:#75715e">/* Change file descriptor epoll_event structure.  */</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">/* Manipulate an epoll instance &#34;epfd&#34;. Returns 0 in case of success,
+</span><span style="color:#75715e">   -1 in case of error ( the &#34;errno&#34; variable will contain the
+</span><span style="color:#75715e">   specific error code ) The &#34;op&#34; parameter is one of the EPOLL_CTL_*
+</span><span style="color:#75715e">   constants defined above. The &#34;fd&#34; parameter is the target of the
+</span><span style="color:#75715e">   operation. The &#34;event&#34; parameter describes which events the caller
+</span><span style="color:#75715e">   is interested in and any associated user data.  */</span>
+<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">epoll_ctl</span> (<span style="color:#66d9ef">int</span> __epfd, <span style="color:#66d9ef">int</span> __op, <span style="color:#66d9ef">int</span> __fd,
+		      <span style="color:#66d9ef">struct</span> epoll_event <span style="color:#f92672">*</span>__event) __THROW;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * The following function implements the controller interface for
+</span><span style="color:#75715e"> * the eventpoll file that enables the insertion/removal/change of
+</span><span style="color:#75715e"> * file descriptors inside the interest set.
+</span><span style="color:#75715e"> */</span>
+SYSCALL_DEFINE4(epoll_ctl, <span style="color:#66d9ef">int</span>, epfd, <span style="color:#66d9ef">int</span>, op, <span style="color:#66d9ef">int</span>, fd,
+		<span style="color:#66d9ef">struct</span> epoll_event __user <span style="color:#f92672">*</span>, event)
+{
+    <span style="color:#66d9ef">int</span> error;
+	<span style="color:#66d9ef">int</span> full_check <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">struct</span> fd f, tf;
+	<span style="color:#66d9ef">struct</span> eventpoll <span style="color:#f92672">*</span>ep;
+	<span style="color:#66d9ef">struct</span> epitem <span style="color:#f92672">*</span>epi;
+	<span style="color:#66d9ef">struct</span> epoll_event epds;
+	<span style="color:#66d9ef">struct</span> eventpoll <span style="color:#f92672">*</span>tep <span style="color:#f92672">=</span> NULL;
+    
+    ep_op_has_event(op) <span style="color:#f92672">&amp;&amp;</span> copy_from_user(<span style="color:#f92672">&amp;</span>epds, event, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> epoll_event)
+                                          
+    f <span style="color:#f92672">=</span> fdget(epfd);
+  	<span style="color:#75715e">/* Get the &#34;struct file *&#34; for the target file */</span>
+	tf <span style="color:#f92672">=</span> fdget(fd);
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">	 * At this point it is safe to assume that the &#34;private_data&#34; contains
+</span><span style="color:#75715e">	 * our own data structure.
+</span><span style="color:#75715e">	 */</span>
+	ep <span style="color:#f92672">=</span> f.file<span style="color:#f92672">-&gt;</span>private_data;                                      
+}
+</code></pre></div><h3 id="ep_op_has_event">ep_op_has_event</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* Tells if the epoll_ctl(2) operation needs an event copy from userspace */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ep_op_has_event</span>(<span style="color:#66d9ef">int</span> op)
+{
+	<span style="color:#66d9ef">return</span> op <span style="color:#f92672">!=</span> EPOLL_CTL_DEL;
+}
+</code></pre></div><h2 id="epoll_wait">epoll_wait</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#75715e">// /usr/include/x86_64-linux-gnu/sys/epoll.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">/* Wait for events on an epoll instance &#34;epfd&#34;. Returns the number of
+</span><span style="color:#75715e">   triggered events returned in &#34;events&#34; buffer. Or -1 in case of
+</span><span style="color:#75715e">   error with the &#34;errno&#34; variable set to the specific error code. The
+</span><span style="color:#75715e">   &#34;events&#34; parameter is a buffer that will contain triggered
+</span><span style="color:#75715e">   events. The &#34;maxevents&#34; is the maximum number of events to be
+</span><span style="color:#75715e">   returned ( usually size of &#34;events&#34; ). The &#34;timeout&#34; parameter
+</span><span style="color:#75715e">   specifies the maximum wait time in milliseconds (-1 == infinite).
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">   This function is a cancellation point and therefore not marked with
+</span><span style="color:#75715e">   __THROW.  */</span>
+<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">epoll_wait</span> (<span style="color:#66d9ef">int</span> __epfd, <span style="color:#66d9ef">struct</span> epoll_event <span style="color:#f92672">*</span>__events,
+		       <span style="color:#66d9ef">int</span> __maxevents, <span style="color:#66d9ef">int</span> __timeout);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * Implement the event wait interface for the eventpoll file. It is the kernel
+</span><span style="color:#75715e"> * part of the user space epoll_wait(2).
+</span><span style="color:#75715e"> */</span>
+SYSCALL_DEFINE4(epoll_wait, <span style="color:#66d9ef">int</span>, epfd, <span style="color:#66d9ef">struct</span> epoll_event __user <span style="color:#f92672">*</span>, events,
+		<span style="color:#66d9ef">int</span>, maxevents, <span style="color:#66d9ef">int</span>, timeout)
+{
+}
+</code></pre></div><h2 id="其他">其他</h2>
+<h2 id="struct-eventpoll">struct eventpoll</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * This structure is stored inside the &#34;private_data&#34; member of the file
+</span><span style="color:#75715e"> * structure and represents the main data structure for the eventpoll
+</span><span style="color:#75715e"> * interface.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">struct</span> eventpoll {
+	<span style="color:#75715e">/* Protect the access to this structure */</span>
+	spinlock_t lock;
+
+	<span style="color:#75715e">/*
+</span><span style="color:#75715e">	 * This mutex is used to ensure that files are not removed
+</span><span style="color:#75715e">	 * while epoll is using them. This is held during the event
+</span><span style="color:#75715e">	 * collection loop, the file cleanup path, the epoll file exit
+</span><span style="color:#75715e">	 * code and the ctl operations.
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#66d9ef">struct</span> mutex mtx;
+
+	<span style="color:#75715e">/* Wait queue used by sys_epoll_wait() */</span>
+	wait_queue_head_t wq;
+
+	<span style="color:#75715e">/* Wait queue used by file-&gt;poll() */</span>
+	wait_queue_head_t poll_wait;
+
+	<span style="color:#75715e">/* List of ready file descriptors */</span>
+	<span style="color:#66d9ef">struct</span> list_head rdllist;
+
+	<span style="color:#75715e">/* RB tree root used to store monitored fd structs */</span>
+	<span style="color:#66d9ef">struct</span> rb_root rbr;
+
+	<span style="color:#75715e">/*
+</span><span style="color:#75715e">	 * This is a single linked list that chains all the &#34;struct epitem&#34; that
+</span><span style="color:#75715e">	 * happened while transferring ready events to userspace w/out
+</span><span style="color:#75715e">	 * holding -&gt;lock.
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#66d9ef">struct</span> epitem <span style="color:#f92672">*</span>ovflist;
+
+	<span style="color:#75715e">/* wakeup_source used when ep_scan_ready_list is running */</span>
+	<span style="color:#66d9ef">struct</span> wakeup_source <span style="color:#f92672">*</span>ws;
+
+	<span style="color:#75715e">/* The user that created the eventpoll descriptor */</span>
+	<span style="color:#66d9ef">struct</span> user_struct <span style="color:#f92672">*</span>user;
+
+	<span style="color:#66d9ef">struct</span> file <span style="color:#f92672">*</span>file;
+
+	<span style="color:#75715e">/* used to optimize loop detection check */</span>
+	<span style="color:#66d9ef">int</span> visited;
+	<span style="color:#66d9ef">struct</span> list_head visited_list_link;
+};
+</code></pre></div><h2 id="struct-epoll_event">struct epoll_event</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">struct</span> epoll_event
+{
+  uint32_t events;	<span style="color:#75715e">/* Epoll events */</span>
+  epoll_data_t data;	<span style="color:#75715e">/* User data variable */</span>
+} __EPOLL_PACKED;
+</code></pre></div><h2 id="epoll_data_t">epoll_data(_t)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">union</span> epoll_data
+{
+  <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>ptr;
+  <span style="color:#66d9ef">int</span> fd;
+  uint32_t u32;
+  uint64_t u64;
+} epoll_data_t;
+</code></pre></div><h2 id="eventpoll_fops">eventpoll_fops</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* File callbacks that implement the eventpoll file behaviour */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">struct</span> file_operations eventpoll_fops <span style="color:#f92672">=</span> {
+<span style="color:#75715e">#ifdef CONFIG_PROC_FS
+</span><span style="color:#75715e"></span>	.show_fdinfo	<span style="color:#f92672">=</span> ep_show_fdinfo,
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>	.release	<span style="color:#f92672">=</span> ep_eventpoll_release,
+	.poll		<span style="color:#f92672">=</span> ep_eventpoll_poll,
+	.llseek		<span style="color:#f92672">=</span> noop_llseek,
+};
+</code></pre></div><h2 id="原理总结">原理总结</h2>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+epoll_create--&gt;|1创建|fileNode(&quot;创建并初始化eventpoll结构体ep,将ep放入file-&gt;private,并返回fd&quot;)
+epoll_create--&gt;|1创建|RBTree(&quot;红黑树用于存储以后epoll_ctl传来的fd&quot;)
+epoll_create--&gt;|1创建|epitems(&quot;链表,用于存储准备就绪的事件&quot;)
+
+epoll_ctl--&gt;|2 fd对应到|RBTree
+epoll_ctl--&gt;|2 注册回调ep_poll_callback,回调时将fd对应的epitem实例放入就绪链表并唤醒进程|RBTree
+
+epoll_wait--&gt;|3 ep_poll观察是否有数据|epitems--&gt;|3|isEvent{是否有数据?}--&gt;|3有|返回数据
+isEvent--&gt;|3否|sleepTimeoutThenReturn--&gt;被唤醒后从队列中移除wait,再传输就绪事件到用户空间
+</code></pre><p><code>epoll</code>使用<code>RB-Tree</code>红黑树去监听并维护所有文件描述符，<code>RB-Tree</code>的根节点。调用epoll_create时，内核除了帮我们在epoll文件系统里建了个file结点，在内核cache里建了个 红黑树 用于存储以后epoll_ctl传来的socket外，还会再建立一个list链表，用于存储准备就绪的事件.当epoll_wait调用时，仅仅观察这个list链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。所以，epoll_wait非常高效。而且，通常情况下即使我们要监控百万计的句柄，大多一次也只返回很少量的准备就绪句柄而已，所以，epoll_wait仅需要从内核态copy少量的句柄到用户态而已.</p>
+<p>那么，这个准备就绪list链表是怎么维护的呢？</p>
+<p>当我们执行epoll_ctl时，除了把socket放到epoll文件系统里file对象对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪list链表里。所以，当一个socket上有数据到了，内核在把网卡上的数据copy到内核中后就来把socket插入到准备就绪链表里了。</p>
+<p>epoll相比于select并不是在所有情况下都要高效，例如在如果有少于1024个文件描述符监听，且大多数socket都是出于活跃繁忙的状态，这种情况下，select要比epoll更为高效，因为epoll会有更多次的系统调用，用户态和内核态会有更加频繁的切换。</p>
+<p>epoll高效的本质在于：</p>
 <ul>
-<li>CPU开销较大
-在并发量比较高的情况下，如果许多线程反复尝试更新某一个变量，却又一直更新不成功，循环往复，会给CPU带来很大的压力。</li>
-<li>不能保证代码块的原子性
-CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不能保证<code>整个代码块的原子性</code>。比如需要保证3个变量共同进行原子性的更新，就不得不使用Synchronized了。</li>
+<li>减少了用户态和内核态的文件句柄拷贝</li>
+<li>减少了对可读可写文件句柄的遍历</li>
+<li>mmap 加速了内核与用户空间的信息传递，epoll是通过内核与用户mmap同一块内存，避免了无谓的内存拷贝</li>
+<li>IO性能不会随着监听的文件描述的数量增长而下降</li>
+<li>使用红黑树存储fd，以及对应的回调函数，其插入，查找，删除的性能不错，相比于hash，不必预先分配很多的空间</li>
 </ul>
-<h2 id="aqs-1">AQS</h2>
-<p>AQS(<code>AbstractQueuedSynchronizer</code>)，AQS是JDK下提供的一套用于实现基于FIFO等待队列的阻塞锁和相关的同步器的一个同步框架</p>
-<h2 id="list并发访问">List并发访问</h2>
-<h3 id="阻塞锁">阻塞(锁)</h3>
-<ul>
-<li>Collections.synchronizedList + Iterator synchronized</li>
-</ul>
-<p>显然这不是一个好的并发队列，这会导致吞吐量急剧下降。</p>
-<h3 id="非阻塞cas">非阻塞(CAS)</h3>
-<ul>
-<li>
-<p>Lock
-一种好的实现方式是使用ReentrantReadWriteLock来代替ReentrantLock提高读取的吞吐量</p>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/itplay/p/11121638.html">ConcurrentLinkedQueue</a></p>
-</li>
-</ul>
-<p>它采用了参考资料1（http://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf） 中的算法。</p>
-<p>要使用非阻塞算法来完成队列操作，那么就需要一种“循环尝试”的动作，就是循环操作队列，直到成功为止，失败就会再次尝试</p>
-<h2 id="concurrentmodificationexception">ConcurrentModificationException</h2>
 <h2 id="参考">参考</h2>
-<p><a href="../https://mp.weixin.qq.com/s?__biz=mzi2otqxmtm4oq==&amp;mid=2247489891&amp;idx=2&amp;sn=ab909c05dcb22aea0b4859165e1da341&amp;chksm=eae1ec31dd966527afe4f7d7e7b53f47d5eefd1c62bab8c53c207f2ebb2c870f909f2d95a740&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1567127857241&amp;sharer_shareid=8206e3713102e9ca474649d51eda190c#rd">java中synchronized和volatile有什么区别？</a></p>
-<p><a href="../https://mp.weixin.qq.com/s?__biz=mzixnja5mtm2ma==&amp;mid=2652436790&amp;idx=2&amp;sn=1fdb3e1385551e3090568207b3140b5f&amp;chksm=8c6206b9bb158faf39758aab2a92135f68a7a49e541be4da380cb5eab8905d7ad9d6b85f585e&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1583972072027&amp;sharer_shareid=8206e3713102e9ca474649d51eda190c#rd">不使用synchronized和lock，如何实现一个线程安全的单例？</a></p>
-<p>Java Semaphore信号量</p>
-<p><a href="https://blog.csdn.net/u010862794/article/details/72892300">JAVA并发编程: CAS和AQS</a></p>
-<p><a href="https://www.cnblogs.com/waterystone/p/4920797.html">Java并发之AQS详解</a></p>
-<p>&laquo;/Users/qianpianpian/work/书籍/深入浅出Java多线程.pdf&raquo;</p>
-<p>&laquo;/Users/qianpianpian/work/书籍/Geektime/geektime_Java并发编程实战&raquo;</p>
-<p><a href="https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html">从ReentrantLock的实现看AQS的原理及应用</a></p>
-<p><a href="../https://mp.weixin.qq.com/s?__biz=mjm5njq5mti5oa==&amp;mid=2651749434&amp;idx=3&amp;sn=5ffa63ad47fe166f2f1a9f604ed10091&amp;chksm=bd12a5778a652c61509d9e718ab086ff27ad8768586ea9b38c3dcf9e017a8e49bcae3df9bcc8&amp;scene=38#wechat_redirect">【基本功】不可不说的java“锁”事</a></p>
+<p><a href="https://www.cnblogs.com/renhui/p/12868221.html">Linux 下 Epoll 机制概述</a></p>
+<p><a href="https://man7.org/linux/man-pages/man7/epoll.7.html">https://man7.org/linux/man-pages/man7/epoll.7.html</a></p>
+<p><a href="http://gityuan.com/2019/01/06/linux-epoll/">源码解读epoll内核机制</a></p>
 
 
 <footer class="footline">
@@ -7352,8 +7092,6 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -7369,6 +7107,9 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -9362,6 +9103,7 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
                 
                     
+                    
                 
                 
 
@@ -9376,6 +9118,9 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -9457,6 +9202,7 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
                 
                     
+                    
                 
                 
 
@@ -9469,6 +9215,7 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
             
                 
+                    
                     
                 
                 
@@ -9486,6 +9233,9 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
                 
                     
+                        
+                        
+                    
                 
                 
 
@@ -10669,7 +10419,6 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
                 
                     
-                    
                 
                 
 
@@ -10682,9 +10431,6 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -10701,7 +10447,6 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
             
                 
-                    
                     
                 
                 
@@ -10718,9 +10463,6 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -11375,10 +11117,10 @@ CAS机制所保证的只是一个<code>变量的原子性操作</code>，而不�
 	 
 	 
 		
-			<a class="nav nav-prev" href="/en/java/blockingqueue/" title="BlockingQueue"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/" title="handler"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/en/java/threadpoolexecutor/" title="ThreadPoolExecutor" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/" title="Looper" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

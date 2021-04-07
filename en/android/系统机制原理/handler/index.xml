@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Epoll</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/</guid>
+      <description>fs/eventpoll.c
+epoll_create // /usr/include/x86_64-linux-gnu/sys/epoll.h  /* Creates an epoll instance. Returns an fd for the new instance. The &amp;#34;size&amp;#34; parameter is a hint specifying the number of file descriptors to be associated with the new instance. The fd returned by epoll_create() should be closed with close(). */ extern int epoll_create (int __size) __THROW; SYSCALL_DEFINE1(epoll_create, int, size) { if (size &amp;lt;= 0) return -EINVAL; return sys_epoll_create1(0); } epoll_create1 /* * Open an eventpoll file descriptor.</description>
+    </item>
+    
+    <item>
       <title>Looper</title>
       <link>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
