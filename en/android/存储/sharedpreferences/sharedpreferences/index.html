@@ -12,23 +12,23 @@
     <title>SharedPreferences :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1617797149" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1617797149" rel="stylesheet">
-    <link href="/css/hybrid.css?1617797149" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1617797149" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1617797149" rel="stylesheet">
-    <link href="/css/auto-complete.css?1617797149" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1617797149" rel="stylesheet">
-    <link href="/css/theme.css?1617797149" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1617797149" rel="stylesheet">
+    <link href="/css/nucleus.css?1619600281" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1619600281" rel="stylesheet">
+    <link href="/css/hybrid.css?1619600281" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1619600281" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1619600281" rel="stylesheet">
+    <link href="/css/auto-complete.css?1619600281" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1619600281" rel="stylesheet">
+    <link href="/css/theme.css?1619600281" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1619600281" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1617797149" rel="stylesheet">
+    <link href="/css/theme-mine.css?1619600281" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1617797149"></script>
+    <script src="/js/jquery-3.3.1.min.js?1619600281"></script>
 
-    <script src="/js/auto_toc_scroll.js?1617797149"></script>
+    <script src="/js/auto_toc_scroll.js?1619600281"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1617797149"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1617797149"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1619600281"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1619600281"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1617797149"></script>
+<script type="text/javascript" src="/js/search.js?1619600281"></script>
 
     
   </div>
@@ -1061,6 +1061,27 @@
       <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="架构思考和实现" class="dd-item ">
         <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/">
         架构思考和实现
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" class="dd-item ">
+        <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/">
+        架构思考和实现Inner
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -6802,8 +6823,13 @@
       <ul>
         <li><a href="#维护spname--filefile--sharedpreferencesimpl两个arraymap内存缓存">维护spName&ndash;&gt;file,file&ndash;&gt;sharedPreferencesImpl两个ArrayMap内存缓存</a></li>
         <li><a href="#sharedpreferencesimpl构造方法切子线程loadfromdisk得到mapstring-object-mmap">SharedPreferencesImpl构造方法切子线程loadFromDisk,得到Map&lt;String, Object&gt; mMap</a></li>
-        <li><a href="#edit-wait-util-loaded">edit: wait util loaded</a></li>
+        <li><a href="#edit-wait-util-loaded">edit: wait util loaded</a>
+          <ul>
+            <li><a href="#awaitloadedlocked">awaitLoadedLocked</a></li>
+          </ul>
+        </li>
         <li><a href="#putxxx-mmodifiedputkey-value">putXxx: mModified.put(key, value)</a></li>
+        <li><a href="#getxxx-导致anr">getXXX() 导致ANR</a></li>
       </ul>
     </li>
     <li><a href="#2编辑提交">2、编辑提交</a>
@@ -6814,17 +6840,14 @@
             <li><a href="#222-enqueuediskwrite">2.2.2 enqueueDiskWrite</a>
               <ul>
                 <li><a href="#queuedworkqueue">QueuedWork.queue</a></li>
+                <li><a href="#gethandler">getHandler</a></li>
+                <li><a href="#processpendingwork">processPendingWork</a></li>
                 <li><a href="#writetofile">writeToFile</a></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><a href="#22-apply流程">2.2、 apply()流程</a>
-          <ul>
-            <li><a href="#221-committomemory">2.2.1 commitToMemory</a></li>
-            <li><a href="#222-enqueuediskwrite-1">2.2.2 enqueueDiskWrite</a></li>
-          </ul>
-        </li>
+        <li><a href="#22-apply流程">2.2、 apply()流程</a></li>
         <li><a href="#23-主线程堵塞anr">2.3 主线程堵塞ANR</a>
           <ul>
             <li><a href="#waittofinishprocesspendingwork">waitToFinish，processPendingWork</a></li>
@@ -6975,7 +6998,8 @@
 
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> EditorImpl<span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mLock&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><h4 id="awaitloadedlocked">awaitLoadedLocked</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GuardedBy</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mLock&#34;</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">awaitLoadedLocked</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span>mLoaded<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
             <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
@@ -6993,7 +7017,15 @@
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p><img src="/img/android/%E5%AD%98%E5%82%A8/sharedpreferences/sharedpreferences.assets/1.jpeg" alt=""></p>
-<h2 id="2编辑提交">2、编辑提交</h2>
+<h3 id="getxxx-导致anr">getXXX() 导致ANR</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getString</span><span style="color:#f92672">(</span>String key<span style="color:#f92672">,</span> <span style="color:#a6e22e">@Nullable</span> String defValue<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>mLock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        awaitLoadedLocked<span style="color:#f92672">();</span>
+        String v <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>String<span style="color:#f92672">)</span>mMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>key<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> v <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> v <span style="color:#f92672">:</span> defValue<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="2编辑提交">2、编辑提交</h2>
 <p><img src="/img/android/%E5%AD%98%E5%82%A8/sharedpreferences/sharedpreferences.assets/1-20201011181344791.jpeg" alt=""></p>
 <h3 id="21-commit流程">2.1、 commit()流程</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
@@ -7080,8 +7112,8 @@
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
 
-        QueuedWork<span style="color:#f92672">.</span><span style="color:#a6e22e">queue</span><span style="color:#f92672">(</span>writeToDiskRunnable<span style="color:#f92672">,</span> <span style="color:#f92672">!</span>isFromSyncCommit<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
+        QueuedWork<span style="color:#f92672">.</span><span style="color:#a6e22e">queue</span><span style="color:#f92672">(</span>writeToDiskRunnable<span style="color:#f92672">,</span> <span style="color:#f92672">!</span>isFromSyncCommit<span style="color:#f92672">);</span><span style="color:#75715e">//add to sWork
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 </code></pre></div><h5 id="queuedworkqueue">QueuedWork.queue</h5>
 <ul>
 <li>当apply()方式提交的时候，默认消息会延迟发送100毫秒，避免频繁的磁盘写入操作。</li>
@@ -7092,7 +7124,6 @@
 
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">queue</span><span style="color:#f92672">(</span>Runnable work<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> shouldDelay<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         Handler handler <span style="color:#f92672">=</span> getHandler<span style="color:#f92672">();</span>
-
         <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>sLock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
             sWork<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>work<span style="color:#f92672">);</span>
 
@@ -7103,7 +7134,8 @@
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</code></pre></div><h5 id="gethandler">getHandler</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
 </span><span style="color:#75715e">     * Lazily create a handler on a separate thread.
 </span><span style="color:#75715e">     */</span>
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Handler <span style="color:#a6e22e">getHandler</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -7130,7 +7162,8 @@
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processPendingWork</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</code></pre></div><h5 id="processpendingwork">processPendingWork</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processPendingWork</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">long</span> startTime <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
         <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>sProcessingWork<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
             LinkedList<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span> work<span style="color:#f92672">;</span>
@@ -7208,33 +7241,34 @@
         <span style="color:#f92672">};</span>
 
     SharedPreferencesImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">enqueueDiskWrite</span><span style="color:#f92672">(</span>mcr<span style="color:#f92672">,</span> postWriteRunnable<span style="color:#f92672">);</span>
-
     notifyListeners<span style="color:#f92672">(</span>mcr<span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><h4 id="221-committomemory">2.2.1 commitToMemory</h4>
-<h4 id="222-enqueuediskwrite-1">2.2.2 enqueueDiskWrite</h4>
-<h3 id="23-主线程堵塞anr">2.3 主线程堵塞ANR</h3>
+</code></pre></div><h3 id="23-主线程堵塞anr">2.3 主线程堵塞ANR</h3>
+<p>为了保证异步任务及时完成，当生命周期处于 handleStopService() 、handlePauseActivity() 、 handleStopActivity() 的时候会调用QueuedWork.waitToFinish() 会等待写入任务执行完毕。</p>
 <h4 id="waittofinishprocesspendingwork">waitToFinish，processPendingWork</h4>
 <blockquote>
 <p>You don&rsquo;t need to worry about Android component lifecycles and their interaction with apply() writing to disk. The framework makes sure in-flight disk writes from apply() complete before switching states.</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//QueuedWork.java
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">waitToFinish</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#f92672">...</span>
-          processPendingWork<span style="color:#f92672">();</span><span style="color:#75715e">//执行文件写入磁盘操作
-</span><span style="color:#75715e"></span>        <span style="color:#f92672">....</span>
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Trigger queued work to be processed immediately. The queued work is processed on a separate
+</span><span style="color:#75715e">     * thread asynchronous. While doing that run and process all finishers on this thread. The
+</span><span style="color:#75715e">     * finishers can be implemented in a way to check weather the queued work is finished.
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * Is called from the Activity base class&#39;s onPause(), after BroadcastReceiver&#39;s onReceive,
+</span><span style="color:#75715e">     * after Service command handling, etc. (so async work is never lost)
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">waitToFinish</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        processPendingWork<span style="color:#f92672">();</span><span style="color:#75715e">//write to disk and run postWriteRunnable, will block main thread
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                Runnable finisher<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>sLock<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    finisher <span style="color:#f92672">=</span> sFinishers<span style="color:#f92672">.</span><span style="color:#a6e22e">poll</span><span style="color:#f92672">();</span>
+                <span style="color:#f92672">}</span>
+                finisher<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processPendingWork</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">long</span> startTime <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
-      <span style="color:#f92672">....</span>
-     <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>work<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-         <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Runnable w <span style="color:#f92672">:</span> work<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-             w<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">();</span>
-         <span style="color:#f92672">}</span>
-      <span style="color:#f92672">...</span>  
-    <span style="color:#f92672">}</span>
-
-</code></pre></div><p>waitToFinish()会将，储存在QueuedWork的操作一并处理掉。什么时候呢？在Activiy的 onPause()、BroadcastReceiver的onReceive()以及Service的onStartCommand()方法之前都会调用waitToFinish()。大家知道这些方法都是执行在主线程中，一旦waitToFinish()执行超时，就会跑出ANR。</p>
+</code></pre></div><p>waitToFinish()会将，储存在QueuedWork的操作一并处理掉。什么时候呢？在Activiy的 onPause()、BroadcastReceiver的onReceive()以及Service的onStartCommand()方法之前都会调用waitToFinish()。大家知道这些方法都是执行在主线程中，一旦waitToFinish()执行超时，就会抛出ANR。</p>
 <p>至于waitToFinish调用具体时机，查看ActivityThread.java类文件。这里只是说本质原理</p>
 <h2 id="线程安全">线程安全</h2>
 <h3 id="多操作线程安全">多操作线程安全</h3>
@@ -7926,6 +7960,22 @@
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -11375,19 +11425,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1617797149"></script>
-    <script src="/js/jquery.sticky.js?1617797149"></script>
-    <script src="/js/featherlight.min.js?1617797149"></script>
-    <script src="/js/highlight.pack.js?1617797149"></script>
+    <script src="/js/clipboard.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1619600281"></script>
+    <script src="/js/jquery.sticky.js?1619600281"></script>
+    <script src="/js/featherlight.min.js?1619600281"></script>
+    <script src="/js/highlight.pack.js?1619600281"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1617797149"></script>
-    <script src="/js/learn.js?1617797149"></script>
-    <script src="/js/hugo-learn.js?1617797149"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1619600281"></script>
+    <script src="/js/learn.js?1619600281"></script>
+    <script src="/js/hugo-learn.js?1619600281"></script>
     
         
-            <script src="/mermaid/mermaid.js?1617797149"></script>
+            <script src="/mermaid/mermaid.js?1619600281"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

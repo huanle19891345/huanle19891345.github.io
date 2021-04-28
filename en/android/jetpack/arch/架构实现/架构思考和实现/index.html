@@ -12,23 +12,23 @@
     <title>架构思考和实现 :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1617797148" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1617797148" rel="stylesheet">
-    <link href="/css/hybrid.css?1617797148" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1617797148" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1617797148" rel="stylesheet">
-    <link href="/css/auto-complete.css?1617797148" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1617797148" rel="stylesheet">
-    <link href="/css/theme.css?1617797148" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1617797148" rel="stylesheet">
+    <link href="/css/nucleus.css?1619600281" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1619600281" rel="stylesheet">
+    <link href="/css/hybrid.css?1619600281" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1619600281" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1619600281" rel="stylesheet">
+    <link href="/css/auto-complete.css?1619600281" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1619600281" rel="stylesheet">
+    <link href="/css/theme.css?1619600281" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1619600281" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1617797148" rel="stylesheet">
+    <link href="/css/theme-mine.css?1619600281" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1617797148"></script>
+    <script src="/js/jquery-3.3.1.min.js?1619600281"></script>
 
-    <script src="/js/auto_toc_scroll.js?1617797148"></script>
+    <script src="/js/auto_toc_scroll.js?1619600281"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1617797148"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1617797148"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1619600281"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1619600281"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1617797148"></script>
+<script type="text/javascript" src="/js/search.js?1619600281"></script>
 
     
   </div>
@@ -1061,6 +1061,27 @@
       <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="架构思考和实现" class="dd-item active">
         <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/">
         架构思考和实现
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" class="dd-item ">
+        <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/">
+        架构思考和实现Inner
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -6816,7 +6837,7 @@
           <ul>
             <li><a href="#类设计">类设计</a></li>
             <li><a href="#hilt构造并注入viewmodel">Hilt构造并注入viewmodel</a></li>
-            <li><a href="#databinding-design">DataBinding Design</a></li>
+            <li><a href="#databinding场景细分">DataBinding场景细分</a></li>
           </ul>
         </li>
         <li><a href="#viewmodel-layer">ViewModel Layer</a>
@@ -6828,41 +6849,21 @@
                 <li><a href="#trigger-by-user-action-event">Trigger by user action event</a></li>
               </ul>
             </li>
-            <li><a href="#livedata封装">LiveData封装</a></li>
+            <li><a href="#livedata封装思路">LiveData封装思路</a></li>
           </ul>
         </li>
         <li><a href="#model-layer">Model Layer</a>
           <ul>
             <li><a href="#hilt注入singleton-datasource">Hilt注入Singleton DataSource</a></li>
             <li><a href="#具体设计如上架构设计图">具体设计如上架构设计图</a></li>
-            <li><a href="#networkboundresource类设计">NetworkBoundResource类设计</a></li>
             <li><a href="#dataloadflow">DataLoadFlow</a></li>
+            <li><a href="#networkboundresource类设计">NetworkBoundResource类设计</a></li>
             <li><a href="#结构化并发协程">结构化并发,协程</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#分层架构">分层架构</a></li>
-    <li><a href="#networkboundresource数据策略">NetworkBoundResource数据策略</a></li>
-    <li><a href="#resueviewmodels">ResueViewmodels</a>
-      <ul>
-        <li><a href="#pageviewmodel层内复用">PageViewModel层内复用</a></li>
-      </ul>
-    </li>
-    <li><a href="#模块间引用关系和数据通知方式">模块间引用关系和数据通知方式</a></li>
-    <li><a href="#其他参考">其他参考</a>
-      <ul>
-        <li><a href="#common-architectural-principles">Common architectural principles</a>
-          <ul>
-            <li><a href="#separation-of-concerns--单一职责">Separation of concerns&ndash;单一职责</a></li>
-            <li><a href="#drive-ui-from-a-model">Drive UI from a model</a></li>
-          </ul>
-        </li>
-        <li><a href="#best-practices">Best practices</a></li>
-        <li><a href="#single-source-of-truth">Single source of truth</a></li>
-        <li><a href="#networkboundresource_optimize">NetworkBoundResource_Optimize</a></li>
-      </ul>
-    </li>
+    <li><a href="#模块引用和数据通知">模块引用和数据通知</a></li>
   </ul>
 </nav>
     </div>
@@ -6931,19 +6932,19 @@ end
 <p>Activity和Fragment是同样的继承结构设计，以Activity为例:</p>
 <pre><code class="language-mermaid" data-lang="mermaid">classDiagram
 class CommonActivity {
- +inflateContent(savedInstanceState: Bundle?)
- +init(savedInstanceState: Bundle?)
+ +inflateContent(savedInstanceState: Bundle?)*
+ +init(savedInstanceState: Bundle?)*
 }
 class CommonInflateActivity {
  +inflateContent(savedInstanceState: Bundle?)
- +getLayoutId()Int
+ +getLayoutId()*Int
 }
 class DataBindingActivity~VDB : ViewDataBinding~{
 +inflateContent(savedInstanceState: Bundle?)
 +init(savedInstanceState: Bundle?)
 -bindVariable(activityDataBinding: VDB)
-+getLayoutId() Int
-+getVariableMap() Map
++getLayoutId()* Int
++getVariableMap()* Map
 }
 class ViewModelCommonActivity~VM : BaseViewModel~ {
  ~VM viewModel
@@ -6951,7 +6952,7 @@ class ViewModelCommonActivity~VM : BaseViewModel~ {
 class ViewModelBindingActivity~VDB : ViewDataBinding, VM : BaseViewModel~ {
  ~VM viewModel
  +getVariableMap()Map
- +getViewModelVariableId()Int
+ +getViewModelVariableId()*Int
 }
 BaseActivity&lt;|--CommonActivity
 CommonActivity&lt;|--CommonInflateActivity
@@ -6959,7 +6960,7 @@ CommonActivity&lt;|--DataBindingActivity
 CommonInflateActivity&lt;|--ViewModelCommonActivity
 DataBindingActivity&lt;|--ViewModelBindingActivity
 </code></pre><h4 id="hilt构造并注入viewmodel">Hilt构造并注入viewmodel</h4>
-<h4 id="databinding-design">DataBinding Design</h4>
+<h4 id="databinding场景细分">DataBinding场景细分</h4>
 <p><img src="/img/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0.assets/viewattributedatabinding.png" alt=""></p>
 <h3 id="viewmodel-layer">ViewModel Layer</h3>
 <h4 id="hilt注入需要的domain层repository">Hilt注入需要的Domain层Repository</h4>
@@ -6985,7 +6986,7 @@ solution2: use _ private mutableLiveData and public liveData, use fun updateXxx(
 </span><span style="color:#75715e"></span>            }
     }
 }
-</code></pre></div><h4 id="livedata封装">LiveData封装</h4>
+</code></pre></div><h4 id="livedata封装思路">LiveData封装思路</h4>
 <pre><code class="language-mermaid" data-lang="mermaid">graph LR
 subgraph Encapsulation purpose
 
@@ -7011,7 +7012,9 @@ end
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> userRemoteDataSource: UserRemoteDataSource
 ) {
 </code></pre></div><h4 id="具体设计如上架构设计图">具体设计如上架构设计图</h4>
-<p><a href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">架构设计</a></p>
+<p><a href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">架构设计图</a></p>
+<h4 id="dataloadflow">DataLoadFlow</h4>
+<p><img src="/img/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0.assets/dataloadflow.png" alt=""></p>
 <h4 id="networkboundresource类设计">NetworkBoundResource类设计</h4>
 <pre><code class="language-mermaid" data-lang="mermaid">classDiagram
 
@@ -7033,193 +7036,28 @@ class SimpleResource~ResultType~ {
 class SimpleResourceFlow~ResultType~ {
 +loadAsFlow:Flow&lt;Resource&lt;ResultType&gt;&gt;
 }
+class IFlowDataLoader~T~ {
++load:Flow&lt;Resource&lt;T&gt;&gt;
+}
+class IDataLoader~T~ {
++load:Resource&lt;T&gt;
+}
 
 IFlowDataStrategy&lt;|--BaseFlowDataStrategy
 BaseFlowDataStrategy&lt;|--NetworkBoundResource
 BaseFlowDataStrategy&lt;|--SimpleResource
 BaseFlowDataStrategy&lt;|--SimpleResourceFlow
-</code></pre><h4 id="dataloadflow">DataLoadFlow</h4>
-<p><img src="/img/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0.assets/dataloadflow.png" alt=""></p>
-<h4 id="结构化并发协程">结构化并发,协程</h4>
-<p><a href="#networkboundresource_optimize">networkboundresource_optimize5.6.</a></p>
-<h2 id="分层架构">分层架构</h2>
-<p><a href="https://developer.android.com/jetpack/guide#overview">https://developer.android.com/jetpack/guide#overview</a></p>
-<p><img src="/img/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0.assets/final-architecture.png" alt=""></p>
-<h2 id="networkboundresource数据策略">NetworkBoundResource数据策略</h2>
-<p><a href="https://developer.android.com/jetpack/guide#addendum">https://developer.android.com/jetpack/guide#addendum</a></p>
-<p><img src="/img/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0.assets/network-bound-resource.png" alt=""></p>
-<h2 id="resueviewmodels">ResueViewmodels</h2>
-<p><a href="https://stackoverflow.com/questions/12205689/should-i-reuse-view-models-in-different-views">Should I reuse view models in different views?</a></p>
-<p>I noticed that I have views that need the same information like others. But sometimes you need 5 properties of the view model and sometimes only 2.</p>
-<p>Do you <strong>share</strong> such view model over many views or do you create a <strong>separate</strong> view model for each view or maybe do you prefere an <strong>inheritance</strong> or <strong>composition</strong> strategy?</p>
-<p>For me there are some disadvantages for sharing view models:</p>
-<ol>
-<li>Principle of Least Surprise: It is strange to fill only 2 properties of 5 of a view model and get null reference exception, because you don&rsquo;t want to query additional data of the database. When the view model has 5 properties I expect that all are filled. The exceptions prove the rule. Unused properties make the code less readable (Why is that property present if it isn&rsquo;t being used?)</li>
-<li>Separation of Concerns/Single Responsibility Principle: The view model cluttered up on complex sites, because you have to suit different needs for each view. If logic is involved its getting more complex, too.Also, sometimes you may want to add extra properties in your ViewModel that are absolutely specific to your View and that you don&rsquo;t need in other Views.</li>
-<li>I think it puts the burden on the view to decide which ViewModel to call and that can get confusing.</li>
-</ol>
-<p>What do you think? How do you handle such circumstances?</p>
-<p>Answers:</p>
-<p>In the project I am working on, each view has its own ViewModel, however we also have CollectionViewModels, which are shared/referenced by multiple view models.</p>
-<p>Think - a list of Suppliers, that needs to be displayed in multiple screens in your application - and is bound to a variety of controls - a list box, grid view, whatever you need. Having just one ViewModel makes for simpler update/refresh logic of the list of Suppliers.</p>
-<p>TLDR: I would only reuse view models, if all usage cases use the ViewModel in the same way. I.e. they all use the same properties etc.</p>
-<pre><code class="language-mermaid" data-lang="mermaid">graph LR
-
-subgraph 合理
-View1(View)--&gt;|combine|PageViewModel1(&quot;PageViewModel1(VOLiveData,VOLiveData,...)&quot;)--&gt;DomainRepositoryNew1(&quot;DomainRepository1(Flow)&quot;)
-PageViewModel1--&gt;DomainRepositoryNew2(&quot;DomainRepository2(Flow)&quot;)
-PageViewModel1--&gt;DomainRepositoryNew3(&quot;DomainRepository3(Flow)&quot;)
-DomainRepositoryNew1--&gt;LocalDataSourceNew1(&quot;LocalDataSource1&quot;)
-DomainRepositoryNew1--&gt;RemoteDataSourceNew1(&quot;RemoteDataSource1&quot;)
-end
-
-subgraph 不合理
-View(View)--&gt;|combine|DomainViewModel1(&quot;DomainViewModel1(DTOLiveData,DTOLiveData,...)&quot;)--&gt;DomainRepository1(&quot;DomainRepository1(Flow)&quot;)
-View(View)--&gt;|combine|DomainViewModel2(&quot;DomainViewModel2(DTOLiveData,DTOLiveData,...)&quot;)--&gt;DomainRepository2(&quot;DomainRepository2(Flow)&quot;)
-View(View)--&gt;|combine|DomainViewModel3(&quot;DomainViewModel3(DTOLiveData,DTOLiveData,...)&quot;)--&gt;DomainRepository3(&quot;DomainRepository3(Flow)&quot;)
-DomainRepository1--&gt;LocalDataSource1(&quot;LocalDataSource1&quot;)
-DomainRepository1--&gt;RemoteDataSource1(&quot;RemoteDataSource1&quot;)
-end
-</code></pre><h3 id="pageviewmodel层内复用">PageViewModel层内复用</h3>
-<pre><code class="language-mermaid" data-lang="mermaid">graph LR
-PageViewModel层内复用方式--&gt;UseCase(&quot;类似UseCase(plaid项目)添加中间层对repository进行访问&quot;)
-PageViewModel层内复用方式--&gt;Viewmodel继承或组合,委托
-PageViewModel层内复用方式--&gt;interface多实现进行复用
-</code></pre><p><a href="https://medium.com/@rodrigolino/slicing-your-viewmodel-with-delegates-2594e6ab4959">Slicing your ViewModel with Delegates</a></p>
-<p><a href="https://proandroiddev.com/kotlin-delegates-in-android-development-part-2-2c15c11ff438">Kotlin delegates in Android development — Part 2</a></p>
-<h2 id="模块间引用关系和数据通知方式">模块间引用关系和数据通知方式</h2>
+IFlowDataLoader&lt;|--SimpleResourceFlow
+IDataLoader&lt;|--SimpleResource
+</code></pre><h4 id="结构化并发协程">结构化并发,协程</h4>
+<p><a href="../%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner#networkboundresource_optimize">optimizeofnetworkboundresource5.6.</a></p>
+<h2 id="模块引用和数据通知">模块引用和数据通知</h2>
 <pre><code class="language-mermaid" data-lang="mermaid">graph TB
-View--&gt;|reference|ViewModel--&gt;|reference|Repository--&gt;|reference|LocalDataSource
-Repository--&gt;|reference|RemoteDataSource
-ViewModel--&gt;|LiveData,eq: Callback|View
+View(&quot;ViewController&quot;)--&gt;|reference|ViewModel--&gt;|reference|Repository--&gt;|reference|LocalDataSource
+Repository(&quot;DomainRepository&quot;)--&gt;|reference|RemoteDataSource
+ViewModel(&quot;PageViewModel&quot;)--&gt;|LiveData,eq: Callback|View
 Repository--&gt;|Flow,eq: Stream|ViewModel
-</code></pre><p><img src="/img/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0.assets/2-application-graph.png" alt=""></p>
-<h2 id="其他参考">其他参考</h2>
-<p><a href="https://developer.android.com/jetpack/guide">应用架构指南</a></p>
-<h3 id="common-architectural-principles">Common architectural principles</h3>
-<h4 id="separation-of-concerns--单一职责">Separation of concerns&ndash;单一职责</h4>
-<h4 id="drive-ui-from-a-model">Drive UI from a model</h4>
-<h3 id="best-practices">Best practices</h3>
-<ol>
-<li><strong>Avoid designating your app&rsquo;s entry points—such as activities, services, and broadcast receivers—as sources of data.</strong></li>
-<li><strong>Create well-defined boundaries of responsibility between various modules of your app.</strong></li>
-<li><strong>Expose as little as possible from each module.</strong></li>
-<li><strong>Consider how to make each module testable in isolation.</strong></li>
-<li><strong>Focus on the unique core of your app so it stands out from other apps.</strong></li>
-<li><strong>Persist as much relevant and fresh data as possible.</strong></li>
-<li><strong>Assign one data source to be the single source of truth.</strong></li>
-</ol>
-<h3 id="single-source-of-truth">Single source of truth</h3>
-<p>It&rsquo;s common for different REST API endpoints to return the same data. For example, if our backend has another endpoint that returns a list of friends, the same user object could come from two different API endpoints, maybe even using different levels of granularity. If the <code>UserRepository</code> were to return the response from the <code>Webservice</code> request as-is, without checking for consistency, our UIs could show confusing information because the version and format of data from the repository would depend on the endpoint most recently called.</p>
-<p>For this reason, our <code>UserRepository</code> implementation saves web service responses into the database. Changes to the database then trigger callbacks on active <em>LiveData</em> objects. Using this model, <strong>the database serves as the single source of truth</strong>, and other parts of the app access it using our <code>UserRepository</code>. Regardless of whether you use a disk cache, we recommend that your repository designate a data source as the single source of truth for the rest of your app.</p>
-<h3 id="networkboundresource_optimize">NetworkBoundResource_Optimize</h3>
-<ul>
-<li>使用Coroutine Flow替代基于MediatorLiveData的回调通知</li>
-</ul>
-<ol>
-<li>取消回调，可读性增加，协程的异步处理更加优雅，替代了原本appExecutors的线程切换和回调</li>
-<li>支持使用flow的各种操作符</li>
-<li>支持更细粒度的异步任务取消，原本仅支持异步任务之间的取消(通过MediatorLiveData实现取消监听)，修改后支持协程挂起函数内部的两种不同的取消方式，参考博客中协程取消的文章</li>
-</ol>
-<ul>
-<li>
-<p>loadFromDb返回值进行Resource包裹,以支持失败等异常情况处理</p>
-</li>
-<li>
-<p>loadFromDb太具体，改为loadFromLocal</p>
-</li>
-<li>
-<p>异步任务封装为挂起函数，子类继承时按需选择是否需要切换线程以及选择线程类型，提升灵活性</p>
-</li>
-</ul>
-<p>另外saveCallResult不在约束为只能固定在io线程</p>
-<ol start="4">
-<li>
-<p>Use combine instead of extend, because</p>
-<ol>
-<li>Sometimes we don&rsquo;t want to implement all the abstract method.</li>
-<li>Generic type can be auto inferred</li>
-<li>Wrap this class is more convenient then subClass it,Wrap NetworkBoundResource if you don&rsquo;t like the callback-like usage or reuse code</li>
-</ol>
-</li>
-<li>
-<p><a href="https://medium.com/androiddevelopers/coroutines-on-android-part-ii-getting-started-3bff117176dd">https://medium.com/androiddevelopers/coroutines-on-android-part-ii-getting-started-3bff117176dd</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">//Wrap NetworkBoundResource if you don&#39;t like the callback-like usage or reuse code
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">return</span> NetworkBoundResource(
-    localDataLoader = {
-        withContext(Dispatchers.IO) {
-            LogUtil.logWithThread(TAG, <span style="color:#e6db74">&#34;loadFromLocal begin&#34;</span>)
-            <span style="color:#66d9ef">val</span> localResource = userLocalDataSource.login(userName)
-            LogUtil.logWithThread(TAG, <span style="color:#e6db74">&#34;loadFromLocal end&#34;</span>)
-            localResource
-        }
-    },
-    remoteDataLoader = {
-        <span style="color:#75715e">//use coroutineScope {} or supervisorScope {} to get CoroutineScope which will be used to propagate parentContext
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//to receive parent(viewModel) cancellation event
-</span><span style="color:#75715e"></span>        coroutineScope {
-            <span style="color:#66d9ef">val</span> result1 = async(Dispatchers.IO) {
-                LogUtil.logWithThread(TAG, <span style="color:#e6db74">&#34;loadFromRemote1, this = </span><span style="color:#e6db74">$this</span><span style="color:#e6db74">&#34;</span>)
-                userRemoteDataSource.login(userName, password)
-            }
-            <span style="color:#66d9ef">val</span> result2 = async(Dispatchers.IO) {
-                LogUtil.logWithThread(TAG, <span style="color:#e6db74">&#34;loadFromRemote2, this = </span><span style="color:#e6db74">$this</span><span style="color:#e6db74">&#34;</span>)
-                userRemoteDataSource.loginWithCallbackAdapter(userName, password)
-            }
-            <span style="color:#66d9ef">val</span> resource1 = result1.await()
-            <span style="color:#66d9ef">val</span> resource2 = result2.await()
-            Resource.success(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${resource1.data}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${resource2.data}</span><span style="color:#e6db74">&#34;</span>)
-        }
-    },
-    saveRemoteResult = { <span style="color:#66d9ef">data</span> <span style="color:#f92672">-&gt;</span>
-        LogUtil.logWithThread(TAG, <span style="color:#e6db74">&#34;saveRemoteResult&#34;</span>)
-        userLocalDataSource.saveUid(userName, <span style="color:#66d9ef">data</span>)
-    }
-).loadAsFlow()
-</code></pre></div></li>
-<li>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * async issue:
-</span><span style="color:#75715e"> * --async callback: suspendCancellableCoroutine{} + resume
-</span><span style="color:#75715e"> * --         sync : call directly
-</span><span style="color:#75715e"> *
-</span><span style="color:#75715e"> * cancelable issue:
-</span><span style="color:#75715e"> * --  io thread: suspendCancellableCoroutine{} + cont.invokeOnCancellation
-</span><span style="color:#75715e"> * -- cpu thread: coroutineScope{} + isActive
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">loginWithCallbackAdapterInner</span>(userName: String, password: String) =
-    withContext(Dispatchers.IO) {<span style="color:#75715e">//switch thread if you want
-</span><span style="color:#75715e"></span>        suspendCancellableCoroutine&lt;Resource&lt;String&gt;&gt; { cont <span style="color:#f92672">-&gt;</span>
-            LogUtil.logWithThread(
-                UserRepository.TAG,
-                <span style="color:#e6db74">&#34;loginWithCallbackAdapterInner cont = </span><span style="color:#e6db74">$cont</span><span style="color:#e6db74">&#34;</span>
-            )
-   
-            <span style="color:#75715e">//set cancellation handler before start sync request
-</span><span style="color:#75715e"></span>            <span style="color:#75715e">//use CoroutineScope.isActive collaborative cancellation when doing cpu intensive work
-</span><span style="color:#75715e"></span>            cont.invokeOnCancellation {
-                LogUtil.logWithThread(UserRepository.TAG, <span style="color:#e6db74">&#34;onCancellation2 cause = </span><span style="color:#e6db74">$it</span><span style="color:#e6db74">&#34;</span>)
-            }
-   
-            <span style="color:#75715e">//sync or async callback, cancellation handler will be invoked before cont.resume,
-</span><span style="color:#75715e"></span>            <span style="color:#75715e">//after continuation cancel event happened
-</span><span style="color:#75715e"></span>            CallbackContainer().start(<span style="color:#66d9ef">object</span> <span style="color:#960050;background-color:#1e0010">: </span><span style="color:#a6e22e">CallbackContainer</span>.Callback() {
-                <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onSuccess</span>() {
-                    cont.resume(
-                        Resource.success(<span style="color:#e6db74">&#34;Uid from remote adapter userName = </span><span style="color:#e6db74">$userName</span><span style="color:#e6db74"> + password = </span><span style="color:#e6db74">$password</span><span style="color:#e6db74"> .&#34;</span>),
-                        onCancellation = { cause: Throwable <span style="color:#f92672">-&gt;</span> })
-                }
-   
-                <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onFailed</span>(throwable: Throwable) {
-                    cont.resumeWithException(throwable)
-                }
-            })
-        }
-    }
-</code></pre></div></li>
-</ol>
-<p><a href="../https://mp.weixin.qq.com/s?__biz=mzaxmtg2mja2oa==&amp;mid=2649865446&amp;idx=1&amp;sn=a865e722026224c1496079b4295df386&amp;chksm=83bfb5bdb4c83cabe2dedb3d651fd5d1aab10a11a6cdded08787ae13ff5877d9c3eb83fce1bd&amp;scene=132#wechat_redirect">关于android架构，你是否还在生搬硬套？</a></p>
-
+</code></pre>
 
 <footer class="footline">
 	
@@ -7885,6 +7723,25 @@ Repository--&gt;|Flow,eq: Stream|ViewModel
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -7895,9 +7752,6 @@ Repository--&gt;|Flow,eq: Stream|ViewModel
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -11288,7 +11142,7 @@ Repository--&gt;|Flow,eq: Stream|ViewModel
 			<a class="nav nav-prev" href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/kaptgenerateviewmodel/" title="KaptGenerateViewModel"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/en/android/jetpack/compose/" title="compose" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -11298,19 +11152,19 @@ Repository--&gt;|Flow,eq: Stream|ViewModel
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1617797149"></script>
-    <script src="/js/jquery.sticky.js?1617797149"></script>
-    <script src="/js/featherlight.min.js?1617797149"></script>
-    <script src="/js/highlight.pack.js?1617797149"></script>
+    <script src="/js/clipboard.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1619600281"></script>
+    <script src="/js/jquery.sticky.js?1619600281"></script>
+    <script src="/js/featherlight.min.js?1619600281"></script>
+    <script src="/js/highlight.pack.js?1619600281"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1617797149"></script>
-    <script src="/js/learn.js?1617797149"></script>
-    <script src="/js/hugo-learn.js?1617797149"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1619600281"></script>
+    <script src="/js/learn.js?1619600281"></script>
+    <script src="/js/hugo-learn.js?1619600281"></script>
     
         
-            <script src="/mermaid/mermaid.js?1617797149"></script>
+            <script src="/mermaid/mermaid.js?1619600281"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

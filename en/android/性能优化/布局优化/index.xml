@@ -12,11 +12,14 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</guid>
-      <description>布局加载优化 graph LR 正面解决(正面解决)--&amp;gt;去IO 正面解决--&amp;gt;去解析 正面解决--&amp;gt;去反射 侧面解决--&amp;gt;异步加载 参考 //编译生成xml&amp;ndash;&amp;gt;javaView
-https://github.com/iReaderAndroid/X2C
-//仅仅优化反射
-android &amp;ldquo;退一步&amp;quot;的布局加载优化
-Android布局优化（三）使用AsyncLayoutInflater异步加载布局</description>
+      <description>布局加载优化 graph LR 正面解决(正面解决)--&amp;gt;去IO,去解析--&amp;gt;|solution|frontSolution(&amp;quot;X2C,Anko,Compose&amp;quot;) 正面解决--&amp;gt;去反射--&amp;gt;|solution|frontSolution 侧面解决--&amp;gt;异步加载--&amp;gt;|solution|AsyncLayoutInflater 我们可以看到，在setContentView中主要有两个耗时操作：
+1.解析xml,获取XmlResourceParser,这是IO过程。
+2.通过createViewFromTag,创建View对象，用到了反射。
+以上两点就是布局加载可能导致卡顿的原因，也是布局的性能瓶颈。
+耗时监听 AOP(Aspectj,ASM) @Around(&amp;#34;execution(* android.app.Activity.setContentView(..))&amp;#34;) public void getSetContentViewTime(ProceedingJoinPoint joinPoint) { Signature signature = joinPoint.getSignature(); String name = signature.toShortString(); long time = System.currentTimeMillis(); try { joinPoint.proceed(); } catch (Throwable throwable) { throwable.printStackTrace(); } Log.i(&amp;#34;aop inflate&amp;#34;,name + &amp;#34; cost &amp;#34; + (System.currentTimeMillis() - time)); } 上面用的Aspectj，比较简单，上面的注解的意思是在setContentView方法执行内部去调用我们写好的getSetContentViewTime方法。 这样就可以获取相应的耗时。我们可以看下打印的日志：
+I/aop inflate: AppCompatActivity.setContentView(..) cost 69 I/aop inflate: AppCompatActivity.setContentView(..) cost 25 这样就可以实现无侵入的监控每个页面布局加载的耗时。
+获取任一控件耗时 有时为了更精确的知道到底是哪个控件加载耗时，比如我们新添加了自定义View,需要监控它的性能。 我们可以利用setFactory2来监听每个控件的加载耗时。首先我们来回顾下setContentView方法：
+public final View tryCreateView(@Nullable View parent, @NonNull String name, .</description>
     </item>
     
   </channel>

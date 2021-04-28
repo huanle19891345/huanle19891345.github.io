@@ -12,23 +12,23 @@
     <title>Graphics :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1617797149" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1617797149" rel="stylesheet">
-    <link href="/css/hybrid.css?1617797149" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1617797149" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1617797149" rel="stylesheet">
-    <link href="/css/auto-complete.css?1617797149" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1617797149" rel="stylesheet">
-    <link href="/css/theme.css?1617797149" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1617797149" rel="stylesheet">
+    <link href="/css/nucleus.css?1619600281" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1619600281" rel="stylesheet">
+    <link href="/css/hybrid.css?1619600281" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1619600281" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1619600281" rel="stylesheet">
+    <link href="/css/auto-complete.css?1619600281" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1619600281" rel="stylesheet">
+    <link href="/css/theme.css?1619600281" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1619600281" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1617797149" rel="stylesheet">
+    <link href="/css/theme-mine.css?1619600281" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1617797149"></script>
+    <script src="/js/jquery-3.3.1.min.js?1619600281"></script>
 
-    <script src="/js/auto_toc_scroll.js?1617797149"></script>
+    <script src="/js/auto_toc_scroll.js?1619600281"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1617797149"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1617797149"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1619600281"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1619600281"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1617797149"></script>
+<script type="text/javascript" src="/js/search.js?1619600281"></script>
 
     
   </div>
@@ -1061,6 +1061,27 @@
       <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="架构思考和实现" class="dd-item ">
         <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/">
         架构思考和实现
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" class="dd-item ">
+        <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/">
+        架构思考和实现Inner
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -6798,13 +6819,30 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#android-graphics-components">Android graphics components</a>
+    <li><a href="#graphics">Graphics</a>
       <ul>
+        <li><a href="#android-graphics-components">Android graphics components</a></li>
         <li><a href="#image-stream-producers">Image Stream Producers</a></li>
+        <li><a href="#opengl-es">OpenGL ES</a></li>
+        <li><a href="#vulkan">Vulkan</a></li>
       </ul>
     </li>
-    <li><a href="#opengl-es">OpenGL ES</a></li>
-    <li><a href="#vulkan">Vulkan</a></li>
+    <li><a href="#layers-displays">Layers-Displays</a>
+      <ul>
+        <li><a href="#layers">Layers</a></li>
+        <li><a href="#displays">Displays</a>
+          <ul>
+            <li><a href="#virtual-displays">Virtual displays</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#vsync">Vsync</a>
+      <ul>
+        <li><a href="#vsync-offset">VSYNC offset</a></li>
+        <li><a href="#dispsync">DispSync</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -6829,23 +6867,88 @@
         
 
 
+<h2 id="graphics">Graphics</h2>
 <p><a href="https://source.android.com/devices/graphics/index.html">https://source.android.com/devices/graphics/index.html</a></p>
-<h2 id="android-graphics-components">Android graphics components</h2>
-<p>No matter what rendering API developers use, everything is rendered onto a &ldquo;surface.&rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. A==ll of the visible surfaces rendered are composited onto the display by SurfaceFlinger.==</p>
+<h3 id="android-graphics-components">Android graphics components</h3>
+<p>No matter what rendering API developers use, everything is rendered onto a &ldquo;surface.&rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. All of the visible surfaces rendered are composited onto the display by SurfaceFlinger.</p>
 <p>The following diagram shows how the key components work together:</p>
 <p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics.assets/ape-fwk-graphics.png" alt="image"></p>
 <p>Figure 1. How surfaces are rendered</p>
 <p>The main components are described below:</p>
 <h3 id="image-stream-producers">Image Stream Producers</h3>
-<p>An image stream producer can be anything that ==produces graphic buffers for consumption==. Examples include ==OpenGL ES, Canvas 2D==, and mediaserver video decoders.</p>
+<p>An image stream producer can be anything that produces graphic buffers for consumption. Examples include OpenGL ES, Canvas 2D, and mediaserver video decoders.</p>
 <p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics.assets/graphics-pipeline.png" alt="image"></p>
 <p>Figure 2. Graphic data flow through Android</p>
-<hr>
-<h2 id="opengl-es">OpenGL ES</h2>
-<p>OpenGL for Embedded Systems (OpenGL ES or GLES) is a subset[2] of the OpenGL computer graphics rendering application programming interface (API) for rendering 2D and 3D computer graphics such as those used by video games, ==typically hardware-accelerated using a graphics processing unit (GPU)==. It is designed for embedded systems like smartphones, tablet computers, video game consoles and PDAs. OpenGL ES is the &ldquo;most widely deployed 3D graphics API in history&rdquo;.[3]</p>
+<h3 id="opengl-es">OpenGL ES</h3>
+<p>OpenGL for Embedded Systems (OpenGL ES or GLES) is a subset[2] of the OpenGL computer graphics rendering application programming interface (API) for rendering 2D and 3D computer graphics such as those used by video games, typically hardware-accelerated using a graphics processing unit (GPU). It is designed for embedded systems like smartphones, tablet computers, video game consoles and PDAs. OpenGL ES is the &ldquo;most widely deployed 3D graphics API in history&rdquo;.[3]</p>
 <p>The API is cross-language and multi-platform. The libraries GLUT and GLU are not available for OpenGL ES. OpenGL ES is managed by the non-profit technology consortium Khronos Group. Vulkan, a next-generation API from Khronos, is made for simpler high performance drivers for mobile and desktop devices.[4]</p>
-<h2 id="vulkan">Vulkan</h2>
-<p>Application developers use Vulkan to create apps that ==execute commands on the GPU== with significantly reduced overhead. Vulkan also provides a more direct mapping to the capabilities found in current graphics hardware ==compared to EGL and GLES==, minimizing opportunities for driver bugs and reducing developer testing time.</p>
+<h3 id="vulkan">Vulkan</h3>
+<p>Application developers use Vulkan to create apps that execute commands on the GPU with significantly reduced overhead. Vulkan also provides a more direct mapping to the capabilities found in current graphics hardware compared to EGL and GLES, minimizing opportunities for driver bugs and reducing developer testing time.</p>
+<h2 id="layers-displays">Layers-Displays</h2>
+<p><a href="https://source.android.com/devices/graphics/layers-displays">https://source.android.com/devices/graphics/layers-displays</a></p>
+<h3 id="layers">Layers</h3>
+<p>A <em>Layer</em> is the most important unit of composition. A layer is a combination of a <a href="https://source.android.com/devices/graphics/arch-sh">surface</a> and an instance of <a href="https://developer.android.com/reference/android/view/SurfaceControl"><code>SurfaceControl</code></a>. Each layer has a set of properties that define how it interacts with other layers. Layer properties are described in the table below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Positional</td>
+<td style="text-align:left">Defines where the layer appears on its display. Includes information such as the positions of a layer&rsquo;s edges and its <em>Z order</em> relative to other layers (whether it should be in front of or behind other layers).</td>
+</tr>
+<tr>
+<td style="text-align:left">Content</td>
+<td style="text-align:left">Defines how content displayed on the layer should be presented within the bounds defined by the positional properties. Includes information such as crop (to expand a portion of the content to fill the bounds of the layer) and transform (to show rotated or flipped content).</td>
+</tr>
+<tr>
+<td style="text-align:left">Composition</td>
+<td style="text-align:left">Defines how the layer should be composited with other layers. Includes information such as blending mode and a layer-wide alpha value for <a href="https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending">alpha compositing</a>.</td>
+</tr>
+<tr>
+<td style="text-align:left">Optimization</td>
+<td style="text-align:left">Provides information not strictly necessary to correctly composite the layer, but that can be used by the Hardware Composer (HWC) device to optimize how it performs composition. Includes information such as the visible region of the layer and which portion of the layer has been updated since the previous frame.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="displays">Displays</h3>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+SurfaceFlinger--&gt;internalDisplay
+SurfaceFlinger--&gt;externalDisplays
+SurfaceFlinger--&gt;virtualDisplays
+</code></pre><p>A <em>display</em> is another important unit of composition. A system can have multiple displays and displays can be added or removed during normal system operations. Displays are added/removed at the request of the HWC or at the request of the framework. The HWC device requests displays be added or removed when an external display is connected or disconnected from the device, which is called <em>hotplugging</em>. Clients request <em>virtual displays</em>, whose contents are rendered into an off-screen buffer instead of to a physical display.</p>
+<h4 id="virtual-displays">Virtual displays</h4>
+<p><a href="../https://source.android.com/devices/graphics/arch-sf-hwc#surfaceflinger">surfaceflinger</a> supports an internal display (built into the phone or tablet), external displays (such as a television connected through hdmi), and one or more virtual displays that make composited output available within the system. virtual displays can be used to record the screen or send the screen over a network. frames generated for a virtual display are written to a bufferqueue.</p>
+<p>Virtual displays may share the same set of layers as the main display (the layer stack) or have their own set. There&rsquo;s no VSYNC for a virtual display, so the VSYNC for the internal display triggers composition for all displays.</p>
+<p>On HWC implementations that support them, virtual displays can be composited with OpenGL ES (GLES), HWC, or both GLES and HWC. On nonsupporting implementations, virtual displays are always composited using GLES.</p>
+<p>The WindowManager can ask SurfaceFlinger to create a visible layer for which SurfaceFlinger acts as the BufferQueue consumer. It&rsquo;s also possible to ask SurfaceFlinger to create a virtual display, for which SurfaceFlinger acts as the BufferQueue producer.</p>
+<h2 id="vsync">Vsync</h2>
+<p><a href="https://source.android.com/devices/graphics/implement-vsync">https://source.android.com/devices/graphics/implement-vsync</a></p>
+<p>The VSYNC signal synchronizes the display pipeline. The display pipeline consists of app rendering, SurfaceFlinger composition, and the Hardware Composer (HWC) presenting images on the display. VSYNC synchronizes the time apps wake up to start rendering, the time SurfaceFlinger wakes up to composite the screen, and the display refresh cycle. This synchronization eliminates stutter and improves the visual performance of graphics.</p>
+<p>The HWC generates VSYNC events and sends the events to SurfaceFlinger through the callback:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>HWC2_PFN_VSYNC)(hwc2_callback_data_t callbackData,
+        hwc2_display_t display, int64_t timestamp);
+</code></pre></div><p>SurfaceFlinger controls whether or not the HWC generates VSYNC events by calling to <code>setVsyncEnabled</code>. SurfaceFlinger enables <code>setVsyncEnabled</code> to generate VSYNC events so it can synchronize with the refresh cycle of the display. When SurfaceFlinger is synchronized to the display refresh cycle, SurfaceFlinger disables <code>setVsyncEnabled</code> to stop the HWC from generating VSYNC events. If SurfaceFlinger detects a difference between the actual VSYNC and the VSYNC it previously established SurfaceFlinger re-enables VSYNC event generation.</p>
+<h3 id="vsync-offset">VSYNC offset</h3>
+<p>The sync app and SurfaceFlinger render loops to the hardware VSYNC. On a VSYNC event, the display begins showing frame <em>N</em> while SurfaceFlinger begins compositing windows for frame <em>N+1</em>. The app handles pending input and generates frame <em>N+2</em>.</p>
+<p>Synchronizing with VSYNC delivers consistent latency. It reduces errors in apps and SurfaceFlinger and minimizes displays drifting in and out of phase with each other. This, assumes app and SurfaceFlinger per-frame times don’t vary widely. The latency is at least two frames.</p>
+<p>To remedy this, you can employ VSYNC offsets to reduce the input-to-display latency by making app and composition signal relative to hardware VSYNC. This is possible because app plus composition usually takes less than 33 ms.</p>
+<p>The result of VSYNC offset is three signals with same period and offset phase:</p>
+<ul>
+<li><code>HW_VSYNC_0</code> — Display begins showing next frame.</li>
+<li><code>VSYNC</code> — App reads input and generates next frame.</li>
+<li><code>SF_VSYNC</code> — SurfaceFlinger begins compositing for next frame.</li>
+</ul>
+<p>With VSYNC offset, SurfaceFlinger receives the buffer and composites the frame while the app simultaneously processes the input and renders the frame.</p>
+<p><strong>Note:</strong> VSYNC offsets reduce the time available for app and composition, providing a greater chance for error.</p>
+<h3 id="dispsync">DispSync</h3>
+<p>DispSync maintains a model of the periodic hardware-based VSYNC events of a display and uses that model to execute callbacks at specific phase offsets from the hardware VSYNC events.</p>
+<p>DispSync is a software phase-lock loop (PLL) that generates the VSYNC and SF_VSYNC signals used by Choreographer and SurfaceFlinger, even if not offset from hardware VSYNC.</p>
+<p><img src="/img/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics.assets/dispsync.png" alt="DispSync flow"></p>
+<p><strong>Figure 1.</strong> DispSync flow</p>
 
 
 <footer class="footline">
@@ -7469,6 +7572,22 @@
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -10921,19 +11040,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1617797149"></script>
-    <script src="/js/jquery.sticky.js?1617797149"></script>
-    <script src="/js/featherlight.min.js?1617797149"></script>
-    <script src="/js/highlight.pack.js?1617797149"></script>
+    <script src="/js/clipboard.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1619600281"></script>
+    <script src="/js/jquery.sticky.js?1619600281"></script>
+    <script src="/js/featherlight.min.js?1619600281"></script>
+    <script src="/js/highlight.pack.js?1619600281"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1617797149"></script>
-    <script src="/js/learn.js?1617797149"></script>
-    <script src="/js/hugo-learn.js?1617797149"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1619600281"></script>
+    <script src="/js/learn.js?1619600281"></script>
+    <script src="/js/hugo-learn.js?1619600281"></script>
     
         
-            <script src="/mermaid/mermaid.js?1617797149"></script>
+            <script src="/mermaid/mermaid.js?1619600281"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

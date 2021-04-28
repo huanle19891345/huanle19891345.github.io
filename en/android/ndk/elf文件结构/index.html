@@ -12,23 +12,23 @@
     <title>ELF文件结构 :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1617797148" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1617797148" rel="stylesheet">
-    <link href="/css/hybrid.css?1617797148" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1617797148" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1617797148" rel="stylesheet">
-    <link href="/css/auto-complete.css?1617797148" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1617797148" rel="stylesheet">
-    <link href="/css/theme.css?1617797148" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1617797148" rel="stylesheet">
+    <link href="/css/nucleus.css?1619600281" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1619600281" rel="stylesheet">
+    <link href="/css/hybrid.css?1619600281" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1619600281" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1619600281" rel="stylesheet">
+    <link href="/css/auto-complete.css?1619600281" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1619600281" rel="stylesheet">
+    <link href="/css/theme.css?1619600281" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1619600281" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1617797148" rel="stylesheet">
+    <link href="/css/theme-mine.css?1619600281" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1617797148"></script>
+    <script src="/js/jquery-3.3.1.min.js?1619600281"></script>
 
-    <script src="/js/auto_toc_scroll.js?1617797148"></script>
+    <script src="/js/auto_toc_scroll.js?1619600281"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1617797148"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1617797148"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1619600281"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1619600281"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1617797148"></script>
+<script type="text/javascript" src="/js/search.js?1619600281"></script>
 
     
   </div>
@@ -1061,6 +1061,27 @@
       <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="架构思考和实现" class="dd-item ">
         <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/">
         架构思考和实现
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" class="dd-item ">
+        <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/">
+        架构思考和实现Inner
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -6809,12 +6830,21 @@
             <li><a href="#listing-5-section-details-revealed-by-readelf">.Listing 5: Section details revealed by readelf</a></li>
           </ul>
         </li>
+        <li><a href="#section解读">section解读</a></li>
+        <li><a href="#动态链接器linker">动态链接器(linker)</a>
+          <ul>
+            <li><a href="#图解如下">图解如下</a></li>
+          </ul>
+        </li>
+        <li><a href="#hook问题">Hook问题</a></li>
+        <li><a href="#plt-hook流程">PLT hook流程</a></li>
         <li><a href="#elf分析工具">elf分析工具</a></li>
       </ul>
     </li>
     <li><a href="#elfpltgot">elfpltgot</a></li>
     <li><a href="#elfview">elfview</a></li>
     <li><a href="#readelf">readelf</a></li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -6841,12 +6871,17 @@
 
 <h2 id="文件结构">文件结构</h2>
 <p>&laquo;深入理解Android：Java虚拟机ART&raquo;&ndash;elf章的内容</p>
-<p><a href="https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md">https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md</a></p>
-<p><a href="https://linuxhint.com/understanding_elf_file_format/">https://linuxhint.com/understanding_elf_file_format/</a></p>
 <p>As you can see from the description above, an ELF file consists of two sections – an ELF header, and file data. The file data section can consist of a program header table describing zero or more segments, a section header table describing zero or more sections, that is followed by data referred to by entries from the program header table, and the section header table. ==Each segment contains information that is necessary for run-time execution of the file, while sections contain important data for linking and relocation==. Figure 1 illustrates this schematically.</p>
 <p><img src="/img/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.assets/elfheader.png" alt="image"></p>
 <h3 id="the-elf-header">The ELF Header</h3>
-<p>The ELF header is 32 bytes long, and identifies the format of the file. It starts with a sequence of four unique bytes that are 0x7F followed by 0x45, 0x4c, and 0x46 which translates into the three letters E, L, and F. Among other values, the header also indicates whether it is an ELF file for 32 or 64-bit format, uses little or big endianness, shows the ELF version as well as for which operating system the file was compiled for in order to interoperate with the right application binary interface (ABI) and cpu instruction set.</p>
+<p>The ELF header is 32 bytes long, and identifies the format of the file. It starts with a sequence of four unique bytes that are 0x7F followed by 0x45, 0x4c, and 0x46 which translates into the three letters E, L, and F.</p>
+<p>Among other values, the header also indicates</p>
+<ul>
+<li>whether it is an ELF file for 32 or 64-bit format,</li>
+<li>uses little or big endianness</li>
+<li>shows the ELF version</li>
+<li>for which operating system the file was compiled for in order to interoperate with the right application binary interface (ABI) and cpu instruction set.</li>
+</ul>
 <p>Debian GNU/Linux offers the readelf command that is provided in the GNU ‘binutils’ package. Accompanied by the switch -h (short version for “–file-header”) it nicely displays the header of an ELF file. Listing 3 illustrates this for the command touch.</p>
 <h4 id="listing-3-displaying-the-header-of-an-elf-file">.Listing 3: Displaying the header of an ELF file</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">real command:
@@ -6914,7 +6949,13 @@ Program Headers:
    <span style="color:#ae81ff">06</span>
    <span style="color:#ae81ff">07</span>     .fini_array .data.rel.ro .init_array .dynamic .got .got.plt
 </code></pre></div><h3 id="the-section-header">The Section Header</h3>
-<p>The third part of the ELF structure is the section header. It is meant to list the single sections of the binary. The switch -S (short for –section-headers or –sections) lists the different headers. As for the touch command, there are 27 section headers, and Listing 5 shows the first four of them plus the last one, only. Each line covers the section size, the section type as well as its address and memory offset.</p>
+<p>The third part of the ELF structure is the section header. It is meant to list the single sections of the binary. The switch -S (short for –section-headers or –sections) lists the different headers. As for the touch command, there are 27 section headers, and Listing 5 shows the first four of them plus the last one, only. Each line covers the</p>
+<ul>
+<li>section size,</li>
+<li>section type</li>
+<li>its address</li>
+<li>memory offset.</li>
+</ul>
 <h4 id="listing-5-section-details-revealed-by-readelf">.Listing 5: Section details revealed by readelf</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">windows real command: 
 Sdk<span style="color:#ae81ff">\n</span>dk-bundle<span style="color:#ae81ff">\t</span>oolchains<span style="color:#ae81ff">\l</span>lvm<span style="color:#ae81ff">\p</span>rebuilt<span style="color:#ae81ff">\w</span>indows-x86_64<span style="color:#ae81ff">\b</span>in<span style="color:#ae81ff">\x</span>86_64-linux-android-readelf.exe -S git<span style="color:#ae81ff">\d</span>emo<span style="color:#ae81ff">\x</span>Crash<span style="color:#ae81ff">\s</span>rc<span style="color:#ae81ff">\n</span>ative<span style="color:#ae81ff">\l</span>ibxcrash<span style="color:#ae81ff">\o</span>bj<span style="color:#ae81ff">\l</span>ocal<span style="color:#ae81ff">\x</span>86_64<span style="color:#ae81ff">\l</span>ibxcrash.so
@@ -7012,7 +7053,98 @@ Key to Flags:
   L <span style="color:#f92672">(</span>link order<span style="color:#f92672">)</span>, O <span style="color:#f92672">(</span>extra OS processing required<span style="color:#f92672">)</span>, G <span style="color:#f92672">(</span>group<span style="color:#f92672">)</span>, T <span style="color:#f92672">(</span>TLS<span style="color:#f92672">)</span>,
   C <span style="color:#f92672">(</span>compressed<span style="color:#f92672">)</span>, x <span style="color:#f92672">(</span>unknown<span style="color:#f92672">)</span>, o <span style="color:#f92672">(</span>OS specific<span style="color:#f92672">)</span>, E <span style="color:#f92672">(</span>exclude<span style="color:#f92672">)</span>,
   l <span style="color:#f92672">(</span>large<span style="color:#f92672">)</span>, p <span style="color:#f92672">(</span>processor specific<span style="color:#f92672">)</span>
-</code></pre></div><h3 id="elf分析工具">elf分析工具</h3>
+</code></pre></div><h3 id="section解读">section解读</h3>
+<p>hook 关系比较大的几个 section 是：</p>
+<ul>
+<li><code>.dynstr</code>：保存了所有的字符串常量信息。</li>
+<li><code>.dynsym</code>：保存了符号（symbol）的信息（符号的类型、起始地址、大小、符号名称在 <code>.dynstr</code> 中的索引编号等）。函数也是一种符号。</li>
+<li><code>.text</code>：程序代码经过编译后生成的机器指令。</li>
+<li><code>.dynamic</code>：供动态链接器使用的各项信息，记录了当前 ELF 的外部依赖，以及其他各个重要 section 的起始位置等信息。</li>
+<li><code>.got</code>：Global Offset Table。用于记录外部调用的入口地址。动态链接器（linker）执行重定位（relocate）操作时，这里会被填入真实的外部调用的绝对地址。</li>
+<li><code>.plt</code>：Procedure Linkage Table。外部调用的跳板，主要用于支持 lazy binding 方式的外部调用重定位。（Android 目前只有 MIPS 架构支持 lazy binding）</li>
+<li><code>.rel.plt</code>：对外部函数直接调用的重定位信息。</li>
+<li><code>.rel.dyn</code>：除 <code>.rel.plt</code> 以外的重定位信息。（比如通过全局函数指针来调用外部函数）</li>
+</ul>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+.dynamic--&gt;当前ELF的外部依赖
+.dynamic--&gt;其他各个重要section的起始位置等信息
+</code></pre><p>如果你理解了动态链接的过程，我们再回头来思考一下“.got”和“.plt”它们的具体含义。</p>
+<ul>
+<li><strong>The Global Offset Table (GOT)</strong>。简单来说就是在数据段的地址表，假定我们有一些代码段的指令引用一些地址变量，编译器会引用 GOT 表来替代直接引用绝对地址，因为绝对地址在编译期是无法知道的，只有重定位后才会得到 ，GOT 自己本身将会包含函数引用的绝对地址。</li>
+<li><strong>The Procedure Linkage Table (PLT)</strong>。PLT 不同于 GOT，它位于代码段，动态库的每一个外部函数都会在 PLT 中有一条记录，每一条 PLT 记录都是一小段可执行代码。一般来说，外部代码都是在调用 PLT 表里的记录，然后 PLT 的相应记录会负责调用实际的函数。我们一般把这种设定叫作“蹦床”（Trampoline）。</li>
+</ul>
+<p>PLT 和 GOT 记录是一一对应的，并且 GOT 表第一次解析后会包含调用函数的实际地址。既然这样，那 PLT 的意义究竟是什么呢？PLT 从某种意义上赋予我们一种懒加载的能力。当动态库首次被加载时，所有的函数地址并没有被解析。下面让我们结合图来具体分析一下首次函数调用，请注意图中黑色箭头为跳转，紫色为指针。</p>
+<p><img src="/img/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.assets/640-20210427105357588.png" alt="图片"></p>
+<ul>
+<li>我们在代码中调用 func，编译器会把这个转化为 func@plt，并在 PLT 表插入一条记录。</li>
+<li>PLT 表中第一条（或者说第 0 条）PLT[0] 是一条特殊记录，它是用来帮助我们解析地址的。通常在类 Linux 系统，这个的实现会位于动态加载器，就是专栏前面文章提到的 /system/bin/linker。</li>
+<li>其余的 PLT 记录都均包含以下信息：</li>
+</ul>
+<p>&ndash; 跳转 GOT 表的指令（jmp *GOT[n]）。
+&ndash; 为上面提到的第 0 条解析地址函数准备参数。
+&ndash; 调用 PLT[0]，这里 resovler 的实际地址是存储在 GOT[2] 。</p>
+<p>在解析前 GOT[n] 会直接指向 jmp *GOT[n] 的下一条指令。在解析完成后，我们就得到了 func 的实际地址，动态加载器会将这个地址填入 GOT[n]，然后调用 func。</p>
+<p>如果你对上面的这个调用流程还有疑问，你可以参考《GOT 表和 PLT 表》这篇文章，它里面有一张图非常清晰。</p>
+<p><img src="/img/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.assets/640-20210427105922179.png" alt="图片"></p>
+<p>当第一次调用发生后，之后再调用函数 func 就高效简单很多。首先调用 PLT[n]，然后执行 jmp *GOT[n]。GOT[n] 直接指向 func，这样就高效的完成了函数调用。
+<img src="/img/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.assets/640-20210427105907131.png" alt="图片">
+总结一下，因为很多函数可能在程序执行完时都不会被用到，比如错误处理函数或一些用户很少用到的功能模块等，那么一开始把所有函数都链接好实际就是一种浪费。为了提升动态链接的性能，我们可以使用 PLT 来实现延迟绑定的功能。</p>
+<p>对于函数运行的实际地址，我们依然需要通过 GOT 表得到，整个简化过程如下：</p>
+<p><img src="/img/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.assets/640-20210427110010413" alt="图片"></p>
+<p>看到这里，相信你已经有了如何 Hack 这一过程的初步想法。这里业界通常会根据修改 PLT 记录或者 GOT 记录区分为 GOT Hook 和 PLT Hook，但其本质原理十分接近。</p>
+<h3 id="动态链接器linker">动态链接器(linker)</h3>
+<p>安卓中的动态链接器程序是 linker。源码在 <a href="https://android.googlesource.com/platform/bionic/+/master/linker/">这里</a>。</p>
+<p>动态链接（比如执行 dlopen）的大致步骤是：</p>
+<ol>
+<li>检查已加载的 ELF 列表。（如果 libtest.so 已经加载，就不再重复加载了，仅把 libtest.so 的引用计数加一，然后直接返回。）</li>
+<li>从 libtest.so 的 .dynamic section 中读取 libtest.so 的外部依赖的 ELF 列表，从此列表中剔除已加载的 ELF，最后得到本次需要加载的 ELF 完整列表（包括 libtest.so 自身）。</li>
+<li>逐个加载列表中的 ELF。加载步骤：
+<ul>
+<li>用 <code>mmap</code> 预留一块足够大的内存，用于后续映射 ELF。（<code>MAP_PRIVATE</code> 方式）</li>
+<li>读 ELF 的 PHT，用 <code>mmap</code> 把所有类型为 <code>PT_LOAD</code> 的 segment 依次映射到内存中。</li>
+<li>从 .dynamic segment 中读取各信息项，主要是各个 section 的虚拟内存相对地址，然后计算并保存各个 section 的虚拟内存绝对地址。</li>
+<li>执行重定位操作（relocate），这是最关键的一步。重定位信息可能存在于下面的一个或多个 secion 中：<code>.rel.plt</code>, <code>.rela.plt</code>, <code>.rel.dyn</code>, <code>.rela.dyn</code>, <code>.rel.android</code>, <code>.rela.android</code>。动态链接器需要逐个处理这些 <code>.relxxx</code> section 中的重定位诉求。根据已加载的 ELF 的信息，动态链接器查找所需符号的地址（比如 libtest.so 的符号 <code>malloc</code>），找到后，将地址值填入 <code>.relxxx</code> 中指明的<strong>目标地址</strong>中，这些“<strong>目标地址</strong>”一般存在于<code>.got</code> 或 <code>.data</code> 中。</li>
+<li>ELF 的引用计数加一。</li>
+</ul>
+</li>
+<li>逐个调用列表中 ELF 的构造函数（constructor），这些构造函数的地址是之前从 .dynamic segment 中读取到的（类型为 <code>DT_INIT</code> 和 <code>DT_INIT_ARRAY</code>）。各 ELF 的构造函数是按照依赖关系逐层调用的，先调用被依赖 ELF 的构造函数，最后调用 libtest.so 自己的构造函数。（ELF 也可以定义自己的析构函数（destructor），在 ELF 被 unload 的时候会被自动调用）</li>
+</ol>
+<h4 id="图解如下">图解如下</h4>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+dlopen(&quot;动态链接(执行dlopen)&quot;)--&gt;check(&quot;检查已加载的 ELF 列表&quot;)
+dlopen--&gt;read(&quot;.dynamic section 中读取 libtest.so 的外部依赖的 ELF 列表&quot;)
+dlopen--&gt;loadEach(&quot;逐个加载列表中的 ELF。加载步骤&quot;)
+loadEach--&gt;mmap(&quot;用 mmap 预留一块足够大的内存，用于后续映射 ELF&quot;)
+loadEach--&gt;mmapPT_LOAD(&quot;读ELF的PHT用mmap把所有类型为PT_LOAD的segment依次映射到内存中&quot;)
+loadEach--&gt;dynamic(&quot;从.dynamic segment中读取各信息项，主要是各个section的虚拟内存相对地址，计算绝对地址。&quot;)
+loadEach--&gt;|relocate|relocate(&quot;逐个处理.relxxx section中的重定位诉求,找所需符号的地址，找到后将地址值填入.relxxx 中指明的目标地址.got或.data中&quot;)
+loadEach--&gt;ELFRefCount(&quot;ELF 的引用计数加一&quot;)
+dlopen--&gt;cons(&quot;逐个调用列表中 ELF 的构造函数constructor&quot;)
+</code></pre><h3 id="hook问题">Hook问题</h3>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+issue(&quot;直接替换掉地址中的方法有三个问题&quot;)--&gt;基地址--&gt;|solution|maps(&quot;/proc/self/maps&quot;)
+issue--&gt;内存访问权限--&gt;|solution|mprotect
+issue--&gt;指令缓存--&gt;|solution|__builtin___clear_cache
+</code></pre><h3 id="plt-hook流程">PLT hook流程</h3>
+<p>总结一下 xhook 中执行 PLT hook 的流程：</p>
+<ol>
+<li>读 maps，获取 ELF 的内存首地址（start address）。</li>
+<li>验证 ELF 头信息。</li>
+<li>从 PHT 中找到类型为 <code>PT_LOAD</code> 且 offset 为 <code>0</code> 的 segment。计算 ELF 基地址。</li>
+<li>从 PHT 中找到类型为 <code>PT_DYNAMIC</code> 的 segment，从中获取到 <code>.dynamic</code> section，从 <code>.dynamic</code> section中获取其他各项 section 对应的内存地址。</li>
+<li>在 <code>.dynstr</code> section 中找到需要 hook 的 symbol 对应的 index 值。</li>
+<li>遍历所有的.relxxx section（重定位 section），查找 symbol index 和 symbol type 都匹配的项，对于这项重定位项，执行 hook 操作。hook 流程如下：
+<ul>
+<li>读 maps，确认当前 hook 地址的内存访问权限。</li>
+<li>如果权限不是可读也可写，则用 <code>mprotect</code> 修改访问权限为可读也可写。</li>
+<li>如果调用方需要，就保留 hook 地址当前的值，用于返回。</li>
+<li>将 hook 地址的值替换为新的值。（执行 hook）</li>
+<li>如果之前用 <code>mprotect</code> 修改过内存访问权限，现在还原到之前的权限。</li>
+<li>清除 hook 地址所在内存页的处理器指令缓存。</li>
+</ul>
+</li>
+</ol>
+<h3 id="elf分析工具">elf分析工具</h3>
 <ul>
 <li>file</li>
 <li>readelf</li>
@@ -7026,6 +7158,10 @@ Key to Flags:
 <p><a href="https://linux.die.net/man/1/readelf">https://linux.die.net/man/1/readelf</a></p>
 <p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/readelf.html">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/readelf.html</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">https://en.wikipedia.org/wiki/Executable_and_Linkable_Format</a></p>
+<h2 id="参考">参考</h2>
+<p><a href="https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md">https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md</a></p>
+<p><a href="https://linuxhint.com/understanding_elf_file_format/">https://linuxhint.com/understanding_elf_file_format/</a></p>
+<p><a href="../https://mp.weixin.qq.com/s?__biz=mzixmtg5njqyma==&amp;mid=2247486887&amp;idx=1&amp;sn=b07ef3fbd6d7292a83408c61fd2a8105&amp;chksm=974f1caca03895ba6936f55967b3118a404632221cb148ab2da7226847078b732ee3745b4187&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1586741371319&amp;sharer_shareid=8206e3713102e9ca474649d51eda190c#rd">android native hook技术你知道多少？</a></p>
 
 
 <footer class="footline">
@@ -7649,6 +7785,22 @@ Key to Flags:
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -11097,19 +11249,19 @@ Key to Flags:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1617797148"></script>
-    <script src="/js/perfect-scrollbar.min.js?1617797148"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1617797148"></script>
-    <script src="/js/jquery.sticky.js?1617797148"></script>
-    <script src="/js/featherlight.min.js?1617797148"></script>
-    <script src="/js/highlight.pack.js?1617797148"></script>
+    <script src="/js/clipboard.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1619600281"></script>
+    <script src="/js/jquery.sticky.js?1619600281"></script>
+    <script src="/js/featherlight.min.js?1619600281"></script>
+    <script src="/js/highlight.pack.js?1619600281"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1617797148"></script>
-    <script src="/js/learn.js?1617797148"></script>
-    <script src="/js/hugo-learn.js?1617797148"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1619600281"></script>
+    <script src="/js/learn.js?1619600281"></script>
+    <script src="/js/hugo-learn.js?1619600281"></script>
     
         
-            <script src="/mermaid/mermaid.js?1617797148"></script>
+            <script src="/mermaid/mermaid.js?1619600281"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

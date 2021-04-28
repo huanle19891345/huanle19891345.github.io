@@ -312,7 +312,7 @@ State In Compose @Composable fun HelloScreen() { var name by rememberSaveable { 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/jetpack/compose/composesource/</guid>
-      <description>View层次结构 graph TB contentFrameLayout--&amp;gt;ComposeView--&amp;gt;AndroidComposeView--&amp;gt;ViewLayerContainer ViewLayerContainer--&amp;gt;ViewLayer1 ViewLayerContainer--&amp;gt;ViewLayer2 ViewLayerContainer--&amp;gt;ViewLayer3 ViewLayerContainer--&amp;gt;ViewLayer... classDiagram class ComposeView { -val content } class AndroidComposeView { +onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) } class OwnedLayer { &amp;lt;&amp;lt;interface&amp;gt;&amp;gt; +resize(size: IntSize) +drawLayer(canvas: Canvas) +updateDisplayList() +invalidate() } class GraphicLayerInfo { &amp;lt;&amp;lt;interface&amp;gt; +layerId: Long } View&amp;lt;|--ViewGroup ViewGroup&amp;lt;|--AbstractComposeView AbstractComposeView&amp;lt;|--ComposeView ViewGroup&amp;lt;|--AndroidComposeView ViewGroup&amp;lt;|--ViewLayerContainer View&amp;lt;|--ViewLayer OwnedLayer&amp;lt;|--ViewLayer OwnedLayer&amp;lt;|--RenderNodeLayer GraphicLayerInfo&amp;lt;|--OwnedLayer setContent class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) val appContainer = (application as JetnewsApplication).container setContent {//main  JetnewsApp(appContainer, navigationViewModel) } } } public fun ComponentActivity.</description>
+      <description>View层次结构 graph TB contentFrameLayout--&amp;gt;ComposeView--&amp;gt;AndroidComposeView--&amp;gt;ViewLayerContainer ViewLayerContainer--&amp;gt;ViewLayer1 ViewLayerContainer--&amp;gt;ViewLayer2 ViewLayerContainer--&amp;gt;ViewLayer3 ViewLayerContainer--&amp;gt;ViewLayer... View类继承结构 classDiagram class ComposeView { -val content } class AndroidComposeView { +onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) } class OwnedLayer { &amp;lt;&amp;lt;interface&amp;gt;&amp;gt; +resize(size: IntSize) +drawLayer(canvas: Canvas) +updateDisplayList() +invalidate() } class GraphicLayerInfo { &amp;lt;&amp;lt;interface&amp;gt; +layerId: Long } View&amp;lt;|--ViewGroup ViewGroup&amp;lt;|--AbstractComposeView AbstractComposeView&amp;lt;|--ComposeView ViewGroup&amp;lt;|--AndroidComposeView ViewGroup&amp;lt;|--ViewLayerContainer View&amp;lt;|--ViewLayer OwnedLayer&amp;lt;|--ViewLayer OwnedLayer&amp;lt;|--RenderNodeLayer GraphicLayerInfo&amp;lt;|--OwnedLayer setContent class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) val appContainer = (application as JetnewsApplication).container setContent {//main  JetnewsApp(appContainer, navigationViewModel) } } } public fun ComponentActivity.</description>
     </item>
     
     <item>
@@ -324,14 +324,16 @@ State In Compose @Composable fun HelloScreen() { var name by rememberSaveable { 
       <description>https://developer.android.com/topic/libraries/architecture/coroutines
 理解协程、livedata 和 flow
 协程 flow 最佳实践 | 基于 android 开发者峰会应用
-架构思考 graph LR archetecture--&amp;gt;|Async|Scope subgraph AutoCancel Scope--&amp;gt;StructuredConcurrency end archetecture--&amp;gt;|LiveData|UnMutableLiveDataExposeToView archetecture--&amp;gt;|EmitMultiData|Flow lifecycle 从 API 1 开始，处理 Activity 的生命周期 (lifecycle) 就是个老大难的问题，基本上开发者们都看过这两张生命周期流程图:
+如果您想将一个基于回调的流 API 转换为使用 Flow，您可以使用 channelFlow 函数 (当然也可以使用 callbackFlow，它们都基于相同的实现)。
+  Flow 非常适合需要开始/停止数据的产生来匹配观察者的场景。
+  如果生产者和消费者的生命周期不同或者彼此完全独立运行时，请使用 BroadcastChannel。
+  架构思考 graph LR archetecture--&amp;gt;|Async|Scope subgraph AutoCancel Scope--&amp;gt;StructuredConcurrency end archetecture--&amp;gt;|LiveData|UnMutableLiveDataExposeToView archetecture--&amp;gt;|EmitMultiData|Flow lifecycle 从 API 1 开始，处理 Activity 的生命周期 (lifecycle) 就是个老大难的问题，基本上开发者们都看过这两张生命周期流程图:
 △ Activity 生命周期流程图
 随着 Fragment 的加入，这个问题也变得更加复杂:
 △ Fragment 生命周期流程图
 而开发者们面对这个挑战，给出了非常稳健的解决方案: 分层架构。
 分层架构 △ 表现层 (Presentation Layer)、域层 (Domain Layer) 和数据层 (Data Layer)
-如上图所示，通过将应用分为三层，现在只有最上面的 Presentation 层 (以前叫 UI 层) 才知道生命周期的细节，而应用的其他部分则可以安全地忽略掉它。
-ViewModel 而在 Presentation 层内部也有进一步的解决方案: 让一个对象可以在 Activity 和 Fragment 被销毁、重新创建时依然留存，这个对象就是架构组件的 ViewModel 类。下面让我们详细看看 ViewModel 工作的细节。</description>
+如上图所示，通过将应用分为三层，现在只有最上面的 Presentation 层 (以前叫 UI 层) 才知道生命周期的细节，而应用的其他部分则可以安全地忽略掉它。</description>
     </item>
     
     <item>
@@ -402,8 +404,6 @@ VMDebug_dumpHprofData /* * static void dumpHprofData(String fileName, FileDescri
       
       <guid>https://huanle19891345.github.io/en/android/ndk/elf%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</guid>
       <description>文件结构 &amp;laquo;深入理解Android：Java虚拟机ART&amp;raquo;&amp;ndash;elf章的内容
-https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overview.zh-CN.md
-https://linuxhint.com/understanding_elf_file_format/
 As you can see from the description above, an ELF file consists of two sections – an ELF header, and file data. The file data section can consist of a program header table describing zero or more segments, a section header table describing zero or more sections, that is followed by data referred to by entries from the program header table, and the section header table. ==Each segment contains information that is necessary for run-time execution of the file, while sections contain important data for linking and relocation==.</description>
     </item>
     
@@ -536,8 +536,8 @@ build\intermediates\merged_assets\debug\mergeDebugAssets\out</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</guid>
-      <description>https://source.android.com/devices/graphics/index.html
-Android graphics components No matter what rendering API developers use, everything is rendered onto a &amp;ldquo;surface.&amp;rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. A==ll of the visible surfaces rendered are composited onto the display by SurfaceFlinger.==
+      <description>Graphics https://source.android.com/devices/graphics/index.html
+Android graphics components No matter what rendering API developers use, everything is rendered onto a &amp;ldquo;surface.&amp;rdquo; The surface represents the producer side of a buffer queue that is often consumed by SurfaceFlinger. Every window that is created on the Android platform is backed by a surface. All of the visible surfaces rendered are composited onto the display by SurfaceFlinger.
 The following diagram shows how the key components work together:</description>
     </item>
     
@@ -1110,11 +1110,8 @@ https://github.com/iqiyi/xHook/blob/master/docs/overview/android_plt_hook_overvi
   如何获取到被hook的方法的地址 https://github.com/iqiyi/xHook/issues/15
   PLT/GOT hook局限性 xhook只支持PLT/GOT方式的hook，就是hook“调用方so中的对外调用点”。android_getaddrinfofornet函数的实现在libc.so中，需要hook android_getaddrinfofornet的调用方，可以： xhook_register(&amp;#34;.*/libwebviewchromium\\.so$&amp;#34;, &amp;#34;android_getaddrinfofornet&amp;#34;, new_android_getaddrinfofornet, NULL); 不能做 ELF 内部函数之间调用的 hook。 inline hook 可以做到 demo执行步骤 1：下载Android NDK r16b，配置环境变量(每次重启PC都要配置一次) 2：./build_libs.sh通过cmd中单个执行编译完成 3：./install_libs.sh通过在cmd中执行: C:\Users\zhenghuan\git\demo\xHook&amp;gt;install_libs.sh 完成 如何引用系统so https://developer.android.com/ndk/guides/stable_apis.html?hl=zh-CN
 https://stackoverflow.com/questions/13115827/how-to-link-to-the-libmedia-so-system-library-in-an-android-ndk-app-using-androi
-参考 Android Native Hook技术路线概述
-android native hook技术你知道多少?
-frida https://www.frida.re/
-https://github.com/frida/frida
-旧项目 https://github.com/crmulliner/adbi</description>
+InlineHook Android inline hook 浅析
+什么是 inline hook  Inline hooking is a method of intercepting calls to target functions.</description>
     </item>
     
     <item>
@@ -1825,11 +1822,14 @@ Android埋点技术分析</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96/</guid>
-      <description>布局加载优化 graph LR 正面解决(正面解决)--&amp;gt;去IO 正面解决--&amp;gt;去解析 正面解决--&amp;gt;去反射 侧面解决--&amp;gt;异步加载 参考 //编译生成xml&amp;ndash;&amp;gt;javaView
-https://github.com/iReaderAndroid/X2C
-//仅仅优化反射
-android &amp;ldquo;退一步&amp;quot;的布局加载优化
-Android布局优化（三）使用AsyncLayoutInflater异步加载布局</description>
+      <description>布局加载优化 graph LR 正面解决(正面解决)--&amp;gt;去IO,去解析--&amp;gt;|solution|frontSolution(&amp;quot;X2C,Anko,Compose&amp;quot;) 正面解决--&amp;gt;去反射--&amp;gt;|solution|frontSolution 侧面解决--&amp;gt;异步加载--&amp;gt;|solution|AsyncLayoutInflater 我们可以看到，在setContentView中主要有两个耗时操作：
+1.解析xml,获取XmlResourceParser,这是IO过程。
+2.通过createViewFromTag,创建View对象，用到了反射。
+以上两点就是布局加载可能导致卡顿的原因，也是布局的性能瓶颈。
+耗时监听 AOP(Aspectj,ASM) @Around(&amp;#34;execution(* android.app.Activity.setContentView(..))&amp;#34;) public void getSetContentViewTime(ProceedingJoinPoint joinPoint) { Signature signature = joinPoint.getSignature(); String name = signature.toShortString(); long time = System.currentTimeMillis(); try { joinPoint.proceed(); } catch (Throwable throwable) { throwable.printStackTrace(); } Log.i(&amp;#34;aop inflate&amp;#34;,name + &amp;#34; cost &amp;#34; + (System.currentTimeMillis() - time)); } 上面用的Aspectj，比较简单，上面的注解的意思是在setContentView方法执行内部去调用我们写好的getSetContentViewTime方法。 这样就可以获取相应的耗时。我们可以看下打印的日志：
+I/aop inflate: AppCompatActivity.setContentView(..) cost 69 I/aop inflate: AppCompatActivity.setContentView(..) cost 25 这样就可以实现无侵入的监控每个页面布局加载的耗时。
+获取任一控件耗时 有时为了更精确的知道到底是哪个控件加载耗时，比如我们新添加了自定义View,需要监控它的性能。 我们可以利用setFactory2来监听每个控件的加载耗时。首先我们来回顾下setContentView方法：
+public final View tryCreateView(@Nullable View parent, @NonNull String name, .</description>
     </item>
     
     <item>
@@ -1950,7 +1950,20 @@ AutomaticAcquisition onActivityCreated @Override public void onActivityCreated(f
       <guid>https://huanle19891345.github.io/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/</guid>
       <description>架构设计过程 架构思考 graph LR subgraph 抽象客观事物 页面开发任务--&amp;gt;|抽象出模型|数据处理并展示 end subgraph 发现客观问题 数据处理并展示--&amp;gt;|发现问题|splitArch(需要分离界面和数据,分层架构) 数据处理并展示--&amp;gt;|发现问题|数据处理需要考虑界面生命周期 数据处理并展示--&amp;gt;|发现问题|ViewController需要声明式更新 数据处理并展示--&amp;gt;|发现问题|数据需要保留 数据处理并展示--&amp;gt;|发现问题|需要处理异步任务(&amp;quot;需要处理异步任务,结构化并发&amp;quot;) 数据处理并展示--&amp;gt;|发现问题|需要数据源emit多数据项 数据处理并展示--&amp;gt;|发现问题|需要抽象数据策略 数据处理并展示--&amp;gt;|发现问题|callback影响可读性 数据处理并展示--&amp;gt;|发现问题|层间依赖内部引用不灵活 数据处理并展示--&amp;gt;|发现问题|IOC时模板代码且无scope end subgraph 解决问题 splitArch--&amp;gt;|解决方案|MVC,MVP,MVVM(&amp;quot;MVC,MVP,MVVM(数据驱动)&amp;quot;) 数据处理需要考虑界面生命周期--&amp;gt;|解决方案|LifecycleAware组件 ViewController需要声明式更新--&amp;gt;|解决方案|DataBinding 数据需要保留--&amp;gt;|解决方案|ViewModel等三段式保留方案 需要处理异步任务--&amp;gt;|解决方案|Coroutine1(Coroutine) 需要数据源emit多数据项--&amp;gt;|解决方案|Flow 需要抽象数据策略--&amp;gt;|解决方案|NetworkBoundResource类族 callback影响可读性--&amp;gt;|解决方案|Coroutine2(Coroutine,Flow) 层间依赖内部引用不灵活--&amp;gt;|解决方案|IOC传入依赖 IOC时模板代码且无scope--&amp;gt;|解决方案|DI框架,如Hilt end 架构设计 Jetpack架构组件的通用最优落地设计如下
 各层内设计 View Layer 类设计 Activity和Fragment是同样的继承结构设计，以Activity为例:
-classDiagram class CommonActivity { +inflateContent(savedInstanceState: Bundle?) +init(savedInstanceState: Bundle?) } class CommonInflateActivity { +inflateContent(savedInstanceState: Bundle?) +getLayoutId()Int } class DataBindingActivity~VDB : ViewDataBinding~{ +inflateContent(savedInstanceState: Bundle?) +init(savedInstanceState: Bundle?) -bindVariable(activityDataBinding: VDB) +getLayoutId() Int +getVariableMap() Map } class ViewModelCommonActivity~VM : BaseViewModel~ { ~VM viewModel } class ViewModelBindingActivity~VDB : ViewDataBinding, VM : BaseViewModel~ { ~VM viewModel +getVariableMap()Map +getViewModelVariableId()Int } BaseActivity&amp;lt;|--CommonActivity CommonActivity&amp;lt;|--CommonInflateActivity CommonActivity&amp;lt;|--DataBindingActivity CommonInflateActivity&amp;lt;|--ViewModelCommonActivity DataBindingActivity&amp;lt;|--ViewModelBindingActivity Hilt构造并注入viewmodel DataBinding Design ViewModel Layer Hilt注入需要的Domain层Repository Data load type Trigger by lifecycle event automatic val userNameLiveData = liveData { emit(userRepository.</description>
+classDiagram class CommonActivity { +inflateContent(savedInstanceState: Bundle?)* +init(savedInstanceState: Bundle?)* } class CommonInflateActivity { +inflateContent(savedInstanceState: Bundle?) +getLayoutId()*Int } class DataBindingActivity~VDB : ViewDataBinding~{ +inflateContent(savedInstanceState: Bundle?) +init(savedInstanceState: Bundle?) -bindVariable(activityDataBinding: VDB) +getLayoutId()* Int +getVariableMap()* Map } class ViewModelCommonActivity~VM : BaseViewModel~ { ~VM viewModel } class ViewModelBindingActivity~VDB : ViewDataBinding, VM : BaseViewModel~ { ~VM viewModel +getVariableMap()Map +getViewModelVariableId()*Int } BaseActivity&amp;lt;|--CommonActivity CommonActivity&amp;lt;|--CommonInflateActivity CommonActivity&amp;lt;|--DataBindingActivity CommonInflateActivity&amp;lt;|--ViewModelCommonActivity DataBindingActivity&amp;lt;|--ViewModelBindingActivity Hilt构造并注入viewmodel DataBinding场景细分 ViewModel Layer Hilt注入需要的Domain层Repository Data load type Trigger by lifecycle event automatic val userNameLiveData = liveData { emit(userRepository.</description>
+    </item>
+    
+    <item>
+      <title>架构思考和实现Inner</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/</guid>
+      <description>分层架构 https://developer.android.com/jetpack/guide#overview
+NetworkBoundResource数据策略 https://developer.android.com/jetpack/guide#addendum
+ ResueViewmodels Should I reuse view models in different views?
+I noticed that I have views that need the same information like others. But sometimes you need 5 properties of the view model and sometimes only 2.
+Do you share such view model over many views or do you create a separate view model for each view or maybe do you prefere an inheritance or composition strategy?</description>
     </item>
     
     <item>

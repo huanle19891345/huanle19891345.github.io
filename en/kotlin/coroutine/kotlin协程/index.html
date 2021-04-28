@@ -12,23 +12,23 @@
     <title>kotlin协程 :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1617797149" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1617797149" rel="stylesheet">
-    <link href="/css/hybrid.css?1617797149" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1617797149" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1617797149" rel="stylesheet">
-    <link href="/css/auto-complete.css?1617797149" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1617797149" rel="stylesheet">
-    <link href="/css/theme.css?1617797149" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1617797149" rel="stylesheet">
+    <link href="/css/nucleus.css?1619600282" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1619600282" rel="stylesheet">
+    <link href="/css/hybrid.css?1619600282" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1619600282" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1619600282" rel="stylesheet">
+    <link href="/css/auto-complete.css?1619600282" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1619600282" rel="stylesheet">
+    <link href="/css/theme.css?1619600282" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1619600282" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1617797149" rel="stylesheet">
+    <link href="/css/theme-mine.css?1619600282" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1617797149"></script>
+    <script src="/js/jquery-3.3.1.min.js?1619600282"></script>
 
-    <script src="/js/auto_toc_scroll.js?1617797149"></script>
+    <script src="/js/auto_toc_scroll.js?1619600282"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1617797149"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1617797149"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1619600282"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1619600282"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1617797149"></script>
+<script type="text/javascript" src="/js/search.js?1619600282"></script>
 
     
   </div>
@@ -1061,6 +1061,27 @@
       <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="架构思考和实现" class="dd-item ">
         <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/">
         架构思考和实现
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" class="dd-item ">
+        <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/">
+        架构思考和实现Inner
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -6814,6 +6835,7 @@
         <li><a href="#子协程抛出未捕获的异常时默认情况下会取消其父协程">子协程抛出未捕获的异常时，默认情况下会取消其父协程。</a></li>
       </ul>
     </li>
+    <li><a href="#executorhttpdocsoraclecomjavase8docsapijavautilconcurrentexecutorhtmlascoroutinedispatcher"><a href="http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executor.html">Executor</a>.asCoroutineDispatcher()</a></li>
   </ul>
 </nav>
     </div>
@@ -6981,6 +7003,8 @@
 <h3 id="父协程手动调用cancel或者异常结束会立即取消它的所有子协程">父协程手动调用<code>cancel()</code>或者异常结束，会立即取消它的所有子协程</h3>
 <h3 id="父协程必须等待所有子协程完成处于完成或者取消状态才能完成">父协程必须等待所有子协程完成（处于完成或者取消状态）才能完成</h3>
 <h3 id="子协程抛出未捕获的异常时默认情况下会取消其父协程">子协程抛出未捕获的异常时，默认情况下会取消其父协程。</h3>
+<h2 id="executorhttpdocsoraclecomjavase8docsapijavautilconcurrentexecutorhtmlascoroutinedispatcher"><a href="http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executor.html">Executor</a>.asCoroutineDispatcher()</h2>
+<p><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/java.util.concurrent.-executor/as-coroutine-dispatcher.html">https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/java.util.concurrent.-executor/as-coroutine-dispatcher.html</a></p>
 
 
 <footer class="footline">
@@ -7603,6 +7627,22 @@
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -11052,19 +11092,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.min.js?1617797149"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1617797149"></script>
-    <script src="/js/jquery.sticky.js?1617797149"></script>
-    <script src="/js/featherlight.min.js?1617797149"></script>
-    <script src="/js/highlight.pack.js?1617797149"></script>
+    <script src="/js/clipboard.min.js?1619600282"></script>
+    <script src="/js/perfect-scrollbar.min.js?1619600282"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1619600282"></script>
+    <script src="/js/jquery.sticky.js?1619600282"></script>
+    <script src="/js/featherlight.min.js?1619600282"></script>
+    <script src="/js/highlight.pack.js?1619600282"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1617797149"></script>
-    <script src="/js/learn.js?1617797149"></script>
-    <script src="/js/hugo-learn.js?1617797149"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1619600282"></script>
+    <script src="/js/learn.js?1619600282"></script>
+    <script src="/js/hugo-learn.js?1619600282"></script>
     
         
-            <script src="/mermaid/mermaid.js?1617797149"></script>
+            <script src="/mermaid/mermaid.js?1619600282"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,23 +12,23 @@
     <title>native_hook :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1617797148" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1617797148" rel="stylesheet">
-    <link href="/css/hybrid.css?1617797148" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1617797148" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1617797148" rel="stylesheet">
-    <link href="/css/auto-complete.css?1617797148" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1617797148" rel="stylesheet">
-    <link href="/css/theme.css?1617797148" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1617797148" rel="stylesheet">
+    <link href="/css/nucleus.css?1619600281" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1619600281" rel="stylesheet">
+    <link href="/css/hybrid.css?1619600281" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1619600281" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1619600281" rel="stylesheet">
+    <link href="/css/auto-complete.css?1619600281" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1619600281" rel="stylesheet">
+    <link href="/css/theme.css?1619600281" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1619600281" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1617797148" rel="stylesheet">
+    <link href="/css/theme-mine.css?1619600281" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1617797148"></script>
+    <script src="/js/jquery-3.3.1.min.js?1619600281"></script>
 
-    <script src="/js/auto_toc_scroll.js?1617797148"></script>
+    <script src="/js/auto_toc_scroll.js?1619600281"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1617797148"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1617797148"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1619600281"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1619600281"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1617797148"></script>
+<script type="text/javascript" src="/js/search.js?1619600281"></script>
 
     
   </div>
@@ -1061,6 +1061,27 @@
       <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="架构思考和实现" class="dd-item ">
         <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0/">
         架构思考和实现
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/" title="架构思考和实现Inner" class="dd-item ">
+        <a href="/en/android/jetpack/arch/%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0/%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AE%9E%E7%8E%B0inner/">
+        架构思考和实现Inner
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -6803,6 +6824,12 @@
         </li>
       </ul>
     </li>
+    <li><a href="#inlinehook">InlineHook</a>
+      <ul>
+        <li><a href="#什么是-inline-hook">什么是 inline hook</a></li>
+        <li><a href="#inline-hook-的原理">Inline hook 的原理</a></li>
+      </ul>
+    </li>
     <li><a href="#参考">参考</a></li>
     <li><a href="#frida">frida</a></li>
     <li><a href="#旧项目">旧项目</a></li>
@@ -6861,6 +6888,20 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\z</span>
 </code></pre></div><h4 id="如何引用系统so">如何引用系统so</h4>
 <p><a href="https://developer.android.com/ndk/guides/stable_apis.html?hl=zh-CN">https://developer.android.com/ndk/guides/stable_apis.html?hl=zh-CN</a></p>
 <p><a href="https://stackoverflow.com/questions/13115827/how-to-link-to-the-libmedia-so-system-library-in-an-android-ndk-app-using-androi">https://stackoverflow.com/questions/13115827/how-to-link-to-the-libmedia-so-system-library-in-an-android-ndk-app-using-androi</a></p>
+<h2 id="inlinehook">InlineHook</h2>
+<p><a href="https://www.sunmoonblog.com/2019/07/15/inline-hook-basic/">Android inline hook 浅析</a></p>
+<h3 id="什么是-inline-hook">什么是 inline hook</h3>
+<blockquote>
+<p>Inline hooking is a method of intercepting calls to target functions. The general idea is to redirect a function to our own, so that we can perform processing before and/or after the function does its; this could include: checking parameters, shimming, logging, spoofing returned data, and filtering calls.</p>
+<p>The hooks are placed by directly modifying code within the target function (inline modification), usually by overwriting the first few bytes with a jump; this allows execution to be redirected before the function does any processing</p>
+</blockquote>
+<h3 id="inline-hook-的原理">Inline hook 的原理</h3>
+<p>inline hook 由3部分组成：</p>
+<ul>
+<li>Hook - 为了 hook 目标函数(旧函数)，会向其代码中写入一个5个字节的跳转指令(实际跳转指令以及指令大小跟平台相关)</li>
+<li>Proxy - 用于指定被 hook 的目标函数将要跳转到的函数(新函数)</li>
+<li>Trampoline - 用于调用旧函数</li>
+</ul>
 <h2 id="参考">参考</h2>
 <p><a href="https://gtoad.github.io/2018/07/05/Android-Native-Hook/">Android Native Hook技术路线概述</a></p>
 <p><a href="../https://mp.weixin.qq.com/s?__biz=mzixmtg5njqyma==&amp;mid=2247486887&amp;idx=1&amp;sn=b07ef3fbd6d7292a83408c61fd2a8105&amp;chksm=974f1caca03895ba6936f55967b3118a404632221cb148ab2da7226847078b732ee3745b4187&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1586741371319&amp;sharer_shareid=8206e3713102e9ca474649d51eda190c#rd">android native hook技术你知道多少?</a></p>
@@ -7492,6 +7533,22 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\z</span>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -10943,19 +11000,19 @@ C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\z</span>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1617797148"></script>
-    <script src="/js/perfect-scrollbar.min.js?1617797148"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1617797148"></script>
-    <script src="/js/jquery.sticky.js?1617797148"></script>
-    <script src="/js/featherlight.min.js?1617797148"></script>
-    <script src="/js/highlight.pack.js?1617797148"></script>
+    <script src="/js/clipboard.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.min.js?1619600281"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1619600281"></script>
+    <script src="/js/jquery.sticky.js?1619600281"></script>
+    <script src="/js/featherlight.min.js?1619600281"></script>
+    <script src="/js/highlight.pack.js?1619600281"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1617797148"></script>
-    <script src="/js/learn.js?1617797148"></script>
-    <script src="/js/hugo-learn.js?1617797148"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1619600281"></script>
+    <script src="/js/learn.js?1619600281"></script>
+    <script src="/js/hugo-learn.js?1619600281"></script>
     
         
-            <script src="/mermaid/mermaid.js?1617797148"></script>
+            <script src="/mermaid/mermaid.js?1619600281"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
