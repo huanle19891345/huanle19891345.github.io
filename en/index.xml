@@ -12,8 +12,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</guid>
-      <description>heap.cc
-Heap::ChangeCollector(CollectorType) void Heap::ChangeCollector(CollectorType collector_type) { /*CollectorType是一个枚举变量，用于定义不同的回收器类型。collector_type_是 Heap类的成员变量，描述当前设定的回收器类型。对笔者所搭建的模拟器而言，虚拟机使用的 回收器类型为kCollectorTypeCMS。CMS是ConcurrentMarkSweep的缩写。它是标记 清除垃圾回收算法的一种。本书后续章节会详细介绍它们。此处，读者仅作简单了解即可。 */ if (collector_type != collector_type_) { collector_type_ = collector_type;//设置垃圾回收器类型  ...... switch (collector_type_) { case kCollectorTypeCC: {//CC是Concurrent Copying的缩写  ..... if (use_tlab_) {//是否使用TLAB。本例中不使用它，所以use_tlab_为false  //ChangeAllocator函数将设置内存分配器的类型  ChangeAllocator(kAllocatorTypeRegionTLAB); } else { ChangeAllocator(kAllocatorTypeRegion); } break; } case kCollectorTypeMC://MC:Mark Compact  case kCollectorTypeSS://SS:Semi-space  //GSS:改进版的SS  case kCollectorTypeGSS:{ ..... if (use_tlab_) { ChangeAllocator(kAllocatorTypeTLAB); } else { ChangeAllocator(kAllocatorTypeBumpPointer); } break; } case kCollectorTypeMS: {//MS：mark-sweep  .</description>
+      <description>graph LR subgraph CollectorType kCollectorTypeCC kCollectorTypeMC kCollectorTypeSS kCollectorTypeGSS kCollectorTypeMS kCollectorTypeCMS end subgraph AllocatorType kCollectorTypeCC--&amp;gt;RegionSpace kCollectorTypeMC--&amp;gt;BumpPointerSpace kCollectorTypeSS--&amp;gt;BumpPointerSpace kCollectorTypeGSS--&amp;gt;BumpPointerSpace kCollectorTypeMS--&amp;gt;MallocSpace kCollectorTypeCMS--&amp;gt;MallocSpace RegionSpace--&amp;gt;|use_tlab_|kAllocatorTypeRegionTLAB RegionSpace--&amp;gt;kAllocatorTypeRegion BumpPointerSpace--&amp;gt;|use_tlab_|kAllocatorTypeTLAB BumpPointerSpace--&amp;gt;kAllocatorTypeBumpPointer MallocSpace--&amp;gt;|kUseRosAlloc|kAllocatorTypeRosAlloc MallocSpace--&amp;gt;kAllocatorTypeDlMalloc end heap.cc
+Heap::ChangeCollector(CollectorType) void Heap::ChangeCollector(CollectorType collector_type) { /*CollectorType是一个枚举变量，用于定义不同的回收器类型。collector_type_是 Heap类的成员变量，描述当前设定的回收器类型。对笔者所搭建的模拟器而言，虚拟机使用的 回收器类型为kCollectorTypeCMS。CMS是ConcurrentMarkSweep的缩写。它是标记 清除垃圾回收算法的一种。本书后续章节会详细介绍它们。此处，读者仅作简单了解即可。 */ if (collector_type != collector_type_) { collector_type_ = collector_type;//设置垃圾回收器类型  ...... switch (collector_type_) { case kCollectorTypeCC: {//CC是Concurrent Copying的缩写  ..... if (use_tlab_) {//是否使用TLAB。本例中不使用它，所以use_tlab_为false  //ChangeAllocator函数将设置内存分配器的类型  ChangeAllocator(kAllocatorTypeRegionTLAB); } else { ChangeAllocator(kAllocatorTypeRegion); } break; } case kCollectorTypeMC://MC:Mark Compact  case kCollectorTypeSS://SS:Semi-space  //GSS:改进版的SS  case kCollectorTypeGSS:{ .</description>
     </item>
     
     <item>
@@ -303,6 +303,7 @@ https://developer.android.google.cn/jetpack/compose/documentation
 https://github.com/android/compose-samples
 深入详解 Jetpack Compose | 实现原理
 jetpack compse原理解析
+View 嵌套太深会卡？来用 Jetpack Compose，随便套
 State In Compose @Composable fun HelloScreen() { var name by rememberSaveable { mutableStateOf(&amp;#34;&amp;#34;) } HelloContent(name = name, onNameChange = { name = it }) } @Composable fun HelloContent(name: String, onNameChange: (String) -&amp;gt; Unit) { Column(modifier = Modifier.padding(16.dp)) { Text( text = &amp;#34;Hello, $name&amp;#34;, modifier = Modifier.padding(bottom = 8.dp), style = MaterialTheme.typography.h5 ) OutlinedTextField( value = name, onValueChange = { onNameChange(it) }, label = { Text(&amp;#34;Name&amp;#34;) } ) } } Compose和DataBinding State对应 graph TB subgraph DataBinding ViewAttribute--&amp;gt;|event|BackData BackData--&amp;gt;|state|ViewAttribute end subgraph Compose HelloContent--&amp;gt;|event|HelloScreen HelloScreen(&amp;quot;HelloScreen(stateful)&amp;quot;)--&amp;gt;|state|HelloContent(&amp;quot;HelloContent(stateless)&amp;quot;) end Key Point: When hoisting state, there are three rules to help you figure out where state should go:</description>
     </item>
     
@@ -429,12 +430,63 @@ epoll_create // /usr/include/x86_64-linux-gnu/sys/epoll.h  /* Creates an epoll i
     </item>
     
     <item>
+      <title>FFmpegDebug</title>
+      <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/ffmpegdebug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/ffmpegdebug/</guid>
+      <description>How to debug The small program uses the mac machine. First complete the preparation of FFmpeg source code download and compilation.
+(0)Download FFmpeg source code&amp;ndash;success  git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
+ As for the tools used to open these source files, readers should consider tools that are suitable for them and suitable for large projects, such as sourceinsight, sublime, vim, emacs, xcode, Android Studio, etc.
+(1) Compile FFmpeg&amp;ndash;success #实际操作的命令 brew install yasm brew install automake fdk-aac git lame libass libtool libvorbis libvpx \ opus sdl shtool texi2html theora wget x264 x265 xvid nasm .</description>
+    </item>
+    
+    <item>
       <title>FlutterBoost</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost/</guid>
       <description>BoostFlutterActivity.onCreate BoostFlutterActivity implements FlutterActivityAndFragmentDelegate.Host { private FlutterActivityAndFragmentDelegate delegate; public static class NewEngineIntentBuilder { public Intent build(@NonNull Context context) { SerializableMap serializableMap = new SerializableMap(); serializableMap.setMap(params); return new Intent(context, activityClass) .putExtra(EXTRA_BACKGROUND_MODE, backgroundMode) .putExtra(EXTRA_DESTROY_ENGINE_WITH_ACTIVITY, false) .putExtra(EXTRA_URL, url) .putExtra(EXTRA_PARAMS, serializableMap); } @Override public String getContainerUrl() { if (getIntent().hasExtra(EXTRA_URL)) { return getIntent().getStringExtra(EXTRA_URL); } } @Override protected void onCreate(@Nullable Bundle savedInstanceState) { delegate = new FlutterActivityAndFragmentDelegate(this); delegate.onAttach(this); setContentView(createFlutterView()); } FlutterActivityAndFragmentDelegate implements IFlutterViewContainer { protected IOperateSyncer mSyncer; FlutterActivityAndFragmentDelegate(@NonNull Host host) { this.</description>
+    </item>
+    
+    <item>
+      <title>FlutterBoost3</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost3/</guid>
+      <description>Native层设计 FlutterBoostPlugin类设计 FlutterBoost.setup 1. initialize default engine public void setup(Application application, FlutterBoostDelegate delegate, Callback callback, FlutterBoostOptions options) { // 1. initialize default engine  FlutterEngine engine = FlutterEngineCache.getInstance().get(ENGINE_ID); if (engine == null) { if (options == null) options = FlutterBoostOptions.createDefault(); engine = new FlutterEngine(application, options.shellArgs()); engine.getNavigationChannel().setInitialRoute(options.initialRoute()); engine.getDartExecutor().executeDartEntrypoint(new DartExecutor.DartEntrypoint( FlutterMain.findAppBundlePath(), options.dartEntrypoint())); if(callback != null) callback.onStart(engine); FlutterEngineCache.getInstance().put(ENGINE_ID, engine); } // 2. set delegate  getPlugin().setDelegate(delegate); //3. register ActivityLifecycleCallbacks  setupActivityLifecycleCallback(application); } 2. set delegate to Plugin /** * Generated file.</description>
+    </item>
+    
+    <item>
+      <title>FlutterEngineCache</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/flutterenginecache/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/flutterenginecache/</guid>
+      <description>BaseOnFlutter2.0
+FlutterEngineCache public class FlutterEngineCache { private static FlutterEngineCache instance; private final Map&amp;lt;String, FlutterEngine&amp;gt; cachedEngines = new HashMap&amp;lt;&amp;gt;(); } FlutterEngineInit graph LR FlutterApplication--&amp;gt;|after onCreate|flutterLoader.startInit--&amp;gt;similarToFlutter1.12 FlutterEngine--&amp;gt;initAssetManager FlutterEngine--&amp;gt;initDartExecutor FlutterEngine--&amp;gt;initMultipleChannels FlutterEngine--&amp;gt;flutterLoader.startInitAndBlockUtilComplete FlutterEngine--&amp;gt;flutterJNI.attachToNativeShell/Engine--&amp;gt;similarToFlutter1.12WhenConstuctFlutterView FlutterEngine--&amp;gt;initFlutterRendererAndPlatformViewsController FlutterEngine Constructor public FlutterEngine(@NonNull Context context, @Nullable String[] dartVmArgs) { this(context, /* flutterLoader */ null, new FlutterJNI(), dartVmArgs, true); } /** Fully configurable {@code FlutterEngine} constructor. */ public FlutterEngine( @NonNull Context context, @Nullable FlutterLoader flutterLoader, @NonNull FlutterJNI flutterJNI, @NonNull PlatformViewsController platformViewsController, @Nullable String[] dartVmArgs, boolean automaticallyRegisterPlugins, boolean waitForRestorationData) { AssetManager assetManager; try { assetManager = context.</description>
+    </item>
+    
+    <item>
+      <title>FlutterEngineDebug环境搭建</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/flutterenginedebug%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/flutterenginedebug%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>FlutterEngine开发环境 https://github.com/flutter/flutter/wiki/Setting-up-the-Engine-development-environment
+Editor autocomplete support VSCode with C/C++ Intellisense VSCode can provide some IDE features using the C/C++ extension. It will provide basic support on install without needing any additional configuration. There will probably be some issues, like header not found errors and incorrect jump to definitions.
+Intellisense can also use our compile_commands.json for more robust functionality. Either symlink src/out/compile_commands.json to the project root at src/flutter or provide an absolute path to it in the c_cpp_properties.</description>
+    </item>
+    
+    <item>
+      <title>FlutterEngineGroup</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/flutterenginegroup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/engine/flutterenginegroup/</guid>
+      <description>FlutterEngineGroup构造 public class FlutterEngineGroup { final List&amp;lt;FlutterEngine&amp;gt; activeEngines = new ArrayList&amp;lt;&amp;gt;(); /** Create a FlutterEngineGroup whose child engines will share resources. */ public FlutterEngineGroup(@NonNull Context context) { this(context, null); } /** * Create a FlutterEngineGroup whose child engines will share resources. Use {@code dartVmArgs} to * pass flags to the Dart VM during initialization. */ public FlutterEngineGroup(@NonNull Context context, @Nullable String[] dartVmArgs) { FlutterLoader loader = FlutterInjector.instance().flutterLoader(); if (!loader.initialized()) { loader.</description>
     </item>
     
     <item>
@@ -1058,7 +1110,7 @@ public static class MeasureSpec { //int类型占4个字节，其中高2位表示
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/methodchannel/</guid>
-      <description>整体设计 graph TB Dart(DartFramework)--&amp;gt;|await|Engine--&amp;gt;|GetPlatformTaskRunner-&amp;gt;PostTask|PlatformC++--&amp;gt;PlatformJava PlatformJava--&amp;gt;PlatformC++ PlatformC++--&amp;gt;|ui_task_runner_-&amp;gt;PostTask|Engine--&amp;gt;Dart 注册监听MethodChannel().setMethodCallHandler((call, result) -&amp;gt; {}) class MainActivity() : FlutterActivity() { private val CHANNEL = &amp;#34;samples.flutter.dev/battery&amp;#34; override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) GeneratedPluginRegistrant.registerWith(this) MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result -&amp;gt; // Note: this method is invoked on the main thread.  if (call.method == &amp;#34;getBatteryLevel&amp;#34;) { val batteryLevel = getBatteryLevel()//android平台api调用获取  if (batteryLevel != -1) { result.success(batteryLevel) } else { result.error(&amp;#34;UNAVAILABLE&amp;#34;, &amp;#34;Battery level not available.&amp;#34;, null) } } else { result.</description>
+      <description>整体设计 graph LR subgraph DartVM Dart(DartFramework)--&amp;gt;|await|Engine(EngineC++) end subgraph Platform Engine--&amp;gt;|GetPlatformTaskRunner-&amp;gt;PostTask|PlatformC++--&amp;gt;PlatformJava PlatformJava--&amp;gt;PlatformC++ PlatformC++--&amp;gt;|ui_task_runner_-&amp;gt;PostTask|Engine--&amp;gt;Dart end 数据格式编解码 graph LR MethodCall(&amp;quot;MethodCall:StringMethodName,ObjectArguments&amp;quot;)--&amp;gt;|encode|ByteBuffer ByteBuffer--&amp;gt;|decode|MethodCall EngineUi线程接收消息模块设计 graph TB subgraph DartUiThreadNative ALooper_pollOnce--&amp;gt;MessageLoopAndroid::OnEventFired --&amp;gt;Engine::DispatchPlatformMessage--&amp;gt;RuntimeController::DispatchPlatformMessage --&amp;gt;PlatformConfiguration::DispatchPlatformMessage--&amp;gt;tonic::DartInvoke end subgraph DartUiThreadDart tonic::DartInvoke--&amp;gt;binding.dart--&amp;gt;platform_channel.dart--&amp;gt;callHandler end 注册监听MethodChannel().setMethodCallHandler((call, result) -&amp;gt; {}) class MainActivity() : FlutterActivity() { private val CHANNEL = &amp;#34;samples.flutter.dev/battery&amp;#34; override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) GeneratedPluginRegistrant.registerWith(this) MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result -&amp;gt; // Note: this method is invoked on the main thread.  if (call.</description>
     </item>
     
     <item>
@@ -1414,7 +1466,10 @@ void runApp(Widget app) { WidgetsFlutterBinding.ensureInitialized() ..attachRoot
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/startup_embedder_framwwork/</guid>
-      <description>FlutterApplication.onCreate /** * Flutter implementation of {@link android.app.Application}, managing * application-level global initializations. */ //FlutterApplication @CallSuper public void onCreate() { super.onCreate(); FlutterMain.startInitialization(this); } /** FlutterMain * Starts initialization of the native system. * @param applicationContext The Android application context. */ public static void startInitialization(@NonNull Context applicationContext) { if (isRunningInRobolectricTest) { return; } FlutterLoader.getInstance().startInitialization(applicationContext); } FlutterLoader.startInitialization() /** Finds Flutter resources in an application APK and also loads Flutter&amp;#39;s native library.*/ //FlutterLoader  /** * Starts initialization of the native system.</description>
+      <description>graph LR FlutterView--&amp;gt;|对应|DartVM--&amp;gt;|对应|Engine attachToFlutterEngine图解 分别由FlutterRenderer控制渲染flutter UI到platform侧的FlutterView，由AndroidTouchProcessor控制platform侧的FlutterView的touchEvent到flutter
+graph LR FlutterView--&amp;gt;|attachToFlutterEngine|FlutterEngine FlutterView--&amp;gt;|interaction events to|FlutterEngine FlutterEngine--&amp;gt;|renderTo|FlutterView FlutterEngine--&amp;gt;FlutterRenderer--&amp;gt;|notify|FlutterJNI RenderSurface--&amp;gt;|nofity surface event|FlutterRenderer FlutterView--&amp;gt;|contains|RenderSurface FlutterEngine--&amp;gt;|contains|PlatformViewsController--&amp;gt;|contains|AndroidTouchProcessor--&amp;gt;|sendTouchEvent|Flutter RenderSurface类设计图解 classDiagram TextureView&amp;lt;|--FlutterTextureView RenderSurface&amp;lt;|--FlutterTextureView SurfaceView&amp;lt;|--FlutterSurfaceView RenderSurface&amp;lt;|--FlutterSurfaceView View&amp;lt;|--FlutterImageView RenderSurface&amp;lt;|--FlutterImageView class FlutterView 下述为flutter1.12版本时的源码研究，新版2.0设计上已经进行优化见上面的图解
+1.12时在new FlutterView时进行Engine和DartVM的构造和初始化，而在2.0上功能分离到FlutterEngine这个java class中
+FlutterApplication.onCreate /** * Flutter implementation of {@link android.app.Application}, managing * application-level global initializations. */ //FlutterApplication @CallSuper public void onCreate() { super.onCreate(); FlutterMain.startInitialization(this); } /** FlutterMain * Starts initialization of the native system. * @param applicationContext The Android application context.</description>
     </item>
     
     <item>
@@ -1538,6 +1593,17 @@ https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html
     </item>
     
     <item>
+      <title>TranscodingSource</title>
+      <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/examples/transcodingsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/examples/transcodingsource/</guid>
+      <description>https://www.ffmpeg.org/ffmpeg.html
+Transcoding Detailed description The transcoding process in ffmpeg for each output can be described by the following diagram:
+ _______ ______________ | | | | | input | demuxer | encoded data | decoder | file | ---------&amp;gt; | packets | -----+ |_______| |______________| | av_read_frame AVPacket v ---------&amp;gt; _________ | | | decoded |AVFrame | frames | |_________| ________ ______________ | | | | | |fliter | output | &amp;lt;-------- | encoded data | &amp;lt;----+ | file | muxer | packets | encoder |________| |______________| AVPacket ffmpeg calls the libavformat library (containing demuxers) to read input files and get packets containing encoded data from them.</description>
+    </item>
+    
+    <item>
       <title>Transform</title>
       <link>https://huanle19891345.github.io/en/android/gradlejenkins/transform/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1611,6 +1677,18 @@ Choreographer 会通过上面创建的 APP 延时源 mEventThreadSource 对象�
 SurfaceFlinger类设计 graph TB SurfaceFlinger--&amp;gt;BnSurfaceComposer--&amp;gt;BnInterface BnSurfaceComposer--&amp;gt;ISurfaceComposer ISurfaceComposer--&amp;gt;IInterface BnInterface--&amp;gt;BBinder--&amp;gt;IBinder system/core/rootdir/init.rc
 init.rc on property:vold.decrypt=trigger_restart_framework stop surfaceflinger start surfaceflinger # A/B update verifier that marks a successful boot. exec_start update_verifier class_start main class_start late_start frameworks/native/services/surfaceflinger/surfaceflinger.rc
 surfaceflinger.rc service surfaceflinger /system/bin/surfaceflinger class core animation user system group graphics drmrpc readproc onrestart restart zygote writepid /dev/stune/foreground/tasks socket pdx/system/vr/display/client stream 0666 system graphics u:object_r:pdx_display_client_endpoint_socket:s0 socket pdx/system/vr/display/manager stream 0666 system graphics u:object_r:pdx_display_manager_endpoint_socket:s0 socket pdx/system/vr/display/vsync stream 0666 system graphics u:object_r:pdx_display_vsync_endpoint_socket:s0 frameworks/native/services/surfaceflinger/main_surfaceflinger.</description>
+    </item>
+    
+    <item>
+      <title>WebRTC源码下载和编译</title>
+      <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/webrtc/webrtc%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/webrtc/webrtc%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%BC%96%E8%AF%91/</guid>
+      <description>下载和编译步骤 1. GET DEPOT TOOLS LINUX / MAC Clone the depot_tools repository:
+$ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git Add depot_tools to the front of your PATH (you will probably want to put this in your ~/.bashrc or ~/.zshrc). Assuming you cloned depot_tools to /path/to/depot_tools:
+$ export PATH=/path/to/depot_tools:$PATH 2. 安装python 2.7 3. Download Source Create a working directory, enter it, and run:
+$ fetch --nohooks webrtc_android //会在当前执行目录中下载文件到src文件夹 $ gclient sync 4. preCompile # 进入到src目录中 cd src # 执行完后，当前目录应为 /home/webrtc/webrtc_android/src # 下载 java相关命令和包，以及其他一些必要的软件和包 build/install-build-deps-android.</description>
     </item>
     
     <item>
@@ -1692,7 +1770,7 @@ Naive 崩溃捕获需要注册这些信号的处理函数（signal handler），
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/</guid>
-      <description>原理图 ZygoteInit.main public static void main(String argv[]) { ZygoteServer zygoteServer = new ZygoteServer(); for (int i = 1; i &amp;lt; argv.length; i++) { if (&amp;#34;start-system-server&amp;#34;.equals(argv[i])) { startSystemServer = true; } else if (&amp;#34;--enable-lazy-preload&amp;#34;.equals(argv[i])) { enableLazyPreload = true; } else if (argv[i].startsWith(ABI_LIST_ARG)) { abiList = argv[i].substring(ABI_LIST_ARG.length()); } else if (argv[i].startsWith(SOCKET_NAME_ARG)) { socketName = argv[i].substring(SOCKET_NAME_ARG.length()); } else { throw new RuntimeException(&amp;#34;Unknown command line argument: &amp;#34; + argv[i]); } } zygoteServer.registerServerSocketFromEnv(socketName); if (startSystemServer) { Runnable r = forkSystemServer(abiList, socketName, zygoteServer); // {@code r == null} in the parent (zygote) process, and {@code r !</description>
+      <description>原理图 sequenceDiagram ZygoteProcess-&amp;gt;&amp;gt;SystemServerProcess: forkSystemServer activate SystemServerProcess SystemServerProcess-&amp;gt;&amp;gt;SystemServerProcess: handleSystemServerProcess activate SystemServerProcess SystemServerProcess-&amp;gt;&amp;gt;SystemServerProcess: ZygoteInit.zygoteInit deactivate SystemServerProcess activate SystemServerProcess SystemServerProcess-&amp;gt;&amp;gt;SystemServerProcess: SystemServer.main deactivate SystemServerProcess deactivate SystemServerProcess activate ZygoteProcess ZygoteProcess-&amp;gt;&amp;gt;ZygoteProcess: runSelectLoop SystemServerProcess-&amp;gt;&amp;gt;ZygoteProcess: notify activate ZygoteProcess ZygoteProcess-&amp;gt;&amp;gt;ZygoteProcess: processOneCommand ZygoteProcess-&amp;gt;&amp;gt;ChildAppProcess: Zygote.forkAndSpecialize deactivate ZygoteProcess activate ChildAppProcess ChildAppProcess-&amp;gt;&amp;gt;ChildAppProcess: handleChildProc activate ChildAppProcess ChildAppProcess-&amp;gt;&amp;gt;ChildAppProcess: ZygoteInit.zygoteInit deactivate ChildAppProcess activate ChildAppProcess ChildAppProcess-&amp;gt;&amp;gt;ChildAppProcess: ActivityThead.main deactivate ChildAppProcess deactivate ChildAppProcess deactivate ZygoteProcess ZygoteInit.main public static void main(String argv[]) { ZygoteServer zygoteServer = new ZygoteServer(); for (int i = 1; i &amp;lt; argv.</description>
     </item>
     
     <item>
@@ -2089,6 +2167,42 @@ class BeWrapperedA(Fun1 funA) otherFun() { funA(param1, param2, fun) } fun(param
     </item>
     
     <item>
+      <title>编解码知识</title>
+      <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/%E7%BC%96%E8%A7%A3%E7%A0%81/%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/%E7%BC%96%E8%A7%A3%E7%A0%81/%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9F%A5%E8%AF%86/</guid>
+      <description>视频编码器 第一步:帧类型分析(分组)&amp;ndash;确定I、P、B帧 经过压缩后的帧分为：I帧，P帧和B帧:
+　I帧：关键帧，采用帧内压缩技术。 P帧：向前参考帧，在压缩时，只参考前面已经处理的帧。采用帧音压缩技术。 B帧：双向参考帧，在压缩时，它即参考前而的帧，又参考它后面的帧。采用帧间压缩技术。
+理想情况下，一个视频流，从一个I帧开始后面轻微运动都是 P/B，直到遇到场景切换就再插一个I，如此往复。一般来说，P/B 参考范围不会越过I帧。
+我们可以强行指定 P/B 参考不允许越过 I 帧，这样的I帧我们叫它 IDR 帧，每个 IDR 帧（Instantaneous Decoding Refresh）的间隔我们称作一个 GOP（Group of Pictures）。
+上图中的箭头表示信息提供方向，二分方式确定Coding Order
+第二步:帧内/帧间预测 　帧内预测压缩，解决的是空域数据冗余问题。 帧间预测压缩（运动估计与补偿），解决的是时域数据冗徐问题。
+帧内 大量统计表明，源 YUV 中两个相邻像素值相等、相似或者缓变概率极大，发生突变的几率是极小。（简单解释下，缓变图像：细量化，粗采样；突变图像：粗量化，细采样，处理细节丰富的图像）
+通常，编码器会通过算法将图像划分为一块一块的，然后逐块进行后续的压缩处理。
+假设当前的块不在图像边缘，我们可以用上方相邻块边界邻近值作为基础值，也就是上面一行中的每一个值，都垂直向下做拷贝，构建出和源 YUV 块一样大小的预测块，这种构建预测块的方式，我们叫做垂直预测模式，属于帧内预测模式的一种。与它相似的，还有水平预测模式、均值预测模式（也就是4x4的均值填充整个 4x4）等。
+紧接着，用源YUV的数据和预测YUV的数据做差值，得到残差块，这样我们在码流中，就直接传输残差的数据和当前4x4块的预测模式的标志位就行，这极大地节省了码流。
+举例：计算源块与预测块的残差
+帧间 如果是帧间预测的话，编码器会以当前块空域相邻的位置，在时域参考帧上的同为块，作为起始点进行规则搜索，直到搜索完找到能够节省码流最大的块作为帧间预测块，当前块到预测块的位移称为运动矢量，这样我们在码流中传输运动矢量、帧间预测模式标志位、残差就可以。
+H.264 中我们把 16x16 大小的块称作宏块，宏块也是 H.264 中最大的块，做帧内/帧间预测的时候可以分成8x8、4*4 这样的子块，都是要把它们最能节省码流的预测模式都算出来，然后比较出最优秀的划分模式进行传输。
+第三步:变换+量化 　整数离散余弦变换（DCT），将空间上的相关性变为频域上无关的数据然后进行量化。
+大量统计表明，把经过预测后得到的残差经过DCT空频变换，直流和低频（相对平坦，图像或块中大部分占比）能量集中在左上，高频（细节，图像或块中少部分占比）能量集中在右下，DCT本身虽然没有压缩作用，却为以后压缩时的取舍，奠定了必不可少的基础。
+变换后直流分量DC都集中在左上角，是整块像素的求和的均值。由于人眼对高频信号不敏感，我们可以定义这样一个变量QP=5，将变换块中所有的值都除以QP，这样做进一步节省传输码流位宽，同时主要去掉了高频分量的值，在解码端只需要将变换块中所有的值在乘QP就可以基本还原低频分量。
+我们将QP运算的过程称为量化，可见量化值越大，丢掉的高频信息就越多，再加上编码器中都是用整形变量代表像素值，所以量化值最大还原的低频信息也会越不准确，即造成的失真就越大，块效应也会越大，视频编码的质量损失主要来源于此。
+块效应
+第四步:滤波 我们可以把滤波理解为一个在量化值波动特别大的时候的一个提升主观质量的操作。如果量化值波动特别大，有可能造成本不应该是真实边界的区域内有很明显的块效应。我们暂称为块效应边界。
+真实边缘就比如说我们人脸和身后的背景，中间的这一条线。那假边界就是图中人脸区域的一个一个小块当中的这样的一个线。
+为了优化这种情况我们需要对块效应边界两边的值进行补偿操作，让块效应边界两边的值差异不要过大，从而降低块效应，提升质量。
+具体的操作，我们分三步。我会细致给大家梳理下。这部分很重要，有需要或者感兴趣的同学可以参考：
+1、初步估算块效应边界强度。
+2、区分真假边界。
+3、计算差值。
+第五步:熵编码 我们在真实网络传输的过程中肯定都是二进制码，所以我们需要将当前的像素值进一步压缩成二进制流
+总结一下 到这里，走完一整个编码流程，生成的数据就是压缩后的结果，我们也可将它送到适应我们的网络中去。
+先是我们计算过没有经过编码压缩的视频需要极大的带宽，所以我们必须进行编码。后来又说道编码的各个过程，输入的原始YUV进来，采用帧类型分析得到IDR、I、P、B类型，然后采用帧内/帧间预测+块划分得到残差，再采用变换+量化进行进一步压缩，接着采用滤波去除方块效应，然后采用熵编码将像素值转换为二进制流进一步压缩，输出压缩后可传输的码流。</description>
+    </item>
+    
+    <item>
       <title>编译插桩和动态代理</title>
       <link>https://huanle19891345.github.io/en/android/aop/%E7%BC%96%E8%AF%91%E6%8F%92%E6%A1%A9%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -2167,8 +2281,7 @@ MITM Server的处理方式是从第一个SSL/TLS握手包Client Hello中提取�
 我们再看下当路由中又被 push 进一个 Page时的情况：
 因为通常 Page 的 opaque=true, maintainState=true,所以 Page2 进入 onstage， Page1 不在需要被绘制，但需要保持状态，进入了offstage。
 因为通常 popupWindow（dialog） 的 opaque=false,我们再向路由中 push 一个 dialog:
-类设计 参考 Flutter 路由原理解析
-Flutter 路由源码解析</description>
+类设计 Usage Navigator 1.0  **Navigator** — a widget that manages a stack of Route objects. **Route** — an object managed by a Navigator that represents a screen, typically implemented by classes like MaterialPageRoute.</description>
     </item>
     
     <item>

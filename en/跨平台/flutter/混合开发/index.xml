@@ -16,6 +16,15 @@
     </item>
     
     <item>
+      <title>FlutterBoost3</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/flutterboost3/</guid>
+      <description>Native层设计 FlutterBoostPlugin类设计 FlutterBoost.setup 1. initialize default engine public void setup(Application application, FlutterBoostDelegate delegate, Callback callback, FlutterBoostOptions options) { // 1. initialize default engine  FlutterEngine engine = FlutterEngineCache.getInstance().get(ENGINE_ID); if (engine == null) { if (options == null) options = FlutterBoostOptions.createDefault(); engine = new FlutterEngine(application, options.shellArgs()); engine.getNavigationChannel().setInitialRoute(options.initialRoute()); engine.getDartExecutor().executeDartEntrypoint(new DartExecutor.DartEntrypoint( FlutterMain.findAppBundlePath(), options.dartEntrypoint())); if(callback != null) callback.onStart(engine); FlutterEngineCache.getInstance().put(ENGINE_ID, engine); } // 2. set delegate  getPlugin().setDelegate(delegate); //3. register ActivityLifecycleCallbacks  setupActivityLifecycleCallback(application); } 2. set delegate to Plugin /** * Generated file.</description>
+    </item>
+    
+    <item>
       <title>混合开发</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

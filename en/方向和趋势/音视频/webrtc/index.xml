@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>webrtc on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/webrtc/</link>
+    <description>Recent content in webrtc on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/webrtc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC源码下载和编译</title>
+      <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/webrtc/webrtc%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/webrtc/webrtc%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%BC%96%E8%AF%91/</guid>
+      <description>下载和编译步骤 1. GET DEPOT TOOLS LINUX / MAC Clone the depot_tools repository:
+$ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git Add depot_tools to the front of your PATH (you will probably want to put this in your ~/.bashrc or ~/.zshrc). Assuming you cloned depot_tools to /path/to/depot_tools:
+$ export PATH=/path/to/depot_tools:$PATH 2. 安装python 2.7 3. Download Source Create a working directory, enter it, and run:
+$ fetch --nohooks webrtc_android //会在当前执行目录中下载文件到src文件夹 $ gclient sync 4. preCompile # 进入到src目录中 cd src # 执行完后，当前目录应为 /home/webrtc/webrtc_android/src # 下载 java相关命令和包，以及其他一些必要的软件和包 build/install-build-deps-android.</description>
+    </item>
+    
+  </channel>
+</rss>

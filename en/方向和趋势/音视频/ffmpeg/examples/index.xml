@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>examples on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/examples/</link>
+    <description>Recent content in examples on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/examples/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TranscodingSource</title>
+      <link>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/examples/transcodingsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E6%96%B9%E5%90%91%E5%92%8C%E8%B6%8B%E5%8A%BF/%E9%9F%B3%E8%A7%86%E9%A2%91/ffmpeg/examples/transcodingsource/</guid>
+      <description>https://www.ffmpeg.org/ffmpeg.html
+Transcoding Detailed description The transcoding process in ffmpeg for each output can be described by the following diagram:
+ _______ ______________ | | | | | input | demuxer | encoded data | decoder | file | ---------&amp;gt; | packets | -----+ |_______| |______________| | av_read_frame AVPacket v ---------&amp;gt; _________ | | | decoded |AVFrame | frames | |_________| ________ ______________ | | | | | |fliter | output | &amp;lt;-------- | encoded data | &amp;lt;----+ | file | muxer | packets | encoder |________| |______________| AVPacket ffmpeg calls the libavformat library (containing demuxers) to read input files and get packets containing encoded data from them.</description>
+    </item>
+    
+  </channel>
+</rss>

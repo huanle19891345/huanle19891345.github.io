@@ -17,6 +17,7 @@ https://developer.android.google.cn/jetpack/compose/documentation
 https://github.com/android/compose-samples
 深入详解 Jetpack Compose | 实现原理
 jetpack compse原理解析
+View 嵌套太深会卡？来用 Jetpack Compose，随便套
 State In Compose @Composable fun HelloScreen() { var name by rememberSaveable { mutableStateOf(&amp;#34;&amp;#34;) } HelloContent(name = name, onNameChange = { name = it }) } @Composable fun HelloContent(name: String, onNameChange: (String) -&amp;gt; Unit) { Column(modifier = Modifier.padding(16.dp)) { Text( text = &amp;#34;Hello, $name&amp;#34;, modifier = Modifier.padding(bottom = 8.dp), style = MaterialTheme.typography.h5 ) OutlinedTextField( value = name, onValueChange = { onNameChange(it) }, label = { Text(&amp;#34;Name&amp;#34;) } ) } } Compose和DataBinding State对应 graph TB subgraph DataBinding ViewAttribute--&amp;gt;|event|BackData BackData--&amp;gt;|state|ViewAttribute end subgraph Compose HelloContent--&amp;gt;|event|HelloScreen HelloScreen(&amp;quot;HelloScreen(stateful)&amp;quot;)--&amp;gt;|state|HelloContent(&amp;quot;HelloContent(stateless)&amp;quot;) end Key Point: When hoisting state, there are three rules to help you figure out where state should go:</description>
     </item>
     
