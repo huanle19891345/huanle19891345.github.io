@@ -3,15 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/alloc/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/1binderservicemanager/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/1space/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/allocrelated/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/2alloc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/2binderserver/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/3binderclient/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/4binderkernel/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/allocrelated/</loc>
   </url>
   
   <url>
@@ -27,7 +59,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</loc>
   </url>
   
   <url>
@@ -79,15 +111,19 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/art_lock/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/art_lock/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/ashmem/</loc>
   </url>
   
   <url>
@@ -95,43 +131,27 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderclient/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderkernel/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/bitmap/bitmap/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderserver/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/bitmap/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderservicemanager/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmap/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/bitmap/bitmapsource/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/bitmap/bitmapsource/</loc>
   </url>
   
   <url>
@@ -178,10 +198,6 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/c%E5%90%AF%E5%8A%A8java/</loc>
-  </url>
-  
-  <url>
     <loc>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/databinding/</loc>
   </url>
   
@@ -190,7 +206,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat%E4%BB%8B%E7%BB%8D/</loc>
   </url>
   
   <url>
@@ -222,7 +242,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/epoll/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/handler/epoll/</loc>
   </url>
   
   <url>
@@ -239,6 +259,10 @@
   
   <url>
     <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/startup/flutter_surface/</loc>
   </url>
   
   <url>
@@ -262,23 +286,23 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/gc/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_concurrentcopying/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/gc1_ms_cms/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_markcompact/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/gc2_concurrentcopying/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_ms_cms/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/gc3_markcompact/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/gc_semi_space/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/gc4_semi_space/</loc>
   </url>
   
   <url>
@@ -298,11 +322,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/graphics/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/handler/</loc>
   </url>
   
   <url>
@@ -322,7 +346,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/input/</loc>
   </url>
   
   <url>
@@ -334,7 +358,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</loc>
   </url>
   
   <url>
@@ -362,15 +386,15 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/jvm_jit/</loc>
   </url>
   
   <url>
@@ -378,11 +402,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/kernel/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/kernel/kernel/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/kernel/kernel/</loc>
   </url>
   
   <url>
@@ -410,11 +434,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/layoutinflater/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/layoutinflater/layoutinflater/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/layoutinflater/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/layoutinflater/</loc>
   </url>
   
   <url>
@@ -466,7 +490,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/looper/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/handler/looper/</loc>
   </url>
   
   <url>
@@ -494,11 +518,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/measure/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/measure/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/</loc>
   </url>
   
   <url>
@@ -514,11 +538,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/</loc>
   </url>
   
   <url>
@@ -562,6 +586,10 @@
   </url>
   
   <url>
+    <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/pigeon/</loc>
+  </url>
+  
+  <url>
     <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/provider/</loc>
   </url>
   
@@ -586,7 +614,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/runtime_visitroots/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/runtime_visitroots/</loc>
   </url>
   
   <url>
@@ -626,11 +654,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/alloc_gc/space/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/stacktraceelement/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/thread/stacktraceelement/</loc>
   </url>
   
   <url>
@@ -654,15 +678,27 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/surfaceview/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/systemloadlibrary/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/surfaceview/surfaceviewsource/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/systemserversource/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/syscall%E6%9F%A5%E6%89%BE%E6%96%B9%E5%BC%8F/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/systemloadlibrary/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/zygote/systemserversource/</loc>
   </url>
   
   <url>
@@ -685,11 +721,19 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/textureview/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/handler/threadlocal/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/textureview/textureviewsource/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/thread/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/system/handler/threadlocal/</loc>
   </url>
   
   <url>
@@ -697,7 +741,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/thread/threadstate/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/thread/threadstate/</loc>
   </url>
   
   <url>
@@ -721,7 +765,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/input/toucheventnative/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/input/toucheventnative/</loc>
   </url>
   
   <url>
@@ -757,11 +801,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/vsync_surfaceflinger/</loc>
   </url>
   
   <url>
@@ -801,15 +845,15 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/zygote/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygotesource/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/zygote/zygotesource/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/zygote/zygote%E8%BF%9B%E7%A8%8B/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/zygote/zygote%E8%BF%9B%E7%A8%8B/</loc>
   </url>
   
   <url>
@@ -841,19 +885,19 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/ashmem/%E5%8C%BF%E5%90%8D%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98ashmem/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
   </url>
   
   <url>
@@ -869,11 +913,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%A4%9A%E8%BF%9B%E7%A8%8B/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/</loc>
   </url>
   
   <url>
@@ -893,11 +937,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E9%80%80%E5%87%BA/</loc>
   </url>
   
   <url>
@@ -909,11 +953,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/%E5%BC%82%E5%B8%B8/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E5%BC%82%E5%B8%B8/</loc>
+    <loc>https://huanle19891345.github.io/en/android/%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/</loc>
   </url>
   
   <url>
@@ -984,11 +1028,11 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91_%E8%BF%90%E8%A1%8C/</loc>
   </url>
   
   <url>
@@ -1004,7 +1048,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E6%BA%90%E7%A0%81%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/</loc>
   </url>
   
   <url>
@@ -1012,7 +1056,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%BB%98%E5%88%B6/</loc>
   </url>
   
   <url>
@@ -1024,31 +1068,19 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</loc>
+    <loc>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/</loc>
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E7%B1%BB%E7%BC%96%E8%AF%91/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86/</loc>
   </url>
   
   <url>
@@ -1076,14 +1108,6 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
-  </url>
-  
-  <url>
-    <loc>https://huanle19891345.github.io/en/android/%E8%99%9A%E6%8B%9F%E6%9C%BA/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</loc>
-  </url>
-  
-  <url>
     <loc>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</loc>
   </url>
   
@@ -1100,7 +1124,7 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/</loc>
+    <loc>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%88%B6/</loc>
   </url>
   
   <url>

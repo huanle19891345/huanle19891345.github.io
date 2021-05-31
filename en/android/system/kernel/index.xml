@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kernel on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/kernel/</link>
+    <description>Recent content in kernel on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kernel</title>
+      <link>https://huanle19891345.github.io/en/android/system/kernel/kernel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/kernel/kernel/</guid>
+      <description>下载和编译内核步骤 Android 9.0内核编译
+下载内核 cd kernel git clone https://android.googlesource.com/kernel/goldfish 执行完这两条命令后就可以看到kernel目录下有一个goldfish目录了,goldfish内核专门是提供给emulator用的.
+cd goldfish git branch -r git checkout origin/android-goldfish-4.4-dev -b android-goldfish-4.4-dev 这里涉及到要下载哪个版本的内核,emulator命令默认用的是qemu内核, 一般跟这个版本的内核一样就可以了,可以直接启用emulator然后进入到Settings-&amp;gt;System-&amp;gt;About phone-&amp;gt;点击Android version,里面就有内核版本号.
+编译内核 一定要和Android编译时lunch选的一样, 可以进入到out/target/product目录下查看自己编的是什么版本, 如果是generic_x86_64,那lunch的就是aosp_x86_64_eng的,其他版本依此类推. 接下来就可以编译了,下面我提供了几个编译的脚本大家可以进行对比和参照,lunch不同的版本对应的脚本是不一样的,即使编译通过了,也不能运行,我因为这个浪费了很长的时间 使用方法:
+ 在goldfish目录下创建一个build.sh文件 将脚本里面的内容复制到build.sh中,或者根据脚本自己写, 注意lunch的版本 执行chmod a+rx build.sh并且执行./build.sh.  aosp_x86-eng #指定编译的内核类型 export ARCH=x86 #指定的gcc编译器的前缀, 就是下面PATH中的x86_64-linux-android-4.9的前缀 export CROSS_COMPILE=x86_64-linux-android- export REAL_CROSS_COMPILE=x86_64-linux-android- #这里android_root要写是android根目录的绝对地址例如: ~/google/android-9.0 PATH=$PATH:/home/zhenghuan/Android/Source/android-9.0.0_r3/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/bin #编译的配置,在arch/x86/configs目录下, make x86_64_ranchu_defconfig #编译内核命令 make -j16 编译内核大概10来分钟就可以完成了,之后会生成一个arch/x86_64/boot/bzImage的东西,不同kernel生成的是不一样的,要看清楚. 最后回到android根目录执行emulator -kernel kernel/goldfish/arch/x86/boot/bzImage启动虚拟机
+启动虚拟机 ~/Android/Source/android-9.0.0_r3$ emulator -show-kernel -kernel /home/zhenghuan/Android/Source/kernel/goldfish/arch/x86/boot/bzImage -qemu -s  -kernel use specific emulated kernel 指定模拟器的内核，这里指定我们自己编译的内核arch/x86/boot/bzImage -qemu args.</description>
+    </item>
+    
+  </channel>
+</rss>

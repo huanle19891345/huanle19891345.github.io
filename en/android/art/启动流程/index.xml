@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>启动流程 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</link>
+    <description>Recent content in 启动流程 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ART启动流程</title>
+      <link>https://huanle19891345.github.io/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/art%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</guid>
+      <description>graph TB Init(&amp;quot;init进程通过解析配置脚本&amp;quot;)--&amp;gt;|fork子进程运行Zygote服务|AppProcess(&amp;quot;/system/bin/app_process:frameworks\base\cmds\app_process\app_main.cc&amp;quot;) AppProcess--&amp;gt;JniInvocation::Init AppProcess--&amp;gt;AndroidRuntime::StartVm AppProcess--&amp;gt;C调用Java层ZygoteInit的main方法 zygoteinit.main后续流程参考zygotesource
+frameworks\base\cmds\app_process\app_main.cpp
+int main(int argc, char* const argv[]) { if (zygote) { runtime.start(&amp;#34;com.android.internal.os.ZygoteInit&amp;#34;, args, zygote); } else if (className) { runtime.start(&amp;#34;com.android.internal.os.RuntimeInit&amp;#34;, args, zygote); } else { fprintf(stderr, &amp;#34;Error: no class name or --zygote supplied.\n&amp;#34;); app_usage(); LOG_ALWAYS_FATAL(&amp;#34;app_process: no class name or --zygote supplied.&amp;#34;); return 10; } void AndroidRuntime::start(const char* className, const Vector&amp;lt;String8&amp;gt;&amp;amp; options, bool zygote){ ...... JniInvocation jni_invocation; jni_invocation.Init(NULL);//1. 它将加载ART虚拟机的核心动态库。  JNIEnv* env; if (startVm(&amp;amp;mJavaVM, &amp;amp;env, zygote) !</description>
+    </item>
+    
+  </channel>
+</rss>

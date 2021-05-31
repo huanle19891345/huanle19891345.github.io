@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>measurelayoutdraw on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/</link>
+    <description>Recent content in measurelayoutdraw on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>measure</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/measure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E7%B3%BB%E7%BB%9F%E7%BB%98%E5%88%B6/measurelayoutdraw/measure/</guid>
+      <description>原理总结 MeasureSpec MeasureSpec是View的内部类，内部封装了View的规格尺寸，以及View的宽高信息。在Measure的流程中，系统会将View的LayoutParams根据父容器是施加的规则转换为MeasureSpec，然后在onMeasure()方法中具体确定控件的宽高信息。源码及分析如下所示：
+public static class MeasureSpec { //int类型占4个字节，其中高2位表示尺寸测量模式，低30位表示具体的宽高信息  private static final int MODE_SHIFT = 30; private static final int MODE_MASK = 0x3 &amp;lt;&amp;lt; MODE_SHIFT; /** @hide */ @IntDef({UNSPECIFIED, EXACTLY, AT_MOST}) @Retention(RetentionPolicy.SOURCE) public @interface MeasureSpecMode {} //如下所示是MeasureSpec中的三种模式：UNSPECIFIED、EXACTLY、AT_MOST  /** * Measure specification mode: The parent has not imposed any constraint * on the child. It can be whatever size it wants. */ public static final int UNSPECIFIED = 0 &amp;lt;&amp;lt; MODE_SHIFT; /** * Measure specification mode: The parent has determined an exact size * for the child.</description>
+    </item>
+    
+  </channel>
+</rss>

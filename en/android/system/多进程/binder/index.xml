@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>binder on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/</link>
+    <description>Recent content in binder on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1BinderServiceManager</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/1binderservicemanager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/1binderservicemanager/</guid>
+      <description>Sequence svclist frameworks/native/cmds/servicemanager/service_manager.c
+service_manager.c(ServiceManger is single thread) main int main(int argc, char** argv) { struct binder_state *bs; union selinux_callback cb; char *driver; if (argc &amp;gt; 1) { driver = argv[1]; } else { driver = &amp;#34;/dev/binder&amp;#34;; } bs = binder_open(driver, 128*1024);//1  if (binder_become_context_manager(bs)) {//2  ALOGE(&amp;#34;cannot become context manager (%s)\n&amp;#34;, strerror(errno)); return -1; } binder_loop(bs, svcmgr_handler);//3  return 0; } binder_open
+binder_become_context_manager
+binder_loop
+svcmgr_handler int svcmgr_handler(struct binder_state *bs, struct binder_transaction_data *txn, struct binder_io *msg, struct binder_io *reply) { switch(txn-&amp;gt;code) { case SVC_MGR_GET_SERVICE: case SVC_MGR_CHECK_SERVICE: s = bio_get_string16(msg, &amp;amp;len); handle = do_find_service(s, len, txn-&amp;gt;sender_euid, txn-&amp;gt;sender_pid); if (!</description>
+    </item>
+    
+    <item>
+      <title>2BinderServer</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/2binderserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/2binderserver/</guid>
+      <description>Binder Native And Java Design classDiagram class IBinder { +queryLocalInterface(descriptor) +linkToDeath(recipient, cookie, flags) status_t +unlinkToDeath(recipient, cookie, flags, outRecipient) status_t +transact(code, data, reply, flags) status_t +localBinder() BBinder +remoteBinder() BpBinder } class BpBinder { } class BBinder { +transact(code, data, reply, flags) #onTransact(code, data, reply, flags) } class BnInterface~INTERFACE~ { +queryLocalInterface(_descriptor) IInterface +getInterfaceDescriptor() descriptor #onAsBinder() IBinder } class BnGraphicBufferProducer { +onTransact() status_t } class IInterface { +asBinder(IInterface*) IBinder } class IGraphicBufferProducer { +ipcMethod() } class BufferQueueProducer { +ipcMethod() } class JavaBBinder { +onTransact() } IBinder &amp;lt;|-- BpBinder IBinder &amp;lt;|-- BBinder BBinder &amp;lt;|-- BnInterface : native type server BBinder &amp;lt;|-- JavaBBinder : java type server BnInterface &amp;lt;|-- BnGraphicBufferProducer : BnInterface&amp;lt;IGraphicBufferProducer&amp;gt; IInterface &amp;lt;|-- IGraphicBufferProducer BnGraphicBufferProducer &amp;lt;|-- BufferQueueProducer IGraphicBufferProducer &amp;lt;|.</description>
+    </item>
+    
+    <item>
+      <title>3BinderClient</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/3binderclient/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/3binderclient/</guid>
+      <description>Data Flow graph LR parcel_data--&amp;gt;flat_binder_object flat_binder_object--&amp;gt;binder_transaction_data getService SystemServiceRegistry ContextImpl.getSystemService @Override public Object getSystemService(String name) { return SystemServiceRegistry.getSystemService(this, name); } registerServices /** * Manages all of the system services that can be returned by {@link Context#getSystemService}. Used by {@link ContextImpl}. */ static { ...... registerService(Context.ACTIVITY_SERVICE, ActivityManager.class, new CachedServiceFetcher&amp;lt;ActivityManager&amp;gt;() { @Override public ActivityManager createService(ContextImpl ctx) { return new ActivityManager(ctx.getOuterContext(), ctx.mMainThread.getHandler()); }}); ...... registerService(Context.DISPLAY_SERVICE, DisplayManager.class, new CachedServiceFetcher&amp;lt;DisplayManager&amp;gt;() { @Override public DisplayManager createService(ContextImpl ctx) { return new DisplayManager(ctx.</description>
+    </item>
+    
+    <item>
+      <title>4BinderKernel</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/4binderkernel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/4binderkernel/</guid>
+      <description>binder_write_read struct binder_write_read { binder_size_t	write_size;	/* bytes to write */ binder_size_t	write_consumed;	/* bytes consumed by driver */ binder_uintptr_t	write_buffer; binder_size_t	read_size;	/* bytes to read */ binder_size_t	read_consumed;	/* bytes consumed by driver */ binder_uintptr_t	read_buffer; }; binder_transaction_data struct binder_transaction_data { /* The first two are only used for bcTRANSACTION and brTRANSACTION, * identifying the target and contents of the transaction. */ union { /* target descriptor of command transaction */ __u32	handle; /* target descriptor of return transaction */ binder_uintptr_t ptr; } target; binder_uintptr_t	cookie;	/* target object cookie */ __u32	code;	/* transaction command */ /* General information about the transaction.</description>
+    </item>
+    
+    <item>
+      <title>BinderDeath</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binderdeath/</guid>
+      <description>原理总结 Binder死亡通知机制之linkToDeath
+UnlinkToDeath流程类似，参考上文，不做记录
+死亡通知是为了让Bp端(客户端进程)进能知晓Bn端(服务端进程)的生死情况，当Bn端进程死亡后能通知到Bp端。
+ 定义：AppDeathRecipient是继承IBinder::DeathRecipient类，主要需要实现其binderDied()来进行死亡通告。 注册：binder-&amp;gt;linkToDeath(AppDeathRecipient)是为了将AppDeathRecipient死亡通知注册到Binder上。  Bp端只需要覆写binderDied()方法，实现一些后尾清除类的工作，则在Bn端死掉后，会回调binderDied()进行相应处理。
+linkToDeath android_os_BinderProxy_linkToDeath static void android_os_BinderProxy_linkToDeath(JNIEnv* env, jobject obj, jobject recipient, jint flags) { //获取BinderProxy.mObject成员变量值, 即BpBinder对象  IBinder* target = (IBinder*)env-&amp;gt;GetLongField(obj, gBinderProxyOffsets.mObject); sp&amp;lt;JavaDeathRecipient&amp;gt; jdr = new JavaDeathRecipient(env, recipient, list); //建立死亡通知[见小节2.2]  status_t err = target-&amp;gt;linkToDeath(jdr, NULL, flags); }  获取DeathRecipientList: 其成员变量mList记录该BinderProxy的JavaDeathRecipient列表信息；  一个BpBinder可以注册多个死亡回调   创建JavaDeathRecipient: 继承于IBinder::DeathRecipient  linkToDeath status_t BpBinder::linkToDeath( const sp&amp;lt;DeathRecipient&amp;gt;&amp;amp; recipient, void* cookie, uint32_t flags) { IPCThreadState* self = IPCThreadState::self(); self-&amp;gt;requestDeathNotification(mHandle, this); self-&amp;gt;flushCommands(); } requestDeathNotification status_t IPCThreadState::requestDeathNotification(int32_t handle, BpBinder* proxy) { mOut.</description>
+    </item>
+    
+    <item>
+      <title>Binder原理</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/binder/binder%E5%8E%9F%E7%90%86/</guid>
+      <description>写给 android 应用工程师的 binder 原理剖析
+架构设计分析（三）Android 9.0 Binder机制
+彻底理解Android Binder通信架构 Android 6.0
+Binder系列5—注册服务(addService)
+Android IPC: Part 2 - Binder and Service Manager Perspective
+深入理解Binder通信原理及面试问题
+Binder | 内存拷贝的本质和变迁
+Linux 背景知识 传统 IPC 通信原理 Binder IPC 原理 BinderProcedure flow struct binder_write_read transact total </description>
+    </item>
+    
+  </channel>
+</rss>

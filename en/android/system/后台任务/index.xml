@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>后台任务 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/</link>
+    <description>Recent content in 后台任务 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后台任务处理</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86/</guid>
+      <description>https://developer.android.com/guide/background/
+图 1. 此决策树可帮助您确定哪个类别最适合您的后台任务。
+推荐的解决方案 下面几部分将介绍针对各个后台任务类型的推荐解决方案。
+即时任务 对于应在用户离开特定作用域或完成某项互动时结束的任务，我们建议使用 Kotlin 协程。许多 Android KTX 库都包含适用于常见应用组件（如 ViewModel）和常见应用生命周期的现成可用的协程作用域。
+如果您是 Java 编程语言用户，请参阅 Android 上的线程处理，了解推荐的选项。
+对于应立即执行并需要继续处理的任务，即使用户将应用放在后台运行或重启设备，我们也建议使用 WorkManager 并利用其对长时间运行的任务的支持。
+在特定情况下（例如使用媒体播放或主动导航功能时），您可能希望直接使用前台服务。
+延期任务 凡是不直接与用户互动相关且日后可随时运行的任务，都可以延期执行。建议为延期任务使用 WorkManager 解决方案。
+如果您希望某些可延期异步任务即使在应用退出或设备重启后仍能正常运行，使用 WorkManager 可以轻松地调度这些任务。如需了解如何调度这些类型的任务，请参阅 WorkManager 相关文档。
+精确任务 需要在精确时间点执行的任务可以使用 AlarmManager。
+如需详细了解 AlarmManager，请参阅设置重复闹铃时间。</description>
+    </item>
+    
+  </channel>
+</rss>

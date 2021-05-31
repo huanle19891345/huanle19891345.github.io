@@ -39,7 +39,7 @@ Before Android 8.0, crashes were handled by the debuggerd and debuggerd64 daemon
 Native crash异常，能定位到代码哪个地方报错吗 #18
 arm-linux-androideabi-addr2line –e obj/local/armeabi/libhello-jni.so 00004de8 000056c8 00004fb4 00004f58 #这一步就该addr2line出场了。我们从backstrace中拿到了出错时的指令地址，它对应我们程序中某个函数的某行操作。我们需要addr2line将对应文件和对应行数打出来。这个命令的格式是 addr2line -e exefile addr #在NDK中找到对应的addr2line命令，testapp程序文件取出来，执行命令 [root@localhost]# /opt/android_tools/android-ndk-r20/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line -f -e testapp 000a3f10 testGetEntryById /home/***/***/***/test.c:220 real command: $ Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/x86_64-linux-android-addr2line.exe -f -e ~/git/demo/xCrash/src/native/libxcrash/obj/local/x86_64/libxcrash.so 000000000000c2df xc_test_call_4 git/demo/xCrash/src/native/libxcrash/jni/xc_test.c:64 ndk-stack工具 https://developer.android.com/ndk/guides/ndk-stack?hl=zh-cn
 https://help.aliyun.com/knowledge_detail/70180.html
-adb shell logcat | ndk-stack -sym $PROJECT_PATH/obj/local/armeabi ndk-stack -sym ./workspace2/testNdkStack/obj/local/armeabi-v7a/ -dump ./logcat.log &amp;gt; result.log 在result.log中可以分析定位到出现该crash的对应代码文件和具体行数 real command: git\demo\xCrash\src\native\libxcrash\obj\local&amp;gt;ndk-stack -sym .</description>
+adb shell logcat | ndk-stack -sym $PROJECT_PATH/obj/local/armeabi //需要-sym指定的目录中存在包含符号的so，系统system/lib下的so默认被strip导致没有符号 ndk-stack -sym ./workspace2/testNdkStack/obj/local/armeabi-v7a/ -dump ./logcat.log &amp;gt; result.log 在result.log中可以分析定位到出现该crash的对应代码文件和具体行数 real command: git\demo\xCrash\src\native\libxcrash\obj\local&amp;gt;ndk-stack -sym .</description>
     </item>
     
     <item>

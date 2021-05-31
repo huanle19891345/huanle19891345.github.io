@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1类编译 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/</link>
+    <description>Recent content in 1类编译 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dex2oat</title>
+      <link>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat/</guid>
+      <description>dex2oat原理图 sequenceDiagram installd-&amp;gt;&amp;gt;dex2oat: main activate dex2oat dex2oat-&amp;gt;&amp;gt;dex2oat: art:dex2oat() activate dex2oat dex2oat-&amp;gt;&amp;gt;dex2oat: Setup() Note right of dex2oat: MethodVerified回调时deVirtual deactivate dex2oat activate dex2oat dex2oat-&amp;gt;&amp;gt;dex2oat: CompileImage() Note right of dex2oat: 三种编译处理模式:dex2dex,jni,dex2Native activate dex2oat dex2oat-&amp;gt;&amp;gt;dex2oat: LoadClassProfileDescriptors() deactivate dex2oat activate dex2oat dex2oat-&amp;gt;&amp;gt;dex2oat: Compile() dex2oat-&amp;gt;&amp;gt;CompilerDriver: CompileAll CompilerDriver-&amp;gt;&amp;gt;CompilerDriver: PreCompile activate CompilerDriver Note right of CompilerDriver: Resolve,Verity,InitializeClasses deactivate CompilerDriver activate CompilerDriver CompilerDriver-&amp;gt;&amp;gt;CompilerDriver: Compile() activate CompilerDriver CompilerDriver-&amp;gt;&amp;gt;CompilerDriver: CompileDexFile() Note right of CompilerDriver: 多线程编译,传递dex中的class_ids索引 activate CompilerDriver CompilerDriver-&amp;gt;&amp;gt;CompilerDriver: CompileClassVisitor activate CompilerDriver CompilerDriver-&amp;gt;&amp;gt;CompilerDriver: CompileMethod() Note right of CompilerDriver: AddCompiledMethod to CompilerDriver deactivate CompilerDriver deactivate CompilerDriver deactivate CompilerDriver deactivate CompilerDriver deactivate dex2oat deactivate dex2oat deactivate dex2oat dex2oat-&amp;gt;&amp;gt;dex2oat: WriteOatFiles() Note right of dex2oat: 输出.</description>
+    </item>
+    
+    <item>
+      <title>dex2oat介绍</title>
+      <link>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat%E4%BB%8B%E7%BB%8D/</guid>
+      <description>pre-compilation的好处 graph LR AOT--&amp;gt;Fast AOT--&amp;gt;cleanMemory Code pre-compilation: We pre-compile all the hot code. When the apps execute, the most important parts of the code are already optimized and ready to be natively executed. The app no longer needs to wait for the JIT compiler to kick in.
+The benefit is that the code is mapped as clean memory (compared to the JIT dirty memory) which improves the overall memory efficiency. The clean memory can be released by the kernel when under memory pressure while the dirty memory cannot, lessening the chances that the kernel will kill the app.</description>
+    </item>
+    
+  </channel>
+</rss>

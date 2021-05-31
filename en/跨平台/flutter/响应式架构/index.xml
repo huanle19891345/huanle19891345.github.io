@@ -13,7 +13,8 @@
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/provider/</guid>
       <description>总结 监听者_DefaultInheritedProviderScopeElement监听到回调通知后通过markNeedsBuild()进行rebuild,而Consumer会通过Provider.of获取到最新的model值
-graph LR ChangeNotifierProvider(&amp;quot;ChangeNotifierProvider_T extends ChangeNotifier_&amp;quot;)--&amp;gt;|1:ListensTo|ChangeNotifier ChangeNotifier--&amp;gt;|2:notifyListeners|ChangeNotifierProvider--&amp;gt;|3:rebuildsAndNotifyDependentsDescendants|Consumer 类设计 ChangeNotifier Usage class Counter with ChangeNotifier { int value = 0; void increment() { value += 1; notifyListeners(); } } /// A class that can be extended or mixed in that provides a change notification /// API using [VoidCallback] for notifications. /// /// See also: /// /// * [ValueNotifier], which is a [ChangeNotifier] that wraps a single value. class ChangeNotifier implements Listenable { LinkedList&amp;lt;_ListenerEntry&amp;gt;?</description>
+graph LR ChangeNotifierProvider(&amp;quot;ChangeNotifierProvider_T extends ChangeNotifier_&amp;quot;)--&amp;gt;|1:ListensTo|ChangeNotifier ChangeNotifier--&amp;gt;|2:notifyListeners|ChangeNotifierProvider--&amp;gt;|3:rebuildsAndNotifyDependentsDescendants|Consumer 类设计 在_InheritedProviderScopeMixin被unmount时，会通知ChangeNotifier进行dispose，可以用来进行结构化并发，取消异步数据请求。
+ChangeNotifier Usage class Counter with ChangeNotifier { int value = 0; void increment() { value += 1; notifyListeners(); } } /// A class that can be extended or mixed in that provides a change notification /// API using [VoidCallback] for notifications. /// /// See also: /// /// * [ValueNotifier], which is a [ChangeNotifier] that wraps a single value. class ChangeNotifier implements Listenable { LinkedList&amp;lt;_ListenerEntry&amp;gt;?</description>
     </item>
     
     <item>

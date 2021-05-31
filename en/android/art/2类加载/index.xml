@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2类加载 on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/</link>
+    <description>Recent content in 2类加载 on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Android_N混合编译与对热补丁影响解析</title>
+      <link>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/android_n%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%B9%E7%83%AD%E8%A1%A5%E4%B8%81%E5%BD%B1%E5%93%8D%E8%A7%A3%E6%9E%90/</guid>
+      <description>Android_N混合编译与对热补丁影响解析.md
+入口文件位于dex2oat.cc中，在这里并不想贴具体的调用函数，简单的描述一下流程：若dex2oat参数中有输入profile文件，会读取profile中的数据。与以往不同的是，这里不仅会根据profile文件来生成base.odex文件，同时还会生成称为app_image的base.art文件。与boot.art类似，base.art文件主要为了加快应用的对“热代码”的加载与缓存。
+那么我们就剩下最后一个问题，app image文件是什么时候被加载，并且为什么它会影响热补丁的机制？
+###App image文件的加载 在apk启动时我们需要加载应用的oat文件以及可能存在的app image文件，它的大致流程如下：
+ 通过OpenDexFilesFromOat加载oat时，若app image存在，则通过调用OpenImageSpace函数加载； 在加载app image文件时，通过UpdateAppImageClassLoadersAndDexCaches函数，将art文件中的dex_cache中dex的所有class插入到ClassTable，同时将method更新到dex_cache; 在类加载时，使用时ClassLinker::LookupClass会先从ClassTable中去查找，找不到时才会走到DefineClass中。   非常简单的说，app image的作用是记录已经编译好的“热代码”，并且在启动时一次性把它们加载到缓存。预先加载代替用时查找以提升应用的性能，到这里我们终于明白为什么base.art会影响热补丁的机制。
+无论是使用插入pathlist还是parent classloader的方式，若补丁修改的class已经存在与app image，它们都是无法通过热补丁更新的。它们在启动app时已经加入到PathClassLoader的ClassTable中，系统在查找类时会直接使用base.apk中的class。
+最后我们再来总结一下Android N混合编译运行的整个流程，它就像一个小型生态系统那样和谐。
+##Android N上热补丁的出路 假设base.art文件在补丁前已经存在，这里存在三种情况：
+ 补丁修改的类都不app image中；这种情况是最理想的，此时补丁机制依然有效； 补丁修改的类部分在app image中；这种情况我们只能更新一部分的类，此时是最危险的。一部分类是新的，一部分类是旧的，app可能会出现地址错乱而出现crash。 补丁修改的类全部在app image中；这种情况只是造成补丁不生效，app并不会因此造成crash。  ###运行时替换PathClassLoader方案 事实上，App image中的class是插入到PathClassloader中的ClassTable中。假设我们完全废弃掉PathClassloader，而采用一个新建Classloader来加载后续的所有类，即可达到将cache无用化的效果。
+实际代码对应AndroidNClassLoader中的findClass和findLibrary方法，通过调用super.findClass和super.findLibrary来避开调用原本应用PathClassLoader的find方法，原本的findClass方法会先查找classTable造成修复的class无法加载到</description>
+    </item>
+    
+    <item>
+      <title>类加载</title>
+      <link>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD/</guid>
+      <description>动态加载dex和so https://alibaba.github.io/atlas/update/principle.html
+PathClassLoader自身负责主Apk的类和c库的查找路口；其parent BootClassloader负责framework sdk的内容的查找。
+PathClassLoader本身也是一个class，继承了BaseDexClassLoader（同DexClassLoader），里面查找过程在DexPathList里面实现（如下图） &amp;gt;
+DexPathList最终通过DexFile去loadClass，DexPathList可以理解为持有者DexFile以及nativeLibrary目录，再查找的时候遍历这些对象，直到找到需要的类或者c库，那么动态部署的方式就是把新修改的内容添加到这些对象的最前面，从而使得查找的过程中新修改的内容能够提前找到从而替换原有的（如下图）
+BaseDexClassLoader构造方法 private final DexPathList pathList; /** \* Constructs an instance. \* Note that all the *.jar and *.apk files from {@code dexPath} might be \* first extracted in-memory before the code is loaded. This can be avoided \* by passing raw dex files (*.dex) in the {@code dexPath}. * \* @param dexPath the list of jar/apk files containing classes and \* resources, delimited by {@code File.</description>
+    </item>
+    
+    <item>
+      <title>类加载虚拟机层</title>
+      <link>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82/</guid>
+      <description>Flow load class trigger flow graph TB EnsureInitialized--&amp;gt;InitializeClass InitializeClass--&amp;gt;MethodVerifier::VerifyClass MethodVerifier::VerifyClass--&amp;gt;MethodVerifier::VerifyMethods MethodVerifier::VerifyMethods--&amp;gt;MethodVerifier::VerifyMethod MethodVerifier::VerifyMethod--&amp;gt;MethodVerifier::CodeFlowVerifyInstruction MethodVerifier::CodeFlowVerifyInstruction--&amp;gt;ResolveType MethodVerifier::VerifyMethod--&amp;gt;ResolveType ResolveType--&amp;gt;FindClass FindClass--&amp;gt;DefineClass ClassLinkerSummary ClassLinker中其他一些常见函数。包括：
+·Resolve相关函数。虽然名称叫Resolve，但在ART代码里，它并非是图8-5类加载、链接和初始化阶段中提到的Resolve。相反，它甚至可能触发一个类的加载和链接流程。
+·FindClass：根据类的字符串名称搜索一个类。如果没有的话，则可能触发类的加载和链接流程。
+graph LR ResolveMethod--&amp;gt;ResolveType ResolveField--&amp;gt;ResolveType ResolveType--&amp;gt;FindClass FindClass--&amp;gt;FindClassInBaseDexClassLoader--&amp;gt;FindClassInBaseDexClassLoaderClassPath--&amp;gt;DefineClass ResolveMethod template &amp;lt;ClassLinker::ResolveMode kResolveMode&amp;gt; ArtMethod* ClassLinker::ResolveMethod(const DexFile&amp;amp; dex_file, uint32_t method_idx, Handle&amp;lt;mirror::DexCache&amp;gt; dex_cache, Handle&amp;lt;mirror::ClassLoader&amp;gt; class_loader, ArtMethod* referrer, InvokeType type) { //和ResolveType类似，首先判断dex_cache中是否已经解析过这个方法了。  ArtMethod* resolved = dex_cache-&amp;gt;GetResolvedMethod(method_idx, image_pointer_size_); if (resolved != nullptr &amp;amp;&amp;amp; !resolved-&amp;gt;IsRuntimeMethod()) { if (kResolveMode == ClassLinker::kForceICCECheck) { //Java有诸如1.5、1.6这样的版本，在早期Java版本里，有些信息和现在的版本有差异，  //此处将检查是否有信息不兼容的地方（即check incompatible class change），  //如果检查失败，则会设置一个IncompatibleClassChangeError异常，笔者此处不拟讨论。  if (resolved-&amp;gt;CheckIncompatibleClassChange(type)) { .</description>
+    </item>
+    
+  </channel>
+</rss>

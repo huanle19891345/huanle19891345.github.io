@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>art on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/art/</link>
+    <description>Recent content in art on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/art/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ART_Lock</title>
+      <link>https://huanle19891345.github.io/en/android/art/art_lock/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/art_lock/</guid>
+      <description>ObjectLock&amp;lt;mirror::Class&amp;gt; lock(self, klass); art/runtime/object_lock.cc
+object_lock.cc ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::ObjectLock(Thread* self, Handle&amp;lt;T&amp;gt; object) : self_(self), obj_(object) { CHECK(object != nullptr); obj_-&amp;gt;MonitorEnter(self_); } ~ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::~ObjectLock() { obj_-&amp;gt;MonitorExit(self_); } art/runtime/mirror/object-inl.h
+object-inl.h MonitorEnter inline mirror::Object* Object::MonitorEnter(Thread* self) { return Monitor::MonitorEnter(self, this, /*trylock*/false); } art/runtime/monitor.cc
+monitor.cc MonitorEnter mirror::Object* Monitor::MonitorEnter(Thread* self, mirror::Object* obj, bool trylock) { StackHandleScope&amp;lt;1&amp;gt; hs(self); Handle&amp;lt;mirror::Object&amp;gt; h_obj(hs.NewHandle(obj)); while (true) { // We initially read the lockword with ordinary Java/relaxed semantics.</description>
+    </item>
+    
+    <item>
+      <title>基础数据结构</title>
+      <link>https://huanle19891345.github.io/en/android/art/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/art/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>dex文件里class_def ArtField 一个ArtField对象仅仅是代表一个Java类的成员变量，但它自己并不提供空间来存储这个Java成员变量的内容。Class LinkFields时我们将看到这个Java成员变量所需的存储空间在什么地方
+.... private： GcRoot&amp;lt;mirror::Class&amp;gt; declaring_class_; //该成员变量在哪个类中被定义  uint32_t access_flags_; //该成员变量的访问标记  //该成员变量在dex文件中field_ids数组中的索引，注意，它是由图8-7中encoded_field结  //构体中field_idx_diff计算而来  uint32_t field_dex_idx_; //如果ArtField所代表的成员变量是类的静态成员变量，则下面的offset_代表是该变量实际的存储  //空间在图8-13里Class内存布局中的起始位置。如果是非静态成员变量，则offset_指向图8-13中  //Object内存布局里对应的位置。  uint32_t offset_; ArtMethod 7.0
+...... protected: //下面这四个成员变量的解释可参考图8-7  GcRoot&amp;lt;mirror::Class&amp;gt; declaring_class_; //本函数在哪个类中声明  uint32_t access_flags_; uint32_t dex_code_item_offset_; //表示某个方法在dex文件method_ids数组中的索引  uint32_t dex_method_index_; //与ArtField的field_index_类似，下面这个成员变量和Class类如何管理它的成员函数有关。  //如果这个ArtMethod对应的是一个static或direct函数，则method_index_是指向定义它的类的methods_中的索引。 //如果这个ArtMethod是virtual函数，则method_index_是指向它的VTable中的索引。注意，可能多个类的VTable都包含该//ArtMethod对象（比如Object的那11个方法），所以要保证这个method_index_在不同VTable中都有相同的值——这也是//LinkMethods中那三个函数比较复杂的原因。  uint16_t method_index_; //热度。函数每被调用一次，该值递增1。一旦超过某个阈值，该函数可能就需要被编译成本地方法以加  //快执行速度了。  uint16_t hotness_count_; struct PACKED(4) PtrSizedFields { //指向declaring_class_-&amp;gt;dex_cache_的resolved_methods_成员，详情需结合下文对Dex-Cache的介绍。  ArtMethod** dex_cache_resolved_methods_; //指针的指针，指向declaring_class_-&amp;gt;dex_cache_的dex_cache_resolved_types_成员，详情需结合下文对DexCache的介绍  GcRoot&amp;lt;mirror::Class&amp;gt;* dex_cache_resolved_types_; //下面两个变量是函数指针，它们是一个ArtMethod对象代表的Java方法的入口函数地址。  //我们后续章节介绍Java代码执行的时候再来讨论它  void* entry_point_from_jni_; // Method dispatch from quick compiled code invokes this pointer which may cause bridging into  // the interpreter.</description>
+    </item>
+    
+  </channel>
+</rss>

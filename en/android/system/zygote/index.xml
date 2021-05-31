@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zygote on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/zygote/</link>
+    <description>Recent content in zygote on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/zygote/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SystemServerSource</title>
+      <link>https://huanle19891345.github.io/en/android/system/zygote/systemserversource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/zygote/systemserversource/</guid>
+      <description>main /** * The main entry point from zygote. */ public static void main(String[] args) { new SystemServer().run(); } run private void run() { // The system server should never make non-oneway calls  Binder.setWarnOnBlocking(true); // Ensure binder calls into the system always run at foreground priority.  BinderInternal.disableBackgroundScheduling(true); // Increase the number of binder threads in system_server  BinderInternal.setMaxThreads(sMaxBinderThreads); // Prepare the main looper thread (this thread).  android.os.Process.setThreadPriority( android.</description>
+    </item>
+    
+    <item>
+      <title>ZygoteSource</title>
+      <link>https://huanle19891345.github.io/en/android/system/zygote/zygotesource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/zygote/zygotesource/</guid>
+      <description>原理图 sequenceDiagram ZygoteProcess-&amp;gt;&amp;gt;SystemServerProcess: forkSystemServer activate SystemServerProcess SystemServerProcess-&amp;gt;&amp;gt;SystemServerProcess: handleSystemServerProcess activate SystemServerProcess SystemServerProcess-&amp;gt;&amp;gt;SystemServerProcess: ZygoteInit.zygoteInit deactivate SystemServerProcess activate SystemServerProcess SystemServerProcess-&amp;gt;&amp;gt;SystemServerProcess: SystemServer.main deactivate SystemServerProcess deactivate SystemServerProcess activate ZygoteProcess ZygoteProcess-&amp;gt;&amp;gt;ZygoteProcess: runSelectLoop SystemServerProcess-&amp;gt;&amp;gt;ZygoteProcess: notify activate ZygoteProcess ZygoteProcess-&amp;gt;&amp;gt;ZygoteProcess: processOneCommand ZygoteProcess-&amp;gt;&amp;gt;ChildAppProcess: Zygote.forkAndSpecialize deactivate ZygoteProcess activate ChildAppProcess ChildAppProcess-&amp;gt;&amp;gt;ChildAppProcess: handleChildProc activate ChildAppProcess ChildAppProcess-&amp;gt;&amp;gt;ChildAppProcess: ZygoteInit.zygoteInit deactivate ChildAppProcess activate ChildAppProcess ChildAppProcess-&amp;gt;&amp;gt;ChildAppProcess: ActivityThead.main deactivate ChildAppProcess deactivate ChildAppProcess deactivate ZygoteProcess ZygoteInit.main public static void main(String argv[]) { ZygoteServer zygoteServer = new ZygoteServer(); for (int i = 1; i &amp;lt; argv.</description>
+    </item>
+    
+    <item>
+      <title>Zygote进程</title>
+      <link>https://huanle19891345.github.io/en/android/system/zygote/zygote%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/zygote/zygote%E8%BF%9B%E7%A8%8B/</guid>
+      <description>What is the Zygote copy-on-write heap?
+All &amp;ldquo;Zygote-based&amp;rdquo; processes have memory pages that are identical among them.
+Those pages are not copied, instead everything is linked to the same memory page. This reduces the amount on RAM used by all the &amp;ldquo;Zygote-based&amp;rdquo; processes.
+If one of those process writes new data into such a page the page is automatically copied before the write actually takes place (because otherwise the memory of all forks would be changed).</description>
+    </item>
+    
+  </channel>
+</rss>

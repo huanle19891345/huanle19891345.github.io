@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>thread on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/thread/</link>
+    <description>Recent content in thread on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/thread/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>StackTraceElement</title>
+      <link>https://huanle19891345.github.io/en/android/system/thread/stacktraceelement/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/thread/stacktraceelement/</guid>
+      <description>9.0.0_r3
+Throwable.getStackTrace public StackTraceElement[] getStackTrace() { return getOurStackTrace().clone(); } private synchronized StackTraceElement[] getOurStackTrace() { // Initialize stack trace field with information from // backtrace if this is the first call to this method // // Android-changed: test explicitly for equality with // STACK_TRACE_ELEMENT if (stackTrace == libcore.util.EmptyArray.STACK_TRACE_ELEMENT || (stackTrace == null &amp;amp;&amp;amp; backtrace != null) /* Out of protocol state */) { stackTrace = nativeGetStackTrace(backtrace);//main  backtrace = null; } return stackTrace; } /art/runtime/native/java_lang_Throwable.</description>
+    </item>
+    
+    <item>
+      <title>ThreadState</title>
+      <link>https://huanle19891345.github.io/en/android/system/thread/threadstate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/thread/threadstate/</guid>
+      <description>浅析android 线程状态 java的6种线程状态定义在/java/lang/Thread.java中:
+https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html
+//Thread.java public class Thread implements Runnable { ... public enum State { /** * The thread has been created, but has never been started. */ NEW, /** * The thread may be run. */ RUNNABLE, /** * The thread is blocked and waiting for a lock. */ BLOCKED, /** * The thread is waiting. */ WAITING, /** * The thread is waiting for a specified amount of time.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>input on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/input/</link>
+    <description>Recent content in input on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/input/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>touchEventNative</title>
+      <link>https://huanle19891345.github.io/en/android/system/input/toucheventnative/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/input/toucheventnative/</guid>
+      <description>原理图 static const char *WAKE_LOCK_ID = &amp;#34;KeyEvents&amp;#34;; static const char *DEVICE_PATH = &amp;#34;/dev/input&amp;#34;; SystemServer startOtherServices private void startOtherServices() { inputManager = new InputManagerService(context); wm = WindowManagerService.main(context, inputManager, mFactoryTestMode != FactoryTest.FACTORY_TEST_LOW_LEVEL, !mFirstBoot, mOnlyCore, new PhoneWindowManager()); ServiceManager.addService(Context.WINDOW_SERVICE, wm, /* allowIsolated= */ false, DUMP_FLAG_PRIORITY_CRITICAL | DUMP_FLAG_PROTO); ServiceManager.addService(Context.INPUT_SERVICE, inputManager, /* allowIsolated= */ false, DUMP_FLAG_PRIORITY_CRITICAL); ...... inputManager.setWindowManagerCallbacks(wm.getInputMonitor()); inputManager.start(); } InputManagerService public class InputManagerService extends IInputManager.Stub { public InputManagerService(Context context) { this.mContext = context; this.mHandler = new InputManagerHandler(DisplayThread.</description>
+    </item>
+    
+  </channel>
+</rss>

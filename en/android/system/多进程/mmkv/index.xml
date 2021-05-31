@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mmkv on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/</link>
+    <description>Recent content in mmkv on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MMKV</title>
+      <link>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/%E5%A4%9A%E8%BF%9B%E7%A8%8B/mmkv/mmkv/</guid>
+      <description>参考 https://github.com/Tencent/MMKV/wiki/android_ipc
+https://github.com/Tencent/MMKV/wiki/design
+原理总结 MMKV 本质上是将文件 mmap 到内存块中，将新增的 key-value 统统 append 到内存中；到达边界后，进行重整回写以腾出空间，空间还是不够的话，就 double 内存空间；对于内存文件中可能存在的重复键值，MMKV 只选用最后写入的作为有效键值。
+状态同步 写指针的同步 我们可以在每个进程内部缓存自己的写指针，然后在写入键值的同时，还要把最新的写指针位置也写到 mmap 内存中；这样每个进程只需要对比一下缓存的指针与 mmap 内存的写指针，如果不一样，就说明其他进程进行了写操作。事实上 MMKV 原本就在文件头部保存了有效内存的大小，这个数值刚好就是写指针的内存偏移量，我们可以重用这个数值来校对写指针。
+内存重整的感知 考虑使用一个单调递增的序列号，每次发生内存重整，就将序列号递增。将这个序列号也放到 mmap 内存中，每个进程内部也缓存一份，只需要对比序列号是否一致，就能够知道其他进程是否触发了内存重整。
+内存增长的感知 事实上 MMKV 在内存增长之前，会先尝试通过内存重整来腾出空间，重整后还不够空间才申请新的内存。所以内存增长可以跟内存重整一样处理。至于新的内存大小，可以通过查询文件大小来获得，无需在 mmap 内存另外存放。
+挑选进程锁  文件锁，优点是天然 robust，缺点是不支持递归加锁，也不支持读写锁升级/降级，需要自行实现。 pthread_mutex，优点是 pthread 库支持递归加锁，也支持读写锁升级/降级，缺点是不 robust，需要自行清理。  文件锁 到这里我们已经完成了数据的多进程同步工作，是时候回头处理锁事了，亦即前面提到的递归锁和锁升级/降级。
+递归锁 意思是如果一个进程/线程已经拥有了锁，那么后续的加锁操作不会导致卡死，并且解锁也不会导致外层的锁被解掉。对于文件锁来说，前者是满足的，后者则不然。因为文件锁是状态锁，没有计数器，无论加了多少次锁，一个解锁操作就全解掉。只要用到子函数，就非常需要递归锁。
+锁升级/降级 锁升级是指将已经持有的共享锁，升级为互斥锁，亦即将读锁升级为写锁；锁降级则是反过来。文件锁支持锁升级，但是容易死锁：假如 A、B 进程都持有了读锁，现在都想升级到写锁，就会陷入相互等待的困境，发生死锁。另外，由于文件锁不支持递归锁，也导致了锁降级无法进行，一降就降到没有锁。
+为了解决递归锁和锁升级/降级这两个难题，需要对文件锁(系统调用flock)进行封装，增加读锁、写锁计数器。处理逻辑如下表：
+   读锁计数器 写锁计数器 加读锁 加写锁 解读锁 解写锁     0 0 加读锁 加写锁 - -   0 1 +1 +1 - 解写锁   0 N +1 +1 - -1   1 0 +1 解读锁再加写锁 解读锁 -   1 1 +1 +1 -1 加读锁   1 N +1 +1 -1 -1   N 0 +1 解读锁再加写锁 -1 -   N 1 +1 +1 -1 加读锁   N N +1 +1 -1 -1    需要注意的地方有两点：</description>
+    </item>
+    
+  </channel>
+</rss>

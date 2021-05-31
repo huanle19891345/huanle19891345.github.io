@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>handler on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/handler/</link>
+    <description>Recent content in handler on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/handler/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Epoll</title>
+      <link>https://huanle19891345.github.io/en/android/system/handler/epoll/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/handler/epoll/</guid>
+      <description>原理总结 graph LR epoll_create--&amp;gt;|1创建|fileNode(&amp;quot;创建并初始化eventpoll结构体ep,将ep放入file-&amp;gt;private,并返回fd&amp;quot;) epoll_create--&amp;gt;|1创建|RBTree(&amp;quot;红黑树用于存储以后epoll_ctl传来的fd&amp;quot;) epoll_create--&amp;gt;|1创建|epitems(&amp;quot;链表,用于存储准备就绪的事件&amp;quot;) epoll_ctl--&amp;gt;|2 fd对应到|RBTree epoll_ctl--&amp;gt;|2 注册回调ep_poll_callback,回调时将fd对应的epitem实例放入就绪链表并唤醒进程|RBTree epoll_wait--&amp;gt;|3 ep_poll观察是否有数据|epitems--&amp;gt;|3|isEvent{是否有数据?}--&amp;gt;|3有|返回数据 isEvent--&amp;gt;|3否|sleepTimeoutThenReturn--&amp;gt;被唤醒后从队列中移除wait,再传输就绪事件到用户空间 epoll使用RB-Tree红黑树去监听并维护所有文件描述符，RB-Tree的根节点。调用epoll_create时，内核除了帮我们在epoll文件系统里建了个file结点，在内核cache里建了个 红黑树 用于存储以后epoll_ctl传来的socket外，还会再建立一个list链表，用于存储准备就绪的事件.当epoll_wait调用时，仅仅观察这个list链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。所以，epoll_wait非常高效。而且，通常情况下即使我们要监控百万计的句柄，大多一次也只返回很少量的准备就绪句柄而已，所以，epoll_wait仅需要从内核态copy少量的句柄到用户态而已.
+那么，这个准备就绪list链表是怎么维护的呢？
+当我们执行epoll_ctl时，除了把socket放到epoll文件系统里file对象对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪list链表里。所以，当一个socket上有数据到了，内核在把网卡上的数据copy到内核中后就来把socket插入到准备就绪链表里了。
+epoll相比于select并不是在所有情况下都要高效，例如在如果有少于1024个文件描述符监听，且大多数socket都是出于活跃繁忙的状态，这种情况下，select要比epoll更为高效，因为epoll会有更多次的系统调用，用户态和内核态会有更加频繁的切换。
+epoll高效的本质在于：
+ 减少了用户态和内核态的文件句柄拷贝 减少了对可读可写文件句柄的遍历 mmap 加速了内核与用户空间的信息传递，epoll是通过内核与用户mmap同一块内存，避免了无谓的内存拷贝 IO性能不会随着监听的文件描述的数量增长而下降 使用红黑树存储fd，以及对应的回调函数，其插入，查找，删除的性能不错，相比于hash，不必预先分配很多的空间  fs/eventpoll.c
+epoll_create // /usr/include/x86_64-linux-gnu/sys/epoll.h  /* Creates an epoll instance. Returns an fd for the new instance. The &amp;#34;size&amp;#34; parameter is a hint specifying the number of file descriptors to be associated with the new instance. The fd returned by epoll_create() should be closed with close().</description>
+    </item>
+    
+    <item>
+      <title>Looper</title>
+      <link>https://huanle19891345.github.io/en/android/system/handler/looper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/handler/looper/</guid>
+      <description>原理总结 Looper就是对epoll系统调用的封装层，屏蔽外部对epoll的直接使用
+Looper system/core/libutils/Looper.cpp
+Looper Looper::Looper(bool allowNonCallbacks) : mAllowNonCallbacks(allowNonCallbacks), mSendingMessage(false), mPolling(false), mEpollFd(-1), mEpollRebuildRequired(false), mNextRequestSeq(0), mResponseIndex(0), mNextMessageUptime(LLONG_MAX) { mWakeEventFd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);//main  LOG_ALWAYS_FATAL_IF(mWakeEventFd &amp;lt; 0, &amp;#34;Could not make wake event fd: %s&amp;#34;, strerror(errno)); AutoMutex _l(mLock); rebuildEpollLocked();//main } void Looper::rebuildEpollLocked() { // Allocate the new epoll instance and register the wake pipe.  mEpollFd = epoll_create(EPOLL_SIZE_HINT);//main  LOG_ALWAYS_FATAL_IF(mEpollFd &amp;lt; 0, &amp;#34;Could not create epoll instance: %s&amp;#34;, strerror(errno)); struct epoll_event eventItem; memset(&amp;amp; eventItem, 0, sizeof(epoll_event)); // zero out unused members of data field union  eventItem.</description>
+    </item>
+    
+    <item>
+      <title>ThreadLocal</title>
+      <link>https://huanle19891345.github.io/en/android/system/handler/threadlocal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/handler/threadlocal/</guid>
+      <description>ThreadLocal模型 graph LR thread--&amp;gt;threadLocalMap threadLocalMap--&amp;gt;entry1 threadLocalMap--&amp;gt;entry2 threadLocalMap--&amp;gt;entryLooper threadLocalMap--&amp;gt;entryxxx entry1--&amp;gt;key=threadlocal1,value=T1 entry2--&amp;gt;key=threadlocal2,value=T2 entryLooper--&amp;gt;LooperEntry(key=threadlocal_Looper,value=Looper) LooperEntry--&amp;gt;MessageQueue  线性探测解决hash冲突 超过默认长度(16)的2/3时rehash减少hash冲突，扩容一倍 threadlocal作为key保存在entry中时是WeakReference，在被回收时清除记录，因此需要外部定义TheadLocal实例的地方配置为static，否则在外部回收threadlocal时，threadlocalmap中的entry也会被清理掉 lazy模式，只有添加第一个 元素时才通过createMap创建ThreadLocalMap  Thread /* ThreadLocal values pertaining to this thread. This map is maintained * by the ThreadLocal class. */ ThreadLocal.ThreadLocalMap threadLocals = null; /* * InheritableThreadLocal values pertaining to this thread. This map is * maintained by the InheritableThreadLocal class. */ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null; ThreadLocal threadLocalHashCode public class ThreadLocal&amp;lt;T&amp;gt; { /** * ThreadLocals rely on per-thread linear-probe hash maps attached * to each thread (Thread.</description>
+    </item>
+    
+  </channel>
+</rss>

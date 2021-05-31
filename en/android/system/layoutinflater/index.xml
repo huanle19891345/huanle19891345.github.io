@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>layoutinflater on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/system/layoutinflater/</link>
+    <description>Recent content in layoutinflater on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/system/layoutinflater/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LayoutInflater</title>
+      <link>https://huanle19891345.github.io/en/android/system/layoutinflater/layoutinflater/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/system/layoutinflater/layoutinflater/</guid>
+      <description>原理图 视图层级 AppCompatActivity.setContentView @Override public void setContentView(@LayoutRes int layoutResID) { getDelegate().setContentView(layoutResID); } AppCompatDelegateImpl.java
+@Override public void setContentView(int resId) { ensureSubDecor(); ViewGroup contentParent = mSubDecor.findViewById(android.R.id.content); contentParent.removeAllViews(); LayoutInflater.from(mContext).inflate(resId, contentParent); } installDecor,createSubDecor private void ensureSubDecor() { if (!mSubDecorInstalled) { mSubDecor = createSubDecor(); } } private ViewGroup createSubDecor() { // Now let&amp;#39;s make sure that the Window has installed its decor by retrieving it  //确保优先初始化 DecorView  mWindow.getDecorView();//PhoneWindow  ViewGroup subDecor = null; //根据不同的设置来对 subDecor 进行初始化  if (!</description>
+    </item>
+    
+  </channel>
+</rss>
