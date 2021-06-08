@@ -7,6 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>1插件化面临的问题</title>
+      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/1%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/1%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>图解 graph LR subgraph 解决插件组件生命周期调用问题 插件生命周期 end subgraph 反射AssetManager.assetPath,再通过AssetManager来创建一个新的Resources对象 加载插件资源 end subgraph newDexClassLoader加载插件apk,从插件ClassLoader中load指定的插件Activity名字,newInstance之后强转为Activity类型使用 加载插件类 end subgraph 上下文如BaseContext,mResources,activityInfo在attach时反射替换为插件的 直接提供插件Activity给系统 end 插件生命周期--&amp;gt;启动插件Activity 启动插件Activity--&amp;gt;HookInstrumentation的execStartActivity 启动插件Activity--&amp;gt;|Shadow|更改启动Activity方式,调用自定义方法到插件进程,转成插代理Activity 插件生命周期--&amp;gt;AMS回到App端 AMS回到App端--&amp;gt;直接提供插件Activity给系统--&amp;gt;Hack修改宿主PathClassLoader 直接提供插件Activity给系统--&amp;gt;HackActivityThread主线程Handler AMS回到App端--&amp;gt;提供代理Activity给系统--&amp;gt;生命周期转发给插件Activity 提供代理Activity给系统--&amp;gt;|Shadow|生命周期转发给插件Activity,再转调回代理Activity 加载插件类 Shadow的全动态设计原理解析
+Java还有两个和动态化相关的特性，一个是接口，另一个是向上转型。
+Class&amp;lt;?&amp;gt; implClass = classLoader.loadClass(&amp;#34;com.xxx.AImpl&amp;#34;); Object implObject = implClass.newInstance(); A a = (A) implObject; 这里假设classLoader动态加载了一些Java类，其中就有一个类叫做com.xxx.AImpl，AImpl继承自A，或者AImpl实现了A接口。注意这里用了强制类型转换，是因为代码层面是将Object类型向下转型成了A。但实际上我们知道implObject的类型是AImpl，AImpl转换成A是一个向上转型。向上转型总是安全的。所以用这种方法总是可以先定义出接口，精心设计接口，让接口足够通用和稳定。只要接口不变，它的实现总是可以修改的。我们将接口打包在宿主中，接口就轻易不能更新了。但是它的实现总是可以更新的。
+加载插件资源 传统方式 https://github.com/singwhatiwanna/dynamic-load-apk/
+我们知道，activity的工作主要是由ContextImpl来完成的， 它在activity中是一个叫做mBase的成员变量。注意到Context中有如下两个抽象方法，看起来是和资源有关的，实际上context就是通过它们来获取资源的，这两个抽象方法的真正实现在ContextImpl中。也即是说，只要我们自己实现这两个方法，就可以解决资源问题了。
+/** Return an AssetManager instance for your application&amp;#39;s package. */ public abstract AssetManager getAssets(); /** Return a Resources instance for your application&amp;#39;s package.</description>
+    </item>
+    
+    <item>
       <title>Hook</title>
       <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/hook/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -37,19 +51,6 @@ Atlas(阿里) https://blog.csdn.net/M075097/article/details/79225030
 Neptune(爱奇艺)  插件的安装与加载  https://github.com/iqiyi/Neptune/blob/master/docs/SDK%E5%8E%9F%E7%90%86/%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8A%A0%E8%BD%BD.md
  Neptune/docs/SDK原理/插件的代理实现机制.md  https://github.com/iqiyi/Neptune/blob/master/docs/SDK%E5%8E%9F%E7%90%86/%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.md
 Hydra(美团-未开源) </description>
-    </item>
-    
-    <item>
-      <title>插件化面临的问题</title>
-      <link>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/%E6%8F%92%E4%BB%B6%E5%8C%96/%E6%8F%92%E4%BB%B6%E5%8C%96%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
-      <description>加载插件类 Shadow的全动态设计原理解析
-加载插件资源 传统方式 https://github.com/singwhatiwanna/dynamic-load-apk/
-我们知道，activity的工作主要是由ContextImpl来完成的， 它在activity中是一个叫做mBase的成员变量。注意到Context中有如下两个抽象方法，看起来是和资源有关的，实际上context就是通过它们来获取资源的，这两个抽象方法的真正实现在ContextImpl中。也即是说，只要我们自己实现这两个方法，就可以解决资源问题了。
-/** Return an AssetManager instance for your application&amp;#39;s package. */ public abstract AssetManager getAssets(); /** Return a Resources instance for your application&amp;#39;s package. */ public abstract Resources getResources(); 下面看一下如何实现这两个方法 首先要加载apk中的资源：
-protected void loadResources() { try { AssetManager assetManager = AssetManager.class.newInstance(); Method addAssetPath = assetManager.getClass().getMethod(&amp;#34;addAssetPath&amp;#34;, String.class); addAssetPath.invoke(assetManager, mDexPath); mAssetManager = assetManager; } catch (Exception e) { e.printStackTrace(); } Resources superRes = super.getResources(); mResources = new Resources(mAssetManager, superRes.</description>
     </item>
     
   </channel>

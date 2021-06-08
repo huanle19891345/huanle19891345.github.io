@@ -7,23 +7,41 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Provider</title>
-      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/provider/</link>
+      <title>1跨组件传递数据</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/1%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/provider/</guid>
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/1%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</guid>
+      <description>总览 InheritedWidget图解 graph TB parent(&amp;quot;parentInheritedWidget&amp;quot;)--&amp;gt;|_dependents:依赖我,的组件,也就是我的改变需要通知到的组件|child(&amp;quot;child.inheritFromWidgetOfExactType&amp;quot;) child--&amp;gt;|getParentInheritedWidget|parent child--&amp;gt;|useParentInheritedWidget|child 类设计 Element.mount @mustCallSuper void mount(Element parent, dynamic newSlot) { _updateInheritance();//main  } InheritedElement._updateInheritance @override void _updateInheritance() { assert(_active); final Map&amp;lt;Type, InheritedElement&amp;gt; incomingWidgets = _parent?._inheritedWidgets; if (incomingWidgets != null) _inheritedWidgets = HashMap&amp;lt;Type, InheritedElement&amp;gt;.from(incomingWidgets); else _inheritedWidgets = HashMap&amp;lt;Type, InheritedElement&amp;gt;(); _inheritedWidgets[widget.runtimeType] = this; } Element.inheritFromWidgetOfExactType /// Obtains the nearest widget of the given type, which must be the type of a  /// concrete [InheritedWidget] subclass, and registers this build context with  /// that widget such that when that widget changes (or a new widget of that  /// type is introduced, or the widget goes away), this build context is  /// rebuilt so that it can obtain new values from that widget.</description>
+    </item>
+    
+    <item>
+      <title>2Provider</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/2provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/2provider/</guid>
       <description>总结 监听者_DefaultInheritedProviderScopeElement监听到回调通知后通过markNeedsBuild()进行rebuild,而Consumer会通过Provider.of获取到最新的model值
 graph LR ChangeNotifierProvider(&amp;quot;ChangeNotifierProvider_T extends ChangeNotifier_&amp;quot;)--&amp;gt;|1:ListensTo|ChangeNotifier ChangeNotifier--&amp;gt;|2:notifyListeners|ChangeNotifierProvider--&amp;gt;|3:rebuildsAndNotifyDependentsDescendants|Consumer 类设计 在_InheritedProviderScopeMixin被unmount时，会通知ChangeNotifier进行dispose，可以用来进行结构化并发，取消异步数据请求。
 ChangeNotifier Usage class Counter with ChangeNotifier { int value = 0; void increment() { value += 1; notifyListeners(); } } /// A class that can be extended or mixed in that provides a change notification /// API using [VoidCallback] for notifications. /// /// See also: /// /// * [ValueNotifier], which is a [ChangeNotifier] that wraps a single value. class ChangeNotifier implements Listenable { LinkedList&amp;lt;_ListenerEntry&amp;gt;?</description>
     </item>
     
     <item>
-      <title>跨组件传递数据</title>
-      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</link>
+      <title>3异步_响应式_状态管理</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/3%E5%BC%82%E6%AD%A5_%E5%93%8D%E5%BA%94%E5%BC%8F_%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</guid>
-      <description>总览 InheritedWidget graph TB parent(&amp;quot;parentInheritedWidget&amp;quot;)--&amp;gt;|_dependents:依赖我,的组件,也就是我的改变需要通知到的组件|child(&amp;quot;child.inheritFromWidgetOfExactType&amp;quot;) child--&amp;gt;|getParentInheritedWidget|parent child--&amp;gt;|useParentInheritedWidget|child 类设计 Element.mount @mustCallSuper void mount(Element parent, dynamic newSlot) { _updateInheritance();//main  } InheritedElement._updateInheritance @override void _updateInheritance() { assert(_active); final Map&amp;lt;Type, InheritedElement&amp;gt; incomingWidgets = _parent?._inheritedWidgets; if (incomingWidgets != null) _inheritedWidgets = HashMap&amp;lt;Type, InheritedElement&amp;gt;.from(incomingWidgets); else _inheritedWidgets = HashMap&amp;lt;Type, InheritedElement&amp;gt;(); _inheritedWidgets[widget.runtimeType] = this; } Element.inheritFromWidgetOfExactType /// Obtains the nearest widget of the given type, which must be the type of a  /// concrete [InheritedWidget] subclass, and registers this build context with  /// that widget such that when that widget changes (or a new widget of that  /// type is introduced, or the widget goes away), this build context is  /// rebuilt so that it can obtain new values from that widget.</description>
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/3%E5%BC%82%E6%AD%A5_%E5%93%8D%E5%BA%94%E5%BC%8F_%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/</guid>
+      <description>状态管理 graph LR StateMangement--&amp;gt;BLOC/Stream+StreamBuilder/Rxdart StateMangement--&amp;gt;Redux StateMangement--&amp;gt;Provider/ScopedModel rxdart https://pub.dev/packages/rxdart
+   Dart RxDart     Stream Observable   StreamController Subject    redux Flutter Fish Redux架构演进2.0
+https://pub.dev/packages/flutter_redux
+https://pub.dev/packages/fish_redux
+StroreProver和ChangeNotifierProvider是基于InheritedWidget，而BlocProvider不是
+Provider基于context.getElementForInheritedWidgetOfExactType&amp;lt;_DefaultInheritedProviderScope&amp;gt;跨组件获取数据
+而BlocProvider是基于: BlocProviderprovider = context.ancestorWidgetOfExactType(type);跨组件获取数据
+graph LR subgraph redux StoreProvider StoreConnector Store end StoreProvider--&amp;gt;|similar|ChangeNotifierProvider StoreConnector--&amp;gt;|similar|Consumer Store--&amp;gt;|similar|ChangeNotifier subgraph provider ChangeNotifierProvider Consumer ChangeNotifier end subgraph BLOC/Stream+StreamBuilder ChangeNotifierProvider--&amp;gt;|similar|BlocProvider ChangeNotifier--&amp;gt;|similar|XxxBloc Consumer--&amp;gt;|similar|BlocProvider.of end  state-mgmt https://flutter.dev/docs/development/data-and-backend/state-mgmt
+https://flutter.dev/docs/development/data-and-backend/state-mgmt/options
+ephemeral state and app state When asked about React’s setState versus Redux’s store, the author of Redux, Dan Abramov, replied:</description>
     </item>
     
   </channel>

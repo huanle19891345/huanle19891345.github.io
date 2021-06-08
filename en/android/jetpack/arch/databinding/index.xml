@@ -12,7 +12,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/jetpack/arch/databinding/databinding/</guid>
-      <description>类设计 基于androidx.databinding:databinding-runtime:4.0.1
+      <description>类设计 在liveData数据变化回调onChanged之后，触发requestRebind,在executeBindings时根据dirtyFlags通过BindingAdapter方法刷新View属性
+基于androidx.databinding:databinding-runtime:4.0.1
 DataBindingUtil private static DataBinderMapper sMapper = new DataBinderMapperImpl(); private static DataBindingComponent sDefaultComponent = null; setContentView public static &amp;lt;T extends ViewDataBinding&amp;gt; T setContentView(@NonNull Activity activity, int layoutId) { return setContentView(activity, layoutId, sDefaultComponent); } public static &amp;lt;T extends ViewDataBinding&amp;gt; T setContentView(@NonNull Activity activity, int layoutId, @Nullable DataBindingComponent bindingComponent) { activity.setContentView(layoutId); View decorView = activity.getWindow().getDecorView(); ViewGroup contentView = (ViewGroup) decorView.findViewById(android.R.id.content); return bindToAddedViews(bindingComponent, contentView, 0, layoutId); } bindToAddedViews private static &amp;lt;T extends ViewDataBinding&amp;gt; T bindToAddedViews(DataBindingComponent component, ViewGroup parent, int startChildren, int layoutId) { final int endChildren = parent.</description>
     </item>
     

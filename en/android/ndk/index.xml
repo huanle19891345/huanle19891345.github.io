@@ -24,7 +24,7 @@ As you can see from the description above, an ELF file consists of two sections 
       <guid>https://huanle19891345.github.io/en/android/ndk/jni/</guid>
       <description>https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html
 https://developer.android.com/training/articles/perf-jni
-JavaVM and JNIEnv JNI defines two key data structures, &amp;ldquo;JavaVM&amp;rdquo; and &amp;ldquo;JNIEnv&amp;rdquo;. Both of these are essentially pointers to pointers to function tables. (In the C++ version, they&amp;rsquo;re classes with a pointer to a function table and a member function for each JNI function that indirects through the table.) The JavaVM provides the &amp;ldquo;invocation interface&amp;rdquo; functions, which allow you to create and destroy a JavaVM. In theory you can have multiple JavaVMs per process, but Android only allows one.</description>
+JavaVM and JNIEnv 图解 graph LR JavaVM--&amp;gt;singlePerProcess JNIEnv--&amp;gt;singlePerThread JNI defines two key data structures, &amp;ldquo;JavaVM&amp;rdquo; and &amp;ldquo;JNIEnv&amp;rdquo;. Both of these are essentially pointers to pointers to function tables. (In the C++ version, they&amp;rsquo;re classes with a pointer to a function table and a member function for each JNI function that indirects through the table.) The JavaVM provides the &amp;ldquo;invocation interface&amp;rdquo; functions, which allow you to create and destroy a JavaVM.</description>
     </item>
     
     <item>

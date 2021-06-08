@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2livedata on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/</link>
+    <description>Recent content in 2livedata on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1MediatorLiveData</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/1mediatorlivedata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/1mediatorlivedata/</guid>
+      <description>原理图 graph LR MediatorLiveData--&amp;gt;|addSource|sourceLiveDataN subgraph SourceN,observeForever when mediatorLiveData acitve sourceLiveDataN--&amp;gt;|onChange|observerN end MediatorLiveData--&amp;gt;|addSource|sourceLiveData2 subgraph Source2,observeForever when mediatorLiveData acitve sourceLiveData2--&amp;gt;|onChange|observer2 end MediatorLiveData--&amp;gt;|addSource|sourceLiveData1 subgraph Source1,observeForever when mediatorLiveData acitve sourceLiveData1--&amp;gt;|onChange|observer1 end MutableLiveData public class MutableLiveData&amp;lt;T&amp;gt; extends LiveData&amp;lt;T&amp;gt; { /** * Creates a MutableLiveData initialized with the given {@code value}. * * @param value initial value */ public MutableLiveData(T value) { super(value); } /** * Creates a MutableLiveData with no value assigned to it. */ public MutableLiveData() { super(); } @Override public void postValue(T value) { super.</description>
+    </item>
+    
+    <item>
+      <title>LiveData</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/livedata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/livedata/</guid>
+      <description>类设计 androidx.lifecycle:lifecycle-livedata:2.0.0
+androidx.lifecycle:lifecycle-livedata-core:2.0.0
+observe private SafeIterableMap&amp;lt;Observer&amp;lt;? super T&amp;gt;, ObserverWrapper&amp;gt; mObservers = new SafeIterableMap&amp;lt;&amp;gt;(); observe @MainThread public void observe(@NonNull LifecycleOwner owner, @NonNull Observer&amp;lt;? super T&amp;gt; observer) { assertMainThread(&amp;#34;observe&amp;#34;); if (owner.getLifecycle().getCurrentState() == DESTROYED) { // ignore  return; } LifecycleBoundObserver wrapper = new LifecycleBoundObserver(owner, observer); ObserverWrapper existing = mObservers.putIfAbsent(observer, wrapper); if (existing != null &amp;amp;&amp;amp; !existing.isAttachedTo(owner)) { throw new IllegalArgumentException(&amp;#34;Cannot add the same observer&amp;#34; + &amp;#34; with different lifecycles&amp;#34;); } if (existing !</description>
+    </item>
+    
+    <item>
+      <title>LiveDataCoroutine</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/livedatacoroutine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/livedatacoroutine/</guid>
+      <description>@UseExperimental(ExperimentalTypeInference::class) fun &amp;lt;T&amp;gt; liveData( context: CoroutineContext = EmptyCoroutineContext, timeoutInMs: Long = DEFAULT_TIMEOUT, @BuilderInference block: suspend LiveDataScope&amp;lt;T&amp;gt;.() -&amp;gt; Unit ): LiveData&amp;lt;T&amp;gt; = CoroutineLiveData(context, timeoutInMs, block) CoroutineLiveData 图解 sequenceDiagram CoroutineLiveData-&amp;gt;&amp;gt;CoroutineLiveData: init activate CoroutineLiveData CoroutineLiveData-&amp;gt;&amp;gt;BlockRunner: new BlockRunner BlockRunner-&amp;gt;&amp;gt;CoroutineScope: new CoroutineScope deactivate CoroutineLiveData CoroutineLiveData-&amp;gt;&amp;gt;CoroutineLiveData: onActive activate CoroutineLiveData CoroutineLiveData-&amp;gt;&amp;gt;BlockRunner: blockRunner?.maybeRun() BlockRunner-&amp;gt;&amp;gt;CoroutineScope: runningJob = scope.launch CoroutineScope-&amp;gt;&amp;gt;CoroutineScope: block(liveDataScopeImpl) deactivate CoroutineLiveData CoroutineLiveData-&amp;gt;&amp;gt;CoroutineLiveData: onInactive activate CoroutineLiveData CoroutineLiveData-&amp;gt;&amp;gt;BlockRunner: blockRunner?.cancel() BlockRunner-&amp;gt;&amp;gt;CoroutineScope: cancellationJob = scope.launch deactivate CoroutineLiveData internal typealias Block&amp;lt;T&amp;gt; = suspend LiveDataScope&amp;lt;T&amp;gt;.</description>
+    </item>
+    
+    <item>
+      <title>Transformations</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/transformations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/2livedata/transformations/</guid>
+      <description>map 图解 sequenceDiagram SourceLiveData-&amp;gt;&amp;gt;ResultMediatorLivedata: onChanged ResultMediatorLivedata-&amp;gt;&amp;gt;ResultMediatorLivedata: setValue(mapFunction.apply(x)) inline fun &amp;lt;X, Y&amp;gt; LiveData&amp;lt;X&amp;gt;.map(crossinline transform: (X) -&amp;gt; Y): LiveData&amp;lt;Y&amp;gt; = Transformations.map(this) { transform(it) } public static &amp;lt;X, Y&amp;gt; LiveData&amp;lt;Y&amp;gt; map( @NonNull LiveData&amp;lt;X&amp;gt; source, @NonNull final Function&amp;lt;X, Y&amp;gt; mapFunction) { final MediatorLiveData&amp;lt;Y&amp;gt; result = new MediatorLiveData&amp;lt;&amp;gt;(); result.addSource(source, new Observer&amp;lt;X&amp;gt;() { @Override public void onChanged(@Nullable X x) { result.setValue(mapFunction.apply(x)); } }); return result; } switchMap 图解 sequenceDiagram SourceLiveData-&amp;gt;&amp;gt;SwitchedLiveData: switchMapFunction.apply(x) SwitchedLiveData-&amp;gt;&amp;gt;ResultMediatorLivedata: onChanged ResultMediatorLivedata-&amp;gt;&amp;gt;ResultMediatorLivedata: setValue(y) inline fun &amp;lt;X, Y&amp;gt; LiveData&amp;lt;X&amp;gt;.</description>
+    </item>
+    
+  </channel>
+</rss>

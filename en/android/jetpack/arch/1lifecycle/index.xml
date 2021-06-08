@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1lifecycle on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/arch/1lifecycle/</link>
+    <description>Recent content in 1lifecycle on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/arch/1lifecycle/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lifecycle</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/1lifecycle/lifecycle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/1lifecycle/lifecycle/</guid>
+      <description>设计图 https://developer.android.com/topic/libraries/architecture/lifecycle
+生命周期感知型组件的最佳做法  使界面控制器（Activity 和 Fragment）尽可能保持精简。它们不应试图获取自己的数据，而应使用 ViewModel 执行此操作，并观察 LiveData 对象以将更改体现到视图中。 设法编写数据驱动型界面，对于此类界面，界面控制器的责任是随着数据更改而更新视图，或者将用户操作通知给 ViewModel。 将数据逻辑放在 ViewModel 类中。ViewModel 应充当界面控制器与应用其余部分之间的连接器。不过要注意，ViewModel 不负责获取数据（例如，从网络获取）。但是，ViewModel 应调用相应的组件来获取数据，然后将结果提供给界面控制器。 使用数据绑定在视图与界面控制器之间维持干净的接口。这样一来，您可以使视图更具声明性，并尽量减少需要在 Activity 和 Fragment 中编写的更新代码。如果您更愿意使用 Java 编程语言执行此操作，请使用诸如 Butter Knife 之类的库，以避免样板代码并实现更好的抽象化。 如果界面很复杂，不妨考虑创建 presenter 类来处理界面的修改。这可能是一项艰巨的任务，但这样做可使界面组件更易于测试。 避免在 ViewModel 中引用 View 或 Activity 上下文。如果 ViewModel 存在的时间比 Activity 更长（在配置更改的情况下），Activity 将泄漏并且不会获得垃圾回收器的妥善处置。 使用 Kotlin 协程管理长时间运行的任务和其他可以异步运行的操作。  </description>
+    </item>
+    
+    <item>
+      <title>LifecycleCoroutine</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/arch/1lifecycle/lifecyclecoroutine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/arch/1lifecycle/lifecyclecoroutine/</guid>
+      <description>LifecycleCoroutine 图解 sequenceDiagram LifecycleCoroutineScopeImpl-&amp;gt;&amp;gt;LifecycleCoroutineScopeImpl: Lifecycle.coroutineScope.get(),register activate LifecycleCoroutineScopeImpl Note right of LifecycleCoroutineScopeImpl: lunch启动协程并lifecycle.addObserver deactivate LifecycleCoroutineScopeImpl LifecycleCoroutineScopeImpl-&amp;gt;&amp;gt;LifecycleCoroutineScopeImpl: onStateChanged回调时State.DESTROYED自动取消协程 LifecycleCoroutineScopeImpl-&amp;gt;&amp;gt;LifecycleCoroutineScopeImpl: launchWhenXxx activate LifecycleCoroutineScopeImpl LifecycleCoroutineScopeImpl-&amp;gt;&amp;gt;LifecycleController: new LifecycleController LifecycleController-&amp;gt;&amp;gt;LifecycleController: lifecycle.addObserver LifecycleController-&amp;gt;&amp;gt;DispatchQueue: dispatch lifecycle to LifecycleCoroutineScopeImpl-&amp;gt;&amp;gt;PausingDispatcher: withContext(PausingDispatcher, block) deactivate LifecycleCoroutineScopeImpl PausingDispatcher-&amp;gt;&amp;gt;PausingDispatcher: dispatchQueue.runOrEnqueue(block) activate PausingDispatcher PausingDispatcher-&amp;gt;&amp;gt;DispatchQueue: dispatch block to deactivate PausingDispatcher LifecycleCoroutineScopeImpl /** * [CoroutineScope] tied to this [LifecycleOwner]&amp;#39;s [Lifecycle]. * * This scope will be cancelled when the [Lifecycle] is destroyed. * * This scope is bound to * [Dispatchers.</description>
+    </item>
+    
+  </channel>
+</rss>

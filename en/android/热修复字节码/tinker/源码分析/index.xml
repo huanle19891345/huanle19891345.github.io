@@ -22,7 +22,10 @@ AbstractApkParser.parseResourceTable private DexClass[] dexClasses; private Reso
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/tinker/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/tinkergradlepluginsource/</guid>
-      <description>build.gradle层 1：构建基准apk(仅仅发版时需要打开tinkerEnabled，开发自己debug时不需要打开)
+      <description>keyTitle_decoder类设计
+keyTitle_dexsectiondiffalgorithm类设计
+keyTitle_dexsectionpatchalgorithm类设计
+build.gradle层 1：构建基准apk(仅仅发版时需要打开tinkerEnabled，开发自己debug时不需要打开)
 1.1: Copy apk,map,R文件到bakApk目录下
 1.2: 创建tinkerPatchDebug和tinkerPatchRelease的task执行的必要参数
 //tinker/tinker-sample-android/app/build.gradle def bakPath = file(&amp;#34;${buildDir}/bakApk/&amp;#34;) /** \* you can use assembleRelease to build you base apk \* use tinkerPatchRelease -POLD_APK= -PAPPLY_MAPPING= -PAPPLY_RESOURCE= to build patch \* add apk from the build/bakApk */ ext { //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?  tinkerEnabled = true //for normal build  //old apk file to build patch apk  tinkerOldApkPath = &amp;#34;${bakPath}/app-debug-0917-16-24-41.</description>

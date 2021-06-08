@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>workmanager on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/android/jetpack/workmanager/</link>
+    <description>Recent content in workmanager on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/jetpack/workmanager/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WorkManager</title>
+      <link>https://huanle19891345.github.io/en/android/jetpack/workmanager/workmanager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/jetpack/workmanager/workmanager/</guid>
+      <description>https://developer.android.com/topic/libraries/architecture/workmanager/
+Android新技术之从Service到WorkManager
+使用 WorkManager 处理需要立刻执行的后台任务
+WorkManager 流程分析和源码解析 | 开发者说·DTalk
+WorkManager 的特点与适用场景 特点   保证任务一定会被执行 WorkManager 有自己的数据库，每一个任务的信息与任务状态，都会保存在本地数据库中。所以即使程序没有在运行，或者在设备重启等情况下，WorkManager 依然可以保证任务的执行，只是不保证任务立即被执行。
+  合理使用设备资源 在执行很多周期性或非立即执行的任务时，WorkManager 提供我们 API，帮助我们合理利用设备资源，避免不必要的内存，流量，电量等消耗。
+  适用场景  可延迟进行的任务 a.满足某些条件才执行的任务，如需要在充电时才执行的任务。 b.用户无感知或可延迟感知的任务，如同步配置信息，同步资源，同步通讯录等。 定期重复性任务，但时效性要求不高的，如定期 log 上传，数据备份等。 退出应用后还应继续执行的未完成任务。  WorkManager 的使用 WorkManager 的使用非常简单，分为如下几个步骤:
+ 创建一个后台任务 Worker。 定义 WorkRequest，配置运行任务的方式和时间。 将任务提交给系统处理。 观察 Worker 的进度或状态。  WorkManager 流程分析与源码解析 这个章节将会从以下几个方面梳理 WorkManager 的流程与源码:
+ 创建 a. WorkManager的初始化 b. WorkRequest的创建 非约束条件任务的执行 带约束条件任务的执行  4.1 创建 首先梳理一下 WorkManager 的初始化过程。
+4.1.1. WorkManager 的初始化 WorkManagerInitializer 在默认的情况下，WorkManager 并不是在我们调用 WorkManager.</description>
+    </item>
+    
+  </channel>
+</rss>

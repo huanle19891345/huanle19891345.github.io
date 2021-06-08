@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stream on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/stream/</link>
+    <description>Recent content in stream on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/stream/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stream</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/stream/stream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E5%93%8D%E5%BA%94%E5%BC%8F%E6%9E%B6%E6%9E%84/stream/stream/</guid>
+      <description>Stream/BLoC https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/
+Flutter中如何利用StreamBuilder和BLoC来控制Widget状态
+Why use RxDart and how we can use with BLoC Pattern in Flutter?
+What is a Stream? Introduction In order to easily visualize the notion of Stream, simply consider a pipe with 2 ends, only one allowing to insert something into it. When you insert something into the pipe, it flows inside the pipe and goes out by the other end.
+In Flutter,
+ the pipe is called a Stream to control the Stream, we usually(*) use a StreamController to insert something into the Stream, the StreamController exposes the “entrance&amp;quot;, called a StreamSink, accessible via the sink property the way out of the Stream, is exposed by the StreamController via the stream property  How do I know that something is conveyed by a Stream?</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,6 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>1hotfixResearch</title>
+      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/1hotfixresearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/1hotfixresearch/</guid>
+      <description>价值 热修复的作用   可快速修复，避免线上Bug带来的业务损失，把损失降到最低。
+  保证客户端的更新率，无须用户进行版本升级安装
+  良好的用户体验，无感知修复异常。节省用户下载安装成本。
+  分类 图解 graph LR subgraph dex插入到数组的最前 DexElements end subgraph env-&amp;gt;FromReflectedMethod得到方法对应的ArtMethod,对其所有成员进行修改 NativeHook end subgraph 避免类被加上ISPREVERIFIED 补丁dex end 代码修复--&amp;gt;NativeHook 代码修复--&amp;gt;DexElements DexElements--&amp;gt;补丁dex DexElements--&amp;gt;全量dex 代码修复--&amp;gt;混合优化 代码修复--&amp;gt;代码插桩和替换 各技术能力范围 https://github.com/Tencent/tinker/wiki
+    Tinker QZone AndFix Robust     类替换 yes yes no no   So替换 yes no no no   资源替换 yes yes no no   全平台支持 yes yes yes yes   即时生效 no no yes yes   性能损耗 较小 较大 较小 较小   补丁包大小 较小 较大 一般 一般   开发透明 yes yes no no   复杂度 较低 较低 复杂 复杂   gradle支持 yes no no no   Rom体积 较大 较小 较小 较小   成功率 较高 较高 一般 最高    代码修复 代码插桩和替换/Java Hook Instant Run 原理 在第一次完整编译的时候给所有的类插桩（字节码操作），使它们的方法能被代理</description>
+    </item>
+    
+    <item>
       <title>AndFix</title>
       <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/andfix/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -29,7 +42,8 @@ object InvokeMethod(const ScopedObjectAccessAlreadyRunnable&amp;amp; soa, jobjec
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/andfixsource/</guid>
-      <description>AndFixManager.java fix public synchronized void fix(String patchPath) { fix(new File(patchPath), mContext.getClassLoader(), null); } public synchronized void fix(File file, ClassLoader classLoader, List&amp;lt;String&amp;gt; classes) { final DexFile dexFile = DexFile.loadDex(file.getAbsolutePath(), optfile.getAbsolutePath(), Context.MODE_PRIVATE); ClassLoader patchClassLoader = new ClassLoader(classLoader) { @Override protected Class&amp;lt;?&amp;gt; findClass(String className) throws ClassNotFoundException { Class&amp;lt;?&amp;gt; clazz = dexFile.loadClass(className, this); if (clazz == null &amp;amp;&amp;amp; className.startsWith(&amp;#34;com.alipay.euler.andfix&amp;#34;)) { return Class.forName(className);// annotation’s class 	// not found 	} if (clazz == null) { throw new ClassNotFoundException(className); } return clazz; } }; Enumeration&amp;lt;String&amp;gt; entrys = dexFile.</description>
+      <description>核心方法addReplaceMethod(Method src, Method dest)
+AndFixManager.java fix public synchronized void fix(String patchPath) { fix(new File(patchPath), mContext.getClassLoader(), null); } //加载补丁包中所有类所有方法,如果拥有注解methodReplace，则触发replaceMethod public synchronized void fix(File file, ClassLoader classLoader, List&amp;lt;String&amp;gt; classes) { final DexFile dexFile = DexFile.loadDex(file.getAbsolutePath(), optfile.getAbsolutePath(), Context.MODE_PRIVATE); ClassLoader patchClassLoader = new ClassLoader(classLoader) {//以当前classLoader作为parentClassLoader优先查找 	@Override protected Class&amp;lt;?&amp;gt; findClass(String className) throws ClassNotFoundException { Class&amp;lt;?&amp;gt; clazz = dexFile.loadClass(className, this); if (clazz == null &amp;amp;&amp;amp; className.startsWith(&amp;#34;com.alipay.euler.andfix&amp;#34;)) { return Class.forName(className);// annotation’s class 	// not found 	} if (clazz == null) { throw new ClassNotFoundException(className); } return clazz; } }; Enumeration&amp;lt;String&amp;gt; entrys = dexFile.</description>
     </item>
     
     <item>
@@ -41,19 +55,6 @@ object InvokeMethod(const ScopedObjectAccessAlreadyRunnable&amp;amp; soa, jobjec
       <description>Dex文件格式 https://source.android.com/devices/tech/dalvik/dex-format
 File layout
    名称 格式 说明     header header_item 标头   string_ids string_id_item[] 字符串标识符列表。这些是此文件使用的所有字符串的标识符，用于内部命名（例如类型描述符）或用作代码引用的常量对象。此列表必须使用 UTF-16 代码点值按字符串内容进行排序（不采用语言区域敏感方式），且不得包含任何重复条目。   type_ids type_id_item[] 类型标识符列表。这些是此文件引用的所有类型（类、数组或原始类型）的标识符（无论文件中是否已定义）。此列表必须按 string_id 索引进行排序，且不得包含任何重复条目。   proto_ids proto_id_item[] 方法原型标识符列表。这些是此文件引用的所有原型的标识符。此列表必须按返回类型（按 type_id 索引排序）主要顺序进行排序，然后按参数列表（按 type_id 索引排序的各个参数，采用字典排序方法）进行排序。该列表不得包含任何重复条目。   field_ids field_id_item[] 字段标识符列表。这些是此文件引用的所有字段的标识符（无论文件中是否已定义）。此列表必须进行排序，其中定义类型（按 type_id 索引排序）是主要顺序，字段名称（按 string_id 索引排序）是中间顺序，而类型（按 type_id 索引排序）是次要顺序。该列表不得包含任何重复条目。   method_ids method_id_item[] 方法标识符列表。这些是此文件引用的所有方法的标识符（无论文件中是否已定义）。此列表必须进行排序，其中定义类型（按 type_id 索引排序）是主要顺序，方法名称（按 string_id 索引排序）是中间顺序，而方法原型（按 proto_id 索引排序）是次要顺序。该列表不得包含任何重复条目。   class_defs class_def_item[] 类定义列表。这些类必须进行排序，以便所指定类的超类和已实现的接口比引用类更早出现在该列表中。此外，对于在该列表中多次出现的同名类，其定义是无效的。   call_site_ids call_site_id_item[] 调用站点标识符列表。这些是此文件引用的所有调用站点的标识符（无论文件中是否已定义）。此列表必须按 call_site_off 以升序进行排序。   method_handles method_handle_item[] 方法句柄列表。此文件引用的所有方法句柄的列表（无论文件中是否已定义）。此列表未进行排序，而且可能包含将在逻辑上对应于不同方法句柄实例的重复项。   data ubyte[] 数据区，包含上面所列表格的所有支持数据。不同的项有不同的对齐要求；如有必要，则在每个项之前插入填充字节，以实现所需的对齐效果。   link_data ubyte[] 静态链接文件中使用的数据。本文档尚未指定本区段中数据的格式。此区段在未链接文件中为空，而运行时实现可能会在适当的情况下使用这些数据。    Dalvik-Bytecode https://source.</description>
-    </item>
-    
-    <item>
-      <title>hotfixResearch</title>
-      <link>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/hotfixresearch/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://huanle19891345.github.io/en/android/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%AD%97%E8%8A%82%E7%A0%81/hotfixresearch/</guid>
-      <description>价值 热修复的作用   可快速修复，避免线上Bug带来的业务损失，把损失降到最低。
-  保证客户端的更新率，无须用户进行版本升级安装
-  良好的用户体验，无感知修复异常。节省用户下载安装成本。
-  分类 各技术能力范围 https://github.com/Tencent/tinker/wiki
-    Tinker QZone AndFix Robust     类替换 yes yes no no   So替换 yes no no no   资源替换 yes yes no no   全平台支持 yes yes yes yes   即时生效 no no yes yes   性能损耗 较小 较大 较小 较小   补丁包大小 较小 较大 一般 一般   开发透明 yes yes no no   复杂度 较低 较低 复杂 复杂   gradle支持 yes no no no   Rom体积 较大 较小 较小 较小   成功率 较高 较高 一般 最高    代码修复 代码插桩和替换/Java Hook Instant Run 原理 在第一次完整编译的时候给所有的类插桩（字节码操作），使它们的方法能被代理</description>
     </item>
     
     <item>

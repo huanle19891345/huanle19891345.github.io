@@ -53,16 +53,17 @@ sequenceDiagram Note over Manager: host(位于主进程) Note over Loader: Plugi
 5：对每个插件apk做extractSo(更新信息到数据库，更新part.libraryDir)和odex(更新odex信息到数据库，更新part.oDexDir)
 6：bindPluginProgressService，加载runtime，加载loader，加载plugin，调用loader的convertActivityIntent转换intent为代理容器Activity
 7：正常启动代理容器Activity
+shadow的全动态设计原理解析
+Manager的动态化 Shadow的Manager的功能就是管理插件，包括插件的下载逻辑、入口逻辑，预加载逻辑等。反正就是一切还没有进入到Loader之前的所有事情。
+由于Manager就是一个普通类，不是Android系统规定要在Manifest中注册才能使用的类，所以Manager的动态化就是一般性的动态加载实现。
+为了让宿主中的固定代码足够的少，我们给Manager定义的接口就是一个类似传统Main函数的接口。
+void enter(Context context, long formId, Bundle bundle, EnterCallback callback); 这就是Manager的唯一方法，宿主中只会调用这个方法。传入当前界面的Context以便打开下一个插件Activity。将所有插件中可能用到的参数通过Bundle传给插件。定义一些fromId，用来让Manager的实现逻辑分辨这一次enter是从哪里来的。实际上在宿主中的每一处enter调用都可以设置不同的fromId，就相当于让Manager知道调用来自宿主中的哪一行代码了。再传入一个EnterCallback供Manager可以返回一个动态加载的View作为插件的Loading View。
 Loader PpsBinder中Loader本身的Binder先通过PPS跨进程通信到Manager进程，从而使Loader的Binder成了跨进程的Binder
+Loader的动态化 Loader就是负责加载插件Activity，然后实现插件Activity的生命周期等功能的那部分核心逻辑了。很多插件框架就只有Loader这部分功能，或者说只开源了Loader这部分功能。一般来说，Loader是宿主到插件的桥梁。比如说我们要在宿主中执行Loader的代码，才能Hack一些系统类，让它们加载插件Activity。或者在宿主中的代理壳子Activity中，也要使用Loader去加载插件Activity完成转调功能。所以通常宿主代码就直接依赖了Loader的代码。这就是为什么其他插件框架都需要将插件框架本身的代码打包在宿主中。
+稍复杂一点的问题就是代理壳子ContainerActivity需要和PluginActivity通过Loader相互调用。所以Shadow应用前面提到的动态化原理时，做了双向的接口，可以看到代码中的HostActivityDelegate和HostActivityDelegator。通过定义出这两个接口，可以避免ContainerActivity和Loader相互加载对方时还需要加载对方所依赖的其他类。定义成接口，就只需要加载这个接口就行了。
+通过这个设计，插件框架的绝大部分需要修改或修复的代码就都可以动态发布了。并且也使得在同一个宿主中可以有多个不同实现的Loader，这样业务就可以针对业务自身的bug修改Loader的代码，不会影响其他业务了。紧急情况下Loader也可以耦合业务逻辑。
 宿主中的公共代码和资源的更新和修复可行性方案 graph LR subgraph 插件自带动态加载能力,可以更新功能,修复问题 宿主(&amp;quot;宿主(包含公共仓库资源)&amp;quot;)--&amp;gt;插件1,通过配置whiteList访问宿主公共资源 宿主--&amp;gt;插件2 宿主--&amp;gt;插件3 end 1：利用热修复方案如Tinker中的java修复部分替换宿主dex elements(atlas的host更新也使用的类似修复方案)，资源更新也采用相应的热修复方式进行
-2：将公共代码和资源从组件做成插件，动态加载：
-参考DynamicPluginLoader:
-val coreLoaderFactory = mDynamicLoaderClassLoader.getInterface( CoreLoaderFactory::class.java, CORE_LOADER_FACTORY_IMPL_NAME ) mPluginLoader = coreLoaderFactory.build(hostContext) DelegateProviderHolder.setDelegateProvider(mPluginLoader) 通过注入的方式将loader中的接口实现动态注入到runtime模块(loader依赖runtime)，用来动态的实现DelegateProvider接口
-HostUiLayerProvider 也是类似的注入依赖思想，依赖倒置，控制反转
-类似manager的加载方式？Or使用插件间dependOn的方式？
-Manager方式适用于仅仅java代码的动态化，dependOn也可以拓展支持资源
-参考rePlugin的方式：
-//WebViewActivity  // 从WebView插件获取WebrViewPage的代理  WebPageProxy viewProxy = WebPageProxy.</description>
+2：将公共代码和资源从组件做成插件，动态加载：</description>
     </item>
     
   </channel>

@@ -7,6 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>EventChannel</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/eventchannel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/eventchannel/</guid>
+      <description>技术依赖 graph TB EventChannel--&amp;gt;|baseOn|MethodChannel EventChannel--&amp;gt;|baseOn|Stream 核心原理 sequenceDiagram rect rgb(199, 237, 204) Dart-&amp;gt;&amp;gt;Dart: stream.listen activate Dart Dart-&amp;gt;&amp;gt;Platform: methodChannel.invokeMethod(listen) deactivate Dart activate Platform Platform-&amp;gt;&amp;gt;Platform: onListen activate Platform Platform-&amp;gt;&amp;gt;Platform: handler.onListen(EventSink) deactivate Platform deactivate Platform end rect rgb(199, 237, 204) Platform-&amp;gt;&amp;gt;Platform: eventSink.success activate Platform Platform-&amp;gt;&amp;gt;Dart: messenger.send deactivate Platform activate Dart Dart-&amp;gt;&amp;gt;Dart: StreamController.add(T event) deactivate Dart end Usage Dart StreamBuilder Use demo参考/Users/qianpianpian/git/flutter/samples/platform_channels/lib/src/event_channel_demo.dart
+使用StreamBuilder包裹stream
+child: StreamBuilder&amp;lt;AccelerometerReadings&amp;gt;( stream: Accelerometer.readings,//stream  builder: (context, snapshot) { if (snapshot.hasError) { return Text((snapshot.</description>
+    </item>
+    
+    <item>
       <title>MessageLoop</title>
       <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/messageloop/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -32,9 +43,8 @@ graph LR subgraph Dart MethodCallDart(&amp;quot;MethodCall:StringMethodName,Obje
       
       <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/%E9%80%9A%E4%BF%A1/pigeon/</guid>
       <description>https://github.com/flutter/packages/tree/master/packages/pigeon
-Pigeon效果 graph LR subgraph Pigeon/message.dart HostApi(&amp;quot;@HostApi&amp;quot;) FlutterApi(&amp;quot;@FlutterApi&amp;quot;) Class(&amp;quot;Define Class&amp;quot;) configurePigeon end subgraph FlutterSideGeneratedCode FlutterApi--&amp;gt;GenerateFlutterApi(&amp;quot;abstract class FlutterApi:channel.setMessageHandler and delegate to FlutterApi&amp;quot;) GenerateCallHostApi(&amp;quot;class HostApi: wrap channel.send&amp;quot;)--&amp;gt;HostApi end subgraph AndroidSideGeneratedCode GenerateCallFullterApi(&amp;quot;classFlutterApi: wrap channel.send&amp;quot;)--&amp;gt;FlutterApi HostApi--&amp;gt;GenereateHostApi(&amp;quot;interface HostApi: channel.setMessageHandler and delegate to HostApi&amp;quot;) end Pigeon @async server端 sync时生成的server端handler直接代理到接口实现进行方法调用，无法异步，必须阻塞platform thread
-RequestParams input = RequestParams.fromMap((Map&amp;lt;String, Object&amp;gt;)message); Resource output = api.request(input); wrapped.put(&amp;#34;result&amp;#34;, output.toMap()); reply.reply(wrapped); async时server端handler方法签名多一个参数Result，利用回调实现异步
-public interface Result&amp;lt;T&amp;gt; { void success(T result); } RequestParams input = RequestParams.fromMap((Map&amp;lt;String, Object&amp;gt;)message); api.</description>
+Pigeon介绍 Pigeon是Flutter官方推荐的，用于自动生成PlatformChannel通信层模板代码(channel定义，编解码，异常处理等)的package，可以减少通信层开发时间。生成的代码通过MessageChannel进行通信。pigeon则使用MessageChannel并针对每个api方法设置唯一的channelName来进行区分，BasicMessageChannel中的T,也就是request参数和response类型都是Object，并在传输过程中对model进行编解码成Map传输。
+Pigeon功能 graph LR subgraph Pigeon/message.dart HostApi(&amp;quot;@HostApi&amp;quot;) FlutterApi(&amp;quot;@FlutterApi&amp;quot;) Class(&amp;quot;Define Class&amp;quot;) configurePigeon end subgraph server GenerateFlutterApi GenereateHostApi end subgraph client GenerateCallHostApi GenerateCallFullterApi end FlutterApi--&amp;gt;|handle in Flutter|GenerateFlutterApi(&amp;quot;abstract class FlutterApi:channel.setMessageHandler and delegate to FlutterApi&amp;quot;) GenerateCallHostApi(&amp;quot;class HostApi: wrap channel.send&amp;quot;)--&amp;gt;|Flutter to host|HostApi GenerateCallFullterApi(&amp;quot;classFlutterApi: wrap channel.send&amp;quot;)--&amp;gt;|host to Flutter|FlutterApi HostApi--&amp;gt;|handle in host|GenereateHostApi(&amp;quot;interface HostApi: channel.setMessageHandler and delegate to HostApi&amp;quot;) Pigeon 生成代码 Client端 class NativeNetworkApi { Future&amp;lt;Resource&amp;gt; request(RequestParams arg) async { final Object encoded = arg.encode(); const BasicMessageChannel&amp;lt;Object&amp;gt; channel = BasicMessageChannel&amp;lt;Object&amp;gt;(&amp;#39;dev.</description>
     </item>
     
   </channel>

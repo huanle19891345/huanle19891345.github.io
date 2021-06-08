@@ -18,13 +18,12 @@
 如果您想将一个基于回调的流 API 转换为使用 Flow，您可以使用 channelFlow 函数 (当然也可以使用 callbackFlow，它们都基于相同的实现)。
   Flow 非常适合需要开始/停止数据的产生来匹配观察者的场景。
   如果生产者和消费者的生命周期不同或者彼此完全独立运行时，请使用 BroadcastChannel。
-  架构思考 graph LR archetecture--&amp;gt;|Async|Scope subgraph AutoCancel Scope--&amp;gt;StructuredConcurrency end archetecture--&amp;gt;|LiveData|UnMutableLiveDataExposeToView archetecture--&amp;gt;|EmitMultiData|Flow lifecycle 从 API 1 开始，处理 Activity 的生命周期 (lifecycle) 就是个老大难的问题，基本上开发者们都看过这两张生命周期流程图:
+  架构思考 graph LR archetecture--&amp;gt;|Async|Scope subgraph AutoCancel Scope--&amp;gt;StructuredConcurrency end archetecture--&amp;gt;|LiveData|UnMutableLiveDataExposeToView--&amp;gt;LiveDataCoroutine archetecture--&amp;gt;|EmitMultiData|Flow oneshot--&amp;gt;suspendCancellableCoroutine multishots--&amp;gt;callbackFlow lifecycle 从 API 1 开始，处理 Activity 的生命周期 (lifecycle) 就是个老大难的问题，基本上开发者们都看过这两张生命周期流程图:
 △ Activity 生命周期流程图
 随着 Fragment 的加入，这个问题也变得更加复杂:
 △ Fragment 生命周期流程图
 而开发者们面对这个挑战，给出了非常稳健的解决方案: 分层架构。
-分层架构 △ 表现层 (Presentation Layer)、域层 (Domain Layer) 和数据层 (Data Layer)
-如上图所示，通过将应用分为三层，现在只有最上面的 Presentation 层 (以前叫 UI 层) 才知道生命周期的细节，而应用的其他部分则可以安全地忽略掉它。</description>
+分层架构 △ 表现层 (Presentation Layer)、域层 (Domain Layer) 和数据层 (Data Layer)</description>
     </item>
     
   </channel>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1startup on 郑欢的学习总结</title>
+    <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/</link>
+    <description>Recent content in 1startup on 郑欢的学习总结</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1startup</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/1startup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/1startup/</guid>
+      <description>Flutter 安卓平台源码剖析
+Flutter启动流程源码分析
+深入理解Flutter引擎启动&amp;ndash;详细
+Flutter作为一款跨平台的框架，可以运行在Android、iOS等平台，Android为例讲解如何从Android应用启动流程中衔接到Flutter框架，如何启动Flutter引擎的启动流程。 熟悉Android的开发者，应该都了解APP启动过程，会执行Application和Activity的初始化，并调用它们的onCreate()方法。那么FlutterApplication和FlutterActivity的onCreate()方法是连接Native和Flutter的枢纽。
+ FlutterApplication.java的onCreate过程：初始化配置文件/加载libflutter.so/注册JNI方法； FlutterActivity.java的onCreate过程：创建FlutterView、Engine, Dart虚拟机、Isolate、taskRunner等对象，最终执行执行到Dart的main()方法，执行runApp(Widget app)来处理整个Dart业务代码。  深入理解Flutter应用启动&amp;ndash;runApp(Widget app)方法开始
+runApp(MyApp)是flutter应用开始真正执行业务逻辑代码的起点，整个过程主要工作：
+ WidgetsFlutterBinding初始化：这是一个单例模式，负责创建WidgetsFlutterBinding对象，WidgetsFlutterBinding继承抽象类BindingBase，并且附带7个mixin，初始化渲染、语义化、绘制、平台消息以及手势等一系列操作； attachRootWidget：遍历挂载整个视图树，并建立Widget、Element、RenderObject之间的连接与关系，此处Element的具体类型为RenderObjectToWidgetElement； scheduleWarmUpFrame：调度预热帧，执行帧绘制方法handleBeginFrame和handleDrawFrame。  从WidgetsFlutterBinding是单例模式，从小节[2.4]得WidgetsBinding的renderViewElement记录着唯一的RenderObjectToWidgetElement对象，从小节[2.3.2]可知RendererBinding的renderView记录着唯一的RenderView对象；也就是说每个flutter应用创建的Root Widget跟Element、RenderObject一一对应，且单例唯一。
+MyApp是用户定义的根Widget，为了建立三棵树的关系，RenderObjectToWidgetAdapter起到重要的桥接功能，该类的createElement方法创建RenderObjectToWidgetElement对象，createRenderObject()方法获取的是RenderView。
+ </description>
+    </item>
+    
+    <item>
+      <title>2startup_embedder_framwwork</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/2startup_embedder_framwwork/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/2startup_embedder_framwwork/</guid>
+      <description>graph LR FlutterView--&amp;gt;|对应|DartVM--&amp;gt;|对应|Engine attachToFlutterEngine图解 分别由FlutterRenderer控制渲染flutter UI到platform侧的FlutterView，由AndroidTouchProcessor控制platform侧的FlutterView的touchEvent到flutter
+graph LR FlutterView--&amp;gt;|attachToFlutterEngine|FlutterEngine FlutterView--&amp;gt;|interaction events to|FlutterEngine FlutterEngine--&amp;gt;|renderTo|FlutterView FlutterEngine--&amp;gt;FlutterRenderer--&amp;gt;|notify|FlutterJNI RenderSurface--&amp;gt;|nofity surface event|FlutterRenderer FlutterView--&amp;gt;|contains|RenderSurface FlutterEngine--&amp;gt;|contains|PlatformViewsController--&amp;gt;|contains|AndroidTouchProcessor--&amp;gt;|sendTouchEvent|Flutter 下述为flutter1.12版本时的源码研究，新版2.0设计上已经进行优化见上面的图解
+1.12时在new FlutterView时进行Engine和DartVM的构造和初始化，而在2.0上功能分离到FlutterEngine这个java class中
+FlutterApplication.onCreate /** * Flutter implementation of {@link android.app.Application}, managing * application-level global initializations. */ //FlutterApplication @CallSuper public void onCreate() { super.onCreate(); FlutterMain.startInitialization(this); } /** FlutterMain * Starts initialization of the native system. * @param applicationContext The Android application context. */ public static void startInitialization(@NonNull Context applicationContext) { if (isRunningInRobolectricTest) { return; } FlutterLoader.</description>
+    </item>
+    
+    <item>
+      <title>3flutter_surface</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/3flutter_surface/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/3flutter_surface/</guid>
+      <description>RenderSurface类设计图解 classDiagram class FlutterSurfaceView { -FlutterRenderer flutterRenderer -SurfaceHolder_Callback surfaceCallback } class FlutterTextureView { -FlutterRenderer flutterRenderer; -Surface renderSurface; } class FlutterImageView { -FlutterRenderer flutterRenderer; -ImageReader imageReader } TextureView&amp;lt;|--FlutterTextureView RenderSurface&amp;lt;|--FlutterTextureView SurfaceView&amp;lt;|--FlutterSurfaceView RenderSurface&amp;lt;|--FlutterSurfaceView View&amp;lt;|--FlutterImageView RenderSurface&amp;lt;|--FlutterImageView class FlutterView classDiagram class AndroidSurface { +SetNativeWindow(AndroidNativeWindow) } class AndroidSurfaceGL { fml::RefPtr&amp;lt;AndroidNativeWindow&amp;gt; native_window_; std::unique_ptr&amp;lt;AndroidEGLSurface&amp;gt; onscreen_surface_; std::unique_ptr&amp;lt;AndroidEGLSurface&amp;gt; offscreen_surface_; } GPUSurfaceSoftwareDelegate&amp;lt;|--AndroidSurfaceSoftware AndroidSurface&amp;lt;|--AndroidSurfaceSoftware AndroidSurface&amp;lt;|--AndroidSurfaceGL GPUSurfaceGLDelegate&amp;lt;|--AndroidSurfaceGL AndroidSurface&amp;lt;|--AndroidSurfaceVulkan GPUSurfaceVulkanDelegate&amp;lt;|--AndroidSurfaceVulkan class GPUSurfaceGL { GPUSurfaceGLDelegate* delegate_ sk_sp&amp;lt;SkSurface&amp;gt; onscreen_surface_ } Surface&amp;lt;|--GPUSurfaceGL class AndroidEGLSurface { const EGLSurface surface_; const EGLDisplay display_; const EGLContext context_; bool SwapBuffers(); } Flutter通过Surface自绘图解 graph LR subgraph Platform Surface end Surface--&amp;gt;|flutterRenderer.</description>
+    </item>
+    
+    <item>
+      <title>4startup_dart_framework</title>
+      <link>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/4startup_dart_framework/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanle19891345.github.io/en/%E8%B7%A8%E5%B9%B3%E5%8F%B0/flutter/1startup/4startup_dart_framework/</guid>
+      <description>类设计 runApp main.dart
+void main() =&amp;gt; runApp(MyApp()); widgets/binding.dart
+void runApp(Widget app) { WidgetsFlutterBinding.ensureInitialized() ..attachRootWidget(app) ..scheduleWarmUpFrame(); } WidgetsFlutterBinding.ensureInitialized() /// A concrete binding for applications based on the Widgets framework. /// This is the glue that binds the framework to the Flutter engine.  class WidgetsFlutterBinding extends BindingBase with GestureBinding, ServicesBinding, SchedulerBinding, PaintingBinding, SemanticsBinding, RendererBinding, WidgetsBinding { /// Returns an instance of the [WidgetsBinding], creating and  /// initializing it if necessary. If one is created, it will be a  /// [WidgetsFlutterBinding].</description>
+    </item>
+    
+  </channel>
+</rss>
