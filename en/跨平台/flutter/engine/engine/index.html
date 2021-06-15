@@ -12,23 +12,23 @@
     <title>Engine :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623724638" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623724638" rel="stylesheet">
-    <link href="/css/hybrid.css?1623724638" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623724638" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623724638" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623724638" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623724638" rel="stylesheet">
-    <link href="/css/theme.css?1623724638" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623724638" rel="stylesheet">
+    <link href="/css/nucleus.css?1623725216" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623725216" rel="stylesheet">
+    <link href="/css/hybrid.css?1623725216" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623725216" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623725216" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623725216" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623725216" rel="stylesheet">
+    <link href="/css/theme.css?1623725216" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623725216" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623724638" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623725216" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623724638"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623725216"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623724638"></script>
+    <script src="/js/auto_toc_scroll.js?1623725216"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623724638"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623724638"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623725216"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623725216"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623724638"></script>
+<script type="text/javascript" src="/js/search.js?1623725216"></script>
 
     
   </div>
@@ -7588,6 +7588,9 @@
     <li><a href="#runtimecontrollerplatformconfigurationclient">RuntimeController:PlatformConfigurationClient</a></li>
     <li><a href="#engineruntimedelegate">Engine:RuntimeDelegate</a></li>
     <li><a href="#shellenginedelegate">Shell:Engine::Delegate</a></li>
+    <li><a href="#vsyncwaiterandroidawaitvsync">VsyncWaiterAndroid::AwaitVSync</a></li>
+    <li><a href="#flutterjniasyncwaitforvsync">FlutterJNI.asyncWaitForVsync</a></li>
+    <li><a href="#choreographergetinstancepostframecallback">Choreographer.getInstance().postFrameCallback</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -7753,6 +7756,81 @@
     }
   }
   AwaitVSync();
+}
+</code></pre></div><p>shell/platform/android/vsync_waiter_android.cc</p>
+<h2 id="vsyncwaiterandroidawaitvsync">VsyncWaiterAndroid::AwaitVSync</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">// |VsyncWaiter|
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> VsyncWaiterAndroid<span style="color:#f92672">::</span>AwaitVSync() {
+  <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> weak_this <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> std<span style="color:#f92672">::</span>weak_ptr<span style="color:#f92672">&lt;</span>VsyncWaiter<span style="color:#f92672">&gt;</span>(shared_from_this());
+  jlong java_baton <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>jlong<span style="color:#f92672">&gt;</span>(weak_this);
+
+  task_runners_.GetPlatformTaskRunner()<span style="color:#f92672">-&gt;</span>PostTask([java_baton]() {
+    JNIEnv<span style="color:#f92672">*</span> env <span style="color:#f92672">=</span> fml<span style="color:#f92672">::</span>jni<span style="color:#f92672">::</span>AttachCurrentThread();
+    env<span style="color:#f92672">-&gt;</span>CallStaticVoidMethod(g_vsync_waiter_class<span style="color:#f92672">-&gt;</span>obj(),     <span style="color:#75715e">//调用FlutterJNI.asyncWaitForVsync
+</span><span style="color:#75715e"></span>                              g_async_wait_for_vsync_method_,  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                              java_baton                       <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    );
+  });
+}
+</code></pre></div><h2 id="flutterjniasyncwaitforvsync">FlutterJNI.asyncWaitForVsync</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#75715e">// TODO(mattcarroll): add javadocs
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Called by native.
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">asyncWaitForVsync</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> cookie<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>asyncWaitForVsyncDelegate <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      asyncWaitForVsyncDelegate<span style="color:#f92672">.</span><span style="color:#a6e22e">asyncWaitForVsync</span><span style="color:#f92672">(</span>cookie<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalStateException<span style="color:#f92672">(</span>
+          <span style="color:#e6db74">&#34;An AsyncWaitForVsyncDelegate must be registered with FlutterJNI before asyncWaitForVsync() is invoked.&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><h2 id="choreographergetinstancepostframecallback">Choreographer.getInstance().postFrameCallback</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VsyncWaiter</span> <span style="color:#f92672">{</span>
+  
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> FlutterJNI<span style="color:#f92672">.</span><span style="color:#a6e22e">AsyncWaitForVsyncDelegate</span> asyncWaitForVsyncDelegate <span style="color:#f92672">=</span>
+      <span style="color:#66d9ef">new</span> FlutterJNI<span style="color:#f92672">.</span><span style="color:#a6e22e">AsyncWaitForVsyncDelegate</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">asyncWaitForVsync</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> cookie<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+          Choreographer<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span>
+              <span style="color:#f92672">.</span><span style="color:#a6e22e">postFrameCallback</span><span style="color:#f92672">(</span>
+                  <span style="color:#66d9ef">new</span> Choreographer<span style="color:#f92672">.</span><span style="color:#a6e22e">FrameCallback</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                    <span style="color:#a6e22e">@Override</span>
+                    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doFrame</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> frameTimeNanos<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                      <span style="color:#66d9ef">float</span> fps <span style="color:#f92672">=</span> windowManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getDefaultDisplay</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getRefreshRate</span><span style="color:#f92672">();</span>
+                      <span style="color:#66d9ef">long</span> refreshPeriodNanos <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">long</span><span style="color:#f92672">)</span> <span style="color:#f92672">(</span>1000000000<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span> <span style="color:#f92672">/</span> fps<span style="color:#f92672">);</span>
+                      FlutterJNI<span style="color:#f92672">.</span><span style="color:#a6e22e">nativeOnVsync</span><span style="color:#f92672">(</span>
+                          frameTimeNanos<span style="color:#f92672">,</span> frameTimeNanos <span style="color:#f92672">+</span> refreshPeriodNanos<span style="color:#f92672">,</span> cookie<span style="color:#f92672">);</span>
+                    <span style="color:#f92672">}</span>
+                  <span style="color:#f92672">});</span>
+        <span style="color:#f92672">}</span>
+      <span style="color:#f92672">};</span>
+</code></pre></div><p>shell/platform/android/vsync_waiter_android.cc</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#75715e">// static
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> VsyncWaiterAndroid<span style="color:#f92672">::</span>OnNativeVsync(JNIEnv<span style="color:#f92672">*</span> env,
+                                       jclass jcaller,
+                                       jlong frameTimeNanos,
+                                       jlong frameTargetTimeNanos,
+                                       jlong java_baton) {
+  TRACE_EVENT0(<span style="color:#e6db74">&#34;flutter&#34;</span>, <span style="color:#e6db74">&#34;VSYNC&#34;</span>);
+
+  <span style="color:#66d9ef">auto</span> frame_time <span style="color:#f92672">=</span> fml<span style="color:#f92672">::</span>TimePoint<span style="color:#f92672">::</span>FromEpochDelta(
+      fml<span style="color:#f92672">::</span>TimeDelta<span style="color:#f92672">::</span>FromNanoseconds(frameTimeNanos));
+  <span style="color:#66d9ef">auto</span> target_time <span style="color:#f92672">=</span> fml<span style="color:#f92672">::</span>TimePoint<span style="color:#f92672">::</span>FromEpochDelta(
+      fml<span style="color:#f92672">::</span>TimeDelta<span style="color:#f92672">::</span>FromNanoseconds(frameTargetTimeNanos));
+
+  ConsumePendingCallback(java_baton, frame_time, target_time);
+}
+
+<span style="color:#66d9ef">void</span> VsyncWaiterAndroid<span style="color:#f92672">::</span>ConsumePendingCallback(
+    jlong java_baton,
+    fml<span style="color:#f92672">::</span>TimePoint frame_start_time,
+    fml<span style="color:#f92672">::</span>TimePoint frame_target_time) {
+  <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> weak_this <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>weak_ptr<span style="color:#f92672">&lt;</span>VsyncWaiter<span style="color:#f92672">&gt;*&gt;</span>(java_baton);
+  <span style="color:#66d9ef">auto</span> shared_this <span style="color:#f92672">=</span> weak_this<span style="color:#f92672">-&gt;</span>lock();
+  <span style="color:#66d9ef">delete</span> weak_this;
+
+  <span style="color:#66d9ef">if</span> (shared_this) {
+    shared_this<span style="color:#f92672">-&gt;</span>FireCallback(frame_start_time, frame_target_time);
+  }
 }
 </code></pre></div><h2 id="参考">参考</h2>
 <p><a href="https://api.flutter.dev/javadoc/io/flutter/embedding/engine/FlutterEngine.html">https://api.flutter.dev/javadoc/io/flutter/embedding/engine/FlutterEngine.html</a></p>
@@ -12306,19 +12384,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623724638"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623724638"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623724638"></script>
-    <script src="/js/jquery.sticky.js?1623724638"></script>
-    <script src="/js/featherlight.min.js?1623724638"></script>
-    <script src="/js/highlight.pack.js?1623724638"></script>
+    <script src="/js/clipboard.min.js?1623725216"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623725216"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623725216"></script>
+    <script src="/js/jquery.sticky.js?1623725216"></script>
+    <script src="/js/featherlight.min.js?1623725216"></script>
+    <script src="/js/highlight.pack.js?1623725216"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623724638"></script>
-    <script src="/js/learn.js?1623724638"></script>
-    <script src="/js/hugo-learn.js?1623724638"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623725216"></script>
+    <script src="/js/learn.js?1623725216"></script>
+    <script src="/js/hugo-learn.js?1623725216"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623724638"></script>
+            <script src="/mermaid/mermaid.js?1623725216"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
