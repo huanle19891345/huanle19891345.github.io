@@ -13,7 +13,8 @@
       
       <guid>https://huanle19891345.github.io/en/android/system/thread/stacktraceelement/</guid>
       <description>9.0.0_r3
-Throwable.getStackTrace public StackTraceElement[] getStackTrace() { return getOurStackTrace().clone(); } private synchronized StackTraceElement[] getOurStackTrace() { // Initialize stack trace field with information from // backtrace if this is the first call to this method // // Android-changed: test explicitly for equality with // STACK_TRACE_ELEMENT if (stackTrace == libcore.util.EmptyArray.STACK_TRACE_ELEMENT || (stackTrace == null &amp;amp;&amp;amp; backtrace != null) /* Out of protocol state */) { stackTrace = nativeGetStackTrace(backtrace);//main  backtrace = null; } return stackTrace; } /art/runtime/native/java_lang_Throwable.</description>
+Throwable.getStackTrace public Throwable() { fillInStackTrace(); } public synchronized Throwable fillInStackTrace() { if (stackTrace != null || backtrace != null /* Out of protocol state */ ) { backtrace = nativeFillInStackTrace(); } return this; } fillInStackTrace art/runtime/native/java_lang_Throwable.cc
+static jobject Throwable_nativeFillInStackTrace(JNIEnv* env, jclass) { ScopedFastNativeObjectAccess soa(env); return soa.Self()-&amp;gt;CreateInternalStackTrace&amp;lt;false&amp;gt;(soa); } template&amp;lt;bool kTransactionActive&amp;gt; jobject Thread::CreateInternalStackTrace(const ScopedObjectAccessAlreadyRunnable&amp;amp; soa) const { // Compute depth of stack, save frames if possible to avoid needing to recompute many.</description>
     </item>
     
     <item>

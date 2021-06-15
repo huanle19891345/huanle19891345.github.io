@@ -9,26 +9,26 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>kernel :: 郑欢的学习总结</title>
+    <title>解释执行7_0 :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623724638" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623724638" rel="stylesheet">
-    <link href="/css/hybrid.css?1623724638" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623724638" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623724638" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623724638" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623724638" rel="stylesheet">
-    <link href="/css/theme.css?1623724638" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623724638" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724636" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724636" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724636" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724636" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724636" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724636" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724636" rel="stylesheet">
+    <link href="/css/theme.css?1623724636" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724636" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623724638" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724636" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623724638"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724636"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623724638"></script>
+    <script src="/js/auto_toc_scroll.js?1623724636"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -39,7 +39,7 @@
     
 
   </head>
-  <body class="" data-url="/en/android/system/kernel/">
+  <body class="" data-url="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623724638"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623724638"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724636"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724636"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623724638"></script>
+<script type="text/javascript" src="/js/search.js?1623724636"></script>
 
     
   </div>
@@ -217,7 +217,7 @@
   
     
     <li data-nav-id="/en/android/art/" title="art" class="dd-item
-        
+        parent
         
         
         ">
@@ -677,7 +677,7 @@
   
     
     <li data-nav-id="/en/android/art/jni/" title="jni" class="dd-item
-        
+        parent
         
         
         ">
@@ -789,7 +789,7 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item active">
         <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
         解释执行7_0
         <i class="fas fa-check read-icon"></i>
@@ -2203,7 +2203,7 @@
   
     
     <li data-nav-id="/en/android/system/" title="system" class="dd-item
-        parent
+        
         
         
         ">
@@ -2533,8 +2533,8 @@
   
     
     <li data-nav-id="/en/android/system/kernel/" title="kernel" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/en/android/system/kernel/">
@@ -7540,6 +7540,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -7558,7 +7560,13 @@
             
           
           
-            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/system/'>system</a> > kernel
+            
+            
+          
+          
+            <a href='/en/'>技术探索总结</a> > <a href='/en/android/'>android</a> > <a href='/en/android/art/'>art</a> > <a href='/en/android/art/jni/'>jni</a> > 解释执行7_0
+          
+        
           
         
           
@@ -7571,6 +7579,52 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#quick_entrypoints_x86s">quick_entrypoints_x86.S</a>
+      <ul>
+        <li><a href="#art_quick_invoke_stub">art_quick_invoke_stub</a></li>
+        <li><a href="#art_quick_to_interpreter_bridge">art_quick_to_interpreter_bridge</a></li>
+      </ul>
+    </li>
+    <li><a href="#quick_trampoline_entrypointscc">quick_trampoline_entrypoints.cc</a>
+      <ul>
+        <li><a href="#artquicktointerpreterbridge">artQuickToInterpreterBridge</a></li>
+      </ul>
+    </li>
+    <li><a href="#interpreterhcc">interpreter.h/cc</a>
+      <ul>
+        <li><a href="#enterinterpreterfromentrypoint">EnterInterpreterFromEntryPoint</a></li>
+        <li><a href="#execute">Execute</a></li>
+      </ul>
+    </li>
+    <li><a href="#interpreter_switch_implcc">interpreter_switch_impl.cc</a>
+      <ul>
+        <li><a href="#executeswitchimpl">ExecuteSwitchImpl</a></li>
+      </ul>
+    </li>
+    <li><a href="#interpreter_commonhcc">interpreter_common.h/cc</a>
+      <ul>
+        <li><a href="#doinvoke">DoInvoke</a></li>
+        <li><a href="#docall">DoCall</a></li>
+        <li><a href="#docallcommon">DoCallCommon</a></li>
+        <li><a href="#artinterpretertointerpreterbridge">ArtInterpreterToInterpreterBridge</a></li>
+        <li><a href="#artinterpretertocompiledcodebridge">ArtInterpreterToCompiledCodeBridge</a></li>
+      </ul>
+    </li>
+    <li><a href="#art_methodcc">art_method.cc</a>
+      <ul>
+        <li><a href="#invoke">Invoke</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -7578,86 +7632,513 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              解释执行7_0
+            </h1>
           
 
         
 
 
+<h2 id="quick_entrypoints_x86s">quick_entrypoints_x86.S</h2>
+<h3 id="art_quick_invoke_stub">art_quick_invoke_stub</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#960050;background-color:#1e0010">/*这段注释来自于源码，它展示了调用</span><span style="color:#a6e22e">art_quick_invoke_stub函数时</span><span style="color:#960050;background-color:#1e0010">，相关参数在栈中的布局</span>
+    <span style="color:#960050;background-color:#1e0010">*</span> <span style="color:#a6e22e">Quick</span> <span style="color:#66d9ef">invocation</span> <span style="color:#66d9ef">stub</span> (<span style="color:#66d9ef">non-static</span>).
+    <span style="color:#960050;background-color:#1e0010">*</span> <span style="color:#a6e22e">On</span> <span style="color:#66d9ef">entry</span>:
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span>] <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">address</span> <span style="color:#960050;background-color:#1e0010">返回值地址，这是由函数调用指令自动压入栈的</span>
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">method</span> <span style="color:#66d9ef">pointer</span> <span style="color:#960050;background-color:#1e0010">代表方法</span><span style="color:#66d9ef">C的ArtMethod对象</span>
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#ae81ff">8</span>] <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">argument</span> <span style="color:#66d9ef">array</span> <span style="color:#66d9ef">or</span> <span style="color:#66d9ef">null</span> <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">no</span> <span style="color:#66d9ef">argument</span> <span style="color:#66d9ef">methods</span>
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#ae81ff">12</span>] <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">size</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">argument</span> <span style="color:#66d9ef">array</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">bytes</span>
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#ae81ff">16</span>] <span style="color:#960050;background-color:#1e0010">=</span> (<span style="color:#66d9ef">managed</span>) <span style="color:#66d9ef">thread</span> <span style="color:#66d9ef">pointer</span> <span style="color:#960050;background-color:#1e0010">这是代表调用线程的</span><span style="color:#66d9ef">Thread对象</span>
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#ae81ff">20</span>] <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">JValue</span>* <span style="color:#66d9ef">result</span>
+    <span style="color:#960050;background-color:#1e0010">*</span>  <span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">sp</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#ae81ff">24</span>] <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">shorty</span>
+    <span style="color:#960050;background-color:#1e0010">*/</span>
+<span style="color:#a6e22e">DEFINE_FUNCTION</span> <span style="color:#66d9ef">art_quick_invoke_stub</span>      <span style="color:#75715e">#定义art_quick_invoke_stub函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">PUSH</span> <span style="color:#66d9ef">ebp</span>                        <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">save</span> <span style="color:#66d9ef">ebp</span>
+    <span style="color:#a6e22e">PUSH</span> <span style="color:#66d9ef">ebx</span>                        <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">save</span> <span style="color:#66d9ef">ebx</span>
+    <span style="color:#a6e22e">PUSH</span> <span style="color:#66d9ef">esi</span>                        <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">save</span> <span style="color:#66d9ef">esi</span>
+    <span style="color:#a6e22e">PUSH</span> <span style="color:#66d9ef">edi</span>                        <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">save</span> <span style="color:#66d9ef">edi</span>
+    <span style="color:#a6e22e">......</span>                              <span style="color:#960050;background-color:#1e0010">//处理浮点寄存器、扩展栈空间等</span>
+    <span style="color:#960050;background-color:#1e0010">//下面的循环用于从</span><span style="color:#a6e22e">args中拷贝参数到栈上</span><span style="color:#960050;background-color:#1e0010">。此处保留代码中原有的注释</span>
+    <span style="color:#a6e22e">movl</span> <span style="color:#ae81ff">28</span>(%ebp), %ecx                <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">ECX</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">size</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">args</span>
+    <span style="color:#a6e22e">movl</span> <span style="color:#ae81ff">24</span>(%ebp), %esi                <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">ESI</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">argument</span> <span style="color:#66d9ef">array</span>
+    <span style="color:#a6e22e">leal</span> <span style="color:#ae81ff">4</span>(%esp), %edi                 <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">EDI</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#66d9ef">just</span> <span style="color:#66d9ef">after</span> <span style="color:#66d9ef">Method</span>* <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">stack</span> <span style="color:#66d9ef">arguments</span>
+    <span style="color:#a6e22e">rep</span> <span style="color:#a6e22e">movsb</span>                          <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">ecx--</span>) <span style="color:#960050;background-color:#1e0010">{</span> *<span style="color:#66d9ef">edi</span><span style="color:#960050;background-color:#1e0010">++</span> <span style="color:#960050;background-color:#1e0010">=</span> *<span style="color:#66d9ef">esi</span><span style="color:#960050;background-color:#1e0010">++</span> <span style="color:#960050;background-color:#1e0010">}</span>
 
-	<h1 id="kernel">kernel</h1>
-<p>探索总结kernel知识</p>
+    <span style="color:#a6e22e">......</span>                             <span style="color:#960050;background-color:#1e0010">//略过其他代码</span>
+.Lgpr_setup_finished:                  <span style="color:#75715e">#至此，参数已经准备好。下面将进入ArtMethod对象的机器码入口
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">mov</span> <span style="color:#ae81ff">20</span>(%ebp), %eax                     <span style="color:#960050;background-color:#1e0010">//</span><span style="color:#66d9ef">EBP</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#ae81ff">20</span><span style="color:#960050;background-color:#1e0010">处保存着</span><span style="color:#66d9ef">ArtMethod</span>* <span style="color:#66d9ef">C对象</span><span style="color:#960050;background-color:#1e0010">，将其拷贝</span>
+                                      <span style="color:#960050;background-color:#1e0010">到</span><span style="color:#a6e22e">EAX中</span>
+    <span style="color:#75715e">#跳转到这个ArtMethod对象机器码入口对应的地方。main
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">call</span> *<span style="color:#66d9ef">ART_METHOD_QUICK_CODE_OFFSET_32</span>(%eax)
+    <span style="color:#a6e22e">.....</span>                              <span style="color:#960050;background-color:#1e0010">//恢复栈，设置返回值到</span><span style="color:#66d9ef">result中</span>
+    <span style="color:#a6e22e">ret</span>
+<span style="color:#a6e22e">END_FUNCTION</span> <span style="color:#66d9ef">art_quick_invoke_stub</span>
+</code></pre></div><h3 id="art_quick_to_interpreter_bridge">art_quick_to_interpreter_bridge</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#75715e">#DEFINE_FUNCTION是一个宏，用于定义一个函数。下面将定义
+</span><span style="color:#75715e">#art_quick_to_interpreter_bridge函数
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">DEFINE_FUNCTION</span> <span style="color:#66d9ef">art_quick_to_interpreter_bridge</span>
+    <span style="color:#75715e">#下面这个宏在10.1.3.1.3节介绍过了，执行其中的汇编指令后，栈的布局将变成如图10-4所示的样子。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">SETUP_REFS_AND_ARGS_CALLEE_SAVE_FRAME</span>  <span style="color:#66d9ef">ebx</span>, <span style="color:#66d9ef">ebx</span>
+    <span style="color:#a6e22e">mov</span> %esp, %edx                  <span style="color:#75715e">#将ESP保存到EDX中
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">PUSH</span> <span style="color:#66d9ef">eax</span>                    <span style="color:#75715e">#EAX入栈，EAX寄存器的值代表被调用方法的ArtMethod对象。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">PUSH</span> <span style="color:#66d9ef">edx</span>                    <span style="color:#75715e">#EDX入栈，
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pushl</span> %fs:<span style="color:#66d9ef">THREAD_SELF_OFFSET</span>      <span style="color:#75715e">#获取当前线程的Thread对象，并压入栈中
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">PUSH</span> <span style="color:#66d9ef">eax</span>                      <span style="color:#75715e">#EAX入栈。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">call</span> <span style="color:#66d9ef">SYMBOL</span>(<span style="color:#66d9ef">artQuickToInterpreterBridge</span>) <span style="color:#75715e">#main
+</span><span style="color:#75715e"></span>                              <span style="color:#75715e">#调用目标函数
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">#参数出栈，恢复到SETUP_REFS_AND_ARGS_CALLEE_SAVE_FRAME执行后的栈状态
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">addl</span> <span style="color:#66d9ef">LITERAL</span>(<span style="color:#ae81ff">16</span>), %esp
+    <span style="color:#a6e22e">......</span>
+    <span style="color:#75715e">#下面三行代码用于处理返回值，xmm为浮点寄存，64位长，而eax，edx为32位长。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">#下面这三行代码执行往后，xmm0的低32位的值来自EAX，高32位的值来自EDX。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">movd</span> %eax, %xmm0
+    <span style="color:#a6e22e">movd</span> %edx, %xmm1
+    <span style="color:#a6e22e">punpckldq</span> %xmm1, %xmm0             <span style="color:#75715e">#将xmm1和xmm0低32位的值组合起来存储到xmm0中。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">#调整栈顶位置
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">addl</span> <span style="color:#66d9ef">LITERAL</span>(<span style="color:#ae81ff">48</span>), %esp
+    <span style="color:#a6e22e">POP</span> <span style="color:#66d9ef">ebp</span>
+    <span style="color:#a6e22e">POP</span> <span style="color:#66d9ef">esi</span>
+    <span style="color:#a6e22e">POP</span> <span style="color:#66d9ef">edi</span>
+    <span style="color:#a6e22e">RETURN_OR_DELIVER_PENDING_EXCEPTION</span>      <span style="color:#75715e">#函数返回或抛异常（10.6节将介绍它）,main
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">END_FUNCTION</span> <span style="color:#66d9ef">art_quick_to_interpreter_bridge</span>
+</code></pre></div><h2 id="quick_trampoline_entrypointscc">quick_trampoline_entrypoints.cc</h2>
+<h3 id="artquicktointerpreterbridge">artQuickToInterpreterBridge</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">extern</span> <span style="color:#e6db74">&#34;C&#34;</span> <span style="color:#66d9ef">uint64_t</span> artQuickToInterpreterBridge(ArtMethod<span style="color:#f92672">*</span> method,
+                    Thread<span style="color:#f92672">*</span> self, ArtMethod<span style="color:#f92672">**</span> sp) {
+    <span style="color:#75715e">//参数method代表当前被调用的Java方法，我们用图10-7中的ArtMethod* B表示它
+</span><span style="color:#75715e"></span>    ScopedQuickEntrypointChecks <span style="color:#a6e22e">sqec</span>(self);
+    JValue tmp_value;
+    <span style="color:#75715e">/*PopStackedShadowFrame和Thread对栈的管理有关。此处假设是从机器码跳转到解释执行模式，
+</span><span style="color:#75715e">      并且不是HDeoptimize的情况，那么，该函数返回值deopt_frame为nullptr。 */</span>
+    ShadowFrame<span style="color:#f92672">*</span> deopt_frame <span style="color:#f92672">=</span> self<span style="color:#f92672">-&gt;</span>PopStackedShadowFrame(
+        StackedShadowFrameType<span style="color:#f92672">::</span>kSingleFrameDeoptimizationShadowFrame, false);
 
+    ManagedStack fragment; <span style="color:#75715e">//重要：构造一个ManagedStack对象。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> shorty_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#75715e">//如果不是代理方法的话，non_proxy_method就是ArtMethod* B本身。
+</span><span style="color:#75715e"></span>    ArtMethod<span style="color:#f92672">*</span> non_proxy_method <span style="color:#f92672">=</span>
+                method<span style="color:#f92672">-&gt;</span>GetInterfaceMethodIfProxy(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>));
+    <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item <span style="color:#f92672">=</span> non_proxy_method<span style="color:#f92672">-&gt;</span>GetCodeItem();
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> shorty <span style="color:#f92672">=</span> non_proxy_method<span style="color:#f92672">-&gt;</span>GetShorty(<span style="color:#f92672">&amp;</span>shorty_len);
 
+    JValue result; <span style="color:#75715e">//存储方法调用的返回值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (deopt_frame <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+        ..... <span style="color:#75715e">//和HDeoptimize有关，后续章节再介绍它
+</span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> old_cause <span style="color:#f92672">=</span> ......;
+        <span style="color:#66d9ef">uint16_t</span> num_regs <span style="color:#f92672">=</span> code_item<span style="color:#f92672">-&gt;</span>registers_size_;
+        <span style="color:#75715e">//创建代表ArtMethod B的栈帧对象ShawFrame。注意，它的link_取值为nullptr，
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//dex_pc_取值为0
+</span><span style="color:#75715e"></span>        ShadowFrameAllocaUniquePtr shadow_frame_unique_ptr <span style="color:#f92672">=</span>
+            CREATE_SHADOW_FRAME(num_regs, <span style="color:#75715e">/* link */</span> <span style="color:#66d9ef">nullptr</span>, method,
+                            <span style="color:#75715e">/* dex pc */</span> <span style="color:#ae81ff">0</span>);
+        ShadowFrame<span style="color:#f92672">*</span> shadow_frame <span style="color:#f92672">=</span> shadow_frame_unique_ptr.get();
+        size_t first_arg_reg <span style="color:#f92672">=</span> code_item<span style="color:#f92672">-&gt;</span>registers_size_ <span style="color:#f92672">-</span> code_item<span style="color:#f92672">-&gt;</span>ins_size_;
+        <span style="color:#75715e">//借助BuildQuickShadowFrameVisitor将调用参数放到shadow_frame对象中
+</span><span style="color:#75715e"></span>        BuildQuickShadowFrameVisitor <span style="color:#a6e22e">shadow_frame_builder</span>(sp,
+                        method<span style="color:#f92672">-&gt;</span>IsStatic(), shorty, shorty_len,
+                        shadow_frame, first_arg_reg);
+        shadow_frame_builder.VisitArguments();
+        <span style="color:#75715e">//判断ArtMethod* B所属的类是否已经初始化
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">bool</span> needs_initialization <span style="color:#f92672">=</span>
+            method<span style="color:#f92672">-&gt;</span>IsStatic() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>method<span style="color:#f92672">-&gt;</span>GetDeclaringClass()<span style="color:#f92672">-&gt;</span>IsInitialized();
+        <span style="color:#75715e">//重要：下面两行代码将fragment和shadow_frame放到Thread类对应的成员变量中去处理
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//我们后续再讨论这部分内容
+</span><span style="color:#75715e"></span>        self<span style="color:#f92672">-&gt;</span>PushManagedStackFragment(<span style="color:#f92672">&amp;</span>fragment);
+        self<span style="color:#f92672">-&gt;</span>PushShadowFrame(shadow_frame);
+        ......
+        <span style="color:#75715e">//如果ArtMethod B所属类没有初始化，则先初始化它。类初始化就是调用ClassLinker的Ensure-
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//Initialized函数
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (needs_initialization) {
+                StackHandleScope<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> hs(self);
+            Handle<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> h_class(hs.NewHandle(
+                    shadow_frame<span style="color:#f92672">-&gt;</span>GetMethod()<span style="color:#f92672">-&gt;</span>GetDeclaringClass()));
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetClassLinker()<span style="color:#f92672">-&gt;</span>EnsureInitialized(
+                        self, h_class, true, true)) {......}
+        }
+        <span style="color:#75715e">//解释执行的入口函数
+</span><span style="color:#75715e"></span>        result <span style="color:#f92672">=</span> interpreter<span style="color:#f92672">::</span>EnterInterpreterFromEntryPoint(self, code_item, shadow_frame);<span style="color:#75715e">//main
+</span><span style="color:#75715e"></span>        }
+        <span style="color:#75715e">//和Thread对栈的管理有关
+</span><span style="color:#75715e"></span>        self<span style="color:#f92672">-&gt;</span>PopManagedStackFragment(fragment);
+        <span style="color:#75715e">//根据sp的位置找到本方法的调用者，以图10-7为例，即找到ArtMethod* A，是它调用了本方
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//法（对应为ArtMethod* B）。
+</span><span style="color:#75715e"></span>        ArtMethod<span style="color:#f92672">*</span> caller <span style="color:#f92672">=</span> QuickArgumentVisitor<span style="color:#f92672">::</span>GetCallingMethod(sp);
+        <span style="color:#66d9ef">if</span> (UNLIKELY(Dbg<span style="color:#f92672">::</span>IsForcedInterpreterNeededForUpcall(self, caller))) {
+            <span style="color:#75715e">//和HDeoptimize有关
+</span><span style="color:#75715e"></span>         <span style="color:#75715e">//和HDeoptimize有关
+</span><span style="color:#75715e"></span>            self<span style="color:#f92672">-&gt;</span>PushDeoptimizationContext(result, shorty[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span>,
+                        <span style="color:#75715e">/* from_code */</span> false, self<span style="color:#f92672">-&gt;</span>GetException());
+            self<span style="color:#f92672">-&gt;</span>SetException(Thread<span style="color:#f92672">::</span>GetDeoptimizationException());
+        }
+        <span style="color:#66d9ef">return</span> result.GetJ();      <span style="color:#75715e">//artQuickToInterpreterBridge返回
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><h2 id="interpreterhcc">interpreter.h/cc</h2>
+<h3 id="enterinterpreterfromentrypoint">EnterInterpreterFromEntryPoint</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">extern</span> JValue <span style="color:#a6e22e">EnterInterpreterFromEntryPoint</span>(
+        Thread<span style="color:#f92672">*</span> self,                        <span style="color:#75715e">//代表调用线程的Thread对象
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item,      <span style="color:#75715e">//方法B的dex指令码内容
+</span><span style="color:#75715e"></span>    ShadowFrame<span style="color:#f92672">*</span> shadow_frame                <span style="color:#75715e">//方法B所需的参数
+</span><span style="color:#75715e"></span>);
 
+JValue <span style="color:#a6e22e">EnterInterpreterFromEntryPoint</span>(Thread<span style="color:#f92672">*</span> self,
+            <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item, ShadowFrame<span style="color:#f92672">*</span> shadow_frame) {
+    ......
+    <span style="color:#75715e">//下面这段代码和JIT有关，相关知识见本章后续对JIT的介绍
+</span><span style="color:#75715e"></span>    jit<span style="color:#f92672">::</span>Jit<span style="color:#f92672">*</span> jit <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetJit();
+    <span style="color:#66d9ef">if</span> (jit <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+        jit<span style="color:#f92672">-&gt;</span>NotifyCompiledCodeToInterpreterTransition(self,
+                        shadow_frame<span style="color:#f92672">-&gt;</span>GetMethod());
+    }
+    <span style="color:#75715e">//关键函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> Execute(self, code_item, <span style="color:#f92672">*</span>shadow_frame, JValue());<span style="color:#75715e">//main
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="execute">Execute</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">inline</span> JValue <span style="color:#a6e22e">Execute</span>(Thread<span style="color:#f92672">*</span> self,
+        <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item,
+        ShadowFrame<span style="color:#f92672">&amp;</span> shadow_frame,JValue result_register,
+        <span style="color:#66d9ef">bool</span> stay_in_interpreter <span style="color:#f92672">=</span> false) {
+    <span style="color:#75715e">/*注意stay_in_interpreter参数，它表示是否强制使用解释执行模式。默认为false，它表示如果
+</span><span style="color:#75715e">      方法B存在jit编译得到的机器码，则转到jit去执行。  */</span>
+    <span style="color:#75715e">/*下面这个if条件的判断很有深意。我们在本章解释图10-5里ShadowFrame成员变量时曾说过，如果
+</span><span style="color:#75715e">      是HDeoptimize的情况，ShadowFrame的dex_pc_不是0（这表示有一部分指令以机器码方式执
+</span><span style="color:#75715e">      行）。如果dex_pc_为0的话，则表示该方法从一开始就将以解释方式执行。我们称这种情况为纯解
+</span><span style="color:#75715e">      释执行的方法，此时，我们就需要检查它是否存在JIT的情况。  */</span>
+    <span style="color:#66d9ef">if</span> (LIKELY(shadow_frame.GetDexPC() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)) {
+        instrumentation<span style="color:#f92672">::</span>Instrumentation<span style="color:#f92672">*</span> instrumentation <span style="color:#f92672">=</span>
+                    Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetInstrumentation();
+        ArtMethod <span style="color:#f92672">*</span>method <span style="color:#f92672">=</span> shadow_frame.GetMethod();
+        <span style="color:#66d9ef">if</span> (UNLIKELY(instrumentation<span style="color:#f92672">-&gt;</span>HasMethodEntryListeners())) {
+            instrumentation<span style="color:#f92672">-&gt;</span>MethodEnterEvent(self,
+                shadow_frame.GetThisObject(code_item<span style="color:#f92672">-&gt;</span>ins_size_),
+                method, <span style="color:#ae81ff">0</span>);
+        }
+        <span style="color:#75715e">//判断这个需要纯解释执行的方法是否经过JIT编译了
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>stay_in_interpreter) {
+            jit<span style="color:#f92672">::</span>Jit<span style="color:#f92672">*</span> jit <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetJit();
+            <span style="color:#66d9ef">if</span> (jit <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+                jit<span style="color:#f92672">-&gt;</span>MethodEntered(self, shadow_frame.GetMethod());
+                <span style="color:#66d9ef">if</span> (jit<span style="color:#f92672">-&gt;</span>CanInvokeCompiledCode(method)) {
+                    ...... <span style="color:#75715e">//转入jit编译的机器码去执行并返回结果
+</span><span style="color:#75715e"></span>                }
+     } }
+    } <span style="color:#75715e">//dex_pc_是否为0判断结束
+</span><span style="color:#75715e"></span>
+    ...... <span style="color:#75715e">//下面是解释执行的处理逻辑
+</span><span style="color:#75715e"></span>    ArtMethod<span style="color:#f92672">*</span> method <span style="color:#f92672">=</span> shadow_frame.GetMethod();
+    <span style="color:#75715e">//transaction_active和dex2oat编译逻辑有关，完整虚拟机运行时候返回false
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> transaction_active <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>IsActiveTransaction();
+    <span style="color:#75715e">//是否略过Access检查，即判断是否有权限执行本方法。大部分情况下该if条件是满足的
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (LIKELY(method<span style="color:#f92672">-&gt;</span>SkipAccessChecks())) {
+        <span style="color:#75715e">/*main,在ART虚拟机中，解释执行的实现方式有三种，由kInterpreterImplKind取值来控制：
+</span><span style="color:#75715e">          （1）kMterpImplKind：根据不同CPU平台，采用对应汇编语言编写的，基于goto逻辑的实现。
+</span><span style="color:#75715e">              这也是kInterpreterImplKind的默认取值。
+</span><span style="color:#75715e">          （2）kSwitchImplKind：由C++编写，基于switch/case逻辑实现。
+</span><span style="color:#75715e">          （3）kComputedGotoImplKind：由C++编写，基于goto逻辑实现。根据代码中的注释所述，
+</span><span style="color:#75715e">              这种实现的代码不支持使用clang编译器。
+</span><span style="color:#75715e">           这三种实现的思路大同小异，首选自然是速度更快的汇编处理kMterpImplKind模式。
+</span><span style="color:#75715e">           为了展示一些dex指令的处理逻辑，笔者拟讨论kSwtichImplKind模式的相关代码。 */</span>
+    <span style="color:#66d9ef">if</span> (kInterpreterImplKind <span style="color:#f92672">==</span> kMterpImplKind) {
+        <span style="color:#66d9ef">if</span> (transaction_active) {.....}
+        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (UNLIKELY(<span style="color:#f92672">!</span>Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>IsStarted())) {
+            ...... <span style="color:#75715e">//针对dex2oat的情况
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+            ......
+            <span style="color:#75715e">//ExecuteMterpImpl函数的定义由汇编代码实现,main
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">bool</span> returned <span style="color:#f92672">=</span> ExecuteMterpImpl(self, code_item, <span style="color:#f92672">&amp;</span>shadow_frame,
+                                <span style="color:#f92672">&amp;</span>result_register);
+            }
+        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (kInterpreterImplKind <span style="color:#f92672">==</span> kSwitchImplKind) {
+            <span style="color:#66d9ef">if</span> (transaction_active) {......
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#75715e">//kSwitchImplKind的入口函数。注意，最后一个参数的值为false。main
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> ExecuteSwitchImpl<span style="color:#f92672">&lt;</span>false, false<span style="color:#f92672">&gt;</span>(self, code_item, shadow_frame,
+                                    result_register, false);
+            }
+        } <span style="color:#66d9ef">else</span> {　<span style="color:#75715e">//kInterpreterImplKind取值为kComputedGotoImplKind的情况,main
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (transaction_active) {......}
+        <span style="color:#66d9ef">else</span> {
+                <span style="color:#66d9ef">return</span> ExecuteGotoImpl<span style="color:#f92672">&lt;</span>false, false<span style="color:#f92672">&gt;</span>(self, code_item, shadow_frame,
+                            result_register);
+            }
+        }
+    }
+    ......
+}
+</code></pre></div><h2 id="interpreter_switch_implcc">interpreter_switch_impl.cc</h2>
+<h3 id="executeswitchimpl">ExecuteSwitchImpl</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span> do_access_check, <span style="color:#66d9ef">bool</span> transaction_active<span style="color:#f92672">&gt;</span>
+JValue ExecuteSwitchImpl(Thread<span style="color:#f92672">*</span> self, <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item,
+                    ShadowFrame<span style="color:#f92672">&amp;</span> shadow_frame, JValue result_register,
+                    <span style="color:#66d9ef">bool</span> interpret_one_instruction) {
+    <span style="color:#75715e">//注意上文Execute代码中调用ExeucteSwitchImpl时设置的最后一个参数为false，所以此处inter-
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//pret_one_instruction为false。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">constexpr</span> <span style="color:#66d9ef">bool</span> do_assignability_check <span style="color:#f92672">=</span> do_access_check;
+    ......
+    <span style="color:#75715e">//dex_pc指向要执行的dex指令
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> dex_pc <span style="color:#f92672">=</span> shadow_frame.GetDexPC();
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">const</span> instrumentation <span style="color:#f92672">=</span>
+                Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetInstrumentation();
+    <span style="color:#75715e">//insns代表方法B的dex指令码数组
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint16_t</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">const</span> insns <span style="color:#f92672">=</span> code_item<span style="color:#f92672">-&gt;</span>insns_;
+    <span style="color:#66d9ef">const</span> Instruction<span style="color:#f92672">*</span> inst <span style="color:#f92672">=</span> Instruction<span style="color:#f92672">::</span>At(insns <span style="color:#f92672">+</span> dex_pc);
+    <span style="color:#66d9ef">uint16_t</span> inst_data;
+    <span style="color:#75715e">//方法B对应的ArtMethod对象
+</span><span style="color:#75715e"></span>    ArtMethod<span style="color:#f92672">*</span> method <span style="color:#f92672">=</span> shadow_frame.GetMethod();
+    jit<span style="color:#f92672">::</span>Jit<span style="color:#f92672">*</span> jit <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetJit();
+    ......
+    <span style="color:#66d9ef">do</span> { <span style="color:#75715e">//遍历方法B的dex指令码数组，main
+</span><span style="color:#75715e"></span>        dex_pc <span style="color:#f92672">=</span> inst<span style="color:#f92672">-&gt;</span>GetDexPc(insns);
+        shadow_frame.SetDexPC(dex_pc);
+        ......
+        inst_data <span style="color:#f92672">=</span> inst<span style="color:#f92672">-&gt;</span>Fetch16(<span style="color:#ae81ff">0</span>);
+        <span style="color:#75715e">/*main,借助switch/case，针对每一种dex指令进行处理。注意，处理每种dex指令前，都有一个PREAMBLE
+</span><span style="color:#75715e">          宏，该宏就是调用instrumentation的DexPcMovedEvent函数。10.5节将单独介绍和instrumentation相关的内容。  */</span>
+        <span style="color:#66d9ef">switch</span> (inst<span style="color:#f92672">-&gt;</span>Opcode(inst_data)) {<span style="color:#75715e">//main
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">case</span> Instruction<span style="color:#f92672">::</span>NOP: <span style="color:#75715e">//处理NOP指令
+</span><span style="color:#75715e"></span>                PREAMBLE();
+                <span style="color:#75715e">//Next_1xx是Instruction类的成员函数，用于跳过本指令的参数，使之指向下一条
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//指令的开头。1xx是dex指令码存储格式的一种。读者可不用管它。
+</span><span style="color:#75715e"></span>                inst <span style="color:#f92672">=</span> inst<span style="color:#f92672">-&gt;</span>Next_1xx();
+                <span style="color:#66d9ef">break</span>;
+            ...... <span style="color:#75715e">//其他dex指令码的处理
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> Instruction<span style="color:#f92672">::</span>INVOKE_DIRECT: { <span style="color:#75715e">//invoke-direct指令码的处理
+</span><span style="color:#75715e"></span>            PREAMBLE();
+            <span style="color:#75715e">//DoInvoke的分析见下文。main
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">bool</span> success <span style="color:#f92672">=</span> DoInvoke<span style="color:#f92672">&lt;</span>kDirect, false, do_access_check<span style="color:#f92672">&gt;</span>(
+                self, shadow_frame, inst, inst_data, <span style="color:#f92672">&amp;</span>result_register);
+            <span style="color:#75715e">/*Next_3xx也是Instruction类的成员函数。下面的POSSIBLY_HANDLE_PENDING_EXCEPTION
+</span><span style="color:#75715e">              是一个宏，如果有异常发生，则进入异常处理，否则将调用Next_3xx函数使得inst指向
+</span><span style="color:#75715e">              下一条指令。整个解释执行的流程就这样循环直到所有指令码处理完毕。main   */</span>
+              POSSIBLY_HANDLE_PENDING_EXCEPTION(<span style="color:#f92672">!</span>success, Next_3xx);
+              <span style="color:#66d9ef">break</span>;
+                }
+            ......
+        }
+    } <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>interpret_one_instruction); <span style="color:#75715e">//循环
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//记录dex指令执行的位置并更新到shadow_frame中
+</span><span style="color:#75715e"></span>    shadow_frame.SetDexPC(inst<span style="color:#f92672">-&gt;</span>GetDexPc(insns));
+    <span style="color:#66d9ef">return</span> result_register;
+}
+</code></pre></div><h2 id="interpreter_commonhcc">interpreter_common.h/cc</h2>
+<h3 id="doinvoke">DoInvoke</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span>InvokeType type, <span style="color:#66d9ef">bool</span> is_range, <span style="color:#66d9ef">bool</span> do_access_check<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> DoInvoke(Thread<span style="color:#f92672">*</span> self, ShadowFrame<span style="color:#f92672">&amp;</span> shadow_frame,
+            <span style="color:#66d9ef">const</span> Instruction<span style="color:#f92672">*</span> inst, <span style="color:#66d9ef">uint16_t</span> inst_data, JValue<span style="color:#f92672">*</span> result) {
+    <span style="color:#75715e">/*先观察DoInvoke的参数：
+</span><span style="color:#75715e">     （1）模板参数type：指明调用类型，比如kStatic、kDirect等。
+</span><span style="color:#75715e">     （2）模板参数is_range：如果该方法有多于五个参数的话，则需要使用invoke-xxx-range这样
+</span><span style="color:#75715e">         的指令。
+</span><span style="color:#75715e">     （3）模板参数do_access_check：是否需要访问检查。即检查是否有权限调用invoke指令的目标
+</span><span style="color:#75715e">         方法C。
+</span><span style="color:#75715e">     （4）shadow_frame：方法B对应的ShadowFrame对象。
+</span><span style="color:#75715e">     （5）inst：invoke指令对应的Instruction对象。
+</span><span style="color:#75715e">     （6）inst_data：invoke指令对应的参数。
+</span><span style="color:#75715e">     （7）result：用于存储方法C执行的结果。 */</span>
+    <span style="color:#75715e">//method_idx为方法C在dex文件里method_ids数组中的索引
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint32_t</span> method_idx <span style="color:#f92672">=</span> (is_range) <span style="color:#f92672">?</span> inst<span style="color:#f92672">-&gt;</span>VRegB_3rc() <span style="color:#f92672">:</span>
+                inst<span style="color:#f92672">-&gt;</span>VRegB_35c();
+    <span style="color:#75715e">//找到方法C对应的对象。它作为参数存储在方法B的ShawdowFrame对象中。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint32_t</span> vregC <span style="color:#f92672">=</span> (is_range) <span style="color:#f92672">?</span> inst<span style="color:#f92672">-&gt;</span>VRegC_3rc() <span style="color:#f92672">:</span> inst<span style="color:#f92672">-&gt;</span>VRegC_35c();
+    Object<span style="color:#f92672">*</span> receiver <span style="color:#f92672">=</span> (type <span style="color:#f92672">==</span> kStatic) <span style="color:#f92672">?</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">:</span>
+                shadow_frame.GetVRegReference(vregC);
+    <span style="color:#75715e">//sf_method代表ArtMethod* B。
+</span><span style="color:#75715e"></span>    ArtMethod<span style="color:#f92672">*</span> sf_method <span style="color:#f92672">=</span> shadow_frame.GetMethod();
+    <span style="color:#75715e">/*FindMethodFromCode用于查找代表目标方法C对应的ArtMethod对象，即ArtMethod* C。其内
+</span><span style="color:#75715e">      部会根据do_access_check的情况检查方法B是否有权限调用方法C。
+</span><span style="color:#75715e">      注意，FindMethodFromCode函数是根据不同调用类型（kStatic、kDirect、kVirtual、kSuper、
+</span><span style="color:#75715e">      kInterface）以找到对应的ArtMethod对象的关键代码。这部分内容请读者自行阅读。*/</span>
+    ArtMethod<span style="color:#f92672">*</span> <span style="color:#66d9ef">const</span> called_method <span style="color:#f92672">=</span> FindMethodFromCode<span style="color:#f92672">&lt;</span>type,
+            do_access_check<span style="color:#f92672">&gt;</span>( method_idx, <span style="color:#f92672">&amp;</span>receiver, sf_method, self);
+    <span style="color:#75715e">//假设方法C对应的ArtMethod对象找到了，所以，called_method不为空。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (UNLIKELY(called_method <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>)) {.......}
+    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (UNLIKELY(<span style="color:#f92672">!</span>called_method<span style="color:#f92672">-&gt;</span>IsInvokable())) {......}
+    <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">//下面这段代码和JIT有关，我们留待后续章节再来介绍。
+</span><span style="color:#75715e"></span>        jit<span style="color:#f92672">::</span>Jit<span style="color:#f92672">*</span> jit <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetJit();
+        <span style="color:#66d9ef">if</span> (jit <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {......}
+        ......            <span style="color:#75715e">//instrumentation的处理
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> DoCall<span style="color:#f92672">&lt;</span>is_range, do_access_check<span style="color:#f92672">&gt;</span>(called_method, self,
+                        shadow_frame, inst, inst_data,result);
+    }
+}
+</code></pre></div><h3 id="docall">DoCall</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span> is_range, <span style="color:#66d9ef">bool</span> do_assignability_check<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">bool</span> DoCall(ArtMethod<span style="color:#f92672">*</span> called_method, Thread<span style="color:#f92672">*</span> self,
+        ShadowFrame<span style="color:#f92672">&amp;</span> shadow_frame,<span style="color:#66d9ef">const</span> Instruction<span style="color:#f92672">*</span> inst,
+        <span style="color:#66d9ef">uint16_t</span> inst_data, JValue<span style="color:#f92672">*</span> result) {
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint16_t</span> number_of_inputs <span style="color:#f92672">=</span>
+        (is_range) <span style="color:#f92672">?</span> inst<span style="color:#f92672">-&gt;</span>VRegA_3rc(inst_data) <span style="color:#f92672">:</span> inst<span style="color:#f92672">-&gt;</span>VRegA_35c(inst_data);
+    <span style="color:#75715e">//kMaxVarArgsRegs为编译常量，值为5
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> arg[Instruction<span style="color:#f92672">::</span>kMaxVarArgRegs] <span style="color:#f92672">=</span> {};
+    <span style="color:#66d9ef">uint32_t</span> vregC <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span> (is_range) {......}
+        <span style="color:#66d9ef">else</span> {
+            vregC <span style="color:#f92672">=</span> inst<span style="color:#f92672">-&gt;</span>VRegC_35c();
+            inst<span style="color:#f92672">-&gt;</span>GetVarArgs(arg, inst_data); <span style="color:#75715e">//将调用方法C的参数存储到arg数组中,main
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#75715e">//调用DoCallCommon，我们接着看这个函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> DoCallCommon<span style="color:#f92672">&lt;</span>is_range, do_assignability_check<span style="color:#f92672">&gt;</span>( called_method,
+            self, shadow_frame,result, number_of_inputs, arg, vregC);
+}
+</code></pre></div><h3 id="docallcommon">DoCallCommon</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span> is_range, <span style="color:#66d9ef">bool</span> do_assignability_check, size_t kVarArgMax<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> DoCallCommon(ArtMethod<span style="color:#f92672">*</span> called_method,
+        Thread<span style="color:#f92672">*</span> self, ShadowFrame<span style="color:#f92672">&amp;</span> shadow_frame, JValue<span style="color:#f92672">*</span> result,
+        <span style="color:#66d9ef">uint16_t</span> number_of_inputs,<span style="color:#66d9ef">uint32_t</span> (<span style="color:#f92672">&amp;</span>arg)[kVarArgMax],<span style="color:#66d9ef">uint32_t</span> vregC) {
+    <span style="color:#66d9ef">bool</span> string_init <span style="color:#f92672">=</span> false;
+    <span style="color:#75715e">//和String类的构造函数有关。此处不拟讨论。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (UNLIKELY(called_method<span style="color:#f92672">-&gt;</span>GetDeclaringClass()<span style="color:#f92672">-&gt;</span>IsStringClass()
+                <span style="color:#f92672">&amp;&amp;</span> called_method<span style="color:#f92672">-&gt;</span>IsConstructor())) {.....}
 
+    <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item <span style="color:#f92672">=</span> called_method<span style="color:#f92672">-&gt;</span>GetCodeItem();
+    <span style="color:#66d9ef">uint16_t</span> num_regs;
+    <span style="color:#66d9ef">if</span> (LIKELY(code_item <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)) {
+        num_regs <span style="color:#f92672">=</span> code_item<span style="color:#f92672">-&gt;</span>registers_size_;
+    } <span style="color:#66d9ef">else</span> {
+        num_regs <span style="color:#f92672">=</span> number_of_inputs;
+    }
+    <span style="color:#66d9ef">uint32_t</span> string_init_vreg_this <span style="color:#f92672">=</span> is_range <span style="color:#f92672">?</span> vregC : arg[<span style="color:#ae81ff">0</span>];
+    <span style="color:#66d9ef">if</span> (UNLIKELY(string_init)) {......}
 
+    size_t first_dest_reg <span style="color:#f92672">=</span> num_regs <span style="color:#f92672">-</span> number_of_inputs;
+    ......
+    <span style="color:#75715e">//创建方法C所需的ShadowFrame对象。
+</span><span style="color:#75715e"></span>    ShadowFrameAllocaUniquePtr shadow_frame_unique_ptr <span style="color:#f92672">=</span>
+            CREATE_SHADOW_FRAME(num_regs, <span style="color:#f92672">&amp;</span>shadow_frame, called_method, <span style="color:#ae81ff">0</span>);
+    ShadowFrame<span style="color:#f92672">*</span> new_shadow_frame <span style="color:#f92672">=</span> shadow_frame_unique_ptr.get();
+    <span style="color:#66d9ef">if</span> (do_assignability_check) {
+        ...... <span style="color:#75715e">//不考虑这种情况，读者可自行阅读
+</span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+        size_t arg_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">if</span> (is_range) {......}
+        <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">//从调用方法B的ShadowFrame对象中拷贝方法C所需的参数到C的ShadowFrame对象里
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (; arg_index <span style="color:#f92672">&lt;</span> number_of_inputs; <span style="color:#f92672">++</span>arg_index) {
+            AssignRegister(new_shadow_frame, shadow_frame,
+                        first_dest_reg <span style="color:#f92672">+</span> arg_index, arg[arg_index]);
+            }
+        }
+        ......
+    }
+    <span style="color:#75715e">//准备方法C对应的ShadowFrame对象后，现在将考虑如何跳转到目标方法C。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (LIKELY(Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>IsStarted())) {
+        ArtMethod<span style="color:#f92672">*</span> target <span style="color:#f92672">=</span> new_shadow_frame<span style="color:#f92672">-&gt;</span>GetMethod();
+        <span style="color:#75715e">//如果处于调试模式，或者方法C不存在机器码，则调用
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//ArtInterpreterToInterpreterBridge函数，显然，它是解释执行的继续。
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (ClassLinker<span style="color:#f92672">::</span>ShouldUseInterpreterEntrypoint(
+                target, target<span style="color:#f92672">-&gt;</span>GetEntryPointFromQuickCompiledCode())) {
+            ArtInterpreterToInterpreterBridge(self, code_item,
+                                new_shadow_frame,result);<span style="color:#75715e">//main
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#75715e">//如果可以用机器码方式执行方法C，则调用ArtInterpreterToCompiledCodeBridge，
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">//它将从解释执行模式进入机器码执行模式。
+</span><span style="color:#75715e"></span>            ArtInterpreterToCompiledCodeBridge(
+                self, shadow_frame.GetMethod(), code_item,
+                new_shadow_frame, result);
+        }
+    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">//dex2oat中的处理。因为dex2oat要执行诸如类的初始化方法&#34;&lt;clinit&gt;&#34;，这些方法都
+</span><span style="color:#75715e"></span>             <span style="color:#75715e">//采用解释执行模式来处理的。
+</span><span style="color:#75715e"></span>        UnstartedRuntime<span style="color:#f92672">::</span>Invoke(self, code_item, new_shadow_frame, result,
+                                first_dest_reg);
+    }
+    }
+    ......
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>self<span style="color:#f92672">-&gt;</span>IsExceptionPending();
+}
+</code></pre></div><h3 id="artinterpretertointerpreterbridge">ArtInterpreterToInterpreterBridge</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ArtInterpreterToInterpreterBridge</span>(Thread<span style="color:#f92672">*</span> self,
+                <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item,
+                ShadowFrame<span style="color:#f92672">*</span> shadow_frame, JValue<span style="color:#f92672">*</span> result) {
+    ......
+    self<span style="color:#f92672">-&gt;</span>PushShadowFrame(shadow_frame); <span style="color:#75715e">//方法C对应的ShadowFrame对象入栈
+</span><span style="color:#75715e"></span>    ArtMethod<span style="color:#f92672">*</span> method <span style="color:#f92672">=</span> shadow_frame<span style="color:#f92672">-&gt;</span>GetMethod();
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">bool</span> is_static <span style="color:#f92672">=</span> method<span style="color:#f92672">-&gt;</span>IsStatic();
+    <span style="color:#66d9ef">if</span> (is_static) {
+        <span style="color:#75715e">//如果方法C为静态方法，则判断该方法所属的类是否初始化过了，如果没有，则先初始化这个类。
+</span><span style="color:#75715e"></span>        mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">*</span> declaring_class <span style="color:#f92672">=</span> method<span style="color:#f92672">-&gt;</span>GetDeclaringClass();
+        <span style="color:#66d9ef">if</span> (UNLIKELY(<span style="color:#f92672">!</span>declaring_class<span style="color:#f92672">-&gt;</span>IsInitialized())) {
+            StackHandleScope<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> hs(self);
+            HandleWrapper<span style="color:#f92672">&lt;</span>Class<span style="color:#f92672">&gt;</span> h_declaring_class(hs.NewHandleWrapper(
+                                <span style="color:#f92672">&amp;</span>declaring_class));
+            <span style="color:#66d9ef">if</span> (UNLIKELY(<span style="color:#f92672">!</span>Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetClassLinker()<span style="color:#f92672">-&gt;</span>EnsureInitialized(
+                self, h_declaring_class, true, true))) {......}
+        }
+    }
+    <span style="color:#75715e">//如果不是JNI方法，则调用Execute执行该方法。Execute函数我们在10.2.3节介绍过它了。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (LIKELY(<span style="color:#f92672">!</span>shadow_frame<span style="color:#f92672">-&gt;</span>GetMethod()<span style="color:#f92672">-&gt;</span>IsNative())) {
+        result<span style="color:#f92672">-&gt;</span>SetJ(Execute(self, code_item, <span style="color:#f92672">*</span>shadow_frame,<span style="color:#75715e">//main
+</span><span style="color:#75715e"></span>            JValue()).GetJ());
+    } <span style="color:#66d9ef">else</span> {......                  <span style="color:#75715e">/*dex2oat中的处理*/</span> }
+    self<span style="color:#f92672">-&gt;</span>PopShadowFrame();      <span style="color:#75715e">//方法C对应的ShadowFrame出栈
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="artinterpretertocompiledcodebridge">ArtInterpreterToCompiledCodeBridge</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ArtInterpreterToCompiledCodeBridge</span>(Thread<span style="color:#f92672">*</span> self,
+            ArtMethod<span style="color:#f92672">*</span> caller, <span style="color:#66d9ef">const</span> DexFile<span style="color:#f92672">::</span>CodeItem<span style="color:#f92672">*</span> code_item,
+                ShadowFrame<span style="color:#f92672">*</span> shadow_frame, JValue<span style="color:#f92672">*</span> result) {
+    ArtMethod<span style="color:#f92672">*</span> method <span style="color:#f92672">=</span> shadow_frame<span style="color:#f92672">-&gt;</span>GetMethod();
+    <span style="color:#66d9ef">if</span> (method<span style="color:#f92672">-&gt;</span>IsStatic()) {
+        <span style="color:#75715e">//检查方法C所属类是否完成了初始化，如果没有，则先初始化该类。
+</span><span style="color:#75715e"></span>        ......
+    }
+    <span style="color:#66d9ef">uint16_t</span> arg_offset <span style="color:#f92672">=</span> (code_item <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span>
+                    code_item<span style="color:#f92672">-&gt;</span>registers_size_ <span style="color:#f92672">-</span> code_item<span style="color:#f92672">-&gt;</span>ins_size_;
+    jit<span style="color:#f92672">::</span>Jit<span style="color:#f92672">*</span> jit <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetJit();
+    ...... <span style="color:#75715e">//JIT相关，此处先略过
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//调用ArtMethod* C的Invoke函数。直接来看这个函数的代码。
+</span><span style="color:#75715e"></span>    method<span style="color:#f92672">-&gt;</span>Invoke(self, shadow_frame<span style="color:#f92672">-&gt;</span>GetVRegArgs(arg_offset),
+            (shadow_frame<span style="color:#f92672">-&gt;</span>NumberOfVRegs() <span style="color:#f92672">-</span> arg_offset) <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">uint32_t</span>),
+            result,
+            method<span style="color:#f92672">-&gt;</span>GetInterfaceMethodIfProxy(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>))<span style="color:#f92672">-&gt;</span>GetShorty());
+}
+</code></pre></div><h2 id="art_methodcc">art_method.cc</h2>
+<h3 id="invoke">Invoke</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> ArtMethod<span style="color:#f92672">::</span>Invoke(Thread<span style="color:#f92672">*</span> self, <span style="color:#66d9ef">uint32_t</span><span style="color:#f92672">*</span> args, <span style="color:#66d9ef">uint32_t</span> args_size,
+                JValue<span style="color:#f92672">*</span> result,<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> shorty) {
+    <span style="color:#75715e">/* 注意参数
+</span><span style="color:#75715e">       （1）args：方法C所需的参数。它是一个数组，元素个数为args_size。
+</span><span style="color:#75715e">       （2）result：存储方法C调用结果的对象。
+</span><span style="color:#75715e">       （3）shorty：方法C的简短描述。    */</span>
+    <span style="color:#75715e">//栈操作，详情见下文分析
+</span><span style="color:#75715e"></span>    ManagedStack fragment;
+    self<span style="color:#f92672">-&gt;</span>PushManagedStackFragment(<span style="color:#f92672">&amp;</span>fragment);<span style="color:#75715e">//
+</span><span style="color:#75715e"></span>
+    Runtime<span style="color:#f92672">*</span> runtime <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">::</span>Current();
+    <span style="color:#66d9ef">if</span> (UNLIKELY(<span style="color:#f92672">!</span>runtime<span style="color:#f92672">-&gt;</span>IsStarted() <span style="color:#f92672">||</span>
+        Dbg<span style="color:#f92672">::</span>IsForcedInterpreterNeededForCalling(self, <span style="color:#66d9ef">this</span>))) {......}
+    <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">//再次判断方法C是否存在机器码
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">bool</span> have_quick_code <span style="color:#f92672">=</span> GetEntryPointFromQuickCompiledCode() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+        <span style="color:#66d9ef">if</span> (LIKELY(have_quick_code)) {
+            <span style="color:#75715e">//如果是非静态函数，则调用art_quick_invoke_stub函数，否则调用
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">//art_quick_invoke_static_stub函数。这两个函数也是由汇编代码编写。我们看
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">//其中的art_quick_invoke_stub函数。
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>IsStatic()) {
+            (<span style="color:#f92672">*</span>art_quick_invoke_stub)(<span style="color:#66d9ef">this</span>, args, args_size, self, result, shorty);
+            } <span style="color:#66d9ef">else</span> {
+                (<span style="color:#f92672">*</span>art_quick_invoke_static_stub)(<span style="color:#66d9ef">this</span>, args, args_size, self,
+                    result, shorty);
+            }
+            <span style="color:#75715e">//和HDeoptimize有关。详情见下文。
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (UNLIKELY(self<span style="color:#f92672">-&gt;</span>GetException() <span style="color:#f92672">==</span>
+                        Thread<span style="color:#f92672">::</span>GetDeoptimizationException())) {
+                self<span style="color:#f92672">-&gt;</span>DeoptimizeWithDeoptimizationException(result);
+            }
+        }
+    ......
+    self<span style="color:#f92672">-&gt;</span>PopManagedStackFragment(fragment);
+}
+</code></pre></div>
 
-
-<ul class="children children-li">
-	
-
-	
-		
-	
-
-	
-
-	
-		
-	
-		
-			
-				
-<li>
-<a href="/en/android/system/kernel/kernel/" >kernel</a>
-</li>
-				
-
-				
-			
-			
-
-				
-<ul>
-				
-
-				
-					
-				
-
-				
-
-				
-					
-	
-
-				
-
-				
-</ul>
-				
-			
-		
-	
-
-	
-</ul>
-
-
-
-
-
-
-
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -7772,6 +8253,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -7786,6 +8268,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -8074,6 +8559,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -8088,6 +8574,9 @@
             
                 
                     
+                        
+                        
+                    
                 
                 
 
@@ -8152,6 +8641,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -8170,6 +8660,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -9028,7 +9521,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -9043,9 +9535,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -9222,7 +9711,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -9236,9 +9724,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -12185,10 +12670,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/en/android/system/input/toucheventnative/" title="touchEventNative"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/en/android/system/kernel/kernel/" title="kernel" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/en/android/art/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" title="启动流程" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -12198,19 +12683,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623724638"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623724638"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623724638"></script>
-    <script src="/js/jquery.sticky.js?1623724638"></script>
-    <script src="/js/featherlight.min.js?1623724638"></script>
-    <script src="/js/highlight.pack.js?1623724638"></script>
+    <script src="/js/clipboard.min.js?1623724637"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724637"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724637"></script>
+    <script src="/js/jquery.sticky.js?1623724637"></script>
+    <script src="/js/featherlight.min.js?1623724637"></script>
+    <script src="/js/highlight.pack.js?1623724637"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623724638"></script>
-    <script src="/js/learn.js?1623724638"></script>
-    <script src="/js/hugo-learn.js?1623724638"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724637"></script>
+    <script src="/js/learn.js?1623724637"></script>
+    <script src="/js/hugo-learn.js?1623724637"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623724638"></script>
+            <script src="/mermaid/mermaid.js?1623724637"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -12220,3 +12705,4 @@
 
   </body>
 </html>
+

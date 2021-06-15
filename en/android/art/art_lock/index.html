@@ -12,23 +12,23 @@
     <title>ART_Lock :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623151669" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623151669" rel="stylesheet">
-    <link href="/css/hybrid.css?1623151669" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623151669" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623151669" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623151669" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623151669" rel="stylesheet">
-    <link href="/css/theme.css?1623151669" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623151669" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724636" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724636" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724636" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724636" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724636" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724636" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724636" rel="stylesheet">
+    <link href="/css/theme.css?1623724636" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724636" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623151669" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724636" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623151669"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724636"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623151669"></script>
+    <script src="/js/auto_toc_scroll.js?1623724636"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623151669"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623151669"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724636"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724636"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623151669"></script>
+<script type="text/javascript" src="/js/search.js?1623724636"></script>
 
     
   </div>
@@ -705,27 +705,6 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0" class="dd-item ">
-        <a href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
-        _解释执行7_0
-        <i class="fas fa-check read-icon"></i>
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
         <a href="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
         java_jni方法调用原理
@@ -792,6 +771,27 @@
       <li data-nav-id="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
         <a href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/">
         异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -7577,27 +7577,16 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#object_lockcc">object_lock.cc</a>
+    <li><a href="#objectlock">ObjectLock</a>
       <ul>
-        <li><a href="#objectlock">ObjectLock</a></li>
-        <li><a href="#objectlock-1">~ObjectLock</a></li>
-      </ul>
-    </li>
-    <li><a href="#object-inlh">object-inl.h</a>
-      <ul>
+        <li><a href="#objectlock-1">ObjectLock</a></li>
+        <li><a href="#objectlock-2">~ObjectLock</a></li>
         <li><a href="#monitorenter">MonitorEnter</a></li>
-      </ul>
-    </li>
-    <li><a href="#monitorcc">monitor.cc</a>
-      <ul>
         <li><a href="#monitorenter-1">MonitorEnter</a></li>
-      </ul>
-    </li>
-    <li><a href="#lock_wordh">lock_word.h</a>
-      <ul>
         <li><a href="#lockstate">LockState</a></li>
       </ul>
     </li>
+    <li><a href="#mutex">mutex</a></li>
   </ul>
 </nav>
     </div>
@@ -7622,28 +7611,26 @@
         
 
 
+<h2 id="objectlock">ObjectLock</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">ObjectLock<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> lock(self, klass);
 </code></pre></div><p>art/runtime/object_lock.cc</p>
-<h2 id="object_lockcc">object_lock.cc</h2>
-<h3 id="objectlock">ObjectLock</h3>
+<h3 id="objectlock-1">ObjectLock</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
 ObjectLock<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>ObjectLock(Thread<span style="color:#f92672">*</span> self, Handle<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> object) <span style="color:#f92672">:</span> self_(self), obj_(object) {
   CHECK(object <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>);
   obj_<span style="color:#f92672">-&gt;</span>MonitorEnter(self_);
 }
-</code></pre></div><h3 id="objectlock-1">~ObjectLock</h3>
+</code></pre></div><h3 id="objectlock-2">~ObjectLock</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
 ObjectLock<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::~</span>ObjectLock() {
   obj_<span style="color:#f92672">-&gt;</span>MonitorExit(self_);
 }
 </code></pre></div><p>art/runtime/mirror/object-inl.h</p>
-<h2 id="object-inlh">object-inl.h</h2>
 <h3 id="monitorenter">MonitorEnter</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">inline</span> mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> Object<span style="color:#f92672">::</span>MonitorEnter(Thread<span style="color:#f92672">*</span> self) {
   <span style="color:#66d9ef">return</span> Monitor<span style="color:#f92672">::</span>MonitorEnter(self, this, <span style="color:#75715e">/*trylock*/</span>false);
 }
 </code></pre></div><p>art/runtime/monitor.cc</p>
-<h2 id="monitorcc">monitor.cc</h2>
 <h3 id="monitorenter-1">MonitorEnter</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> Monitor<span style="color:#f92672">::</span>MonitorEnter(Thread<span style="color:#f92672">*</span> self, mirror<span style="color:#f92672">::</span>Object<span style="color:#f92672">*</span> obj, <span style="color:#66d9ef">bool</span> trylock) {
     StackHandleScope<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> hs(self);
@@ -7666,7 +7653,6 @@ ObjectLock<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&g
       <span style="color:#66d9ef">case</span> LockWord<span style="color:#f92672">::</span>kThinLocked: {
       <span style="color:#66d9ef">case</span> LockWord<span style="color:#f92672">::</span>kFatLocked: {
 </code></pre></div><p>art/runtime/lock_word.h</p>
-<h2 id="lock_wordh">lock_word.h</h2>
 <h3 id="lockstate">LockState</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h"><span style="color:#66d9ef">enum</span> LockState {
   kUnlocked,    <span style="color:#75715e">// No lock owners.
@@ -7675,6 +7661,32 @@ ObjectLock<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&g
 </span><span style="color:#75715e"></span>  kHashCode,    <span style="color:#75715e">// Lock word contains an identity hash.
 </span><span style="color:#75715e"></span>  kForwardingAddress,  <span style="color:#75715e">// Lock word contains the forwarding address of an object.
 </span><span style="color:#75715e"></span>};
+</code></pre></div><h2 id="mutex">mutex</h2>
+<p>prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8/x86_64-linux/include/c++/4.8/mutex</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-h" data-lang="h">  <span style="color:#75715e">/// @brief  Scoped lock idiom.
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Acquire the mutex here with a constructor call, then release with
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// the destructor call in accordance with RAII style.
+</span><span style="color:#75715e"></span>  template<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _Mutex<span style="color:#f92672">&gt;</span>
+    class lock_guard
+    {
+    public:
+      <span style="color:#66d9ef">typedef</span> _Mutex mutex_type;
+
+      explicit <span style="color:#a6e22e">lock_guard</span>(mutex_type<span style="color:#f92672">&amp;</span> __m) <span style="color:#f92672">:</span> _M_device(__m)
+      { _M_device.lock(); }
+
+      lock_guard(mutex_type<span style="color:#f92672">&amp;</span> __m, adopt_lock_t) <span style="color:#f92672">:</span> _M_device(__m)
+      { } <span style="color:#75715e">// calling thread owns mutex
+</span><span style="color:#75715e"></span>
+      <span style="color:#f92672">~</span>lock_guard()
+      { _M_device.unlock(); }
+
+      lock_guard(<span style="color:#66d9ef">const</span> lock_guard<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> delete;
+      lock_guard<span style="color:#f92672">&amp;</span> operator<span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> lock_guard<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> delete;
+
+    private:
+      mutex_type<span style="color:#f92672">&amp;</span>  _M_device;
+    };
 </code></pre></div>
 
 <footer class="footline">
@@ -12221,19 +12233,19 @@ ObjectLock<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&g
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623151669"></script>
-    <script src="/js/jquery.sticky.js?1623151669"></script>
-    <script src="/js/featherlight.min.js?1623151669"></script>
-    <script src="/js/highlight.pack.js?1623151669"></script>
+    <script src="/js/clipboard.min.js?1623724636"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724636"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724636"></script>
+    <script src="/js/jquery.sticky.js?1623724636"></script>
+    <script src="/js/featherlight.min.js?1623724636"></script>
+    <script src="/js/highlight.pack.js?1623724636"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623151669"></script>
-    <script src="/js/learn.js?1623151669"></script>
-    <script src="/js/hugo-learn.js?1623151669"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724636"></script>
+    <script src="/js/learn.js?1623724636"></script>
+    <script src="/js/hugo-learn.js?1623724636"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623151669"></script>
+            <script src="/mermaid/mermaid.js?1623724636"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

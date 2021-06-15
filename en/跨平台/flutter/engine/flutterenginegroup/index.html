@@ -12,23 +12,23 @@
     <title>FlutterEngineGroup :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623151670" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623151670" rel="stylesheet">
-    <link href="/css/hybrid.css?1623151670" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623151670" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623151670" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623151670" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623151670" rel="stylesheet">
-    <link href="/css/theme.css?1623151670" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623151670" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724638" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724638" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724638" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724638" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724638" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724638" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724638" rel="stylesheet">
+    <link href="/css/theme.css?1623724638" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724638" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623151670" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724638" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623151670"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724638"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623151670"></script>
+    <script src="/js/auto_toc_scroll.js?1623724638"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623151670"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623151670"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724638"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724638"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623151670"></script>
+<script type="text/javascript" src="/js/search.js?1623724638"></script>
 
     
   </div>
@@ -705,27 +705,6 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0" class="dd-item ">
-        <a href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
-        _解释执行7_0
-        <i class="fas fa-check read-icon"></i>
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
         <a href="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
         java_jni方法调用原理
@@ -792,6 +771,27 @@
       <li data-nav-id="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
         <a href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/">
         异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -7587,6 +7587,24 @@
     <li><a href="#createandrunengine">createAndRunEngine</a>
       <ul>
         <li><a href="#flutterenginespawn">FlutterEngine.spawn</a></li>
+        <li><a href="#platform_view_android_jni_implspawn">platform_view_android_jni_impl::Spawn</a></li>
+        <li><a href="#androidshellholderspawn">AndroidShellHolder::Spawn</a></li>
+        <li><a href="#shellspawn">Shell::Spawn</a>
+          <ul>
+            <li><a href="#enginespawn">Engine::Spawn</a>
+              <ul>
+                <li><a href="#runtimecontrollerspawn">RuntimeController::Spawn</a></li>
+              </ul>
+            </li>
+            <li><a href="#shellrunengine">Shell::RunEngine</a>
+              <ul>
+                <li><a href="#enginerun">Engine::Run</a></li>
+                <li><a href="#runtimecontrollerlaunchrootisolate">RuntimeController::LaunchRootIsolate</a></li>
+                <li><a href="#dartisolatecreaterunningrootisolate">DartIsolate::CreateRunningRootIsolate</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -7652,8 +7670,8 @@
     engine <span style="color:#f92672">=</span> createEngine<span style="color:#f92672">(</span>context<span style="color:#f92672">);</span>
     engine<span style="color:#f92672">.</span><span style="color:#a6e22e">getDartExecutor</span><span style="color:#f92672">().</span><span style="color:#a6e22e">executeDartEntrypoint</span><span style="color:#f92672">(</span>dartEntrypoint<span style="color:#f92672">);</span>
   <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-    engine <span style="color:#f92672">=</span> activeEngines<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">spawn</span><span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> dartEntrypoint<span style="color:#f92672">);</span>
-  <span style="color:#f92672">}</span>
+    engine <span style="color:#f92672">=</span> activeEngines<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">spawn</span><span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> dartEntrypoint<span style="color:#f92672">);</span><span style="color:#75715e">//基于已有的这个engine进行spawn
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
 
   activeEngines<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>engine<span style="color:#f92672">);</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@VisibleForTesting</span>
@@ -7678,6 +7696,246 @@
 </span><span style="color:#75715e"></span>      <span style="color:#75715e">// FlutterInjector.
 </span><span style="color:#75715e"></span>      newFlutterJNI<span style="color:#f92672">);</span> <span style="color:#75715e">// FlutterJNI.
 </span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>FlutterJNI.spawn</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> FlutterJNI <span style="color:#a6e22e">spawn</span><span style="color:#f92672">(</span>
+    <span style="color:#a6e22e">@Nullable</span> String entrypointFunctionName<span style="color:#f92672">,</span> <span style="color:#a6e22e">@Nullable</span> String pathToEntrypointFunction<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  ensureRunningOnMainThread<span style="color:#f92672">();</span>
+  ensureAttachedToNative<span style="color:#f92672">();</span>
+  FlutterJNI spawnedJNI <span style="color:#f92672">=</span>
+      nativeSpawn<span style="color:#f92672">(</span>nativeShellHolderId<span style="color:#f92672">,</span> entrypointFunctionName<span style="color:#f92672">,</span> pathToEntrypointFunction<span style="color:#f92672">);</span>
+  Preconditions<span style="color:#f92672">.</span><span style="color:#a6e22e">checkState</span><span style="color:#f92672">(</span>
+      spawnedJNI<span style="color:#f92672">.</span><span style="color:#a6e22e">nativeShellHolderId</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> spawnedJNI<span style="color:#f92672">.</span><span style="color:#a6e22e">nativeShellHolderId</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;Failed to spawn new JNI connected shell from existing shell.&#34;</span><span style="color:#f92672">);</span>
+
+  <span style="color:#66d9ef">return</span> spawnedJNI<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="platform_view_android_jni_implspawn">platform_view_android_jni_impl::Spawn</h3>
+<p>shell/platform/android/platform_view_android_jni_impl.cc</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">static</span> jobject <span style="color:#a6e22e">SpawnJNI</span>(JNIEnv<span style="color:#f92672">*</span> env,
+                        jobject jcaller,
+                        jlong shell_holder,
+                        jstring jEntrypoint,
+                        jstring jLibraryUrl) {
+  
+    <span style="color:#66d9ef">auto</span> spawned_shell_holder <span style="color:#f92672">=</span>
+      ANDROID_SHELL_HOLDER<span style="color:#f92672">-&gt;</span>Spawn(jni_facade, entrypoint, libraryUrl);
+</code></pre></div><h3 id="androidshellholderspawn">AndroidShellHolder::Spawn</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>AndroidShellHolder<span style="color:#f92672">&gt;</span> AndroidShellHolder<span style="color:#f92672">::</span>Spawn(
+    std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>PlatformViewAndroidJNI<span style="color:#f92672">&gt;</span> jni_facade,
+    <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> entrypoint,
+    <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> libraryUrl) <span style="color:#66d9ef">const</span> {
+  
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>flutter<span style="color:#f92672">::</span>Shell<span style="color:#f92672">&gt;</span> shell <span style="color:#f92672">=</span> shell_<span style="color:#f92672">-&gt;</span>Spawn(
+      std<span style="color:#f92672">::</span>move(config.value()), on_create_platform_view, on_create_rasterizer);
+
+    <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>AndroidShellHolder<span style="color:#f92672">&gt;</span>(
+      <span style="color:#66d9ef">new</span> AndroidShellHolder(GetSettings(), jni_facade, thread_host_,
+                             std<span style="color:#f92672">::</span>move(shell), weak_platform_view));
+}
+</code></pre></div><h3 id="shellspawn">Shell::Spawn</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Shell<span style="color:#f92672">&gt;</span> Shell<span style="color:#f92672">::</span>Spawn(
+    RunConfiguration run_configuration,
+    <span style="color:#66d9ef">const</span> CreateCallback<span style="color:#f92672">&lt;</span>PlatformView<span style="color:#f92672">&gt;&amp;</span> on_create_platform_view,
+    <span style="color:#66d9ef">const</span> CreateCallback<span style="color:#f92672">&lt;</span>Rasterizer<span style="color:#f92672">&gt;&amp;</span> on_create_rasterizer) <span style="color:#66d9ef">const</span> {
+
+    <span style="color:#66d9ef">auto</span> shell_maker <span style="color:#f92672">=</span> [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">bool</span> is_gpu_disabled) {
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Shell<span style="color:#f92672">&gt;</span> result(CreateWithSnapshot(<span style="color:#75715e">//main1
+</span><span style="color:#75715e"></span>        PlatformData{}, task_runners_, GetSettings(), vm_,
+        vm_<span style="color:#f92672">-&gt;</span>GetVMData()<span style="color:#f92672">-&gt;</span>GetIsolateSnapshot(), on_create_platform_view,
+        on_create_rasterizer,
+        [engine <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>engine_.get()](
+            Engine<span style="color:#f92672">::</span>Delegate<span style="color:#f92672">&amp;</span> delegate,
+            <span style="color:#66d9ef">const</span> PointerDataDispatcherMaker<span style="color:#f92672">&amp;</span> dispatcher_maker, DartVM<span style="color:#f92672">&amp;</span> vm,
+            fml<span style="color:#f92672">::</span>RefPtr<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> DartSnapshot<span style="color:#f92672">&gt;</span> isolate_snapshot,
+            TaskRunners task_runners, <span style="color:#66d9ef">const</span> PlatformData<span style="color:#f92672">&amp;</span> platform_data,
+            Settings settings, std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Animator<span style="color:#f92672">&gt;</span> animator,
+            fml<span style="color:#f92672">::</span>WeakPtr<span style="color:#f92672">&lt;</span>IOManager<span style="color:#f92672">&gt;</span> io_manager,
+            fml<span style="color:#f92672">::</span>RefPtr<span style="color:#f92672">&lt;</span>SkiaUnrefQueue<span style="color:#f92672">&gt;</span> unref_queue,
+            fml<span style="color:#f92672">::</span>WeakPtr<span style="color:#f92672">&lt;</span>SnapshotDelegate<span style="color:#f92672">&gt;</span> snapshot_delegate,
+            std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>VolatilePathTracker<span style="color:#f92672">&gt;</span> volatile_path_tracker) {
+          <span style="color:#66d9ef">return</span> engine<span style="color:#f92672">-&gt;</span>Spawn(<span style="color:#75715e">/*delegate=*/</span>delegate,<span style="color:#75715e">//main2
+</span><span style="color:#75715e"></span>                               <span style="color:#75715e">/*dispatcher_maker=*/</span>dispatcher_maker,
+                               <span style="color:#75715e">/*settings=*/</span>settings,
+                               <span style="color:#75715e">/*animator=*/</span>std<span style="color:#f92672">::</span>move(animator));
+        },
+        is_gpu_disabled));
+    <span style="color:#66d9ef">return</span> result;
+  };
+  
+  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Shell<span style="color:#f92672">&gt;</span> result;
+  GetIsGpuDisabledSyncSwitch()<span style="color:#f92672">-&gt;</span>Execute(
+      fml<span style="color:#f92672">::</span>SyncSwitch<span style="color:#f92672">::</span>Handlers()
+          .SetIfFalse([<span style="color:#f92672">&amp;</span>] { result <span style="color:#f92672">=</span> shell_maker(false); })
+          .SetIfTrue([<span style="color:#f92672">&amp;</span>] { result <span style="color:#f92672">=</span> shell_maker(true); }));
+  result<span style="color:#f92672">-&gt;</span>shared_resource_context_ <span style="color:#f92672">=</span> io_manager_<span style="color:#f92672">-&gt;</span>GetSharedResourceContext();
+  result<span style="color:#f92672">-&gt;</span>RunEngine(std<span style="color:#f92672">::</span>move(run_configuration));<span style="color:#75715e">//main3
+</span><span style="color:#75715e"></span>  
+  <span style="color:#66d9ef">return</span> result;
+}
+</code></pre></div><h4 id="enginespawn">Engine::Spawn</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Engine<span style="color:#f92672">&gt;</span> Engine<span style="color:#f92672">::</span>Spawn(
+    Delegate<span style="color:#f92672">&amp;</span> delegate,
+    <span style="color:#66d9ef">const</span> PointerDataDispatcherMaker<span style="color:#f92672">&amp;</span> dispatcher_maker,
+    Settings settings,
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Animator<span style="color:#f92672">&gt;</span> animator) <span style="color:#66d9ef">const</span> {
+  <span style="color:#66d9ef">auto</span> result <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>Engine<span style="color:#f92672">&gt;</span>(
+      <span style="color:#75715e">/*delegate=*/</span>delegate,
+      <span style="color:#75715e">/*dispatcher_maker=*/</span>dispatcher_maker,
+      <span style="color:#75715e">/*image_decoder_task_runner=*/</span>
+      runtime_controller_<span style="color:#f92672">-&gt;</span>GetDartVM()<span style="color:#f92672">-&gt;</span>GetConcurrentWorkerTaskRunner(),
+      <span style="color:#75715e">/*task_runners=*/</span>task_runners_,
+      <span style="color:#75715e">/*settings=*/</span>settings,
+      <span style="color:#75715e">/*animator=*/</span>std<span style="color:#f92672">::</span>move(animator),
+      <span style="color:#75715e">/*io_manager=*/</span>runtime_controller_<span style="color:#f92672">-&gt;</span>GetIOManager(),
+      <span style="color:#75715e">/*font_collection=*/</span>font_collection_,
+      <span style="color:#75715e">/*runtime_controller=*/</span><span style="color:#66d9ef">nullptr</span>);
+  result<span style="color:#f92672">-&gt;</span>runtime_controller_ <span style="color:#f92672">=</span> runtime_controller_<span style="color:#f92672">-&gt;</span>Spawn(
+      <span style="color:#f92672">*</span>result,                               <span style="color:#75715e">// runtime delegate
+</span><span style="color:#75715e"></span>      settings_.advisory_script_uri,         <span style="color:#75715e">// advisory script uri
+</span><span style="color:#75715e"></span>      settings_.advisory_script_entrypoint,  <span style="color:#75715e">// advisory script entrypoint
+</span><span style="color:#75715e"></span>      settings_.idle_notification_callback,  <span style="color:#75715e">// idle notification callback
+</span><span style="color:#75715e"></span>      settings_.isolate_create_callback,     <span style="color:#75715e">// isolate create callback
+</span><span style="color:#75715e"></span>      settings_.isolate_shutdown_callback,   <span style="color:#75715e">// isolate shutdown callback
+</span><span style="color:#75715e"></span>      settings_.persistent_isolate_data      <span style="color:#75715e">// persistent isolate data
+</span><span style="color:#75715e"></span>  );
+  <span style="color:#66d9ef">return</span> result;
+}
+</code></pre></div><h5 id="runtimecontrollerspawn">RuntimeController::Spawn</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RuntimeController<span style="color:#f92672">&gt;</span> RuntimeController<span style="color:#f92672">::</span>Spawn(
+    RuntimeDelegate<span style="color:#f92672">&amp;</span> client,
+    std<span style="color:#f92672">::</span>string advisory_script_uri,
+    std<span style="color:#f92672">::</span>string advisory_script_entrypoint,
+    <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int64_t</span>)<span style="color:#f92672">&gt;&amp;</span> idle_notification_callback,
+    <span style="color:#66d9ef">const</span> fml<span style="color:#f92672">::</span>closure<span style="color:#f92672">&amp;</span> isolate_create_callback,
+    <span style="color:#66d9ef">const</span> fml<span style="color:#f92672">::</span>closure<span style="color:#f92672">&amp;</span> isolate_shutdown_callback,
+    std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> fml<span style="color:#f92672">::</span>Mapping<span style="color:#f92672">&gt;</span> persistent_isolate_data) <span style="color:#66d9ef">const</span> {
+  <span style="color:#66d9ef">auto</span> result <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>RuntimeController<span style="color:#f92672">&gt;</span>(
+      client, vm_, isolate_snapshot_, task_runners_, snapshot_delegate_,
+      hint_freed_delegate_, io_manager_, unref_queue_, image_decoder_,
+      advisory_script_uri, advisory_script_entrypoint,
+      idle_notification_callback, platform_data_, isolate_create_callback,
+      isolate_shutdown_callback, persistent_isolate_data,
+      volatile_path_tracker_);
+  result<span style="color:#f92672">-&gt;</span>spawning_isolate_ <span style="color:#f92672">=</span> root_isolate_;
+  <span style="color:#66d9ef">return</span> result;
+}
+</code></pre></div><h4 id="shellrunengine">Shell::RunEngine</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">void</span> Shell<span style="color:#f92672">::</span>RunEngine(
+    RunConfiguration run_configuration,
+    <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(Engine<span style="color:#f92672">::</span>RunStatus)<span style="color:#f92672">&gt;&amp;</span> result_callback) {
+
+  fml<span style="color:#f92672">::</span>TaskRunner<span style="color:#f92672">::</span>RunNowOrPostTask(
+      task_runners_.GetUITaskRunner(),
+      fml<span style="color:#f92672">::</span>MakeCopyable(
+          [run_configuration <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>move(run_configuration),
+           weak_engine <span style="color:#f92672">=</span> weak_engine_, result]() <span style="color:#66d9ef">mutable</span> {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>weak_engine) {
+              FML_LOG(ERROR) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Could not launch engine with configuration - no engine.&#34;</span>;
+              result(Engine<span style="color:#f92672">::</span>RunStatus<span style="color:#f92672">::</span>Failure);
+              <span style="color:#66d9ef">return</span>;
+            }
+            <span style="color:#66d9ef">auto</span> run_result <span style="color:#f92672">=</span> weak_engine<span style="color:#f92672">-&gt;</span>Run(std<span style="color:#f92672">::</span>move(run_configuration));
+            <span style="color:#66d9ef">if</span> (run_result <span style="color:#f92672">==</span> flutter<span style="color:#f92672">::</span>Engine<span style="color:#f92672">::</span>RunStatus<span style="color:#f92672">::</span>Failure) {
+              FML_LOG(ERROR) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Could not launch engine with configuration.&#34;</span>;
+            }
+            result(run_result);
+          }));
+}
+</code></pre></div><h5 id="enginerun">Engine::Run</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">Engine<span style="color:#f92672">::</span>RunStatus Engine<span style="color:#f92672">::</span>Run(RunConfiguration configuration) {
+  last_entry_point_ <span style="color:#f92672">=</span> configuration.GetEntrypoint();
+  last_entry_point_library_ <span style="color:#f92672">=</span> configuration.GetEntrypointLibrary();
+
+  UpdateAssetManager(configuration.GetAssetManager());
+
+  <span style="color:#66d9ef">if</span> (runtime_controller_<span style="color:#f92672">-&gt;</span>IsRootIsolateRunning()) {
+    <span style="color:#66d9ef">return</span> RunStatus<span style="color:#f92672">::</span>FailureAlreadyRunning;
+  }
+
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>runtime_controller_<span style="color:#f92672">-&gt;</span>LaunchRootIsolate(<span style="color:#75715e">//main
+</span><span style="color:#75715e"></span>          settings_,                                 <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          configuration.GetEntrypoint(),             <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          configuration.GetEntrypointLibrary(),      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          configuration.TakeIsolateConfiguration())  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>  ) {
+    <span style="color:#66d9ef">return</span> RunStatus<span style="color:#f92672">::</span>Failure;
+  }
+
+  <span style="color:#66d9ef">return</span> Engine<span style="color:#f92672">::</span>RunStatus<span style="color:#f92672">::</span>Success;
+}
+</code></pre></div><h5 id="runtimecontrollerlaunchrootisolate">RuntimeController::LaunchRootIsolate</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">bool</span> RuntimeController<span style="color:#f92672">::</span>LaunchRootIsolate(
+    <span style="color:#66d9ef">const</span> Settings<span style="color:#f92672">&amp;</span> settings,
+    std<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> dart_entrypoint,
+    std<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> dart_entrypoint_library,
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>IsolateConfiguration<span style="color:#f92672">&gt;</span> isolate_configuration) {
+  
+  DartIsolate<span style="color:#f92672">::</span>CreateRunningRootIsolate(
+          settings,                                       <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          isolate_snapshot_,                              <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          task_runners_,                                  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>PlatformConfiguration<span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">this</span>),  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          snapshot_delegate_,                             <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          hint_freed_delegate_,                           <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          io_manager_,                                    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          unref_queue_,                                   <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          image_decoder_,                                 <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          advisory_script_uri_,                           <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          advisory_script_entrypoint_,                    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          DartIsolate<span style="color:#f92672">::</span>Flags{},                           <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          isolate_create_callback_,                       <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          isolate_shutdown_callback_,                     <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          dart_entrypoint,                                <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          dart_entrypoint_library,                        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          std<span style="color:#f92672">::</span>move(isolate_configuration),               <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          volatile_path_tracker_,                         <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          spawning_isolate_.lock().get()                  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>          )
+</code></pre></div><h5 id="dartisolatecreaterunningrootisolate">DartIsolate::CreateRunningRootIsolate</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">std<span style="color:#f92672">::</span>weak_ptr<span style="color:#f92672">&lt;</span>DartIsolate<span style="color:#f92672">&gt;</span> DartIsolate<span style="color:#f92672">::</span>CreateRunningRootIsolate(
+    <span style="color:#66d9ef">const</span> Settings<span style="color:#f92672">&amp;</span> settings,
+    fml<span style="color:#f92672">::</span>RefPtr<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> DartSnapshot<span style="color:#f92672">&gt;</span> isolate_snapshot,
+    TaskRunners task_runners,
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>PlatformConfiguration<span style="color:#f92672">&gt;</span> platform_configuration,
+    fml<span style="color:#f92672">::</span>WeakPtr<span style="color:#f92672">&lt;</span>SnapshotDelegate<span style="color:#f92672">&gt;</span> snapshot_delegate,
+    fml<span style="color:#f92672">::</span>WeakPtr<span style="color:#f92672">&lt;</span>HintFreedDelegate<span style="color:#f92672">&gt;</span> hint_freed_delegate,
+    fml<span style="color:#f92672">::</span>WeakPtr<span style="color:#f92672">&lt;</span>IOManager<span style="color:#f92672">&gt;</span> io_manager,
+    fml<span style="color:#f92672">::</span>RefPtr<span style="color:#f92672">&lt;</span>SkiaUnrefQueue<span style="color:#f92672">&gt;</span> skia_unref_queue,
+    fml<span style="color:#f92672">::</span>WeakPtr<span style="color:#f92672">&lt;</span>ImageDecoder<span style="color:#f92672">&gt;</span> image_decoder,
+    std<span style="color:#f92672">::</span>string advisory_script_uri,
+    std<span style="color:#f92672">::</span>string advisory_script_entrypoint,
+    Flags isolate_flags,
+    <span style="color:#66d9ef">const</span> fml<span style="color:#f92672">::</span>closure<span style="color:#f92672">&amp;</span> isolate_create_callback,
+    <span style="color:#66d9ef">const</span> fml<span style="color:#f92672">::</span>closure<span style="color:#f92672">&amp;</span> isolate_shutdown_callback,
+    std<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> dart_entrypoint,
+    std<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> dart_entrypoint_library,
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>IsolateConfiguration<span style="color:#f92672">&gt;</span> isolate_configration,
+    std<span style="color:#f92672">::</span>shared_ptr<span style="color:#f92672">&lt;</span>VolatilePathTracker<span style="color:#f92672">&gt;</span> volatile_path_tracker,
+    <span style="color:#66d9ef">const</span> DartIsolate<span style="color:#f92672">*</span> spawning_isolate) {
+  
+    <span style="color:#66d9ef">auto</span> isolate <span style="color:#f92672">=</span> CreateRootIsolate(settings,                           <span style="color:#75715e">//main1
+</span><span style="color:#75715e"></span>                                   isolate_snapshot,                   <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   task_runners,                       <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   std<span style="color:#f92672">::</span>move(platform_configuration),  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   snapshot_delegate,                  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   hint_freed_delegate,                <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   io_manager,                         <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   skia_unref_queue,                   <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   image_decoder,                      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   advisory_script_uri,                <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   advisory_script_entrypoint,         <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   isolate_flags,                      <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   isolate_create_callback,            <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   isolate_shutdown_callback,          <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   std<span style="color:#f92672">::</span>move(volatile_path_tracker),   <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   spawning_isolate                    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                   )
+                     .lock();
+  
+   isolate<span style="color:#f92672">-&gt;</span>RunFromLibrary(dart_entrypoint_library,       <span style="color:#75715e">//main2
+</span><span style="color:#75715e"></span>                               dart_entrypoint,               <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                               settings.dart_entrypoint_args  <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                               )
 </code></pre></div>
 
 <footer class="footline">
@@ -12228,19 +12486,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623151670"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623151670"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623151670"></script>
-    <script src="/js/jquery.sticky.js?1623151670"></script>
-    <script src="/js/featherlight.min.js?1623151670"></script>
-    <script src="/js/highlight.pack.js?1623151670"></script>
+    <script src="/js/clipboard.min.js?1623724638"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724638"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724638"></script>
+    <script src="/js/jquery.sticky.js?1623724638"></script>
+    <script src="/js/featherlight.min.js?1623724638"></script>
+    <script src="/js/highlight.pack.js?1623724638"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623151670"></script>
-    <script src="/js/learn.js?1623151670"></script>
-    <script src="/js/hugo-learn.js?1623151670"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724638"></script>
+    <script src="/js/learn.js?1623724638"></script>
+    <script src="/js/hugo-learn.js?1623724638"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623151670"></script>
+            <script src="/mermaid/mermaid.js?1623724638"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

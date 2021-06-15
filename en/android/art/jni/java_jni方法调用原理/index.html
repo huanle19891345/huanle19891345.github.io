@@ -12,23 +12,23 @@
     <title>java_jni方法调用原理 :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623151669" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623151669" rel="stylesheet">
-    <link href="/css/hybrid.css?1623151669" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623151669" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623151669" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623151669" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623151669" rel="stylesheet">
-    <link href="/css/theme.css?1623151669" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623151669" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724636" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724636" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724636" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724636" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724636" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724636" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724636" rel="stylesheet">
+    <link href="/css/theme.css?1623724636" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724636" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623151669" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724636" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623151669"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724636"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623151669"></script>
+    <script src="/js/auto_toc_scroll.js?1623724636"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623151669"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623151669"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724636"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724636"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623151669"></script>
+<script type="text/javascript" src="/js/search.js?1623724636"></script>
 
     
   </div>
@@ -705,27 +705,6 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0" class="dd-item ">
-        <a href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
-        _解释执行7_0
-        <i class="fas fa-check read-icon"></i>
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item active">
         <a href="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
         java_jni方法调用原理
@@ -792,6 +771,27 @@
       <li data-nav-id="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
         <a href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/">
         异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -7584,6 +7584,8 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#method-execute-flow">Method Execute Flow</a></li>
+    <li><a href="#jni方法查找过程图解">Jni方法查找过程图解</a></li>
+    <li><a href="#javaartmethod查找过程图解">JavaArtMethod查找过程图解</a></li>
     <li><a href="#trampoline-code">Trampoline code</a></li>
     <li><a href="#artinterpretertointerpreterbridge">ArtInterpreterToInterpreterBridge</a>
       <ul>
@@ -7699,7 +7701,67 @@ entry_point_from_quick_compiled_code_--&gt;IsCompiled{Is Compiled?}
 IsCompiled--&gt;|yes|compiledCode
 IsCompiled--&gt;|no|art_quick_to_interpreter_bridge汇编
 art_quick_to_interpreter_bridge汇编--&gt;artQuickToInterpreterBridge
-</code></pre><h2 id="trampoline-code">Trampoline code</h2>
+</code></pre><h2 id="jni方法查找过程图解">Jni方法查找过程图解</h2>
+<pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+
+Trampoline-&gt;&gt;Trampoline:artQuickGenericJniTrampoline
+activate Trampoline
+
+Trampoline-&gt;&gt;Trampoline:void const* nativeCode = artMethod-&gt;GetEntryPointFromJni()
+activate Trampoline
+
+
+Note over Trampoline,artFindNativeMethod: if(nativeCode == GetJniDlsymLookupStub())
+Trampoline-&gt;&gt;artFindNativeMethod:artFindNativeMethod
+
+activate artFindNativeMethod
+
+artFindNativeMethod-&gt;&gt;JavaVMExt: void* native_code = soa.Vm()-&gt;FindCodeForNativeMethod(method);
+
+artFindNativeMethod-&gt;&gt;artFindNativeMethod:method-&gt;RegisterNative(native_code);
+
+activate JavaVMExt
+
+JavaVMExt-&gt;&gt;JavaVMExt: for (const auto&amp; lib : libraries_)
+Note right of JavaVMExt: library-&gt;FindSymbol(jni_short_name, arg_shorty);
+Note right of JavaVMExt: library-&gt;FindSymbol(jni_long_name, arg_shorty);
+deactivate JavaVMExt
+
+deactivate artFindNativeMethod
+deactivate Trampoline
+deactivate Trampoline
+</code></pre><p><a href="../../../%E7%A8%B3%E5%AE%9A%E6%80%A7/%E5%BC%82%E5%B8%B8/xcrash/xcrashanr/#%E5%9B%BE%E8%A7%A3">findsymbol参考xc_dl_sym</a></p>
+<h2 id="javaartmethod查找过程图解">JavaArtMethod查找过程图解</h2>
+<pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+FindMethodFromCode-&gt;&gt;ClassLinker:ResolveMethod
+ClassLinker-&gt;&gt;DexCache:getResolvedMethod
+DexCache-&gt;&gt;ClassLinker: return
+ClassLinker-&gt;&gt;ClassLinker: if resolvedMethod is null,ResolveMethod
+activate ClassLinker
+
+
+ClassLinker-&gt;&gt;ClassLinker: ResolveType
+activate ClassLinker
+Note right of ClassLinker: resolve the declaring class
+
+deactivate ClassLinker
+
+ClassLinker-&gt;&gt;ClassLinker: FindResolvedMethod
+activate ClassLinker
+
+ClassLinker-&gt;&gt;ClassLinker: klass-&gt;FindClassMethod
+activate ClassLinker
+
+deactivate ClassLinker
+
+ClassLinker-&gt;&gt;DexCache: dex_cache-&gt;SetResolvedMethod
+
+deactivate ClassLinker
+
+deactivate ClassLinker
+
+</code></pre><p><a href="../../2%E7%B1%BB%E5%8A%A0%E8%BD%BD/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B1%82#%E5%9B%BE%E8%A7%A3">resolvetype会触发类加载流程在linkcode时methodentrypoint</a></p>
+<h2 id="trampoline-code">Trampoline code</h2>
 <p>所有Trampoline code都是一段汇编代码编写的函数，这段汇编代码函数内部一般会跳转到一个由更高级的编程语言（C++）实现的函数。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thread</span>{
     ......
@@ -8914,25 +8976,6 @@ ALWAYS_INLINE <span style="color:#66d9ef">const</span> <span style="color:#66d9e
             
                 
                     
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -8952,6 +8995,22 @@ ALWAYS_INLINE <span style="color:#66d9ef">const</span> <span style="color:#66d9e
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -13010,7 +13069,7 @@ ALWAYS_INLINE <span style="color:#66d9ef">const</span> <span style="color:#66d9e
 	 
 	 
 		
-			<a class="nav nav-prev" href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/en/android/art/jni/" title="jni"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="/en/android/art/jni/jni%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Jni数据转换" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -13023,19 +13082,19 @@ ALWAYS_INLINE <span style="color:#66d9ef">const</span> <span style="color:#66d9e
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623151669"></script>
-    <script src="/js/jquery.sticky.js?1623151669"></script>
-    <script src="/js/featherlight.min.js?1623151669"></script>
-    <script src="/js/highlight.pack.js?1623151669"></script>
+    <script src="/js/clipboard.min.js?1623724637"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724637"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724637"></script>
+    <script src="/js/jquery.sticky.js?1623724637"></script>
+    <script src="/js/featherlight.min.js?1623724637"></script>
+    <script src="/js/highlight.pack.js?1623724637"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623151669"></script>
-    <script src="/js/learn.js?1623151669"></script>
-    <script src="/js/hugo-learn.js?1623151669"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724637"></script>
+    <script src="/js/learn.js?1623724637"></script>
+    <script src="/js/hugo-learn.js?1623724637"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623151669"></script>
+            <script src="/mermaid/mermaid.js?1623724637"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

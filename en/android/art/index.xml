@@ -12,10 +12,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://huanle19891345.github.io/en/android/art/art_lock/</guid>
-      <description>ObjectLock&amp;lt;mirror::Class&amp;gt; lock(self, klass); art/runtime/object_lock.cc
-object_lock.cc ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::ObjectLock(Thread* self, Handle&amp;lt;T&amp;gt; object) : self_(self), obj_(object) { CHECK(object != nullptr); obj_-&amp;gt;MonitorEnter(self_); } ~ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::~ObjectLock() { obj_-&amp;gt;MonitorExit(self_); } art/runtime/mirror/object-inl.h
-object-inl.h MonitorEnter inline mirror::Object* Object::MonitorEnter(Thread* self) { return Monitor::MonitorEnter(self, this, /*trylock*/false); } art/runtime/monitor.cc
-monitor.cc MonitorEnter mirror::Object* Monitor::MonitorEnter(Thread* self, mirror::Object* obj, bool trylock) { StackHandleScope&amp;lt;1&amp;gt; hs(self); Handle&amp;lt;mirror::Object&amp;gt; h_obj(hs.NewHandle(obj)); while (true) { // We initially read the lockword with ordinary Java/relaxed semantics.</description>
+      <description>ObjectLock ObjectLock&amp;lt;mirror::Class&amp;gt; lock(self, klass); art/runtime/object_lock.cc
+ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::ObjectLock(Thread* self, Handle&amp;lt;T&amp;gt; object) : self_(self), obj_(object) { CHECK(object != nullptr); obj_-&amp;gt;MonitorEnter(self_); } ~ObjectLock template &amp;lt;typename T&amp;gt; ObjectLock&amp;lt;T&amp;gt;::~ObjectLock() { obj_-&amp;gt;MonitorExit(self_); } art/runtime/mirror/object-inl.h
+MonitorEnter inline mirror::Object* Object::MonitorEnter(Thread* self) { return Monitor::MonitorEnter(self, this, /*trylock*/false); } art/runtime/monitor.cc
+MonitorEnter mirror::Object* Monitor::MonitorEnter(Thread* self, mirror::Object* obj, bool trylock) { StackHandleScope&amp;lt;1&amp;gt; hs(self); Handle&amp;lt;mirror::Object&amp;gt; h_obj(hs.NewHandle(obj)); while (true) { // We initially read the lockword with ordinary Java/relaxed semantics. When stronger  // semantics are needed, we address it below.</description>
     </item>
     
     <item>

@@ -12,23 +12,23 @@
     <title>dex2oat :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623151669" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623151669" rel="stylesheet">
-    <link href="/css/hybrid.css?1623151669" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623151669" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623151669" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623151669" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623151669" rel="stylesheet">
-    <link href="/css/theme.css?1623151669" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623151669" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724636" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724636" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724636" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724636" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724636" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724636" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724636" rel="stylesheet">
+    <link href="/css/theme.css?1623724636" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724636" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623151669" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724636" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623151669"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724636"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623151669"></script>
+    <script src="/js/auto_toc_scroll.js?1623724636"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623151669"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623151669"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724636"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724636"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623151669"></script>
+<script type="text/javascript" src="/js/search.js?1623724636"></script>
 
     
   </div>
@@ -705,27 +705,6 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0" class="dd-item ">
-        <a href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
-        _解释执行7_0
-        <i class="fas fa-check read-icon"></i>
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
         <a href="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
         java_jni方法调用原理
@@ -792,6 +771,27 @@
       <li data-nav-id="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
         <a href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/">
         异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -7584,7 +7584,8 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#dex2oat原理图">dex2oat原理图</a></li>
-    <li><a href="#oat和art文件格式和关系">oat和art文件格式和关系</a></li>
+    <li><a href="#oat文件格式">oat文件格式</a></li>
+    <li><a href="#oat文件和art文件的关系">oat文件和art文件的关系</a></li>
     <li><a href="#dex2oat">dex2oat</a>
       <ul>
         <li>
@@ -7698,7 +7699,7 @@ dex2oat-&gt;&gt;CompilerDriver: CompileAll
 
 CompilerDriver-&gt;&gt;CompilerDriver: PreCompile
 activate CompilerDriver
-Note right of CompilerDriver: Resolve,Verity,InitializeClasses
+Note right of CompilerDriver: Resolve,Verify,InitializeClasses
 deactivate CompilerDriver
 
 activate CompilerDriver
@@ -7727,7 +7728,7 @@ Note right of dex2oat: 输出.oat文件
 
 dex2oat-&gt;&gt;dex2oat: HandleImage()
 Note right of dex2oat: 输出.art文件
-</code></pre><h2 id="oat和art文件格式和关系">oat和art文件格式和关系</h2>
+</code></pre><h2 id="oat文件格式">oat文件格式</h2>
 <pre><code class="language-mermaid" data-lang="mermaid">graph LR
 OatDexFile(&quot;OatDexFile[N]&quot;)--&gt;DexFile(&quot;DexFile[N]&quot;)--&gt;TypeLookup-Table(&quot;TypeLookup-Table[N]&quot;)--&gt;ClassOffsets(&quot;ClassOffsets[N]&quot;)
 ClassOffsets--&gt;OatClass0
@@ -7736,7 +7737,13 @@ ClassOffsets--&gt;OatClassXxx
 OatClass1--&gt;CompliedMethod0
 OatClass1--&gt;CompliedMethod1
 OatClass1--&gt;CompliedMethodXxx
-</code></pre><h2 id="dex2oat">dex2oat</h2>
+</code></pre><h2 id="oat文件和art文件的关系">oat文件和art文件的关系</h2>
+<p>·ImageHeader中有几个成员变量关联到oat文件里的信息。其中，oat_file_begin_指向oat文件加载到内存的虚拟地址（图中是0x700ec000），oat_data_begin_指向符号oatdata的值（图中为0x700ed000），oat_data_end_指向符号oatlastword的值（图中为0x740d7e5b）。_</p>
+<p>·art文件里的ArtMethod对象的成员变量ptr_sized_fields_结构体的entry_point_from_quick_compiled_code_指向位于oat文件里对应的code_数组。</p>
+<p>简单来说，可以将art文件看作是很多对象通过类似序列化的方法保存到文件里而得来的。当art文件通过mmap加载到内存时，这些文件里的信息就能转换成对象直接使用。</p>
+<p><img src="/img/android/art/1%E7%B1%BB%E7%BC%96%E8%AF%91/dex2oat.assets/image-20210610095954261.png" alt="image-20210610095954261"></p>
+<p>参考《深入理解Android:Java虚拟机ART》的9.6.2.3</p>
+<h2 id="dex2oat">dex2oat</h2>
 <h5 id="dex2oat-main函数">dex2oat main函数</h5>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv) {
   <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> art<span style="color:#f92672">::</span>dex2oat(argc, argv);
@@ -12713,19 +12720,19 @@ bool CompilerDriver<span style="color:#f92672">::</span>ShouldCompileBasedOnProf
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623151669"></script>
-    <script src="/js/jquery.sticky.js?1623151669"></script>
-    <script src="/js/featherlight.min.js?1623151669"></script>
-    <script src="/js/highlight.pack.js?1623151669"></script>
+    <script src="/js/clipboard.min.js?1623724636"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724636"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724636"></script>
+    <script src="/js/jquery.sticky.js?1623724636"></script>
+    <script src="/js/featherlight.min.js?1623724636"></script>
+    <script src="/js/highlight.pack.js?1623724636"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623151669"></script>
-    <script src="/js/learn.js?1623151669"></script>
-    <script src="/js/hugo-learn.js?1623151669"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724636"></script>
+    <script src="/js/learn.js?1623724636"></script>
+    <script src="/js/hugo-learn.js?1623724636"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623151669"></script>
+            <script src="/mermaid/mermaid.js?1623724636"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

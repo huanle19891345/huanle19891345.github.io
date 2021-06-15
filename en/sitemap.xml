@@ -143,10 +143,6 @@
   </url>
   
   <url>
-    <loc>https://huanle19891345.github.io/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</loc>
-  </url>
-  
-  <url>
     <loc>https://huanle19891345.github.io/en/android/art/alloc_gc/</loc>
   </url>
   
@@ -1141,6 +1137,10 @@
   
   <url>
     <loc>https://huanle19891345.github.io/en/android/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/</loc>
+  </url>
+  
+  <url>
+    <loc>https://huanle19891345.github.io/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/</loc>
   </url>
   
   <url>

@@ -12,23 +12,23 @@
     <title>JDK动态代理 :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623151669" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623151669" rel="stylesheet">
-    <link href="/css/hybrid.css?1623151669" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623151669" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623151669" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623151669" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623151669" rel="stylesheet">
-    <link href="/css/theme.css?1623151669" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623151669" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724636" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724636" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724636" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724636" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724636" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724636" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724636" rel="stylesheet">
+    <link href="/css/theme.css?1623724636" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724636" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623151669" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724636" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623151669"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724636"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623151669"></script>
+    <script src="/js/auto_toc_scroll.js?1623724636"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623151669"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623151669"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724636"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724636"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623151669"></script>
+<script type="text/javascript" src="/js/search.js?1623724636"></script>
 
     
   </div>
@@ -705,27 +705,6 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0" class="dd-item ">
-        <a href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
-        _解释执行7_0
-        <i class="fas fa-check read-icon"></i>
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
         <a href="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
         java_jni方法调用原理
@@ -792,6 +771,27 @@
       <li data-nav-id="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
         <a href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/">
         异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -7581,9 +7581,10 @@
       <ul>
         <li><a href="#newproxyinstance">newProxyInstance</a></li>
         <li><a href="#proxy_generateproxy">Proxy_generateProxy</a></li>
-        <li><a href="#classlinkercreateproxyclass创建并触发类加载流程">ClassLinker::CreateProxyClass创建并触发类加载流程</a></li>
+        <li><a href="#classlinkercreateproxyclass">ClassLinker::CreateProxyClass</a></li>
       </ul>
     </li>
+    <li><a href="#classstatus">ClassStatus</a></li>
   </ul>
 </nav>
     </div>
@@ -7679,7 +7680,7 @@
   <span style="color:#66d9ef">return</span> soa.AddLocalReference<span style="color:#f92672">&lt;</span>jclass<span style="color:#f92672">&gt;</span>(class_linker<span style="color:#f92672">-&gt;</span>CreateProxyClass(
       soa, name, interfaces, loader, methods, <span style="color:#66d9ef">throws</span>));
 }
-</code></pre></div><h3 id="classlinkercreateproxyclass创建并触发类加载流程">ClassLinker::CreateProxyClass创建并触发类加载流程</h3>
+</code></pre></div><h3 id="classlinkercreateproxyclass">ClassLinker::CreateProxyClass</h3>
 <p>art/runtime/class_linker.cc</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc">mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">*</span> ClassLinker<span style="color:#f92672">::</span>CreateProxyClass(ScopedObjectAccessAlreadyRunnable<span style="color:#f92672">&amp;</span> soa,
                                              jstring name,
@@ -7687,6 +7688,93 @@
                                              jobject loader,
                                              jobjectArray methods,
                                              jobjectArray <span style="color:#66d9ef">throws</span>) {
+  
+  Thread<span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> soa.Self();
+  StackHandleScope<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span><span style="color:#f92672">&gt;</span> hs(self);
+  MutableHandle<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> temp_klass(hs.NewHandle(
+  AllocClass(self, GetClassRoot(kJavaLangClass), <span style="color:#66d9ef">sizeof</span>(mirror<span style="color:#f92672">::</span>Class))));
+  
+  
+  temp_klass<span style="color:#f92672">-&gt;</span>SetObjectSize(<span style="color:#66d9ef">sizeof</span>(mirror<span style="color:#f92672">::</span>Proxy));
+  <span style="color:#75715e">// Set the class access flags incl. VerificationAttempted, so we do not try to set the flag on
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// the methods.
+</span><span style="color:#75715e"></span>  temp_klass<span style="color:#f92672">-&gt;</span>SetAccessFlags(kAccClassIsProxy <span style="color:#f92672">|</span> kAccPublic <span style="color:#f92672">|</span> kAccFinal <span style="color:#f92672">|</span> kAccVerificationAttempted);
+  temp_klass<span style="color:#f92672">-&gt;</span>SetClassLoader(soa.Decode<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>ClassLoader<span style="color:#f92672">&gt;</span>(loader));
+  DCHECK_EQ(temp_klass<span style="color:#f92672">-&gt;</span>GetPrimitiveType(), Primitive<span style="color:#f92672">::</span>kPrimNot);
+  temp_klass<span style="color:#f92672">-&gt;</span>SetName(soa.Decode<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>String<span style="color:#f92672">&gt;</span>(name));
+  temp_klass<span style="color:#f92672">-&gt;</span>SetDexCache(GetClassRoot(kJavaLangReflectProxy)<span style="color:#f92672">-&gt;</span>GetDexCache());
+  <span style="color:#75715e">// Object has an empty iftable, copy it for that reason.
+</span><span style="color:#75715e"></span>  temp_klass<span style="color:#f92672">-&gt;</span>SetIfTable(GetClassRoot(kJavaLangObject)<span style="color:#f92672">-&gt;</span>GetIfTable());
+  mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">::</span>SetStatus(temp_klass, ClassStatus<span style="color:#f92672">::</span>kIdx, self);
+  
+  <span style="color:#75715e">//insert into classtable
+</span><span style="color:#75715e"></span>  ObjPtr<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> existing <span style="color:#f92672">=</span> InsertClass(descriptor.c_str(), temp_klass.Get(), hash);
+  
+  LengthPrefixedArray<span style="color:#f92672">&lt;</span>ArtField<span style="color:#f92672">&gt;*</span> sfields <span style="color:#f92672">=</span> AllocArtFieldArray(self, allocator, num_fields);
+  temp_klass<span style="color:#f92672">-&gt;</span>SetSFieldsPtr(sfields);
+  <span style="color:#75715e">// 1. Create a static field &#39;interfaces&#39; that holds the _declared_ interfaces implemented by
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// our proxy, so Class.getInterfaces doesn&#39;t return the flattened set.
+</span><span style="color:#75715e"></span>  ArtField<span style="color:#f92672">&amp;</span> interfaces_sfield <span style="color:#f92672">=</span> sfields<span style="color:#f92672">-&gt;</span>At(<span style="color:#ae81ff">0</span>);
+  interfaces_sfield.SetDexFieldIndex(<span style="color:#ae81ff">0</span>);
+  interfaces_sfield.SetDeclaringClass(temp_klass.Get());
+  interfaces_sfield.SetAccessFlags(kAccStatic <span style="color:#f92672">|</span> kAccPublic <span style="color:#f92672">|</span> kAccFinal);
+  <span style="color:#75715e">// 2. Create a static field &#39;throws&#39; that holds exceptions thrown by our methods.
+</span><span style="color:#75715e"></span>  ArtField<span style="color:#f92672">&amp;</span> throws_sfield <span style="color:#f92672">=</span> sfields<span style="color:#f92672">-&gt;</span>At(<span style="color:#ae81ff">1</span>);
+  throws_sfield.SetDexFieldIndex(<span style="color:#ae81ff">1</span>);
+  throws_sfield.SetDeclaringClass(temp_klass.Get());
+  throws_sfield.SetAccessFlags(kAccStatic <span style="color:#f92672">|</span> kAccPublic <span style="color:#f92672">|</span> kAccFinal);
+  
+   <span style="color:#75715e">// They have as many virtual methods as the array
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> h_methods <span style="color:#f92672">=</span> hs.NewHandle(soa.Decode<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>ObjectArray<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Method<span style="color:#f92672">&gt;&gt;</span>(methods));
+  <span style="color:#75715e">// Create the methods array.
+</span><span style="color:#75715e"></span>  LengthPrefixedArray<span style="color:#f92672">&lt;</span>ArtMethod<span style="color:#f92672">&gt;*</span> proxy_class_methods <span style="color:#f92672">=</span> AllocArtMethodArray(
+        self, allocator, num_direct_methods <span style="color:#f92672">+</span> num_virtual_methods);
+  <span style="color:#75715e">// Create the single direct method.
+</span><span style="color:#75715e"></span>  CreateProxyConstructor(temp_klass, temp_klass<span style="color:#f92672">-&gt;</span>GetDirectMethodUnchecked(<span style="color:#ae81ff">0</span>, image_pointer_size_));
+  <span style="color:#75715e">// Create virtual method using specified prototypes.
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// TODO These should really use the iterators.
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> num_virtual_methods; <span style="color:#f92672">++</span>i) {
+    <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> virtual_method <span style="color:#f92672">=</span> temp_klass<span style="color:#f92672">-&gt;</span>GetVirtualMethodUnchecked(i, image_pointer_size_);
+    <span style="color:#66d9ef">auto</span><span style="color:#f92672">*</span> prototype <span style="color:#f92672">=</span> h_methods<span style="color:#f92672">-&gt;</span>Get(i)<span style="color:#f92672">-&gt;</span>GetArtMethod();
+    CreateProxyMethod(temp_klass, prototype, virtual_method);
+    DCHECK(virtual_method<span style="color:#f92672">-&gt;</span>GetDeclaringClass() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>);
+    DCHECK(prototype<span style="color:#f92672">-&gt;</span>GetDeclaringClass() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>);
+  }
+  <span style="color:#75715e">// The super class is java.lang.reflect.Proxy
+</span><span style="color:#75715e"></span>  temp_klass<span style="color:#f92672">-&gt;</span>SetSuperClass(GetClassRoot(kJavaLangReflectProxy));
+  <span style="color:#75715e">// Now effectively in the loaded state.
+</span><span style="color:#75715e"></span>  mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">::</span>SetStatus(temp_klass, ClassStatus<span style="color:#f92672">::</span>kLoaded, self);
+  
+  LinkClass(self, descriptor.c_str(), temp_klass, h_interfaces, <span style="color:#f92672">&amp;</span>klass)
+    
+  Runtime<span style="color:#f92672">::</span>Current()<span style="color:#f92672">-&gt;</span>GetRuntimeCallbacks()<span style="color:#f92672">-&gt;</span>ClassPrepare(temp_klass, klass);
+  
+  SubtypeCheck<span style="color:#f92672">&lt;</span>ObjPtr<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;&gt;::</span>EnsureInitialized(klass.Get());
+    <span style="color:#75715e">// Lock on klass is released. Lock new class object.
+</span><span style="color:#75715e"></span>    ObjectLock<span style="color:#f92672">&lt;</span>mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">&gt;</span> initialization_lock(self, klass);
+    mirror<span style="color:#f92672">::</span>Class<span style="color:#f92672">::</span>SetStatus(klass, ClassStatus<span style="color:#f92672">::</span>kInitialized, self);
+  
+  <span style="color:#66d9ef">return</span> klass.Get();
+}
+</code></pre></div><h2 id="classstatus">ClassStatus</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">enum</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassStatus</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">uint8_t</span> {
+  kNotReady <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,  <span style="color:#75715e">// Zero-initialized Class object starts in this state.
+</span><span style="color:#75715e"></span>  kRetired <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,  <span style="color:#75715e">// Retired, should not be used. Use the newly cloned one instead.
+</span><span style="color:#75715e"></span>  kErrorResolved <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+  kErrorUnresolved <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+  kIdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>,  <span style="color:#75715e">// Loaded, DEX idx in super_class_type_idx_ and interfaces_type_idx_.
+</span><span style="color:#75715e"></span>  kLoaded <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>,  <span style="color:#75715e">// DEX idx values resolved.
+</span><span style="color:#75715e"></span>  kResolving <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>,  <span style="color:#75715e">// Just cloned from temporary class object.
+</span><span style="color:#75715e"></span>  kResolved <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>,  <span style="color:#75715e">// Part of linking.
+</span><span style="color:#75715e"></span>  kVerifying <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>,  <span style="color:#75715e">// In the process of being verified.
+</span><span style="color:#75715e"></span>  kRetryVerificationAtRuntime <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>,  <span style="color:#75715e">// Compile time verification failed, retry at runtime.
+</span><span style="color:#75715e"></span>  kVerifyingAtRuntime <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>,  <span style="color:#75715e">// Retrying verification at runtime.
+</span><span style="color:#75715e"></span>  kVerified <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>,  <span style="color:#75715e">// Logically part of linking; done pre-init.
+</span><span style="color:#75715e"></span>  kSuperclassValidated <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>,  <span style="color:#75715e">// Superclass validation part of init done.
+</span><span style="color:#75715e"></span>  kInitializing <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>,  <span style="color:#75715e">// Class init in progress.
+</span><span style="color:#75715e"></span>  kInitialized <span style="color:#f92672">=</span> <span style="color:#ae81ff">14</span>,  <span style="color:#75715e">// Ready to go.
+</span><span style="color:#75715e"></span>  kLast <span style="color:#f92672">=</span> kInitialized
+};
 </code></pre></div>
 
 <footer class="footline">
@@ -12230,19 +12318,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623151669"></script>
-    <script src="/js/jquery.sticky.js?1623151669"></script>
-    <script src="/js/featherlight.min.js?1623151669"></script>
-    <script src="/js/highlight.pack.js?1623151669"></script>
+    <script src="/js/clipboard.min.js?1623724636"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724636"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724636"></script>
+    <script src="/js/jquery.sticky.js?1623724636"></script>
+    <script src="/js/featherlight.min.js?1623724636"></script>
+    <script src="/js/highlight.pack.js?1623724636"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623151669"></script>
-    <script src="/js/learn.js?1623151669"></script>
-    <script src="/js/hugo-learn.js?1623151669"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724636"></script>
+    <script src="/js/learn.js?1623724636"></script>
+    <script src="/js/hugo-learn.js?1623724636"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623151669"></script>
+            <script src="/mermaid/mermaid.js?1623724636"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

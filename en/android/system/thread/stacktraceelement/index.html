@@ -12,23 +12,23 @@
     <title>StackTraceElement :: 郑欢的学习总结</title>
 
     
-    <link href="/css/nucleus.css?1623151669" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1623151669" rel="stylesheet">
-    <link href="/css/hybrid.css?1623151669" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1623151669" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1623151669" rel="stylesheet">
-    <link href="/css/auto-complete.css?1623151669" rel="stylesheet">
-    <link href="/css/atom-one-dark.css?1623151669" rel="stylesheet">
-    <link href="/css/theme.css?1623151669" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1623151669" rel="stylesheet">
+    <link href="/css/nucleus.css?1623724637" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1623724637" rel="stylesheet">
+    <link href="/css/hybrid.css?1623724637" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1623724637" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1623724637" rel="stylesheet">
+    <link href="/css/auto-complete.css?1623724637" rel="stylesheet">
+    <link href="/css/atom-one-dark.css?1623724637" rel="stylesheet">
+    <link href="/css/theme.css?1623724637" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1623724637" rel="stylesheet">
     
-    <link href="/css/theme-mine.css?1623151669" rel="stylesheet">
+    <link href="/css/theme-mine.css?1623724637" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1623151669"></script>
+    <script src="/js/jquery-3.3.1.min.js?1623724637"></script>
 
-    <script src="/js/auto_toc_scroll.js?1623151669"></script>
+    <script src="/js/auto_toc_scroll.js?1623724637"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,14 +58,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1623151669"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1623151669"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1623724637"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1623724637"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/huanle19891345.github.io\/\/en";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1623151669"></script>
+<script type="text/javascript" src="/js/search.js?1623724637"></script>
 
     
   </div>
@@ -705,27 +705,6 @@
  
   
     
-      <li data-nav-id="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="_解释执行7_0" class="dd-item ">
-        <a href="/en/android/art/jni/_%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
-        _解释执行7_0
-        <i class="fas fa-check read-icon"></i>
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/" title="java_jni方法调用原理" class="dd-item ">
         <a href="/en/android/art/jni/java_jni%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/">
         java_jni方法调用原理
@@ -792,6 +771,27 @@
       <li data-nav-id="/en/android/art/jni/%E5%BC%82%E5%B8%B8/" title="异常" class="dd-item ">
         <a href="/en/android/art/jni/%E5%BC%82%E5%B8%B8/">
         异常
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/" title="解释执行7_0" class="dd-item ">
+        <a href="/en/android/art/jni/%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C7_0/">
+        解释执行7_0
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -7583,7 +7583,12 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#throwablegetstacktrace">Throwable.getStackTrace</a></li>
+    <li><a href="#throwablegetstacktrace">Throwable.getStackTrace</a>
+      <ul>
+        <li><a href="#fillinstacktrace">fillInStackTrace</a></li>
+        <li><a href="#getstacktrace">getStackTrace</a></li>
+      </ul>
+    </li>
     <li><a href="#threadgetstacktrace">Thread.getStackTrace</a></li>
     <li><a href="#threadinternalstacktracetostacktraceelementarray">Thread::InternalStackTraceToStackTraceElementArray</a></li>
   </ul>
@@ -7612,6 +7617,50 @@
 
 <p>9.0.0_r3</p>
 <h2 id="throwablegetstacktrace">Throwable.getStackTrace</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Throwable</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    fillInStackTrace<span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> Throwable <span style="color:#a6e22e">fillInStackTrace</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>stackTrace <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> backtrace <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#75715e">/* Out of protocol state */</span> <span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        backtrace <span style="color:#f92672">=</span> nativeFillInStackTrace<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="fillinstacktrace">fillInStackTrace</h3>
+<p>art/runtime/native/java_lang_Throwable.cc</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">static</span> jobject <span style="color:#a6e22e">Throwable_nativeFillInStackTrace</span>(JNIEnv<span style="color:#f92672">*</span> env, jclass) {
+  ScopedFastNativeObjectAccess soa(env);
+  <span style="color:#66d9ef">return</span> soa.Self()<span style="color:#f92672">-&gt;</span>CreateInternalStackTrace<span style="color:#f92672">&lt;</span>false<span style="color:#f92672">&gt;</span>(soa);
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cc" data-lang="cc"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span> kTransactionActive<span style="color:#f92672">&gt;</span>
+jobject Thread<span style="color:#f92672">::</span>CreateInternalStackTrace(<span style="color:#66d9ef">const</span> ScopedObjectAccessAlreadyRunnable<span style="color:#f92672">&amp;</span> soa) <span style="color:#66d9ef">const</span> {
+  <span style="color:#75715e">// Compute depth of stack, save frames if possible to avoid needing to recompute many.
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">constexpr</span> size_t kMaxSavedFrames <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>;
+  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>ArtMethodDexPcPair[]<span style="color:#f92672">&gt;</span> saved_frames(<span style="color:#66d9ef">new</span> ArtMethodDexPcPair[kMaxSavedFrames]);
+  FetchStackTraceVisitor <span style="color:#a6e22e">count_visitor</span>(<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>Thread<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>),
+                                       <span style="color:#f92672">&amp;</span>saved_frames[<span style="color:#ae81ff">0</span>],
+                                       kMaxSavedFrames);
+  count_visitor.WalkStack();
+  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint32_t</span> depth <span style="color:#f92672">=</span> count_visitor.GetDepth();
+  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint32_t</span> skip_depth <span style="color:#f92672">=</span> count_visitor.GetSkipDepth();
+
+  <span style="color:#75715e">// Build internal stack trace.
+</span><span style="color:#75715e"></span>  BuildInternalStackTraceVisitor<span style="color:#f92672">&lt;</span>kTransactionActive<span style="color:#f92672">&gt;</span> build_trace_visitor(soa.Self(),
+                                                                         <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>Thread<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>),
+                                                                         skip_depth);
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>build_trace_visitor.Init(depth)) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;  <span style="color:#75715e">// Allocation failed.
+</span><span style="color:#75715e"></span>  }
+  <span style="color:#75715e">// If we saved all of the frames we don&#39;t even need to do the actual stack walk. This is faster
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// than doing the stack walk twice.
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (depth <span style="color:#f92672">&lt;</span> kMaxSavedFrames) {
+    <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> depth; <span style="color:#f92672">++</span>i) {
+      build_trace_visitor.AddFrame(saved_frames[i].first, saved_frames[i].second);
+    }
+  } <span style="color:#66d9ef">else</span> {
+    build_trace_visitor.WalkStack();
+  }
+</code></pre></div><h3 id="getstacktrace">getStackTrace</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> StackTraceElement<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getStackTrace</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">return</span> getOurStackTrace<span style="color:#f92672">().</span><span style="color:#a6e22e">clone</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
@@ -12321,19 +12370,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.min.js?1623151669"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1623151669"></script>
-    <script src="/js/jquery.sticky.js?1623151669"></script>
-    <script src="/js/featherlight.min.js?1623151669"></script>
-    <script src="/js/highlight.pack.js?1623151669"></script>
+    <script src="/js/clipboard.min.js?1623724637"></script>
+    <script src="/js/perfect-scrollbar.min.js?1623724637"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1623724637"></script>
+    <script src="/js/jquery.sticky.js?1623724637"></script>
+    <script src="/js/featherlight.min.js?1623724637"></script>
+    <script src="/js/highlight.pack.js?1623724637"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1623151669"></script>
-    <script src="/js/learn.js?1623151669"></script>
-    <script src="/js/hugo-learn.js?1623151669"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1623724637"></script>
+    <script src="/js/learn.js?1623724637"></script>
+    <script src="/js/hugo-learn.js?1623724637"></script>
     
         
-            <script src="/mermaid/mermaid.js?1623151669"></script>
+            <script src="/mermaid/mermaid.js?1623724637"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
